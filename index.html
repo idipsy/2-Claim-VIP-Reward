@@ -1,0 +1,2251 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VIP列表-按抽佣 - 后台原型</title>
+<style>
+  :root{
+    --bg-shell:#171c2e;
+    --bg-page:#f2f3f7;
+    --bg-card:#ffffff;
+    --border:#e4e6ed;
+    --border-strong:#d2d5df;
+    --text-primary:#1f2430;
+    --text-secondary:#6b7280;
+    --text-muted:#9aa0ab;
+    --accent:#3f5eea;
+    --accent-hover:#3450d1;
+    --accent-bg:#eef1fd;
+    --danger:#e0393e;
+    --danger-bg:#fdecec;
+    --radius:6px;
+  }
+  *{ box-sizing:border-box; }
+  body{
+    margin:0;
+    font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    background:var(--bg-page);
+    color:var(--text-primary);
+    font-size:14px;
+  }
+  .shell{ display:flex; min-height:100vh; }
+
+  .sidebar{ width:220px; flex-shrink:0; background:var(--bg-shell); color:#c7cbe0; padding:18px 0; min-height:100vh; }
+  .logo{ display:flex; align-items:center; gap:8px; padding:0 20px 18px; font-weight:700; color:#fff; font-size:16px; }
+  .logo span{ color:#ffb545; }
+  .nav-item{ padding:9px 20px; font-size:13.5px; cursor:pointer; color:#aeb3c9; display:flex; align-items:center; gap:8px; }
+  .nav-item:hover{ color:#fff; }
+  .nav-item.active{ background:#2a3050; color:#fff; border-right:3px solid var(--accent); }
+  .nav-group-label{ padding:9px 20px 4px; font-size:13.5px; color:#8890ab; }
+
+  .main{ flex:1; min-width:0; display:flex; flex-direction:column; }
+  .topbar{ height:52px; background:var(--bg-shell); color:#c7cbe0; display:flex; align-items:center; padding:0 20px; font-size:13px; flex-shrink:0; gap:6px; }
+  .topbar b{ color:#fff; font-weight:500; }
+  .tabstrip{ background:var(--bg-shell); padding:0 16px 10px; display:flex; gap:8px; flex-wrap:wrap; }
+  .tab{ background:#232948; color:#aeb3c9; padding:5px 10px; border-radius:5px; font-size:12.5px; display:flex; align-items:center; gap:6px; }
+  .tab.active{ background:var(--accent); color:#fff; }
+  .tab .x{ opacity:0.6; font-size:11px; }
+
+  .content{ padding:20px; flex:1; }
+
+  .toolbar{ display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; }
+  .toolbar-left{ display:flex; gap:10px; flex-wrap:wrap; }
+  .btn{
+    height:34px; padding:0 14px; border-radius:var(--radius); font-size:13.5px; cursor:pointer;
+    border:0.5px solid var(--border-strong); background:#fff; color:var(--text-primary);
+    display:inline-flex; align-items:center; gap:6px;
+  }
+  .btn:hover{ background:#f7f8fb; }
+  .btn-primary{ background:var(--accent); border-color:var(--accent); color:#fff; }
+  .btn-primary:hover{ background:var(--accent-hover); }
+  .icon-row{ display:flex; gap:14px; color:var(--text-secondary); }
+  .icon-row span{ cursor:pointer; font-size:15px; }
+
+  .table-wrap{ background:var(--bg-card); border:0.5px solid var(--border); border-radius:8px; overflow-x:auto; }
+  table{ border-collapse:collapse; width:100%; min-width:1680px; font-size:13px; }
+  th{ background:#f8f9fc; color:var(--text-secondary); font-weight:500; text-align:center; padding:11px 12px; white-space:nowrap; border-bottom:0.5px solid var(--border); }
+  th.new-col{ color:var(--accent); }
+  td{ text-align:center; padding:11px 12px; border-bottom:0.5px solid var(--border); white-space:nowrap; }
+  tr:last-child td{ border-bottom:none; }
+  tr:nth-child(even){ background:#fbfbfd; }
+  .lvl-name{ color:var(--accent); font-weight:500; }
+  .action-link{ color:var(--accent); cursor:pointer; }
+  .action-link.danger{ color:var(--danger); }
+  .sep{ color:var(--text-muted); margin:0 6px; }
+  .tag-count{ background:var(--accent-bg); color:var(--accent); padding:2px 8px; border-radius:10px; font-size:12px; cursor:default; }
+
+  /* ===================== VIP福利彩金审核页面：查询筛选 + 状态标签 + 分页 ===================== */
+  .admin-page.hidden{ display:none; }
+  .filter-bar{ background:var(--bg-card); border:0.5px solid var(--border); border-radius:8px; padding:16px 18px 4px; margin-bottom:14px; }
+  .filter-row{ display:flex; gap:16px; flex-wrap:wrap; margin-bottom:14px; }
+  .filter-item{ display:flex; align-items:center; gap:8px; flex:1; min-width:230px; }
+  .filter-item label{ font-size:13px; color:var(--text-secondary); white-space:nowrap; flex-shrink:0; width:66px; text-align:right; }
+  .filter-item input[type=text], .filter-item input[type=number], .filter-item input[type=date], .filter-item select{
+    flex:1; height:34px; border:0.5px solid var(--border-strong); border-radius:var(--radius); padding:0 10px; font-size:13px; color:var(--text-primary); background:#fff; min-width:0;
+  }
+  .filter-item input:focus, .filter-item select:focus{ outline:none; border-color:var(--accent); box-shadow:0 0 0 2px var(--accent-bg); }
+  .filter-item-range .range-pair{ display:flex; align-items:center; gap:6px; flex:1; }
+  .filter-item-range .range-pair input{ flex:1; min-width:0; }
+  .filter-item-range .range-pair .sep{ margin:0; }
+  .filter-item.filter-actions{ flex:0 0 auto; min-width:0; justify-content:flex-end; gap:8px; margin-left:auto; }
+  .filter-item.filter-actions label{ display:none; }
+
+  .audit-badge{ display:inline-block; padding:2px 10px; border-radius:12px; font-size:12px; font-weight:600; white-space:nowrap; }
+  .audit-badge.pending{ background:#fff4e0; color:#b5760a; }
+  .audit-badge.approved{ background:#e6f7ee; color:#158a5c; }
+  .audit-badge.rejected{ background:var(--danger-bg); color:var(--danger); }
+  .audit-badge.not_generated{ background:#eef0f5; color:#6b7280; }
+
+  .pager{ display:flex; align-items:center; justify-content:center; gap:8px; padding:16px 0 4px; color:var(--text-secondary); font-size:12.5px; }
+  .pager .pager-page{ min-width:26px; height:26px; border-radius:4px; display:inline-flex; align-items:center; justify-content:center; border:0.5px solid var(--border-strong); background:#fff; cursor:default; }
+  .pager .pager-page.current{ background:var(--accent); border-color:var(--accent); color:#fff; }
+
+  .tooltip-icon{
+    display:inline-flex; align-items:center; justify-content:center; width:14px; height:14px; border-radius:50%;
+    background:var(--border-strong); color:#fff; font-size:11px; line-height:14px; text-align:center;
+    cursor:default; user-select:none; margin-left:4px; vertical-align:2px;
+  }
+  .tooltip-icon:hover{ background:var(--accent); }
+  th .tooltip-icon{ background:#c9cee6; }
+  /* 置顶浮窗：position:fixed + JS 定位，不受表格 overflow-x 裁剪影响 */
+  .global-tooltip{
+    display:none; position:fixed; background:#232948; color:#fff; font-size:12px; line-height:1.6; font-weight:400;
+    padding:8px 10px; border-radius:6px; max-width:240px; white-space:normal; text-align:left; z-index:999;
+    box-shadow:0 6px 20px rgba(0,0,0,0.18); pointer-events:none;
+  }
+  .global-tooltip.show{ display:block; }
+
+  .overlay{ position:fixed; inset:0; background:rgba(20,22,34,0.45); display:none; align-items:stretch; justify-content:flex-end; z-index:50; }
+  .overlay.show{ display:flex; }
+  .drawer{ width:440px; max-width:92vw; background:#fff; height:100vh; overflow-y:auto; padding:20px 26px; box-shadow:-6px 0 24px rgba(0,0,0,0.12); }
+  .drawer-header{ display:flex; justify-content:space-between; align-items:center; margin-bottom:18px; }
+  .drawer-header span{ font-size:16px; font-weight:600; }
+  .drawer-header .close{ cursor:pointer; color:var(--text-secondary); font-size:18px; line-height:1; }
+
+  .field{ margin-bottom:16px; }
+  .field label{ display:block; font-size:13px; color:var(--text-secondary); margin-bottom:5px; }
+  .field label .req{ color:var(--danger); margin-right:2px; }
+  .field .hint{ font-size:11.5px; color:var(--text-muted); margin-top:4px; line-height:1.5; }
+  .field .warn{ font-size:11.5px; color:#b5760a; margin-top:4px; line-height:1.5; display:none; }
+  .field .err{ font-size:11.5px; color:var(--danger); margin-top:4px; line-height:1.5; display:none; }
+  .cumulative-readout{ font-size:12px; color:var(--accent); background:#f4f7ff; border-radius:6px; padding:6px 10px; margin:8px 0 0; }
+
+  input[type=text], input[type=number], textarea{
+    width:100%; border:0.5px solid var(--border-strong); border-radius:var(--radius);
+    padding:0 10px; font-size:13.5px; color:var(--text-primary); background:#fff;
+  }
+  input[type=text], input[type=number]{ height:36px; }
+  textarea{ padding:9px 10px; font-family:inherit; line-height:1.6; resize:vertical; }
+  input:focus, textarea:focus{ outline:none; border-color:var(--accent); box-shadow:0 0 0 2px var(--accent-bg); }
+  input:disabled{ background:#f5f5f8; color:var(--text-muted); }
+
+  .stepper{ display:flex; align-items:center; border:0.5px solid var(--border-strong); border-radius:var(--radius); overflow:hidden; height:36px; }
+  .stepper input{ flex:1; border:none; text-align:center; height:100%; }
+  .stepper input:focus{ box-shadow:none; }
+  .stepper .unit{ padding:0 10px; color:var(--text-muted); font-size:13px; border-left:0.5px solid var(--border); background:#fafafc; height:100%; display:flex; align-items:center; }
+  .stepper button{ width:36px; height:100%; border:none; background:#fafafc; color:var(--text-secondary); cursor:pointer; font-size:15px; }
+  .stepper button:first-child{ border-right:0.5px solid var(--border); }
+
+  .preview-box{ background:var(--accent-bg); border-radius:var(--radius); padding:12px 14px; margin:4px 0 18px; }
+  .preview-box p{ margin:0; color:#33409e; }
+  .preview-box .label{ font-size:11.5px; margin-bottom:6px; }
+  .preview-box .formula{ font-size:13.5px; }
+  .preview-box .estimate{ font-size:19px; font-weight:600; margin-top:4px; }
+
+  .radio-row{ display:flex; gap:22px; align-items:center; height:36px; }
+  .radio-row label{ display:flex; align-items:center; gap:6px; font-size:13.5px; color:var(--text-primary); cursor:pointer; }
+
+  .section-divider{ border-top:0.5px solid var(--border); margin:20px 0 16px; padding-top:16px; }
+  .section-title{ font-size:14px; font-weight:600; margin-bottom:4px; }
+  .section-sub{ font-size:12px; color:var(--text-muted); margin-bottom:12px; }
+
+  .checkbox-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px 12px; }
+  .checkbox-item{ display:flex; align-items:center; gap:8px; font-size:13.5px; }
+  .checkbox-item input{ width:16px; height:16px; }
+
+  .drawer-footer{ display:flex; justify-content:flex-end; gap:8px; border-top:0.5px solid var(--border); padding-top:16px; margin-top:6px; }
+
+  .change-note{ background:#fff9ec; border:1px solid #f0dfb5; border-radius:8px; margin-bottom:18px; }
+  .change-note summary{ cursor:pointer; padding:13px 18px; font-size:13.5px; font-weight:600; color:#8a6116; list-style:none; display:flex; align-items:center; gap:8px; user-select:none; }
+  .change-note summary::-webkit-details-marker{ display:none; }
+  .change-note summary .chevron{ transition:transform .18s; font-size:11px; }
+  .change-note[open] summary .chevron{ transform:rotate(90deg); }
+  .change-note .note-body{ padding:0 20px 20px; font-size:13px; color:#3a3a3a; line-height:1.8; border-top:1px solid #f0dfb5; margin-top:2px; padding-top:14px; }
+  .change-note h4{ font-size:13.5px; margin:16px 0 6px; color:#1f2430; }
+  .change-note h4:first-child{ margin-top:0; }
+  .change-note ul{ margin:0 0 4px; padding-left:20px; }
+  .change-note li{ margin-bottom:3px; }
+  .change-note code{ background:#f2f0e6; padding:1px 5px; border-radius:4px; font-size:12px; }
+  .change-note table{ width:100%; max-width:760px; min-width:0; border-collapse:collapse; margin:8px 0 14px; font-size:12.5px; background:#fffdf7; table-layout:fixed; }
+  .change-note th, .change-note td{ border:1px solid #f0dfb5; padding:6px 10px; text-align:left; vertical-align:top; line-height:1.6; white-space:normal; word-break:break-word; }
+  .change-note table th{ background:#f5ecd2; color:#6b4f13; font-weight:600; white-space:nowrap; }
+  .tag-new{ background:#e6f0ff; color:#2f5eea; font-size:10px; padding:1px 6px; border-radius:4px; margin-left:6px; font-weight:600; vertical-align:2px; white-space:nowrap; }
+  .tag-manual{ background:#e6f7ee; color:#158a5c; font-size:10px; padding:1px 6px; border-radius:4px; margin-left:6px; font-weight:600; vertical-align:2px; white-space:nowrap; }
+  .tag-type{ background:#f0eefd; color:#6b46c1; font-size:11px; padding:1px 7px; border-radius:4px; margin-right:8px; font-weight:600; white-space:nowrap; display:inline-block; }
+  .optional-tag{ background:#f2f0e6; color:#8a7a4a; font-size:10px; padding:1px 6px; border-radius:4px; margin-left:6px; font-weight:600; vertical-align:2px; }
+
+  .confirm-overlay{ position:fixed; inset:0; background:rgba(20,22,34,0.35); display:none; align-items:center; justify-content:center; z-index:60; }
+  .confirm-overlay.show{ display:flex; }
+  .confirm-box{ background:#fff; border-radius:8px; padding:20px 22px; width:300px; box-shadow:0 8px 30px rgba(0,0,0,0.18); }
+  .confirm-box p{ margin:0 0 18px; font-size:14px; display:flex; align-items:center; gap:8px; }
+  .confirm-actions{ display:flex; justify-content:flex-end; gap:8px; }
+
+  .copy-modal-overlay{ position:fixed; inset:0; background:rgba(20,22,34,0.45); display:none; align-items:center; justify-content:center; z-index:55; }
+  .copy-modal-overlay.show{ display:flex; }
+  .copy-modal{ background:#fff; border-radius:10px; width:560px; max-width:92vw; max-height:86vh; overflow-y:auto; padding:22px 26px; box-shadow:0 10px 40px rgba(0,0,0,0.18); }
+  .copy-modal-header{ display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; }
+  .copy-modal-header span{ font-size:16px; font-weight:600; }
+  .copy-modal-header .close{ cursor:pointer; color:var(--text-secondary); font-size:18px; }
+  .copy-warn{ background:#fff8ec; border:0.5px solid #f0dfb5; color:#8a6116; font-size:12px; padding:9px 12px; border-radius:var(--radius); margin-bottom:18px; line-height:1.6; }
+
+  .claim-rule-list{ display:flex; flex-direction:column; gap:14px; }
+  .claim-rule-item label{ display:flex; align-items:flex-start; gap:8px; font-size:13.5px; color:var(--text-primary); cursor:pointer; line-height:1.6; }
+  .claim-rule-item input[type=radio]{ margin-top:3px; width:15px; height:15px; flex-shrink:0; }
+  .claim-rule-sub{ margin:8px 0 0 23px; }
+  .claim-rule-sub select{ width:200px; height:34px; border:0.5px solid var(--border-strong); border-radius:var(--radius); padding:0 10px; font-size:13px; background:#fff; color:var(--text-primary); }
+
+  .toast{
+    position:fixed; top:20px; left:50%; transform:translateX(-50%);
+    background:#232948; color:#fff; padding:10px 18px; border-radius:6px; font-size:13.5px;
+    opacity:0; pointer-events:none; transition:opacity .2s; z-index:80;
+  }
+  .toast.show{ opacity:1; }
+
+  /* ===================== 顶层四大模块 Tab 切换 ===================== */
+  .app-tabs{ display:flex; align-items:center; background:#171c2e; padding:0 22px; height:50px; gap:2px; flex-shrink:0; }
+  .app-tabs .brand{ color:#fff; font-weight:700; font-size:15px; margin-right:22px; display:flex; align-items:center; gap:6px; }
+  .app-tabs .brand span{ color:#ffb545; }
+  .app-tab{ padding:0 18px; height:50px; display:flex; align-items:center; font-size:13.5px; color:#aeb3c9; cursor:pointer; border-bottom:2px solid transparent; white-space:nowrap; }
+  .app-tab:hover{ color:#fff; }
+  .app-tab.active{ color:#fff; font-weight:600; border-bottom-color:var(--accent); }
+  .app-tab-divider{ width:1px; height:20px; background:#363c60; margin:0 12px; }
+  .tab-content.hidden{ display:none; }
+
+  /* ===================== 客户端原型：H5 + PC 共用 ===================== */
+  .client-page{ padding:26px; background:#eef0f6; min-height:calc(100vh - 50px); }
+  .client-toolbar{ display:flex; align-items:center; justify-content:space-between; margin-bottom:18px; flex-wrap:wrap; gap:10px; }
+  .client-toolbar-title{ font-size:16px; font-weight:700; color:var(--text-primary); }
+  .client-toolbar-title small{ display:block; font-size:12px; color:var(--text-muted); font-weight:400; margin-top:3px; }
+  .client-subtabs{ display:flex; background:#fff; border:0.5px solid var(--border); border-radius:8px; overflow:hidden; }
+  .client-subtab{ padding:8px 22px; font-size:13px; cursor:pointer; color:var(--text-secondary); }
+  .client-subtab.active{ background:var(--accent); color:#fff; }
+  .client-demo-hint{ font-size:12px; color:#8a6116; background:#fff8ec; border:0.5px solid #f0dfb5; border-radius:6px; padding:7px 12px; margin-bottom:18px; line-height:1.6; }
+  .pm-note{ border:1px dashed #b9bfd6; background:#f5f6fb; color:#5a6178; font-size:11.5px; padding:7px 10px; border-radius:6px; margin-top:8px; line-height:1.7; }
+  .pm-note b{ color:#3f5eea; }
+
+  .phone-frame{ width:375px; margin:0 auto; background:#12142a; border-radius:38px; padding:14px; box-shadow:0 20px 50px rgba(20,22,50,0.28); }
+  .phone-notch{ width:120px; height:22px; background:#12142a; border-radius:0 0 14px 14px; margin:0 auto -22px; position:relative; z-index:2; }
+  .phone-screen{ background:#f5f6fa; border-radius:26px; overflow-y:auto; height:780px; position:relative; }
+  .phone-screen::-webkit-scrollbar{ width:0; }
+  .h5-topbar{ background:linear-gradient(135deg,#2b3363,#4a3f8c); color:#fff; padding:34px 16px 44px; position:relative; }
+  .h5-topbar .back{ position:absolute; left:14px; top:34px; font-size:18px; }
+  .h5-topbar .title{ text-align:center; font-size:15px; font-weight:600; }
+  .h5-level-card{ background:rgba(255,255,255,0.14); border-radius:12px; padding:13px 15px; margin-top:14px; }
+  .h5-level-badge{ width:38px; height:38px; border-radius:10px; background:linear-gradient(135deg,#ffb545,#ff8a45); display:flex; align-items:center; justify-content:center; font-weight:700; color:#fff; font-size:12.5px; flex-shrink:0; }
+  .h5-progress-track{ height:6px; background:rgba(255,255,255,0.28); border-radius:4px; margin-top:9px; overflow:hidden; }
+  .h5-progress-fill{ height:100%; background:#ffd76a; border-radius:4px; transition:width .4s; }
+
+  .vip-accordion{ padding:12px; margin-top:-24px; position:relative; z-index:1; }
+  .vip-level-card{ background:#fff; border-radius:12px; margin-bottom:10px; box-shadow:0 2px 10px rgba(20,22,50,0.06); overflow:hidden; }
+  .vip-level-head{ display:flex; align-items:center; gap:10px; padding:13px 14px; cursor:pointer; }
+  .vip-level-head .lv-badge{ width:30px; height:30px; border-radius:8px; background:#eef1fd; color:var(--accent); display:flex; align-items:center; justify-content:center; font-size:11.5px; font-weight:700; flex-shrink:0; }
+  .vip-level-head .lv-name{ font-size:14px; font-weight:600; flex:1; }
+  .vip-level-head .lv-current-tag{ background:#ffb545; color:#fff; font-size:10px; padding:2px 8px; border-radius:10px; font-weight:600; white-space:nowrap; }
+  .vip-level-head .lv-chevron{ font-size:11px; color:var(--text-muted); transition:transform .15s; }
+  .vip-level-card.expanded .lv-chevron{ transform:rotate(90deg); }
+  .vip-level-body{ display:none; padding:0 14px 14px; }
+  .vip-level-card.expanded .vip-level-body{ display:block; }
+
+  .reward-card{ border:0.5px solid var(--border); border-radius:10px; padding:11px 12px; margin-bottom:8px; background:#fbfbfe; }
+  .reward-card-top{ display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:4px; }
+  .reward-card-name{ font-size:12.5px; font-weight:600; display:flex; align-items:center; flex-wrap:wrap; }
+  .reward-card-amount{ font-size:13px; color:var(--accent); font-weight:700; white-space:nowrap; }
+  .reward-progress-track{ height:5px; background:#eceef5; border-radius:3px; overflow:hidden; margin:7px 0 6px; }
+  .reward-progress-fill{ height:100%; background:var(--accent); border-radius:3px; transition:width .3s; }
+  .reward-card-foot{ display:flex; justify-content:space-between; align-items:center; gap:8px; margin-top:4px; }
+  .reward-progress-text{ font-size:11px; color:var(--text-muted); }
+  .reward-btn{ border:none; border-radius:16px; padding:6px 16px; font-size:12px; font-weight:600; cursor:pointer; white-space:nowrap; }
+  .reward-btn.bet{ background:#fff2e4; color:#d97a1f; border:0.5px solid #f3caa0; }
+  .reward-btn.claim{ background:linear-gradient(135deg,#3f5eea,#5f7cff); color:#fff; }
+  .reward-btn.claimed{ background:#eee; color:var(--text-muted); cursor:default; }
+  .reward-demo-adjust{ display:flex; gap:6px; align-items:center; margin-top:7px; }
+  .reward-demo-adjust button{ width:22px; height:22px; border-radius:50%; border:0.5px solid var(--border-strong); background:#fff; cursor:pointer; font-size:12px; line-height:1; padding:0; }
+  .reward-demo-adjust span{ font-size:10.5px; color:var(--text-muted); }
+  .level-preview-row{ display:flex; justify-content:space-between; padding:7px 0; border-bottom:0.5px solid var(--border); font-size:12px; color:var(--text-secondary); }
+  .level-preview-row:last-child{ border-bottom:none; }
+
+  .rule-accordion{ margin:14px; }
+  .rule-item{ background:#fff; border-radius:10px; margin-bottom:8px; overflow:hidden; }
+  .rule-item-head{ padding:12px 14px; font-size:13px; font-weight:600; display:flex; justify-content:space-between; align-items:center; cursor:pointer; }
+  .rule-item-body{ display:none; padding:0 14px 14px; font-size:12px; color:var(--text-secondary); line-height:1.75; }
+  .rule-item.expanded .rule-item-body{ display:block; }
+  .rule-item .rule-chevron{ transition:transform .15s; font-size:11px; color:var(--text-muted); }
+  .rule-item.expanded .rule-chevron{ transform:rotate(180deg); }
+  .rule-para{ margin:0; }
+  .rule-para.rule-bullet{ position:relative; padding-left:14px; margin-bottom:6px; }
+  .rule-para.rule-bullet:last-child{ margin-bottom:0; }
+  .rule-para.rule-bullet::before{ content:'•'; position:absolute; left:0; top:0; color:var(--text-muted); }
+
+  .pc-frame{ background:#fff; border-radius:12px; border:0.5px solid var(--border); overflow:hidden; box-shadow:0 6px 24px rgba(20,22,50,0.07); }
+  .pc-hero{ background:linear-gradient(120deg,#20244a,#3f4a8c); padding:26px 30px 20px; color:#fff; }
+  .pc-hero-top{ display:flex; justify-content:space-between; align-items:flex-start; gap:20px; flex-wrap:wrap; }
+  .pc-ribbon{ display:flex; gap:8px; margin-top:18px; overflow-x:auto; padding-bottom:4px; }
+  .pc-pill{ flex-shrink:0; padding:8px 16px; border-radius:20px; background:rgba(255,255,255,0.12); font-size:12.5px; cursor:pointer; white-space:nowrap; }
+  .pc-pill.current{ background:#ffb545; color:#20244a; font-weight:700; }
+  .pc-pill.selected{ background:rgba(255,255,255,0.34); font-weight:600; }
+  .pc-body{ padding:24px 30px 30px; }
+  .pc-selected-banner{ font-size:12.5px; color:#33409e; margin-bottom:16px; padding:10px 14px; background:#f4f7ff; border-radius:8px; }
+  .pc-reward-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+  .pc-reward-grid .level-preview-row{ grid-column:1/-1; }
+  .pc-rule-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:26px; }
+  .pc-rule-card{ background:#f8f9fc; border-radius:10px; padding:16px; }
+  .pc-rule-card h5{ margin:0 0 8px; font-size:13.5px; }
+  .pc-rule-card p{ margin:0; font-size:12px; color:var(--text-secondary); line-height:1.8; max-height:150px; overflow-y:auto; }
+
+  /* ===== 用户端还原真实现状页面（浅色主题，头像+等级轨道+图标区/表格） ===== */
+  .h5-header{ background:#fff; padding:14px 16px 4px; border-bottom:0.5px solid var(--border); }
+  .h5-header .back-row-center{ position:relative; display:flex; align-items:center; justify-content:center; margin-bottom:14px; }
+  .h5-header .back-row-center .back{ position:absolute; left:0; font-size:18px; color:var(--text-primary); }
+  .h5-header .back-row-center .title{ font-size:15px; font-weight:600; }
+  .h5-user-row{ display:flex; flex-direction:column; align-items:center; text-align:center; gap:3px; margin-bottom:16px; }
+  .h5-avatar{ width:52px; height:52px; border-radius:50%; background:linear-gradient(135deg,#8fa4ff,#6b7fef); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; font-size:15px; flex-shrink:0; margin-bottom:4px; }
+  .h5-user-name{ font-size:14px; font-weight:600; }
+  .h5-user-time{ font-size:10.5px; color:var(--text-muted); }
+
+  .lv-progress-row{ display:flex; align-items:center; gap:10px; padding:0 4px; margin-top:4px; }
+  .lv-progress-endlabel{ font-size:11px; color:var(--text-secondary); font-weight:600; white-space:nowrap; }
+  .lv-exp-text{ font-size:11px; color:var(--text-muted); text-align:center; margin:6px 0 2px; }
+  .lv-progress-text{ font-size:11.5px; color:var(--text-secondary); margin-bottom:6px; }
+
+  .arc-selector{ position:relative; padding:22px 26px 2px; }
+  .arc-curve{ position:absolute; left:16%; right:16%; top:24px; height:46px; border-top:2px dashed #cbd3f0; border-radius:50%; pointer-events:none; }
+  .arc-items{ position:relative; display:flex; justify-content:space-between; align-items:flex-end; }
+  .arc-item{ display:flex; flex-direction:column; align-items:center; gap:6px; opacity:.55; flex:1; }
+  .arc-item.current{ opacity:1; transform:translateY(-12px); }
+  .arc-dot{ width:9px; height:9px; border-radius:50%; background:#b7c1f5; }
+  .arc-item.current .arc-dot{ width:14px; height:14px; background:var(--accent); box-shadow:0 0 0 4px var(--accent-bg); }
+  .arc-label{ font-size:11px; color:var(--text-secondary); white-space:nowrap; }
+  .arc-item.current .arc-label{ color:var(--accent); font-weight:700; }
+  .arc-arrow{ text-align:center; color:var(--accent); font-size:13px; margin-top:2px; }
+
+  .level-hero-card{ margin:6px 14px 16px; border-radius:14px; padding:16px 18px; text-align:center; color:#fff; background:linear-gradient(150deg,#4a3f8c 0%,#3f5eea 55%,#5f7cff 100%); box-shadow:0 8px 20px rgba(63,94,234,0.25); }
+  .level-hero-icon{ font-size:22px; margin-bottom:2px; }
+  .level-hero-title{ font-size:19px; font-weight:700; letter-spacing:1px; margin-bottom:10px; }
+  .level-hero-row{ font-size:12px; opacity:.92; line-height:1.9; }
+  .level-hero-row b{ font-weight:700; }
+
+  .reward-card-subline{ font-size:10.5px; color:var(--text-muted); font-weight:400; margin-top:2px; }
+  .lv-mult-line{ font-size:11.5px; color:var(--text-secondary); background:#f4f7ff; border-radius:6px; padding:6px 10px; margin-bottom:10px; }
+
+  .icon-divider{ display:flex; align-items:center; justify-content:center; gap:8px; color:var(--accent); font-size:12px; font-weight:600; margin:14px 0 2px; }
+  .icon-divider .diamond{ color:#c9d3f7; }
+  .icon-quad{ display:flex; justify-content:space-around; padding:8px 6px 18px; }
+  .icon-quad-item{ display:flex; flex-direction:column; align-items:center; gap:6px; font-size:10.5px; color:var(--text-secondary); }
+  .icon-quad-item .ic{ width:38px; height:38px; border-radius:10px; background:#eef1fd; display:flex; align-items:center; justify-content:center; font-size:16px; }
+
+  .h5-segtabs{ display:flex; background:#f0f1f6; border-radius:8px; margin:0 14px 12px; padding:3px; }
+  .h5-segtab{ flex:1; text-align:center; padding:8px 0; font-size:12.5px; color:var(--text-secondary); border-radius:6px; cursor:pointer; }
+  .h5-segtab.active{ background:#fff; color:var(--accent); font-weight:600; box-shadow:0 1px 4px rgba(20,22,50,0.08); }
+  .h5-tabpane{ display:none; }
+  .h5-tabpane.active{ display:block; }
+
+  .scenario-bar{ display:flex; align-items:center; gap:8px; background:#f4f7ff; border:0.5px solid #c9d3f7; border-radius:8px; padding:9px 14px; margin-bottom:16px; flex-wrap:wrap; }
+  .scenario-bar label{ font-size:12px; color:#33409e; font-weight:600; white-space:nowrap; }
+  .scenario-bar select{ height:30px; border-radius:6px; border:0.5px solid var(--border-strong); font-size:12px; padding:0 8px; background:#fff; }
+
+  .reward-btn.locked{ background:#f1f1f5; color:#9aa0ab; border:0.5px dashed var(--border-strong); cursor:not-allowed; }
+  .reward-btn.expired{ background:#f1f1f5; color:#b0b0b8; border:0.5px dashed var(--border-strong); cursor:not-allowed; text-decoration:line-through; }
+  .reward-btn.expired-fwd{ background:#eaf1ff; color:#3f5eea; border:0.5px solid #c9d3f7; cursor:default; }
+  .reward-note{ font-size:11px; margin:4px 0 6px; line-height:1.6; }
+  .reward-note.locked-note{ color:#b5760a; }
+  .reward-note.unlocked-note{ color:#158a5c; }
+  .reward-note.blocked-note{ color:#a8333a; }
+  .lv-total{ font-size:11px; color:var(--text-secondary); white-space:nowrap; }
+  .lv-total-header{ font-size:12.5px; color:var(--text-secondary); margin-bottom:10px; padding-bottom:8px; border-bottom:0.5px dashed var(--border); }
+  .lv-total-header b{ color:var(--accent); }
+  .lv-total-header.with-btn{ display:flex; justify-content:space-between; align-items:center; gap:8px; }
+  .claim-all-btn{ background:linear-gradient(135deg,#3f5eea,#5f7cff); color:#fff; border:none; border-radius:14px; padding:5px 12px; font-size:11.5px; font-weight:600; cursor:pointer; white-space:nowrap; flex-shrink:0; }
+  .claim-all-btn:disabled{ background:#eee; color:var(--text-muted); cursor:default; }
+  /* 收起/展开样式在当前、历史（上一级）、未来（下一级）三种等级状态间保持统一的卡片语言：均复用 .reward-card 组件外壳，仅按钮/状态文案不同 */
+  .reward-card.past-card{ background:#f6f7fb; opacity:.92; }
+  .reward-card.future-card{ background:#f6f7fb; opacity:.78; }
+  .lv-status-chip{ font-size:9.5px; padding:1px 6px; border-radius:7px; margin-left:6px; white-space:nowrap; font-weight:600; }
+  .lv-status-chip.past{ background:#eef1fd; color:#5f6a8c; }
+  .lv-status-chip.future{ background:#f1f1f5; color:#9aa0ab; }
+
+  .pc-topnav2{ background:#171c2e; color:#c7cbe0; display:flex; align-items:center; padding:0 20px; height:44px; font-size:12.5px; gap:18px; }
+  .pc-topnav2 .brand2{ color:#fff; font-weight:700; margin-right:8px; }
+  .pc-topnav2 .spacer{ flex:1; }
+  .pc-topnav2 .chip{ background:#2a3050; padding:4px 10px; border-radius:14px; font-size:11.5px; }
+  .pc-shell2{ display:flex; align-items:stretch; }
+  .pc-sidebar2{ width:172px; flex-shrink:0; background:#fff; border-right:0.5px solid var(--border); padding:12px 0; }
+  .pc-side-item{ padding:10px 20px; font-size:12.5px; color:var(--text-secondary); display:flex; align-items:center; gap:8px; }
+  .pc-side-item.active{ color:var(--accent); background:var(--accent-bg); border-right:3px solid var(--accent); font-weight:600; }
+  .pc-main2{ flex:1; padding:22px 26px; min-width:0; background:#f7f8fb; }
+  .pc-level-card2{ background:#fff; border:0.5px solid var(--border); border-radius:10px; padding:20px 24px; margin-bottom:18px; }
+  .pc-level-card2 .lc-top{ display:flex; justify-content:space-between; align-items:baseline; margin-bottom:16px; flex-wrap:wrap; gap:10px; }
+  .pc-level-card2 .lc-title{ font-size:15px; font-weight:700; }
+  .pc-level-card2 .lc-exp{ font-size:12px; color:var(--text-muted); }
+  .pc-track-row{ display:flex; align-items:flex-start; overflow-x:auto; padding-bottom:6px; margin-bottom:14px; }
+
+  .pc-table-wrap2{ background:#fff; border:0.5px solid var(--border); border-radius:10px; overflow-x:auto; margin-bottom:20px; }
+  .pc-vip-table{ width:100%; border-collapse:collapse; font-size:12.5px; min-width:960px; }
+  .pc-vip-table th{ background:#f8f9fc; color:var(--text-secondary); font-weight:500; padding:10px 12px; text-align:center; border-bottom:0.5px solid var(--border); white-space:nowrap; }
+  .pc-vip-table td{ padding:10px 12px; text-align:center; border-bottom:0.5px solid var(--border); vertical-align:middle; }
+  .pc-vip-table tr:last-child td{ border-bottom:none; }
+  .pc-vip-table tr.current-row{ background:#f4f7ff; }
+  .pc-vip-table tr.current-row td:first-child{ box-shadow:inset 3px 0 0 var(--accent); font-weight:700; color:var(--accent); }
+  .pc-cell-amount{ font-weight:600; color:var(--text-primary); }
+  .pc-cell-sub{ font-size:10.5px; color:var(--text-muted); margin-top:3px; }
+  .pc-cell-btn{ margin-top:6px; }
+
+  .pc-rule-stack{ display:flex; flex-direction:column; gap:14px; }
+  .pc-rule-card2{ background:#fff; border:0.5px solid var(--border); border-radius:10px; padding:16px 20px; }
+  .pc-rule-card2 h5{ margin:0 0 8px; font-size:13.5px; }
+  .pc-rule-card2 p{ margin:0; font-size:12px; color:var(--text-secondary); line-height:1.85; }
+
+  /* ===================== 需求背景文档 ===================== */
+  .doc-page{ max-width:960px; margin:0 auto; padding:30px 34px 60px; background:#fff; }
+  .doc-page h2{ font-size:20px; margin:0 0 4px; }
+  .doc-page .doc-sub{ color:var(--text-muted); font-size:12.5px; margin-bottom:26px; }
+  .doc-section{ margin-bottom:28px; }
+  .doc-section h3{ font-size:15px; margin:0 0 12px; padding-left:10px; border-left:3px solid var(--accent); }
+  .doc-section h4{ font-size:13.5px; margin:14px 0 6px; color:#1f2430; }
+  .doc-section p{ font-size:13.5px; line-height:1.9; color:#333; margin:0 0 8px; }
+  .doc-section ul{ margin:0 0 8px; padding-left:20px; font-size:13.5px; line-height:1.9; color:#333; }
+  .doc-table{ width:100%; min-width:0; border-collapse:collapse; font-size:12.5px; margin:10px 0 16px; table-layout:fixed; }
+  .doc-table th, .doc-table td{ border:1px solid var(--border); padding:8px 10px; text-align:left; vertical-align:top; white-space:normal; word-break:break-word; overflow-wrap:break-word; }
+  .doc-table th{ background:#f8f9fc; }
+  .doc-callout{ background:#f4f7ff; border-left:3px solid var(--accent); padding:10px 14px; font-size:12.5px; color:#33409e; border-radius:0 6px 6px 0; margin:10px 0; line-height:1.8; }
+  .doc-callout.warn{ background:#fff8ec; border-left-color:#e6b23c; color:#8a6116; }
+
+  /* ===================== 流程图 ===================== */
+  .flow-page{ max-width:1040px; margin:0 auto; padding:30px 34px 60px; }
+  .flow-section{ margin-bottom:44px; background:#fff; border:0.5px solid var(--border); border-radius:10px; padding:26px 30px; }
+  .flow-section h3{ font-size:15px; margin:0 0 6px; padding-left:10px; border-left:3px solid var(--accent); }
+  .flow-section .flow-desc{ font-size:12px; color:var(--text-muted); margin:0 0 22px 13px; }
+  .flow-col{ display:flex; flex-direction:column; align-items:center; }
+  .flow-node{ background:#fff; border:1px solid var(--border-strong); border-radius:8px; padding:10px 18px; font-size:12.5px; text-align:center; min-width:230px; box-shadow:0 2px 6px rgba(20,22,50,0.05); line-height:1.6; }
+  .flow-node.start, .flow-node.end{ background:#232948; color:#fff; border-radius:20px; font-weight:600; border-color:#232948; }
+  .flow-node.decision{ background:#fff8ec; border-color:#f0dfb5; color:#8a6116; }
+  .flow-node.action{ background:#eef1fd; border-color:#c9d3f7; color:#33409e; }
+  .flow-node.danger{ background:#fdecec; border-color:#f3c3c5; color:#a8333a; }
+  .flow-arrow{ width:2px; height:22px; background:var(--border-strong); position:relative; }
+  .flow-arrow::after{ content:''; position:absolute; bottom:-1px; left:50%; transform:translateX(-50%); border:5px solid transparent; border-top-color:var(--border-strong); }
+  .flow-arrow-label{ font-size:10.5px; color:var(--text-muted); margin:2px 0; }
+  .flow-branch{ display:flex; gap:0; align-items:stretch; width:100%; justify-content:center; margin-top:0; }
+  .flow-branch-col{ display:flex; flex-direction:column; align-items:center; flex:1; max-width:250px; padding:0 8px; }
+  .flow-branch-label{ font-size:11px; color:var(--text-muted); margin:6px 0 2px; text-align:center; }
+  .flow-hline-wrap{ width:100%; display:flex; justify-content:center; }
+  .flow-hline{ height:2px; background:var(--border-strong); align-self:flex-start; margin-top:11px; }
+</style>
+</head>
+<body>
+
+<div class="app-tabs">
+  <div class="brand">JUAN<span>365</span> 原型</div>
+  <div class="app-tab active" data-tab="client" onclick="switchAppTab('client')">用户端</div>
+  <div class="app-tab" data-tab="admin" onclick="switchAppTab('admin')">管理后台</div>
+  <div class="app-tab-divider"></div>
+  <div class="app-tab" data-tab="background" onclick="switchAppTab('background')">需求背景</div>
+  <div class="app-tab" data-tab="flow" onclick="switchAppTab('flow')">流程图</div>
+</div>
+
+<!-- ============ Tab 1：用户端（仅H5，直接读取管理后台"VIP列表数据"与"客户端展示设置"配置） ============ -->
+<div class="tab-content" id="tab-client">
+  <div class="client-page">
+    <div class="client-toolbar">
+      <div class="client-toolbar-title">用户端 · VIP特权（H5）<small>仅保留H5作为用户端示例；页面数据（等级字段、展示字段、规则说明文案）均直接读取管理后台「VIP列表-按抽佣」数据与「客户端展示设置」配置——在管理后台修改后，本页会同步刷新，用于验证前后台闭环</small></div>
+    </div>
+    <div class="client-demo-hint">💡 可交互演示：奖励卡片下方"－ / ＋"模拟流水变化，实时切换「去投注」⇄「领取」；当前等级展开态标题右侧"🎁 一键领取"可将该等级下所有已达标待领取的奖励一次性领取，无需逐项点击；若其中存在方案三·受众用户1下"已生成但需先充值"的记录，一键领取时会同步弹出充值提示弹窗，不会静默跳过；下方"场景演示"下拉覆盖「领取规则设置」四个方案在VIP福利卡片上的实际交互表现（选择后会同步切换为该方案的全局生效效果；其中方案一·未领取转发本质不作废，跨周期未领取的奖励仅同步一份站内信/邮件通知，卡片上仍展示"领取"按钮可直接领取）；点击"重置演示"可恢复初始状态重新演示。当前等级（VIP3）下方为低等级（VIP0～VIP2，已达成，展示历史领取记录）与高等级（VIP4～VIP9，未解锁，展示条件预览）——三类等级统一使用同一套奖励卡片样式展示，收起时均展示"总奖金"，展开时按当前/历史/未来分别展示进度、记录或条件说明，形成完整闭环。</div>
+    <div class="scenario-bar">
+      <label>🎬 场景演示（领取规则设置-四个方案）：</label>
+      <select id="scenarioSelect" onchange="setScenario(this.value)">
+        <option value="normal">默认：流水达标即可直接领取</option>
+        <option value="scheme1">方案一·未领取转发：跨周期未领取不作废，同步站内信/邮件提醒，仍需回页面领取</option>
+        <option value="scheme2">方案二·未领取作废：跨周期未领取，由系统自动回收作废</option>
+        <option value="locked">方案三·受众控制领取（未充值）：奖励已生成，点击领取需先完成充值</option>
+        <option value="unlocked">方案三·受众控制领取（已充值）：受众条件已满足，奖励已解锁</option>
+        <option value="blocked">方案四·受众控制发奖（未充值）：不满足受众条件，本期不生成奖励</option>
+      </select>
+      <button class="btn" style="height:30px;font-size:12px;" onclick="resetDemo()">🔄 重置演示</button>
+    </div>
+
+    <div class="client-view" id="view-h5">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="h5-header">
+            <div class="back-row-center"><span class="back">‹</span><span class="title">VIP特权</span></div>
+            <div class="h5-user-row">
+              <div class="h5-avatar">V3</div>
+              <div class="h5-user-name">dipsy</div>
+              <div class="h5-user-time" id="h5-promote-time">最近晋升时间：2026-09-01 16:26:08</div>
+            </div>
+            <div class="lv-progress-row">
+              <span class="lv-progress-endlabel" id="lv-endlabel-cur"></span>
+              <div class="h5-progress-track" style="flex:1;"><div class="h5-progress-fill" id="h5-progress-fill" style="width:0%;"></div></div>
+              <span class="lv-progress-endlabel" id="lv-endlabel-next"></span>
+            </div>
+            <div class="lv-exp-text" id="h5-lv-exp-text"></div>
+
+            <div class="arc-selector" id="h5-arc-selector"></div>
+
+            <div class="level-hero-card" id="h5-level-hero"></div>
+          </div>
+
+          <div class="h5-segtabs">
+            <div class="h5-segtab active" data-pane="benefit" onclick="switchH5Pane('benefit')">VIP福利</div>
+            <div class="h5-segtab" data-pane="rule" onclick="switchH5Pane('rule')">规则说明</div>
+          </div>
+
+          <div class="h5-tabpane active" id="h5-pane-benefit">
+            <div class="vip-accordion" id="h5-vip-list" style="margin-top:0;"></div>
+          </div>
+          <div class="h5-tabpane" id="h5-pane-rule">
+            <div class="rule-accordion" id="h5-rule-list" style="margin-top:0;"></div>
+          </div>
+          <div style="height:22px;"></div>
+        </div>
+      </div>
+      <div class="pm-note" style="max-width:375px;margin-left:auto;margin-right:auto;">
+        <b>设计说明：</b>当前/历史（低于当前）/未来（高于当前）三类等级的收起态与展开态统一采用同一套 90天保级流水／提现流水倍数信息行＋奖励卡片组件展示，不再对非当前等级使用单独的纯文本样式；历史等级展开后展示"已领取 X / 共 Y"，各奖励项同步展示对应的流水要求，与当前/未来等级口径一致；未来等级展开后展示"🔒 未解锁"及达标条件预览；当前等级新增"跨周期未领取"场景，过期文案随管理后台「领取规则设置」的方案联动——方案一·未领取转发本质不作废，仅同步一份站内信/邮件通知，卡片仍展示"领取"按钮可直接领取，其余方案按"已过期作废"处理并禁用按钮；当前等级展开态新增"一键领取"入口，可将该等级下所有已达标待领取的奖励一次性领取；若其中存在方案三·受众用户1下"已生成但需先充值"的记录，一键领取会先正常领取其余可领取项，再同步弹出充值提示弹窗提醒用户完成充值解锁，不会静默跳过。由此 VIP福利 形成"未解锁→投注中→可领取→已领取/待解锁/未生成→跨周期过期→历史记录"的完整闭环展示。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ Tab 2：管理后台（原有原型内容） ============ -->
+<div class="tab-content hidden" id="tab-admin">
+<div class="shell">
+  <div class="sidebar">
+    <div class="logo">JUAN<span>365</span></div>
+    <div class="nav-group-label">会员</div>
+    <div class="nav-item">全部会员</div>
+    <div class="nav-item">会员账单</div>
+    <div class="nav-item">账单详情</div>
+    <div class="nav-item">VIP列表-按投注</div>
+    <div class="nav-item active" id="nav-viplist" onclick="switchAdminPage('viplist')">VIP列表-按抽佣</div>
+    <div class="nav-item" id="nav-audit" onclick="switchAdminPage('audit')">VIP福利彩金审核</div>
+    <div class="nav-item">会员投注</div>
+    <div class="nav-item">会员返水</div>
+    <div class="nav-item">资金处理</div>
+    <div class="nav-item">提款策略</div>
+    <div class="nav-item">返水策略</div>
+    <div class="nav-item">代理推广</div>
+    <div class="nav-item">会员返佣</div>
+    <div class="nav-item">登录日志</div>
+    <div class="nav-item">会员消息</div>
+    <div class="nav-item">标签管理</div>
+    <div class="nav-item">全民推广</div>
+  </div>
+
+  <div class="main">
+    <div class="topbar">仪表盘 &nbsp;/&nbsp; <b id="admin-topbar-title">VIP列表-按抽佣</b></div>
+    <div class="tabstrip">
+      <div class="tab">仪表盘 <span class="x">×</span></div>
+      <div class="tab">会员盈亏 <span class="x">×</span></div>
+      <div class="tab">全部会员 <span class="x">×</span></div>
+      <div class="tab active" id="tab-strip-viplist" onclick="switchAdminPage('viplist')">VIP列表-按抽佣 <span class="x">×</span></div>
+      <div class="tab" id="tab-strip-audit" onclick="switchAdminPage('audit')">VIP福利彩金审核 <span class="x">×</span></div>
+    </div>
+
+    <div class="content">
+    <div class="admin-page" id="admin-page-viplist">
+      <details class="change-note">
+        <summary><span class="chevron">▶</span>本次改动说明（VIP列表页 / 礼金统一固定手动领取 + 日/月福利礼金 + 领取规则）— 点击展开查看变更详情</summary>
+        <div class="note-body">
+
+          <h4>一、字段变更</h4>
+          <ul>
+            <li><b>发放方式统一固定为手动领取</b>：晋级礼金、日福利礼金、周福利礼金、月福利礼金<b>不再提供"自动发放/人工发放"等可选项</b>，统一固定为手动领取（上一版本曾短暂设计为"自动/人工/手动"三选一的全局配置，本轮按需求收敛为直接固定手动领取，不做可配置项，避免运营需要额外配置、也避免跨礼金类型配置不一致）。为了让运营在后台就能清楚识别这一点，表格对应4个列头、以及新增/编辑抽屉对应4个字段标签，均加上<span class="tag-manual">手动领取</span>标识</li>
+            <li><b>新增</b>：日福利礼金<span class="tag-new">NEW</span>、日流水<span class="tag-new">NEW</span>（日福利礼金的达标门槛，逻辑与"周流水→周福利礼金"一致）</li>
+            <li><b>新增</b>：月福利礼金<span class="tag-new">NEW</span>、月流水<span class="tag-new">NEW</span>（逻辑同上）；月福利礼金固定<b>每月16日</b>结算生成上一自然月的奖励</li>
+            <li>日/月福利礼金不再提供逐等级"是否启用"勾选：某等级若不需要该项福利，直接将对应金额配置为 0 即可；是否面向全体等级"整体开放"该福利，统一由「客户端展示设置」中的展示字段勾选控制（勾选状态同时决定是否实际生成待领取记录，见第四节）</li>
+          </ul>
+
+          <h4>二、晋级礼金 / 日福利礼金 / 周福利礼金 / 月福利礼金：统一手动领取</h4>
+          <ul>
+            <li>达标后礼金进入"待领取"状态，由会员在客户端「我的特权」页主动点击领取；<b>领取前不入账，也不计入提现流水</b>，领取后才按该等级配置的「发放礼金稽核倍数」（客户端展示别名"提现流水倍数"）计入提现流水门槛</li>
+            <li>日 / 周 / 月福利礼金能否"生成"，分别取决于对应周期内是否满足日流水 / 周流水 / 月流水门槛；跨级晋级礼金仍按每一级依次生成独立的"待领取"记录，不合并</li>
+            <li>可见性：表格中晋级礼金 / 日福利礼金 / 周福利礼金 / 月福利礼金 4 个对应列头，以及新增/编辑抽屉对应 4 个字段标签，均标注"手动领取"标识，运营无需进入配置弹窗即可在主列表直接确认发放方式</li>
+          </ul>
+
+          <h4>三、领取规则<span class="tag-new">NEW</span>：统一配置，处理跨期未领取奖励</h4>
+          <ul>
+            <li><b>入口</b>：工具栏新增独立按钮「领取规则设置」，单独弹窗配置，<b>全局统一生效</b>，覆盖晋级礼金 / 日福利礼金 / 周福利礼金 / 月福利礼金四类奖励，不分等级单独配置</li>
+            <li>所有统计、结算、判定时间均按<b>北京时间（UTC+8）</b>执行；生成方式为<b>定时统计生成，不按流水达标实时生成</b>：日福利礼金次日 00:00~02:00 结算上一自然日；周福利礼金每周一 00:00~02:00 结算上一自然周（与周流水结算节点一致）；月福利礼金每月16日 00:00~02:00 结算上一自然月；晋级礼金为一次性奖励，以"跨天"为界，晋级次日 00:00 判定是否已领取</li>
+            <li>四选一处理方案（天数下拉沿用需求约定的 5 / 7 / 15 / 30 天内充值可选）：
+              <table>
+                <tr><th style="width:36px;">方案</th><th style="width:96px;">类型</th><th>规则内容</th></tr>
+                <tr><td>1</td><td>未领取转发</td><td>跨天，跨周，跨月时，未领取奖励<b>不作废</b>——奖励继续保留为待领取状态，系统同步发送一条站内信/邮件<b>提醒</b>告知会员有奖励未领取；<b>领取入口和领取方式不变</b>，会员仍需回到VIP福利页面点击"领取"才能到账，站内信/邮件仅作提示，不是发放渠道，也无需在消息中心操作</td></tr>
+                <tr><td>2</td><td>未领取作废</td><td>跨天，跨周，跨月时，未领取奖励<b>系统回收作废</b>——由系统自动回收并作废，作废后领取金额、奖励状态、客户端展示数据全部清零，数据库保留作废记录，客户端不展示</td></tr>
+                <tr><td>3</td><td>受众控制领取</td><td><b>受众用户1</b>：跨天，跨周，跨月时，未领取奖励系统回收作废——受众条件仅控制"是否可领取"，不影响是否生成；奖励照常按周期生成，不满足受众条件时客户端展示为"不可领取"；用户在配置天数内如有任意一笔成功充值到账（不限金额），当前周期内已生成、未领取、未作废的奖励立即实时解锁为可领取；跨期仍未领取的，按方案2作废</td></tr>
+                <tr><td>4</td><td>受众控制发奖</td><td><b>受众用户2</b>：跨天，跨周，跨月时，不满足受众条件不派发奖励，未领取奖励系统回收作废——受众条件控制"是否生成奖励"，定时统计时先判断受众条件，不满足则本周期直接不生成（非作废，是压根不产生记录）；满足受众条件且流水达标才生成奖励并允许领取；跨期仍未领取的，按方案2作废</td></tr>
+              </table>
+              <div class="section-sub" style="margin:2px 0 0;">类型命名口径：<b>未领取转发</b>=奖励生成后跨周期仍保留为待领取状态并同步发送消息提醒，不作废，领取入口不变；<b>未领取作废</b>=奖励生成后跨周期自动回收；<b>受众控制领取</b>=奖励正常生成，满足受众条件后才可领取；<b>受众控制发奖</b>=满足受众条件才生成奖励</div>
+            </li>
+            <li><b>闭环补充</b>：90天保级降级仅清零「待换算预期抽佣金额余量(pool)」，<b>不影响</b>已生成但尚未领取的礼金记录，这些记录仍按自身周期边界与本规则独立处理</li>
+            <li><b>规则闭环状态流转对照表</b>（按场景逐条列出四类礼金在各方案下的完整状态流转，便于开发/测试对照实现）：
+              <table>
+                <tr><th style="width:230px;">场景</th><th>处理规则</th></tr>
+                <tr><td>当前周期内满足流水</td><td>定时任务统计后，根据当前生效的领取规则方案生成或处理奖励</td></tr>
+                <tr><td>当前周期内未满足流水</td><td>不生成奖励</td></tr>
+                <tr><td>方案1：奖励已生成但未领取</td><td>跨周期后继续保留为待领取状态，同步发送站内信/邮件提醒；领取入口不变，用户仍需回到VIP福利页面点击"领取"</td></tr>
+                <tr><td>方案2：奖励已生成但未领取</td><td>跨周期后由系统自动回收并作废</td></tr>
+                <tr><td>方案3：满足流水但未成功充值到账</td><td>奖励照常生成，但客户端展示为不可领取</td></tr>
+                <tr><td>方案3：满足流水且在配置天数内成功充值到账</td><td>奖励实时解锁为可领取，无需等待下一次定时统计</td></tr>
+                <tr><td>方案3：充值金额校验</td><td>不校验金额大小，任意一笔成功充值到账即可满足受众条件</td></tr>
+                <tr><td>方案3：充值成功后的更新时机</td><td>立即将当前有效周期内已生成、未领取、未作废的奖励更新为可领取状态，不等待下一次定时统计</td></tr>
+                <tr><td>方案4：满足流水但不满足受众条件</td><td>不生成奖励（非作废，是压根不产生记录）</td></tr>
+                <tr><td>方案4：满足流水且满足受众条件</td><td>正常生成奖励，客户端可领取</td></tr>
+                <tr><td>方案2 / 3 / 4：奖励已生成但跨周期仍未领取</td><td>自动回收并作废，领取金额、奖励状态、客户端展示数据全部清零</td></tr>
+                <tr><td>已作废奖励后续重新满足条件</td><td>不因用户后续重新满足流水或完成充值而恢复，只能参与下一统计周期的奖励统计</td></tr>
+                <tr><td>奖励作废后</td><td>数据库保留作废记录供查询核对；客户端不再展示该笔已作废奖励</td></tr>
+                <tr><td>后台留痕要求</td><td>方案3"不可领取→充值解锁→跨期作废"的完整过程、方案4"不满足受众条件不生成奖励"的原因，均需记录，对应「VIP福利彩金审核」页审核备注信息</td></tr>
+              </table>
+            </li>
+            <li><b>已确认口径</b>（本轮与运营/研发确认后的关键口径汇总，供开发/测试快速核对）：
+              <table>
+                <tr><th style="width:170px;">项目</th><th>已确认规则</th></tr>
+                <tr><td>奖励类型</td><td>日福利礼金、周福利礼金、月福利礼金三类周期性奖励；晋级礼金为一次性奖励，不纳入本表周期性口径</td></tr>
+                <tr><td>统计周期</td><td>按<b>北京时间（UTC+8）</b>计算自然日、自然周、自然月</td></tr>
+                <tr><td>生成方式</td><td>定时统计生成，不按流水达标实时生成</td></tr>
+                <tr><td>方案3受众条件作用点</td><td>控制"是否可领取"，不控制"是否生成奖励"</td></tr>
+                <tr><td>方案4受众条件作用点</td><td>控制"是否生成奖励"</td></tr>
+                <tr><td>方案3充值判定</td><td>以"成功充值到账"为准</td></tr>
+                <tr><td>方案3充值金额</td><td>不限制金额，任意一笔成功充值到账即可</td></tr>
+                <tr><td>方案3解锁时机</td><td>充值成功到账后实时解锁，仅对当前有效周期内已生成、未领取、未作废的奖励生效</td></tr>
+                <tr><td>已作废奖励</td><td>作废后不可恢复，不因后续充值或重新满足条件而重新开放领取</td></tr>
+                <tr><td>后台记录要求</td><td>保留方案3"不可领取/充值解锁/作废"记录，以及方案4"不生成奖励"的原因记录</td></tr>
+                <tr><td>作废清零范围</td><td>领取金额、奖励状态、客户端展示数据全部清零</td></tr>
+                <tr><td>作废记录</td><td>数据库保留，客户端不展示</td></tr>
+              </table>
+            </li>
+          </ul>
+
+          <h4>四、日/周/月流水门槛与客户端展示设置调整</h4>
+          <ul>
+            <li>新增展示字段：日流水<span class="tag-new">NEW</span>、月流水<span class="tag-new">NEW</span>、日福利礼金<span class="tag-new">NEW</span>、月福利礼金<span class="tag-new">NEW</span></li>
+            <li>「晋级礼金」「周福利礼金」「日福利礼金」「月福利礼金」四项<b>不只是控制客户端展示</b>：取消勾选后，即使对应VIP等级已经配置了具体金额，系统也<b>不会再实际生成待领取记录</b>（即不派发该项礼金）；其余字段（VIP等级名称、门槛、日流水、周流水、月流水、90天保级流水、提现流水倍数）取消勾选仅影响客户端是否显示，不影响后台判定和实际发放</li>
+            <li>「客户端展示设置」中的规则文案字段<b>「周流水规则」更名为「流水福利规则」</b>：因日/周/月流水的达标判定逻辑一致（达标发放、未达标不发放），不再单独按周期区分文案字段，统一在同一段文案中说明日/周/月三档的结算周期与判定逻辑，多等级流水规则、未达标流水结转两条例外规则保留并注明"仅周流水适用"；字段仍维持三段结构（晋升规则/保级规则/流水福利规则），不新增字段，不影响其余两段文案</li>
+          </ul>
+
+        </div>
+      </details>
+
+      <div class="toolbar">
+        <div class="toolbar-left">
+          <button class="btn btn-primary" onclick="openDrawer('add')">＋ 新增</button>
+          <button class="btn" onclick="openCopyModal()">客户端展示设置</button>
+          <button class="btn" onclick="openClaimRuleModal()">领取规则设置<span class="tag-new">NEW</span></button>
+        </div>
+        <div class="icon-row">
+          <span title="刷新">⟳</span>
+          <span title="搜索">🔍</span>
+          <span title="打印">🖶</span>
+          <span title="设置">⚙</span>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>VIP等级</th>
+              <th>VIP等级名称</th>
+              <th>抽佣系数</th>
+              <th>晋升所需经验值门槛</th>
+              <th>预期抽佣金额<span class="tooltip-icon" data-tip="有效投注 ×（1 - 理论RTP - 实际返水率）">ⓘ</span></th>
+              <th>晋级礼金(U)<span class="tag-manual">手动领取</span></th>
+              <th class="new-col">日流水(U)<span class="tag-new">NEW</span></th>
+              <th class="new-col">日福利礼金(U)<span class="tag-new">NEW</span><span class="tag-manual">手动领取</span></th>
+              <th>周流水(U)</th>
+              <th>周福利礼金(U)<span class="tag-manual">手动领取</span></th>
+              <th class="new-col">月流水(U)<span class="tag-new">NEW</span></th>
+              <th class="new-col">月福利礼金(U)<span class="tag-new">NEW</span><span class="tag-manual">手动领取</span></th>
+              <th>90天保级流水(U)</th>
+              <th>发放礼金稽核倍数</th>
+              <th>编辑时间</th>
+              <th>编辑人</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+    </div>
+    <!-- /admin-page-viplist -->
+
+    <div class="admin-page hidden" id="admin-page-audit">
+      <details class="change-note">
+        <summary><span class="chevron">▶</span>本次改动说明（审核方式筛选项调整 / 待审核功能待确认 / 领取规则四个方案在本页的展示方式）— 点击展开查看变更详情</summary>
+        <div class="note-body">
+
+          <h4>一、页面说明</h4>
+          <ul>
+            <li>用于集中查看晋级礼金／日／周／月福利礼金的<b>手动领取</b>与<b>跨周期过期</b>两类记录，供运营核对与客服对账使用</li>
+            <li>晋级礼金／日／周／月福利礼金均<b>统一固定为手动领取</b>（不提供自动/人工发放选项，详见「VIP列表-按抽佣」页说明），因此本页大部分记录是对会员领取行为与系统过期回收行为的<b>留痕记录</b>，而非前置人工审批环节</li>
+          </ul>
+
+          <h4>二、审核状态与查询范围</h4>
+          <ul>
+            <li>审核状态筛选支持<span class="tag-type">待审核</span><span class="tag-type">审核通过</span><span class="tag-type">审核拒绝</span><span class="tag-type">未生成</span>四态查询，<b>默认展示全部状态</b></li>
+            <li>「申领时间」筛选<b>默认展示近一周</b>（今日往前推7天，含首尾两天），页面首次进入时数据即按该范围展示；可按需调整会员ID／账号／代理ID／VIP等级／彩金类型／彩金金额／审核方式／审核人／审核时间等条件后点击"查询"，点击"重置"恢复默认近一周范围</li>
+            <li style="color:#b5760a;"><b>待确认</b>：「待审核」状态及其操作列的"通过/拒绝"人工复核入口，目前作为<b>预留能力</b>保留在原型中演示，是否确有此需要（例如大额彩金人工前置审批）<b>待运营确认后再决定是否保留</b>；如运营确认无需该环节，可直接去除"待审核"状态与对应人工复核操作，所有记录均为系统自动判定后的留痕</li>
+          </ul>
+
+          <h4>三、审核时间口径</h4>
+          <ul>
+            <li><b>手动领取 → 审核通过</b>：会员在客户端点击"领取"，领取即视为审核通过，<b>审核时间＝会员领取时间</b>，<b>审核备注信息＝"手动领取"</b></li>
+            <li><b>跨周期过期 → 审核拒绝</b>：未在周期内领取的奖励由系统按「领取规则设置」自动回收作废，<b>审核时间＝过期回收时间</b>，<b>审核备注信息＝"过期作废"</b>；此类记录的"申领时间"展示为<b>该期奖励生成时间</b>（而非领取时间），因会员实际未申领</li>
+          </ul>
+
+          <h4>四、审核方式筛选项</h4>
+          <ul>
+            <li>原筛选项为<b>自动</b>／<b>手动</b>两项，本轮<b>新增"手动领取"、"过期作废"</b>两个具体方式选项，共四项并存；<b>原有"自动"、"手动"两项保留</b>，用于查询该功能调整前产生的历史数据（历史数据的审核方式仍记录为笼统的"自动"／"手动"，不做回溯改写）；新产生的数据统一使用"手动领取"／"过期作废"两个更明确的具体方式</li>
+          </ul>
+
+          <h4>五、领取规则四个方案在本页的展示方式（便于开发/测试理解）</h4>
+          <ul>
+            <li>「领取规则设置」为<b>全局唯一生效</b>的配置，同一时间只有一个方案在跑，因此<b>审核备注信息不逐条标注具体方案编号</b>（如"方案三"／"方案四"字样），只需清楚描述该记录的特殊处理原因即可；开发/测试如需确认当前生效的是哪个方案，查看「VIP列表-按抽佣」页工具栏「领取规则设置」弹窗中的当前选中项即可，下方按方案分别说明本页应呈现的效果，仅为对照说明，不代表数据里会出现方案编号文字</li>
+            <li><b>方案一·未领取转发</b>：跨天/跨周/跨月时，未领取奖励<b>不作废</b>，继续保留为待领取状态，领取入口和方式不变，系统仅同步发送一条站内信/邮件提醒。本页表现为：<b>跨期未领取期间不产生审核记录</b>（既非"审核通过"也非"审核拒绝／过期作废"，因为会员尚未发生实际领取动作，奖励也未被回收）；直到会员之后主动回到VIP福利页面点击"领取"，才按<b>手动领取 → 审核通过</b>的标准逻辑生成记录，审核时间＝会员实际点击领取的时间，与是否跨过周期无关</li>
+            <li><b>方案二·未领取作废</b>：跨天/跨周/跨月时，未领取奖励由系统<b>回收作废</b>。本页表现为：<b>审核拒绝</b>，审核方式＝"过期作废"，审核备注信息说明作废原因；本页当前演示数据默认按此方案效果展示（即全局生效方案为方案二时的呈现）</li>
+            <li><b>方案三·受众控制领取</b>：奖励按周期正常生成，仅"是否可领取"受充值条件控制。会员在配置天数内完成充值并领取的，记录与普通手动领取<b>无差异</b>，审核方式＝"手动领取"（备注信息可标注"受众充值解锁后领取"便于追溯来源）；配置天数内始终未完成充值、跨期仍未领取的，按<b>方案二</b>同样的作废逻辑处理，审核方式＝"过期作废"（备注信息标注"受众未在时限内充值解锁"）。下方演示数据中已包含这两类标注示例</li>
+            <li><b>方案四·受众控制发奖</b>：受众条件（充值）在生成时点就不满足时，<b>本期直接不生成奖励记录</b>（不是先生成再作废），因此常规意义上"没有记录可审"；但「VIP列表-按抽佣」页需求中明确要求<b>后台仍需留痕"不满足受众条件不生成奖励"的原因</b>，供客服核对。为此本页新增第四种审核状态<span class="tag-type">未生成</span>：该状态下的记录彩金金额展示为<b>配置金额（未发放）</b>，申领时间／审核方式／审核时间均为"—"（因无实际发放/领取/审核动作），审核人展示为"系统"，审核备注信息说明"受众条件未满足，本期不生成奖励"。下方演示数据中已包含该场景示例</li>
+          </ul>
+
+        </div>
+      </details>
+
+      <div class="filter-bar">
+        <div class="filter-row">
+          <div class="filter-item"><label>会员ID</label><input type="text" id="af_memberId" placeholder="请输入会员ID"></div>
+          <div class="filter-item"><label>会员账号</label><input type="text" id="af_account" placeholder="请输入会员账号"></div>
+          <div class="filter-item"><label>上级代理ID</label><input type="text" id="af_agent" placeholder="请输入上级代理ID"></div>
+          <div class="filter-item"><label>VIP等级</label><select id="af_level"><option value="">请选择VIP等级</option></select></div>
+        </div>
+        <div class="filter-row">
+          <div class="filter-item"><label>审核状态</label>
+            <select id="af_status">
+              <option value="">全部状态</option>
+              <option value="pending">待审核（待确认是否保留）</option>
+              <option value="approved">审核通过</option>
+              <option value="rejected">审核拒绝</option>
+              <option value="not_generated">未生成（方案四）</option>
+            </select>
+          </div>
+          <div class="filter-item"><label>彩金类型</label>
+            <select id="af_type">
+              <option value="">请选择彩金类型</option>
+              <option value="晋级礼金">晋级礼金</option>
+              <option value="日福利礼金">日福利礼金</option>
+              <option value="周福利礼金">周福利礼金</option>
+              <option value="月福利礼金">月福利礼金</option>
+            </select>
+          </div>
+          <div class="filter-item filter-item-range"><label>彩金金额</label>
+            <div class="range-pair"><input type="number" id="af_amountMin" placeholder="请输入彩金金额"><span class="sep">~</span><input type="number" id="af_amountMax" placeholder="请输入彩金金额"></div>
+          </div>
+          <div class="filter-item filter-item-range"><label>申领时间</label>
+            <div class="range-pair"><input type="date" id="af_claimFrom"><span class="sep">-</span><input type="date" id="af_claimTo"></div>
+          </div>
+        </div>
+        <div class="filter-row">
+          <div class="filter-item"><label>审核方式</label>
+            <select id="af_method">
+              <option value="">请选择审核方式</option>
+              <option value="自动">自动</option>
+              <option value="手动">手动</option>
+              <option value="手动领取">手动领取</option>
+              <option value="过期作废">过期作废</option>
+            </select>
+          </div>
+          <div class="filter-item"><label>审核人</label><input type="text" id="af_auditor" placeholder="请输入审核人"></div>
+          <div class="filter-item filter-item-range"><label>审核时间</label>
+            <div class="range-pair"><input type="date" id="af_auditFrom"><span class="sep">-</span><input type="date" id="af_auditTo"></div>
+          </div>
+          <div class="filter-item filter-actions">
+            <button class="btn btn-primary" onclick="applyAuditFilter()">🔍 查询</button>
+            <button class="btn" onclick="resetAuditFilter()">⟲ 重置</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>会员ID</th>
+              <th>会员账号</th>
+              <th>上级代理ID</th>
+              <th>VIP等级</th>
+              <th>审核状态</th>
+              <th>彩金类型</th>
+              <th>彩金金额</th>
+              <th>申领时间</th>
+              <th>审核方式</th>
+              <th>审核人</th>
+              <th>审核时间</th>
+              <th>审核备注信息</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody id="audit-tbody"></tbody>
+        </table>
+      </div>
+      <div class="pager" id="audit-pager"></div>
+    </div>
+    <!-- /admin-page-audit -->
+  </div>
+  </div>
+</div>
+</div>
+<!-- /Tab 2：管理后台 -->
+
+<!-- ============ Tab 3：需求背景 ============ -->
+<div class="tab-content hidden" id="tab-background">
+  <div class="doc-page">
+    <h2>VIP列表-按抽佣 · 需求背景说明</h2>
+    <div class="doc-sub">整理自本轮迭代（管理后台礼金机制调整 + 客户端交互升级）需求沟通，供产品、运营、研发对齐口径使用</div>
+
+    <div class="doc-section">
+      <h3>一、背景与目标</h3>
+      <p>VIP-按抽佣体系用于承接按抽佣系数折算的会员等级成长与权益发放。此前版本仅支持"晋级礼金"与"周福利礼金"两类奖励，会员活跃度激励颗粒度较粗，且发放方式（自动/人工/手动）在不同礼金类型间不统一，运营难以在列表页直接判断当前发放口径。本轮迭代的目标：①补齐"日、月"两个更高频/更长周期的流水福利礼金，让激励覆盖日/周/月/晋级四个颗粒度，形成完整的活跃度体系；②将四类礼金的发放方式统一收敛为"手动领取"，降低配置复杂度与跨类型不一致风险，同时通过UI标识让运营无需进入配置弹窗即可确认口径；③新增「领取规则设置」，明确会员逾期未领取奖励时系统应如何处理，补齐业务闭环；④同步升级客户端「我的特权」页交互，引入"去投注 / 领取"双态按钮与"仅当前等级展开"的浏览逻辑，提升会员端可用性。</p>
+    </div>
+
+    <div class="doc-section">
+      <h3>二、涉及范围</h3>
+      <ul>
+        <li><b>管理后台</b>：VIP列表-按抽佣 主表格字段、新增/编辑抽屉字段、客户端展示设置弹窗、新增的领取规则设置弹窗</li>
+        <li><b>客户端</b>：H5 与 PC 双端「我的特权」/ VIP详情页，含等级进度、四类礼金卡片、去投注/领取按钮、规则说明文案展示</li>
+        <li>不涉及：投注、返水、代理推广等其他后台模块（本次仅围绕"VIP列表-按抽佣"单一模块展开）</li>
+      </ul>
+    </div>
+
+    <div class="doc-section">
+      <h3>三、核心规则设计</h3>
+      <h4>3.1 手动领取机制（统一口径，不再提供自动/人工发放选项）</h4>
+      <p>晋级礼金、日福利礼金、周福利礼金、月福利礼金四类奖励，统一固定为"达标后由会员在客户端主动领取"，不提供发放方式的可配置项。领取前不入账、不计入提现流水；领取后按该等级配置的"发放礼金稽核倍数"（客户端展示别名"提现流水倍数"）计入提现流水门槛。为避免运营需要额外进入弹窗确认发放口径，后台列表表头、新增/编辑抽屉字段标签均加注"手动领取"标识。</p>
+      <h4>3.2 日 / 周 / 月流水福利礼金</h4>
+      <p>新增"日流水→日福利礼金""月流水→月福利礼金"两组字段，与既有"周流水→周福利礼金"逻辑一致：会员在对应统计周期内的有效投注流水达到门槛，即生成该等级对应的待领取奖励。某等级若不需要开放某项福利，将金额配置为 0 即可；是否面向全体等级整体开放该福利，由「客户端展示设置」中对应展示字段的勾选统一控制（该勾选同时决定是否实际生成待领取记录）。月福利礼金固定于每月16日结算生成上一自然月的奖励。</p>
+      <p>其中周福利礼金额外遵循两条判定规则（本轮明确，日/月福利礼金同一账号在同一周期内仅对应单一等级门槛，不涉及多级重叠判定）：<b>①多等级流水规则</b>——同一统计周期内若会员的有效投注流水同时满足多个VIP等级的周流水门槛，不逐级叠加发放，仅按会员当前所处的VIP等级发放对应最高等级的周福利礼金；<b>②未达标流水结转</b>——若当前统计周期内未满足当前VIP等级（含本周内晋升后的新等级）的周流水门槛，本周期不发放任何周福利礼金，且未达标部分的有效投注流水自动结转至下一统计周期继续累计，不清零。</p>
+      <h4>3.3 领取规则：跨期未领取奖励处理（全局统一配置，覆盖四类礼金）</h4>
+      <p>奖励生成后若跨天/跨周/跨月仍未领取，按运营在「领取规则设置」中选定的方案统一处理，单选、全局生效：</p>
+      <table class="doc-table">
+        <tr><th style="width:58px;">方案</th><th style="width:96px;">类型</th><th>规则内容</th></tr>
+        <tr><td>方案一</td><td>未领取转发</td><td>跨天/跨周/跨月时，未领取奖励不作废，继续保留为待领取状态，系统同步发送一条站内信/邮件提醒告知会员有奖励未领取；领取入口和领取方式不变，会员仍需回到VIP福利页面点击"领取"才能到账，站内信/邮件仅作提示，不是发放渠道</td></tr>
+        <tr><td>方案二</td><td>未领取作废</td><td>跨天/跨周/跨月时，未领取奖励由系统自动回收作废，作废后领取金额、奖励状态、客户端展示数据全部清零</td></tr>
+        <tr><td>方案三</td><td>受众控制领取</td><td>受众用户1：奖励照常按周期生成，受众条件仅控制"是否可领取"；不满足受众条件时展示为不可领取，用户在配置天数（3/7/15/30天）内如有任意一笔成功充值，当前周期内已生成、未领取、未作废的奖励立即实时解锁为可领取；跨期仍未领取按方案二作废</td></tr>
+        <tr><td>方案四</td><td>受众控制发奖</td><td>受众用户2：受众条件控制"是否生成奖励"，定时统计时先判断受众条件（配置口径与方案三一致，3/7/15/30天内充值），不满足则本周期直接不生成奖励；满足受众条件且流水达标才生成并允许领取；跨期仍未领取按方案二作废</td></tr>
+      </table>
+      <div class="doc-callout warn">方案一（未领取转发）不涉及作废，领取入口和领取方式不变，会员始终可回到VIP福利页面点击"领取"拿到奖励，站内信/邮件仅作提醒；方案二/三/四一旦跨期作废<b>不可恢复</b>，即使用户后续重新满足流水或完成充值，也不会恢复该周期已作废的奖励，只能参与下一周期的统计。</div>
+      <h4>3.4 时区与结算口径</h4>
+      <p>所有统计、结算、判定时间均按<b>北京时间（UTC+8）</b>执行。生成方式为<b>定时统计生成，不按流水达标实时生成</b>：日福利礼金次日 00:00~02:00 结算上一自然日；周福利礼金每周一 00:00~02:00 结算上一自然周；月福利礼金每月16日 00:00~02:00 结算上一自然月；晋级礼金为一次性奖励，以"跨天"为界，晋级次日 00:00 判定是否已领取。</p>
+      <h4>3.5 规则闭环状态流转对照表</h4>
+      <p>下表按"场景 → 处理规则"逐条列出四类礼金在各领取规则方案下的完整状态流转，便于开发/测试对照实现：</p>
+      <table class="doc-table">
+        <tr><th style="width:260px;">场景</th><th>处理规则</th></tr>
+        <tr><td>当前周期内满足流水</td><td>定时任务统计后，根据当前生效的领取规则方案生成或处理奖励</td></tr>
+        <tr><td>当前周期内未满足流水</td><td>不生成奖励</td></tr>
+        <tr><td>方案一：奖励已生成但未领取</td><td>跨周期后继续保留为待领取状态，同步发送站内信/邮件提醒；领取入口不变，用户仍需回到VIP福利页面点击"领取"</td></tr>
+        <tr><td>方案二：奖励已生成但未领取</td><td>跨周期后由系统自动回收并作废</td></tr>
+        <tr><td>方案三：满足流水但未成功充值到账</td><td>奖励照常生成，但客户端展示为不可领取</td></tr>
+        <tr><td>方案三：满足流水且在配置天数内成功充值到账</td><td>奖励实时解锁为可领取，无需等待下一次定时统计</td></tr>
+        <tr><td>方案三：充值金额校验</td><td>不校验金额大小，任意一笔成功充值到账即可满足受众条件</td></tr>
+        <tr><td>方案三：充值成功后的更新时机</td><td>立即将当前有效周期内已生成、未领取、未作废的奖励更新为可领取状态，不等待下一次定时统计</td></tr>
+        <tr><td>方案四：满足流水但不满足受众条件</td><td>不生成奖励（非作废，是压根不产生记录）</td></tr>
+        <tr><td>方案四：满足流水且满足受众条件</td><td>正常生成奖励，客户端可领取</td></tr>
+        <tr><td>方案二/三/四：奖励已生成但跨周期仍未领取</td><td>自动回收并作废，领取金额、奖励状态、客户端展示数据全部清零</td></tr>
+        <tr><td>已作废奖励后续重新满足条件</td><td>不因用户后续重新满足流水或完成充值而恢复，只能参与下一统计周期的奖励统计</td></tr>
+        <tr><td>奖励作废后</td><td>数据库保留作废记录供查询核对；客户端不再展示该笔已作废奖励</td></tr>
+        <tr><td>后台留痕要求</td><td>方案三"不可领取→充值解锁→跨期作废"的完整过程、方案四"不满足受众条件不生成奖励"的原因，均需记录，对应「VIP福利彩金审核」页审核备注信息</td></tr>
+      </table>
+      <h4>3.6 已确认口径</h4>
+      <p>以下为本轮与运营/研发确认后的关键口径，汇总供开发/测试快速核对：</p>
+      <table class="doc-table">
+        <tr><th style="width:200px;">项目</th><th>已确认规则</th></tr>
+        <tr><td>奖励类型</td><td>日福利礼金、周福利礼金、月福利礼金三类周期性奖励；晋级礼金为一次性奖励，不纳入本表周期性口径</td></tr>
+        <tr><td>统计周期</td><td>按<b>北京时间（UTC+8）</b>计算自然日、自然周、自然月</td></tr>
+        <tr><td>生成方式</td><td>定时统计生成，不按流水达标实时生成</td></tr>
+        <tr><td>方案三受众条件作用点</td><td>控制"是否可领取"，不控制"是否生成奖励"</td></tr>
+        <tr><td>方案四受众条件作用点</td><td>控制"是否生成奖励"</td></tr>
+        <tr><td>方案三充值判定</td><td>以"成功充值到账"为准</td></tr>
+        <tr><td>方案三充值金额</td><td>不限制金额，任意一笔成功充值到账即可</td></tr>
+        <tr><td>方案三解锁时机</td><td>充值成功到账后实时解锁，仅对当前有效周期内已生成、未领取、未作废的奖励生效</td></tr>
+        <tr><td>已作废奖励</td><td>作废后不可恢复，不因后续充值或重新满足条件而重新开放领取</td></tr>
+        <tr><td>后台记录要求</td><td>保留方案三"不可领取/充值解锁/作废"记录，以及方案四"不生成奖励"的原因记录</td></tr>
+        <tr><td>作废清零范围</td><td>领取金额、奖励状态、客户端展示数据全部清零</td></tr>
+        <tr><td>作废记录</td><td>数据库保留，客户端不展示</td></tr>
+      </table>
+    </div>
+
+    <div class="doc-section">
+      <h3>四、与晋级 / 保级机制的关系（闭环说明）</h3>
+      <p>会员有效投注按"抽佣系数"折算为「待换算预期抽佣金额余量(pool)」，判定动作收敛为<b>每日一次的定时评估</b>（评估时间为当日凌晨0点后）：系统统计会员自"上一次等级调整日期"至"当前日期前一天"期间累计的有效投注流水折算值，若 pool 达到下一等级的"晋升所需经验值门槛"折算值即触发晋级，生成一次性晋级礼金待领取记录，并开启90天保级考核期；同一账号若单日内流水折算值足以连续跨越多个等级，各等级晋级礼金依次发放。<b>90天保级降级仅清零 pool，不影响已生成但尚未领取的日/周/月福利礼金记录</b>——这些记录仍按自身周期边界与「领取规则设置」独立处理，不随等级升降而联动清零或恢复。四类礼金、晋级/保级机制、领取规则三者共同构成完整闭环：晋级/保级决定"能拿到哪个等级的权益"，日/周/月流水门槛决定"该周期是否生成奖励"，领取规则决定"生成后未及时领取如何处理"。</p>
+    </div>
+
+    <div class="doc-section">
+      <h3>五、本轮迭代变更摘要</h3>
+      <ul>
+        <li>字段：新增 日流水 / 日福利礼金 / 月流水 / 月福利礼金，移除逐等级"是否启用"勾选项</li>
+        <li>发放方式：晋级礼金、日/周/月福利礼金统一固定为手动领取，UI三处（列表表头、抽屉字段、领取规则弹窗提示）加注标识</li>
+        <li>新增「领取规则设置」独立弹窗（未放入客户端展示设置，避免该弹窗内容过多）：四选一处理方案 + 类型速记标签</li>
+        <li>规则文案标签重命名：VIP等级晋升规则说明→晋升规则，保级流水晋升规则说明→保级规则，周流水晋升规则说明→周流水规则（仅改标签，内容不变）</li>
+        <li>结算时间口径统一为北京时间（UTC+8）</li>
+        <li>客户端「我的特权」页新增日/月福利礼金展示、去投注/领取双态按钮、仅当前等级默认展开的浏览逻辑</li>
+        <li>三段规则文案（晋升规则/保级规则/周流水规则）内容细化为分点说明，并新增两条此前未明确的业务规则：①多等级流水规则——同一周期内会员流水同时满足多个等级周流水门槛时，仅发放当前所处等级对应的最高等级周福利礼金；②未达标流水结转——当期未达标的有效投注流水自动结转至下一统计周期，不清零</li>
+        <li>后台「客户端展示设置」规则文案支持按换行分段：编辑时换行录入，客户端自动以圆点"•"分段展示，三段规则统一处理；不换行则展示为一段纯文本</li>
+        <li>新增3.5「规则闭环状态流转对照表」与3.6「已确认口径」两张对照表，将此前分散在各小节中的场景判断与关键决策口径统一汇总，管理后台「VIP列表-按抽佣」页改动说明同步补充相同内容，便于开发/测试快速核对</li>
+        <li>规则文案字段合并：因日/周/月流水的达标判定逻辑一致，「周流水规则」更名为「流水福利规则」，文案内容统一说明日/周/月三档的结算周期与达标判定，多等级流水规则、未达标流水结转两条例外规则仍保留并明确标注"仅周流水适用"；后台文案字段与客户端展示仍维持三段结构（晋升规则/保级规则/流水福利规则），不新增字段</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ============ Tab 4：流程图 ============ -->
+<div class="tab-content hidden" id="tab-flow">
+  <div class="flow-page">
+
+    <div class="flow-section">
+      <h3>流程一：VIP等级晋升 / 保级 pool 累积流程</h3>
+      <div class="flow-desc">对应「抽佣系数 × 有效投注」折算晋级门槛的核心算法，与礼金发放相互独立</div>
+      <div class="flow-col">
+        <div class="flow-node start">会员产生有效投注</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node action">按"抽佣系数"将投注折算为待换算预期抽佣金额，累加至 pool</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node action">每日凌晨0点后执行一次晋升/降级评估：统计会员自"上一次等级调整日期"至"当前日期前一天"的累计折算流水</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node decision">pool 是否达到下一等级"晋升所需经验值门槛"折算值？</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-arrow-label">是</div>
+        <div class="flow-node action">触发晋级：等级 +1，生成本级晋级礼金待领取记录（手动领取）；同日内流水足以连续跨级时，各等级晋级礼金依次发放</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node action">开启90天保级考核期，重新统计有效投注流水</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node decision">考核期内是否达标当前等级"90天保级流水"？</div>
+      </div>
+      <div class="flow-branch">
+        <div class="flow-branch-col">
+          <div class="flow-branch-label">是</div>
+          <div class="flow-node action">维持当前等级，pool 继续向下一等级累积</div>
+        </div>
+        <div class="flow-branch-col">
+          <div class="flow-branch-label">否</div>
+          <div class="flow-node danger">降级1级（每日00:00~02:00执行），pool 清零重新累积</div>
+        </div>
+      </div>
+      <div class="flow-col" style="margin-top:8px;">
+        <div class="flow-node end">流水累计超过当前等级晋升阈值后，可重新恢复原等级</div>
+      </div>
+    </div>
+
+    <div class="flow-section">
+      <h3>流程二：日 / 周 / 月福利礼金 手动领取 + 跨期未领取处理闭环</h3>
+      <div class="flow-desc">对应「领取规则设置」四方案的完整业务闭环，全局统一配置，覆盖四类礼金</div>
+      <div class="flow-col">
+        <div class="flow-node start">定时任务：日/周/月结算节点（北京时间）</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node action">统计对应周期内有效投注流水</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node decision">流水是否达到对应门槛（日/周/月流水）？</div>
+      </div>
+      <div class="flow-branch">
+        <div class="flow-branch-col">
+          <div class="flow-branch-label">否</div>
+          <div class="flow-node">本周期不生成待领取记录，客户端展示"去投注"（周福利礼金：未达标的有效投注流水自动结转至下一统计周期，不清零）</div>
+        </div>
+        <div class="flow-branch-col">
+          <div class="flow-branch-label">是（若为方案四且受众条件不满足，同样不生成）</div>
+          <div class="flow-node action">生成待领取奖励记录，客户端展示"领取"（周福利礼金：若同一周期内流水同时满足多个等级门槛，仅按会员当前所处等级发放对应最高等级的周福利礼金，不逐级叠加）</div>
+        </div>
+      </div>
+      <div class="flow-col" style="margin-top:8px;">
+        <div class="flow-arrow"></div>
+        <div class="flow-node decision">会员是否在本周期结束前完成领取？</div>
+      </div>
+      <div class="flow-branch">
+        <div class="flow-branch-col">
+          <div class="flow-branch-label">是</div>
+          <div class="flow-node action">领取成功，按"发放礼金稽核倍数"计入提现流水</div>
+        </div>
+        <div class="flow-branch-col">
+          <div class="flow-branch-label">否（跨天/跨周/跨月）</div>
+          <div class="flow-node decision">按「领取规则设置」当前生效方案处理</div>
+        </div>
+      </div>
+      <div class="flow-branch" style="margin-top:8px;">
+        <div class="flow-branch-col"><div class="flow-branch-label">方案一</div><div class="flow-node">不作废，同步站内信/邮件提醒，仍需回VIP福利页领取</div></div>
+        <div class="flow-branch-col"><div class="flow-branch-label">方案二</div><div class="flow-node danger">系统回收作废，不可恢复</div></div>
+        <div class="flow-branch-col"><div class="flow-branch-label">方案三</div><div class="flow-node">受众条件内充值可解锁再领取，否则按方案二作废</div></div>
+        <div class="flow-branch-col"><div class="flow-branch-label">方案四</div><div class="flow-node">不满足受众条件本就未生成；已生成未领取按方案二作废</div></div>
+      </div>
+      <div class="flow-col" style="margin-top:16px;">
+        <div class="flow-node end">进入下一统计周期，重新执行本流程</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 新增/编辑 抽屉 -->
+<div class="overlay" id="overlay">
+  <div class="drawer">
+    <div class="drawer-header">
+      <span id="drawerTitle">新增</span>
+      <span class="close" onclick="closeDrawer()">✕</span>
+    </div>
+
+    <div class="field">
+      <label><span class="req">*</span>VIP等级</label>
+      <div class="stepper">
+        <button type="button" onclick="alert('等级由系统按顺序自动生成，不可手动调整')">－</button>
+        <input type="text" id="f_level" disabled>
+        <button type="button" onclick="alert('等级由系统按顺序自动生成，不可手动调整')">＋</button>
+      </div>
+      <div class="hint">新增或编辑时不能与当前已存在级别相同或与已存在的最大级别跨级别输入</div>
+    </div>
+
+    <div class="field">
+      <label><span class="req">*</span>VIP等级名称</label>
+      <input type="text" id="f_name" placeholder="请输入VIP等级名称">
+    </div>
+
+    <div class="field">
+      <label><span class="req">*</span>抽佣系数</label>
+      <div class="stepper">
+        <button type="button" onclick="step('f_coef',-0.1)">－</button>
+        <input type="number" id="f_coef" step="0.1" value="1.0" oninput="updatePreview()">
+        <button type="button" onclick="step('f_coef',0.1)">＋</button>
+      </div>
+      <div class="hint">真实判定用，必须大于0，不对外展示给客户端</div>
+      <div class="err" id="err_coef">抽佣系数必须大于0</div>
+    </div>
+
+    <div class="field">
+      <label><span class="req">*</span>晋升所需经验值门槛</label>
+      <div class="stepper">
+        <button type="button" onclick="step('f_th',-10)">－</button>
+        <input type="number" id="f_th" step="10" value="100" oninput="updatePreview()">
+        <button type="button" onclick="step('f_th',10)">＋</button>
+      </div>
+      <div class="hint">该数值为本等级独立的绝对判定门槛，不与其他等级累加；建议整体保持递增趋势，避免高等级门槛低于低等级</div>
+      <div class="warn" id="warn_th">建议不低于上一等级的门槛值，否则整体递增趋势可能异常</div>
+    </div>
+
+    <div class="preview-box">
+      <p class="label">系数与门槛换算预览</p>
+      <p class="formula" id="previewFormula">门槛 100 ÷ 系数 1.0</p>
+      <p class="label" style="margin-top:10px;">预期抽佣金额（折算门槛，晋级判定实际使用）<span class="tooltip-icon" data-tip="有效投注 ×（1 - 理论RTP - 实际返水率）">ⓘ</span></p>
+      <p class="estimate" id="previewEstimate">≈ 100 U</p>
+      <p style="font-size:11px; color:#5a6bc4; margin:6px 0 0;">该值即晋级判定实际使用的"折算门槛"：会员待换算预期抽佣金额余量(pool)达到此值即可晋级本等级</p>
+    </div>
+
+    <div class="field">
+      <label><span class="req">*</span>晋级礼金<span class="tag-manual">手动领取</span></label>
+      <div class="stepper">
+        <button type="button" onclick="step('f_gift',-1)">－</button>
+        <input type="number" id="f_gift" step="1" value="0">
+        <span class="unit">U</span>
+        <button type="button" onclick="step('f_gift',1)">＋</button>
+      </div>
+      <div class="hint">达标后由会员在客户端主动领取；逾期未领取按「领取规则设置」处理</div>
+    </div>
+
+    <div class="field">
+      <label><span class="req">*</span>日流水<span class="tag-new">NEW</span></label>
+      <div class="stepper">
+        <button type="button" onclick="step('f_dailyTurnover',-10)">－</button>
+        <input type="number" id="f_dailyTurnover" step="10" value="0">
+        <span class="unit">U</span>
+        <button type="button" onclick="step('f_dailyTurnover',10)">＋</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label><span class="req">*</span>日福利礼金<span class="tag-new">NEW</span><span class="tag-manual">手动领取</span></label>
+      <div class="stepper">
+        <button type="button" onclick="step('f_daily',-1)">－</button>
+        <input type="number" id="f_daily" step="1" value="0">
+        <span class="unit">U</span>
+        <button type="button" onclick="step('f_daily',1)">＋</button>
+      </div>
+      <div class="hint">满足左侧日流水后由会员在客户端主动领取，逾期未领取按「领取规则设置」处理；本等级如不需要该福利，金额填0即可</div>
+    </div>
+
+    <div class="field">
+      <label><span class="req">*</span>周流水</label>
+      <div class="stepper">
+        <button type="button" onclick="step('f_week',-10)">－</button>
+        <input type="number" id="f_week" step="10" value="0">
+        <span class="unit">U</span>
+        <button type="button" onclick="step('f_week',10)">＋</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label><span class="req">*</span>周福利礼金<span class="tag-manual">手动领取</span></label>
+      <div class="stepper">
+        <button type="button" onclick="step('f_weekgift',-1)">－</button>
+        <input type="number" id="f_weekgift" step="1" value="0">
+        <span class="unit">U</span>
+        <button type="button" onclick="step('f_weekgift',1)">＋</button>
+      </div>
+      <div class="hint">达标后由会员在客户端主动领取；逾期未领取按「领取规则设置」处理</div>
+    </div>
+
+    <div class="field">
+      <label><span class="req">*</span>月流水<span class="tag-new">NEW</span></label>
+      <div class="stepper">
+        <button type="button" onclick="step('f_monthlyTurnover',-10)">－</button>
+        <input type="number" id="f_monthlyTurnover" step="10" value="0">
+        <span class="unit">U</span>
+        <button type="button" onclick="step('f_monthlyTurnover',10)">＋</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label><span class="req">*</span>月福利礼金<span class="tag-new">NEW</span><span class="tag-manual">手动领取</span></label>
+      <div class="stepper">
+        <button type="button" onclick="step('f_monthly',-1)">－</button>
+        <input type="number" id="f_monthly" step="1" value="0">
+        <span class="unit">U</span>
+        <button type="button" onclick="step('f_monthly',1)">＋</button>
+      </div>
+      <div class="hint">固定每月16日结算生成后由会员在客户端主动领取，逾期未领取按「领取规则设置」处理；本等级如不需要该福利，金额填0即可</div>
+    </div>
+
+    <div class="field">
+      <label><span class="req">*</span>90天保级流水</label>
+      <div class="stepper">
+        <button type="button" onclick="step('f_keep',-10)">－</button>
+        <input type="number" id="f_keep" step="10" value="0">
+        <span class="unit">U</span>
+        <button type="button" onclick="step('f_keep',10)">＋</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label><span class="req">*</span>发放礼金稽核倍数</label>
+      <div class="stepper">
+        <button type="button" onclick="step('f_mult',-1)">－</button>
+        <input type="number" id="f_mult" step="1" value="1">
+        <button type="button" onclick="step('f_mult',1)">＋</button>
+      </div>
+    </div>
+
+    <div class="drawer-footer">
+      <button class="btn" onclick="closeDrawer()">关闭</button>
+      <button class="btn btn-primary" onclick="saveDrawer()">保存</button>
+    </div>
+  </div>
+</div>
+
+<!-- 删除确认 -->
+<div class="confirm-overlay" id="confirmOverlay">
+  <div class="confirm-box">
+    <p>ⓘ 确定要删除该数据吗？</p>
+    <div class="confirm-actions">
+      <button class="btn" onclick="closeConfirm()">取消</button>
+      <button class="btn btn-primary" onclick="doDelete()">确定</button>
+    </div>
+  </div>
+</div>
+
+<!-- 客户端展示设置 -->
+<div class="copy-modal-overlay" id="copyModalOverlay">
+  <div class="copy-modal">
+    <div class="copy-modal-header">
+      <span>客户端展示设置</span>
+      <span class="close" onclick="closeCopyModal()">✕</span>
+    </div>
+    <div class="copy-warn">⚠ 以下设置将展示在客户端「我的特权」页，对所有VIP等级统一生效。规则文案请勿包含具体计算公式、真实系数或门槛数值等涉及游戏利润空间的内容。</div>
+
+    <div class="section-divider" style="margin-top:0; padding-top:0; border-top:none;">
+      <div class="section-title">展示字段</div>
+      <div class="section-sub">勾选后，客户端「VIP详情」表格将对所有等级统一显示该列，未勾选的字段不会透出给任何等级的会员</div>
+      <div class="hint" style="color:#b5760a; background:#fff8ec; border:0.5px solid #f0dfb5; border-radius:var(--radius); padding:8px 10px; margin-bottom:12px;">
+        ⚠ 「晋级礼金」「周福利礼金」「日福利礼金」「月福利礼金」这几项<b>不只是控制客户端展示</b>：取消勾选后，即使对应VIP等级已经配置了具体金额，系统<b>也不会再实际生成待领取记录</b>（不派发该项礼金）；其余字段（VIP等级名称、门槛、日流水、周流水、月流水、90天保级流水、提现流水倍数）取消勾选仅影响客户端是否显示，不影响后台判定和实际发放。「提现流水倍数」对应后台字段「发放礼金稽核倍数」，客户端展示用名不同，实际是同一份数据。
+      </div>
+      <div class="checkbox-grid">
+        <label class="checkbox-item"><input type="checkbox" id="g_name" checked>VIP等级名称</label>
+        <label class="checkbox-item"><input type="checkbox" id="g_threshold" checked>晋升所需经验值门槛</label>
+        <label class="checkbox-item"><input type="checkbox" id="g_gift" checked>晋级礼金</label>
+        <label class="checkbox-item"><input type="checkbox" id="g_dailyTurnover" checked>日流水<span class="tag-new">NEW</span></label>
+        <label class="checkbox-item"><input type="checkbox" id="g_dailyGift" checked>日福利礼金<span class="tag-new">NEW</span></label>
+        <label class="checkbox-item"><input type="checkbox" id="g_week" checked>周流水</label>
+        <label class="checkbox-item"><input type="checkbox" id="g_weekGift" checked>周福利礼金</label>
+        <label class="checkbox-item"><input type="checkbox" id="g_monthlyTurnover" checked>月流水<span class="tag-new">NEW</span></label>
+        <label class="checkbox-item"><input type="checkbox" id="g_monthlyGift" checked>月福利礼金<span class="tag-new">NEW</span></label>
+        <label class="checkbox-item"><input type="checkbox" id="g_keep" checked>90天保级流水</label>
+        <label class="checkbox-item"><input type="checkbox" id="g_mult" checked>提现流水倍数</label>
+      </div>
+    </div>
+
+    <div class="section-divider">
+      <div class="section-title">VIP尊享 图标区域</div>
+      <div class="section-sub">控制客户端「VIP特权」页"VIP尊享"下方的入口图标是否展示，<b>仅为图标展示开关，无实际业务功能</b>（不影响礼金发放、客服权限等）；对所有VIP等级统一生效，未勾选的图标在H5/App该区域不展示。该区域固定为以下4个入口，不随日/月福利礼金新增而变化</div>
+      <div class="checkbox-grid">
+        <label class="checkbox-item"><input type="checkbox" id="g_icon_gift" checked>晋级礼金</label>
+        <label class="checkbox-item"><input type="checkbox" id="g_icon_week" checked>周礼金</label>
+        <label class="checkbox-item"><input type="checkbox" id="g_icon_service" checked>专属客服</label>
+        <label class="checkbox-item"><input type="checkbox" id="g_icon_soon" checked>敬请期待</label>
+      </div>
+    </div>
+
+    <div class="section-divider">
+      <div class="section-title">规则说明文案</div>
+      <div class="section-sub">展示在客户端「我的特权」页底部，对所有等级统一生效；<b>三段文案均为非必填项，若留空，客户端对应模块不展示该内容</b>；文案中按回车换行，客户端将自动按段落用圆点"•"展示（三段规则均按此规则统一处理）；不换行则展示为一段纯文本</div>
+    </div>
+
+    <div class="field">
+      <label>晋升规则<span class="optional-tag">非必填</span></label>
+      <textarea id="copy_promotion" rows="6" oninput="updateEmptyHint('promotion')"></textarea>
+      <div class="hint" id="hint_promotion"></div>
+    </div>
+    <div class="field">
+      <label>保级规则<span class="optional-tag">非必填</span></label>
+      <textarea id="copy_keep" rows="6" oninput="updateEmptyHint('keep')"></textarea>
+      <div class="hint" id="hint_keep"></div>
+    </div>
+    <div class="field">
+      <label>流水福利规则<span class="optional-tag">非必填</span></label>
+      <textarea id="copy_week" rows="8" oninput="updateEmptyHint('week')"></textarea>
+      <div class="hint" id="hint_week"></div>
+    </div>
+
+    <div class="drawer-footer">
+      <button class="btn" onclick="closeCopyModal()">关闭</button>
+      <button class="btn btn-primary" onclick="saveCopyModal()">保存</button>
+    </div>
+  </div>
+</div>
+
+<!-- 领取规则设置：发放方式已固定为手动领取，本弹窗仅配置跨期未领取奖励的处理规则 -->
+<div class="copy-modal-overlay" id="claimRuleModalOverlay">
+  <div class="copy-modal" style="width:640px;">
+    <div class="copy-modal-header">
+      <span>领取规则设置<span class="tag-new">NEW</span></span>
+      <span class="close" onclick="closeClaimRuleModal()">✕</span>
+    </div>
+    <div class="copy-warn">⚠ 晋级礼金、日福利礼金、周福利礼金、月福利礼金均<b>统一固定为手动领取</b>，会员达标后需在客户端主动领取。本规则统一处理"跨期后仍未领取"的奖励，对所有VIP等级统一生效。</div>
+
+    <div class="section-divider" style="margin-top:0; padding-top:0; border-top:none;">
+      <div class="section-title">统计周期</div>
+      <div class="section-sub">均由定时任务统计生成，不随流水达标实时生成：日福利礼金次日00:00~02:00结算上一自然日；周福利礼金每周一00:00~02:00结算上一自然周；月福利礼金每月16日00:00~02:00结算上一自然月；晋级礼金为一次性奖励，以跨天为界</div>
+    </div>
+
+    <div class="section-divider">
+      <div class="section-title">未领取奖励处理方案（单选，全局生效）</div>
+      <div class="claim-rule-list">
+
+        <div class="claim-rule-item">
+          <label><input type="radio" name="claim_mode" value="scheme1"><span class="tag-type">未领取转发</span>跨天，跨周，跨月时，未领取奖励不作废，同步发送站内信/邮件提醒，领取入口不变，仍需回VIP福利页面点击领取</label>
+        </div>
+
+        <div class="claim-rule-item">
+          <label><input type="radio" name="claim_mode" value="scheme2"><span class="tag-type">未领取作废</span>跨天，跨周，跨月时，未领取奖励系统回收作废</label>
+        </div>
+
+        <div class="claim-rule-item">
+          <label><input type="radio" name="claim_mode" value="scheme3"><span class="tag-type">受众控制领取</span>受众用户1：跨天，跨周，跨月时，未领取奖励系统回收作废</label>
+          <div class="claim-rule-sub">
+            <select id="claim_scheme3_days">
+              <option value="3">3天内充值</option>
+              <option value="7">7天内充值</option>
+              <option value="15">15天内充值</option>
+              <option value="30">30天内充值</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="claim-rule-item">
+          <label><input type="radio" name="claim_mode" value="scheme4"><span class="tag-type">受众控制发奖</span>受众用户2：跨天，跨周，跨月时，不满足受众条件不派发奖励，未领取奖励系统回收作废</label>
+          <div class="claim-rule-sub">
+            <select id="claim_scheme4_days">
+              <option value="3">3天内充值</option>
+              <option value="7">7天内充值</option>
+              <option value="15">15天内充值</option>
+              <option value="30">30天内充值</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+      <div class="hint" style="margin-top:12px;">若选择方案1（未领取转发），奖励不会作废，<b>领取入口和领取方式均不变</b>，用户仍需回到VIP福利页面点击"领取"才能到账；系统仅会同步发送一条站内信/邮件提醒，方便用户知晓有奖励尚未领取，并非自动发放、也无需在消息中心操作。若选择方案2/3/4，跨期仍未领取的奖励一旦作废<b>不可恢复</b>，即使用户后续重新满足流水或完成充值，也不会恢复该周期已作废的奖励，只能参与下一周期的奖励统计。后台需记录方案3"不可领取→充值解锁→跨期作废"的完整过程，以及方案4"不满足受众条件不生成奖励"的原因，供客服核对与数据对账。</div>
+    </div>
+
+    <div class="drawer-footer">
+      <button class="btn" onclick="closeClaimRuleModal()">关闭</button>
+      <button class="btn btn-primary" onclick="saveClaimRule()">保存</button>
+    </div>
+  </div>
+</div>
+
+<!-- 用户端：方案三"已生成未充值"场景下，点击领取（含"一键领取"命中需充值的记录时）弹出的充值提示弹窗 -->
+<div class="confirm-overlay" id="rechargeModalOverlay">
+  <div class="confirm-box" style="width:300px;">
+    <p id="rechargeModalText" style="display:block;">💰 完成任意一笔充值后，即可获得专属奖励</p>
+    <div class="confirm-actions">
+      <button class="btn" onclick="closeRechargeModal()">取消</button>
+      <button class="btn btn-primary" onclick="goRecharge()">充值</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<div class="toast" id="clientToast"></div>
+<div class="global-tooltip" id="globalTooltip"></div>
+
+<script>
+let data = [
+  {level:0, name:'VIP0', coef:0,   th:0,   gift:0,    dailyTurnover:0,   dailyGift:0,  week:0,    weekGift:0,  monthlyTurnover:0,    monthlyGift:0,  keep:0,   mult:0, editTime:'2026-04-16 13:23:07', editor:'adminNathan'},
+  {level:1, name:'VIP1', coef:0.5, th:100, gift:5,    dailyTurnover:50,  dailyGift:0.5,week:300,  weekGift:2,  monthlyTurnover:1200, monthlyGift:0,  keep:50,  mult:1, editTime:'2026-04-22 18:21:14', editor:'hugo'},
+  {level:2, name:'VIP2', coef:0.8, th:200, gift:8,    dailyTurnover:80,  dailyGift:1,  week:500,  weekGift:5,  monthlyTurnover:2000, monthlyGift:10, keep:100, mult:1, editTime:'2026-04-11 15:49:32', editor:'hugo'},
+  {level:3, name:'VIP3', coef:1.0, th:300, gift:18,   dailyTurnover:120, dailyGift:2,  week:700,  weekGift:8,  monthlyTurnover:2800, monthlyGift:20, keep:150, mult:1, editTime:'2026-04-11 16:21:26', editor:'hugo'},
+  {level:4, name:'VIP4', coef:1.2, th:400, gift:38,   dailyTurnover:160, dailyGift:3,  week:900,  weekGift:18, monthlyTurnover:3600, monthlyGift:35, keep:200, mult:1, editTime:'2026-04-01 19:21:07', editor:'-'},
+  {level:5, name:'VIP5', coef:1.5, th:500, gift:68,   dailyTurnover:200, dailyGift:5,  week:1100, weekGift:38, monthlyTurnover:4400, monthlyGift:60, keep:250, mult:1, editTime:'2026-04-01 19:21:07', editor:'-'},
+  {level:6, name:'VIP6', coef:1.8, th:600, gift:108,  dailyTurnover:240, dailyGift:8,  week:1300, weekGift:68, monthlyTurnover:5200, monthlyGift:100,keep:300, mult:1, editTime:'2026-04-01 19:21:07', editor:'-'},
+  {level:7, name:'vip7', coef:2.2, th:700, gift:388,  dailyTurnover:280, dailyGift:15, week:1400, weekGift:188,monthlyTurnover:5600, monthlyGift:200,keep:400, mult:1, editTime:'2026-04-04 18:17:40', editor:'superAdmin'},
+  {level:8, name:'vip8', coef:2.6, th:800, gift:888,  dailyTurnover:320, dailyGift:25, week:1500, weekGift:288,monthlyTurnover:6000, monthlyGift:380,keep:500, mult:1, editTime:'2026-04-04 18:17:44', editor:'superAdmin'},
+  {level:9, name:'VIP9', coef:3.0, th:900, gift:1888, dailyTurnover:420, dailyGift:50, week:2100, weekGift:388,monthlyTurnover:8400, monthlyGift:680,keep:300, mult:1, editTime:'2026-04-04 18:17:48', editor:'superAdmin'},
+];
+
+const FIELD_LABELS = {name:'VIP等级名称', threshold:'晋升所需经验值门槛', gift:'晋级礼金', dailyTurnover:'日流水', dailyGift:'日福利礼金', week:'周流水', weekGift:'周福利礼金', monthlyTurnover:'月流水', monthlyGift:'月福利礼金', keep:'90天保级流水', mult:'提现流水倍数'};
+
+// 全局展示字段设置：对所有VIP等级统一生效，而不是逐等级单独配置
+let displayFields = {name:true, threshold:true, gift:true, dailyTurnover:true, dailyGift:true, week:true, weekGift:true, monthlyTurnover:true, monthlyGift:true, keep:true, mult:true};
+
+// VIP尊享图标区域展示开关：仅控制客户端图标是否展示，无实际业务功能，全局统一生效；固定4个入口，与日/月福利礼金无关
+const ICON_LABELS = {icon_gift:'晋级礼金', icon_week:'周礼金', icon_service:'专属客服', icon_soon:'敬请期待'};
+let iconFields = {icon_gift:true, icon_week:true, icon_service:true, icon_soon:true};
+
+// 领取规则：晋级礼金/日/周/月福利礼金均统一固定为"手动领取"（不可配置发放方式），本规则处理跨期未领取奖励，全局统一配置
+let claimRule = { mode: 'scheme2', scheme3Days: 7, scheme4Days: 7 };
+
+let ruleTexts = {
+  promotion: '等级调整周期：系统每日对会员等级进行一次晋升或降级评估，评估时间为当日凌晨0点后。\n晋升判定标准：系统将统计会员从"上一次等级调整日期"至"当前日期前一天"的"有效投注流水总额"，若该总额达到目标等级对应的流水要求，会员将自动晋升至该等级。\n多级晋升规则：同一会员账号在同一天内可连续晋升多个VIP等级，且对应每个等级的"晋升礼金"将依次发放。',
+  keep: '保级考核期：完成会员VIP等级晋升作业后，系统将开启N天保级考核期，期间需达到或超过对应等级的保级流水阈值。\n未达标处理：若考核期内未满足保级流水要求，等级自动下降1级（降级时间安排在每日凌晨0:00～2:00间执行）。\n降级后规则：降级完成后，系统将重新统计有效投注流水；当流水累计超过当前等级的晋升阈值时，可重新恢复至原VIP等级。',
+  week: '统计与结算周期：日福利礼金按自然日统计，次日0:00～2:00结算发放上一自然日奖励；周福利礼金按自然周统计，每周一0:00～2:00结算发放上一自然周奖励；月福利礼金按自然月统计，每月16日0:00～2:00结算发放上一自然月奖励。\n达标判定：日/周/月三档判定逻辑一致——当期有效投注流水≥对应等级门槛，发放该等级对应周期的福利礼金；未达标则本周期不发放该项福利礼金。\n多等级流水规则（仅周流水适用）：在同一统计周期内，若会员的有效投注流水同时满足多个VIP等级的周流水要求，不逐级叠加发放，仅依据会员当前所处的VIP等级，发放对应最高等级的周福利礼金。\n未达标流水结转（仅周流水适用）：若会员在当前统计周期内，未满足当前VIP等级（含本周内晋升的新等级）的周流水要求，则本周期不发放任何周福利礼金，且未达标的有效投注流水将自动结转至下一统计周期继续累计，不清零；日/月福利礼金不涉及结转，未达标即为本期不发放，下期重新独立判定。',
+};
+
+let editingLevel = null;
+let pendingDeleteLevel = null;
+
+function fmt(n){ return Number(n).toFixed(4); }
+
+function displaySummary(){
+  const total = Object.keys(displayFields).length;
+  const on = Object.keys(displayFields).filter(k => displayFields[k]);
+  return `${on.length}/${total}`;
+}
+function displayTitle(){
+  return Object.keys(FIELD_LABELS).map(k => `${FIELD_LABELS[k]}: ${displayFields[k] ? '展示' : '隐藏'}`).join('\n');
+}
+
+function renderTable(){
+  const tbody = document.getElementById('tbody');
+  tbody.innerHTML = data.map(r => `
+    <tr>
+      <td>${r.level}</td>
+      <td class="lvl-name">${r.name}</td>
+      <td>${fmt(r.coef)}</td>
+      <td>${fmt(r.th)}</td>
+      <td>${r.coef > 0 ? Math.round(r.th / r.coef).toLocaleString() : '-'}</td>
+      <td>${fmt(r.gift)}</td>
+      <td>${fmt(r.dailyTurnover)}</td>
+      <td>${fmt(r.dailyGift)}</td>
+      <td>${fmt(r.week)}</td>
+      <td>${fmt(r.weekGift)}</td>
+      <td>${fmt(r.monthlyTurnover)}</td>
+      <td>${fmt(r.monthlyGift)}</td>
+      <td>${fmt(r.keep)}</td>
+      <td>${r.mult}</td>
+      <td>${r.editTime}</td>
+      <td>${r.editor}</td>
+      <td>
+        <span class="action-link" onclick="openDrawer('edit', ${r.level})">编辑</span>
+        <span class="sep">|</span>
+        <span class="action-link danger" onclick="openConfirm(${r.level})">删除</span>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function openDrawer(mode, level){
+  document.getElementById('overlay').classList.add('show');
+  clearValidation();
+  if(mode === 'add'){
+    editingLevel = null;
+    document.getElementById('drawerTitle').textContent = '新增';
+    const nextLevel = Math.max(...data.map(r => r.level)) + 1;
+    document.getElementById('f_level').value = nextLevel;
+    document.getElementById('f_name').value = '';
+    document.getElementById('f_coef').value = 1.0;
+    document.getElementById('f_th').value = 100;
+    document.getElementById('f_gift').value = 0;
+    document.getElementById('f_dailyTurnover').value = 0;
+    document.getElementById('f_daily').value = 0;
+    document.getElementById('f_week').value = 0;
+    document.getElementById('f_weekgift').value = 0;
+    document.getElementById('f_monthlyTurnover').value = 0;
+    document.getElementById('f_monthly').value = 0;
+    document.getElementById('f_keep').value = 0;
+    document.getElementById('f_mult').value = 1;
+  } else {
+    editingLevel = level;
+    const r = data.find(x => x.level === level);
+    document.getElementById('drawerTitle').textContent = '编辑';
+    document.getElementById('f_level').value = r.level;
+    document.getElementById('f_name').value = r.name;
+    document.getElementById('f_coef').value = r.coef;
+    document.getElementById('f_th').value = r.th;
+    document.getElementById('f_gift').value = r.gift;
+    document.getElementById('f_dailyTurnover').value = r.dailyTurnover;
+    document.getElementById('f_daily').value = r.dailyGift;
+    document.getElementById('f_week').value = r.week;
+    document.getElementById('f_weekgift').value = r.weekGift;
+    document.getElementById('f_monthlyTurnover').value = r.monthlyTurnover;
+    document.getElementById('f_monthly').value = r.monthlyGift;
+    document.getElementById('f_keep').value = r.keep;
+    document.getElementById('f_mult').value = r.mult;
+  }
+  updatePreview();
+}
+
+function closeDrawer(){
+  document.getElementById('overlay').classList.remove('show');
+}
+
+function step(id, delta){
+  const el = document.getElementById(id);
+  const decimals = (String(delta).split('.')[1] || '').length;
+  const val = (parseFloat(el.value || 0) + delta);
+  el.value = decimals > 0 ? val.toFixed(decimals) : val;
+  el.dispatchEvent(new Event('input'));
+}
+
+function updatePreview(){
+  const coef = parseFloat(document.getElementById('f_coef').value) || 0;
+  const th = parseFloat(document.getElementById('f_th').value) || 0;
+  const curLevel = parseInt(document.getElementById('f_level').value);
+
+  document.getElementById('previewFormula').textContent = `门槛 ${th} ÷ 系数 ${coef}`;
+  const est = document.getElementById('previewEstimate');
+  est.textContent = coef > 0
+    ? `≈ ${Math.round(th / coef).toLocaleString()} U`
+    : '请输入大于0的抽佣系数';
+
+  const errCoef = document.getElementById('err_coef');
+  errCoef.style.display = (document.getElementById('f_coef').value !== '' && coef <= 0) ? 'block' : 'none';
+
+  const prevLevels = data.filter(r => r.level >= 1 && r.level < curLevel && (editingLevel === null || r.level !== editingLevel));
+  const warnTh = document.getElementById('warn_th');
+  const maxPrevTh = prevLevels.length ? Math.max(...prevLevels.map(r => r.th)) : -Infinity;
+  warnTh.style.display = (th < maxPrevTh) ? 'block' : 'none';
+}
+
+function clearValidation(){
+  document.getElementById('err_coef').style.display = 'none';
+  document.getElementById('warn_th').style.display = 'none';
+}
+
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 1800);
+}
+
+function saveDrawer(){
+  const coef = parseFloat(document.getElementById('f_coef').value) || 0;
+  if(coef <= 0){
+    document.getElementById('err_coef').style.display = 'block';
+    return;
+  }
+  const name = document.getElementById('f_name').value.trim();
+  if(!name){
+    alert('请输入VIP等级名称');
+    return;
+  }
+  const record = {
+    level: parseInt(document.getElementById('f_level').value),
+    name: name,
+    coef: coef,
+    th: parseFloat(document.getElementById('f_th').value) || 0,
+    gift: parseFloat(document.getElementById('f_gift').value) || 0,
+    dailyTurnover: parseFloat(document.getElementById('f_dailyTurnover').value) || 0,
+    dailyGift: parseFloat(document.getElementById('f_daily').value) || 0,
+    week: parseFloat(document.getElementById('f_week').value) || 0,
+    weekGift: parseFloat(document.getElementById('f_weekgift').value) || 0,
+    monthlyTurnover: parseFloat(document.getElementById('f_monthlyTurnover').value) || 0,
+    monthlyGift: parseFloat(document.getElementById('f_monthly').value) || 0,
+    keep: parseFloat(document.getElementById('f_keep').value) || 0,
+    mult: parseFloat(document.getElementById('f_mult').value) || 0,
+    editTime: new Date().toISOString().slice(0,19).replace('T',' '),
+    editor: 'currentUser',
+  };
+  if(editingLevel === null){
+    data.push(record);
+    showToast('新增成功');
+  } else {
+    const idx = data.findIndex(r => r.level === editingLevel);
+    data[idx] = record;
+    showToast('保存成功');
+  }
+  renderTable();
+  closeDrawer();
+  renderClientLevels(); // 同步刷新用户端Tab（读取同一份 data）
+}
+
+function openConfirm(level){
+  pendingDeleteLevel = level;
+  document.getElementById('confirmOverlay').classList.add('show');
+}
+function closeConfirm(){
+  document.getElementById('confirmOverlay').classList.remove('show');
+  pendingDeleteLevel = null;
+}
+function doDelete(){
+  data = data.filter(r => r.level !== pendingDeleteLevel);
+  renderTable();
+  closeConfirm();
+  showToast('删除成功');
+  renderClientLevels(); // 同步刷新用户端Tab
+}
+
+function updateEmptyHint(key){
+  const el = document.getElementById('copy_' + key);
+  const hint = document.getElementById('hint_' + key);
+  hint.textContent = el.value.trim() === '' ? '当前为空，保存后客户端将不展示该模块' : '';
+}
+
+function openCopyModal(){
+  Object.keys(displayFields).forEach(k => {
+    document.getElementById('g_' + k).checked = displayFields[k];
+  });
+  Object.keys(iconFields).forEach(k => {
+    document.getElementById('g_' + k).checked = iconFields[k];
+  });
+  document.getElementById('copy_promotion').value = ruleTexts.promotion;
+  document.getElementById('copy_keep').value = ruleTexts.keep;
+  document.getElementById('copy_week').value = ruleTexts.week;
+  ['promotion','keep','week'].forEach(updateEmptyHint);
+  document.getElementById('copyModalOverlay').classList.add('show');
+}
+function closeCopyModal(){
+  document.getElementById('copyModalOverlay').classList.remove('show');
+}
+function saveCopyModal(){
+  Object.keys(displayFields).forEach(k => {
+    displayFields[k] = document.getElementById('g_' + k).checked;
+  });
+  Object.keys(iconFields).forEach(k => {
+    iconFields[k] = document.getElementById('g_' + k).checked;
+  });
+  ruleTexts.promotion = document.getElementById('copy_promotion').value;
+  ruleTexts.keep = document.getElementById('copy_keep').value;
+  ruleTexts.week = document.getElementById('copy_week').value;
+  closeCopyModal();
+  showToast('客户端展示设置已保存，对所有VIP等级统一生效');
+  renderClientLevels(); // 同步刷新用户端Tab：展示字段与规则文案立即生效
+}
+
+function openClaimRuleModal(){
+  document.querySelector(`input[name=claim_mode][value="${claimRule.mode}"]`).checked = true;
+  document.getElementById('claim_scheme3_days').value = claimRule.scheme3Days;
+  document.getElementById('claim_scheme4_days').value = claimRule.scheme4Days;
+  document.getElementById('claimRuleModalOverlay').classList.add('show');
+}
+function closeClaimRuleModal(){
+  document.getElementById('claimRuleModalOverlay').classList.remove('show');
+}
+function saveClaimRule(){
+  const checked = document.querySelector('input[name=claim_mode]:checked');
+  claimRule.mode = checked ? checked.value : claimRule.mode;
+  claimRule.scheme3Days = parseInt(document.getElementById('claim_scheme3_days').value);
+  claimRule.scheme4Days = parseInt(document.getElementById('claim_scheme4_days').value);
+  closeClaimRuleModal();
+  showToast('领取规则已保存，对所有VIP等级统一生效');
+}
+
+renderTable();
+
+// ===================== VIP福利彩金审核（新增页面，与"VIP列表-按抽佣"平级） =====================
+function switchAdminPage(page){
+  document.getElementById('admin-page-viplist').classList.toggle('hidden', page !== 'viplist');
+  document.getElementById('admin-page-audit').classList.toggle('hidden', page !== 'audit');
+  document.getElementById('nav-viplist').classList.toggle('active', page === 'viplist');
+  document.getElementById('nav-audit').classList.toggle('active', page === 'audit');
+  document.getElementById('tab-strip-viplist').classList.toggle('active', page === 'viplist');
+  document.getElementById('tab-strip-audit').classList.toggle('active', page === 'audit');
+  document.getElementById('admin-topbar-title').textContent = page === 'audit' ? 'VIP福利彩金审核' : 'VIP列表-按抽佣';
+}
+
+// 演示数据：申领时间均落在近一周内（2026-08-26～2026-09-02），覆盖 待审核/审核通过/审核拒绝/未生成 四种状态。
+// 审核方式故意混用"自动/手动"（该功能调整前的历史数据，笼统分类，不回溯改写）与"手动领取/过期作废"（调整后新产生的具体分类），
+// 验证四个筛选项均可查到真实数据；另含2条方案三专项标注（受众解锁后领取/受众未解锁过期）与2条方案四"未生成"记录
+let auditData = [
+  {id:1,  memberId:84443, account:'Hugo017',    agent:'AG10021', level:'VIP3', status:'approved', type:'晋级礼金',   amount:18,   claimTime:'2026-09-01 18:42:13', method:'自动',     auditor:'sysadmin', auditTime:'2026-09-01 18:42:16', note:'手动领取'},
+  {id:2,  memberId:84443, account:'Hugo017',    agent:'AG10021', level:'VIP3', status:'approved', type:'日福利礼金', amount:2,    claimTime:'2026-08-31 09:15:02', method:'手动领取', auditor:'sysadmin', auditTime:'2026-08-31 09:15:05', note:'手动领取（受众充值解锁后领取）'},
+  {id:3,  memberId:84443, account:'Hugo017',    agent:'AG10021', level:'VIP3', status:'approved', type:'周福利礼金', amount:8,    claimTime:'2026-08-31 10:02:47', method:'手动领取', auditor:'sysadmin', auditTime:'2026-08-31 10:02:50', note:'手动领取'},
+  {id:4,  memberId:83210, account:'ChenLei99',  agent:'AG10021', level:'VIP2', status:'approved', type:'晋级礼金',   amount:8,    claimTime:'2026-08-29 14:22:50', method:'自动',     auditor:'sysadmin', auditTime:'2026-08-29 14:22:53', note:'手动领取'},
+  {id:5,  memberId:83210, account:'ChenLei99',  agent:'AG10021', level:'VIP2', status:'rejected', type:'日福利礼金', amount:1,    claimTime:'2026-08-30 00:00:41', method:'自动',     auditor:'系统',     auditTime:'2026-08-30 00:05:11', note:'过期作废'},
+  {id:6,  memberId:80932, account:'TomHardy88', agent:'AG10088', level:'VIP2', status:'pending',  type:'周福利礼金', amount:5,    claimTime:'2026-09-02 10:03:44', method:'—',       auditor:'—',        auditTime:'—',                    note:'—'},
+  {id:7,  memberId:79988, account:'LinaWang',   agent:'AG10133', level:'vip7', status:'approved', type:'晋级礼金',   amount:388,  claimTime:'2026-08-27 20:11:03', method:'手动领取', auditor:'sysadmin', auditTime:'2026-08-27 20:11:06', note:'手动领取'},
+  {id:8,  memberId:78650, account:'dipsy',      agent:'AG10021', level:'VIP4', status:'approved', type:'月福利礼金', amount:35,   claimTime:'2026-08-28 11:00:00', method:'手动',     auditor:'sysadmin', auditTime:'2026-08-28 11:00:03', note:'手动领取'},
+  {id:9,  memberId:81765, account:'Aisha_Q',    agent:'AG10088', level:'VIP5', status:'rejected', type:'日福利礼金', amount:5,    claimTime:'2026-08-26 00:01:47', method:'过期作废', auditor:'系统',     auditTime:'2026-08-27 00:04:20', note:'过期作废（受众未在时限内充值解锁）'},
+  {id:10, memberId:83210, account:'ChenLei99',  agent:'AG10021', level:'VIP1', status:'approved', type:'周福利礼金', amount:2,    claimTime:'2026-08-31 08:00:12', method:'手动领取', auditor:'sysadmin', auditTime:'2026-08-31 08:00:15', note:'手动领取'},
+  {id:11, memberId:84443, account:'Hugo017',    agent:'AG10021', level:'VIP6', status:'approved', type:'晋级礼金',   amount:108,  claimTime:'2026-08-30 16:45:09', method:'自动',     auditor:'sysadmin', auditTime:'2026-08-30 16:45:12', note:'手动领取'},
+  {id:12, memberId:80932, account:'TomHardy88', agent:'AG10088', level:'vip8', status:'pending',  type:'日福利礼金', amount:25,   claimTime:'2026-09-02 09:20:31', method:'—',       auditor:'—',        auditTime:'—',                    note:'—'},
+  {id:13, memberId:79988, account:'LinaWang',   agent:'AG10133', level:'VIP9', status:'approved', type:'晋级礼金',   amount:1888, claimTime:'2026-08-29 21:30:00', method:'手动',     auditor:'sysadmin', auditTime:'2026-08-29 21:30:03', note:'手动领取'},
+  {id:14, memberId:78650, account:'dipsy',      agent:'AG10021', level:'VIP3', status:'rejected', type:'月福利礼金', amount:20,   claimTime:'2026-08-27 00:00:52', method:'过期作废', auditor:'系统',     auditTime:'2026-08-27 00:03:15', note:'过期作废'},
+  {id:15, memberId:84443, account:'Hugo017',    agent:'AG10021', level:'VIP2', status:'approved', type:'晋级礼金',   amount:8,    claimTime:'2026-08-26 12:05:40', method:'手动领取', auditor:'sysadmin', auditTime:'2026-08-26 12:05:43', note:'手动领取'},
+  {id:16, memberId:81765, account:'Aisha_Q',    agent:'AG10088', level:'VIP4', status:'rejected', type:'周福利礼金', amount:18,   claimTime:'2026-08-31 00:00:31', method:'自动',     auditor:'系统',     auditTime:'2026-08-31 00:02:09', note:'过期作废'},
+  {id:17, memberId:82014, account:'Wesley_K',   agent:'AG10088', level:'VIP6', status:'not_generated', type:'周福利礼金', amount:68,  claimTime:'—', method:'—', auditor:'系统', auditTime:'2026-08-31 00:00:15', note:'受众条件未满足，本期不生成奖励'},
+  {id:18, memberId:82014, account:'Wesley_K',   agent:'AG10088', level:'VIP6', status:'not_generated', type:'月福利礼金', amount:100, claimTime:'—', method:'—', auditor:'系统', auditTime:'2026-08-16 00:00:22', note:'受众条件未满足，本期不生成奖励'},
+];
+
+const AUDIT_STATUS_LABEL = { pending:'待审核', approved:'审核通过', rejected:'审核拒绝', not_generated:'未生成' };
+const AUDIT_STATUS_CLASS = { pending:'pending', approved:'approved', rejected:'rejected', not_generated:'not_generated' };
+
+function populateAuditLevelOptions(){
+  const sel = document.getElementById('af_level');
+  if(!sel || sel.options.length > 1) return;
+  data.forEach(r => {
+    const opt = document.createElement('option');
+    opt.value = r.name; opt.textContent = r.name;
+    sel.appendChild(opt);
+  });
+}
+
+function getFilteredAuditData(){
+  const memberId = document.getElementById('af_memberId').value.trim();
+  const account = document.getElementById('af_account').value.trim().toLowerCase();
+  const agent = document.getElementById('af_agent').value.trim().toLowerCase();
+  const level = document.getElementById('af_level').value;
+  const status = document.getElementById('af_status').value;
+  const type = document.getElementById('af_type').value;
+  const amountMin = document.getElementById('af_amountMin').value;
+  const amountMax = document.getElementById('af_amountMax').value;
+  const claimFrom = document.getElementById('af_claimFrom').value;
+  const claimTo = document.getElementById('af_claimTo').value;
+  const method = document.getElementById('af_method').value;
+  const auditor = document.getElementById('af_auditor').value.trim().toLowerCase();
+  const auditFrom = document.getElementById('af_auditFrom').value;
+  const auditTo = document.getElementById('af_auditTo').value;
+
+  return auditData.filter(row => {
+    if(memberId && String(row.memberId).indexOf(memberId) === -1) return false;
+    if(account && row.account.toLowerCase().indexOf(account) === -1) return false;
+    if(agent && row.agent.toLowerCase().indexOf(agent) === -1) return false;
+    if(level && row.level !== level) return false;
+    if(status && row.status !== status) return false;
+    if(type && row.type !== type) return false;
+    if(amountMin !== '' && row.amount < parseFloat(amountMin)) return false;
+    if(amountMax !== '' && row.amount > parseFloat(amountMax)) return false;
+    if(row.claimTime !== '—'){
+      const claimDate = row.claimTime.slice(0, 10);
+      if(claimFrom && claimDate < claimFrom) return false;
+      if(claimTo && claimDate > claimTo) return false;
+    } // 方案四"未生成"记录无实际申领动作（claimTime为"—"），不参与申领时间区间筛选，默认范围下始终可见
+    if(method && row.method !== method) return false;
+    if(auditor && row.auditor.toLowerCase().indexOf(auditor) === -1) return false;
+    if((auditFrom || auditTo) && row.auditTime !== '—'){
+      const auditDate = row.auditTime.slice(0, 10);
+      if(auditFrom && auditDate < auditFrom) return false;
+      if(auditTo && auditDate > auditTo) return false;
+    } else if((auditFrom || auditTo) && row.auditTime === '—'){
+      return false; // 待审核记录尚无审核时间，按审核时间筛选时不计入
+    }
+    return true;
+  });
+}
+
+function renderAuditTable(){
+  const list = getFilteredAuditData();
+  const tbody = document.getElementById('audit-tbody');
+  if(!list.length){
+    tbody.innerHTML = `<tr><td colspan="13" style="color:var(--text-muted);padding:26px 0;">暂无符合筛选条件的审核记录</td></tr>`;
+  } else {
+    tbody.innerHTML = list.map(row => {
+      const badge = `<span class="audit-badge ${AUDIT_STATUS_CLASS[row.status]}">${AUDIT_STATUS_LABEL[row.status]}</span>`;
+      let ops;
+      if(row.status === 'pending'){
+        ops = `<span class="action-link" title="待运营确认是否需要人工复核环节" onclick="approveAudit(${row.id})">通过</span><span class="sep">|</span><span class="action-link danger" title="待运营确认是否需要人工复核环节" onclick="rejectAudit(${row.id})">拒绝</span>`;
+      } else {
+        ops = `<span class="action-link" onclick="viewAuditRow(${row.id})">查看</span>`;
+      }
+      const amountCell = row.status === 'not_generated'
+        ? `${fmtG(row.amount)}<div style="font-size:10px;color:var(--text-muted);">（未发放）</div>`
+        : fmtG(row.amount);
+      return `<tr>
+        <td>${row.memberId}</td>
+        <td>${row.account}</td>
+        <td>${row.agent}</td>
+        <td>${row.level}</td>
+        <td>${badge}</td>
+        <td>${row.type}</td>
+        <td>${amountCell}</td>
+        <td>${row.claimTime}</td>
+        <td>${row.method}</td>
+        <td>${row.auditor}</td>
+        <td>${row.auditTime}</td>
+        <td>${row.note}</td>
+        <td>${ops}</td>
+      </tr>`;
+    }).join('');
+  }
+  const pager = document.getElementById('audit-pager');
+  if(pager) pager.innerHTML = `共 ${list.length} 条&nbsp;&nbsp;<span class="pager-page current">1</span>`;
+}
+
+function applyAuditFilter(){
+  renderAuditTable();
+  showToast('已按筛选条件查询');
+}
+
+function resetAuditFilter(){
+  ['af_memberId','af_account','af_agent','af_level','af_status','af_type','af_amountMin','af_amountMax','af_method','af_auditor','af_auditFrom','af_auditTo'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.value = '';
+  });
+  // 默认申领时间展示近一周：以数据中最新申领时间（模拟"今天"）为基准回溯7天；"未生成"记录无申领时间（"—"），不参与该计算
+  const claimedRows = auditData.filter(r => r.claimTime !== '—');
+  const latest = claimedRows.reduce((max, r) => r.claimTime > max ? r.claimTime : max, claimedRows[0].claimTime).slice(0, 10);
+  const latestDate = new Date(latest + 'T00:00:00');
+  const fromDate = new Date(latestDate.getTime() - 7 * 86400000);
+  const pad = n => String(n).padStart(2, '0');
+  const toStr = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+  document.getElementById('af_claimFrom').value = toStr(fromDate);
+  document.getElementById('af_claimTo').value = toStr(latestDate);
+  renderAuditTable();
+}
+
+function approveAudit(id){
+  const row = auditData.find(r => r.id === id);
+  if(!row) return;
+  row.status = 'approved';
+  row.method = '手动'; // 人工复核后的处理方式，沿用历史"手动"分类，与"手动领取"（会员自助操作）区分
+  row.auditor = 'admin（演示）';
+  row.auditTime = row.claimTime; // 演示：人工审核即时通过
+  row.note = '人工审核通过，奖励正常发放';
+  renderAuditTable();
+  showToast('已审核通过，奖励正常发放');
+}
+
+function rejectAudit(id){
+  const row = auditData.find(r => r.id === id);
+  if(!row) return;
+  row.status = 'rejected';
+  row.method = '手动'; // 人工复核后的处理方式，沿用历史"手动"分类，与"过期作废"（系统自动回收）区分
+  row.auditor = 'admin（演示）';
+  row.auditTime = row.claimTime; // 演示：人工审核即时拒绝
+  row.note = '人工审核拒绝，奖励作废';
+  renderAuditTable();
+  showToast('已审核拒绝，奖励作废');
+}
+
+function viewAuditRow(id){
+  const row = auditData.find(r => r.id === id);
+  if(!row) return;
+  showToast(`会员${row.memberId}（${row.account}）· ${row.level} · ${row.type} ${fmtG(row.amount)}U · ${AUDIT_STATUS_LABEL[row.status]} · ${row.note}`);
+}
+
+populateAuditLevelOptions();
+resetAuditFilter();
+
+// ===================== 顶层四大模块 Tab 切换 =====================
+function switchAppTab(tab){
+  document.querySelectorAll('.app-tab').forEach(el => el.classList.toggle('active', el.dataset.tab === tab));
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.toggle('hidden', el.id !== 'tab-' + tab));
+}
+
+// ===================== 用户端原型：演示数据与交互 =====================
+// 与后台字段口径保持一致的示例数据（仅用于客户端原型演示，不与上方后台管理数据双向绑定）
+// 用户端不再维护独立示例数据：等级字段全部读取上方管理后台 data / displayFields / ruleTexts，
+// 仅"当前会员所处等级、当前经验值、演示流水/领取状态"等属于H5原型自身的演示态。
+const CUR_LEVEL = 3;      // 演示：当前会员为 VIP3（读取 data 中 level=3 的记录）
+let CUR_EXP = null;       // 演示：当前经验值，初始化时按当前/下一等级门槛居中取值
+let expandedLevel = CUR_LEVEL;   // H5：仅当前等级默认展开
+let claimScenario = 'normal';    // normal | scheme1 | scheme2 | locked | unlocked | blocked —— 场景演示：领取规则设置-四个方案
+let demoProgress = { daily: 125, week: 320, monthly: 900 }; // 演示流水进度，可通过 +/- 调整触发按钮态切换（日流水默认已达标，便于演示锁定态）
+let claimedState = { promotion: false, daily: false, week: false, monthly: false };
+
+function fmtG(n){ const v = Math.round((n||0)*100)/100; return v.toString(); }
+function curRecord(){ return data.find(r => r.level === CUR_LEVEL); }
+function nextRecord(){ return data.find(r => r.level === CUR_LEVEL + 1) || null; }
+function prevRecord(){ return data.find(r => r.level === CUR_LEVEL - 1) || null; }
+function initCurExp(){
+  const cur = curRecord(), next = nextRecord();
+  CUR_EXP = next ? cur.th + Math.round((next.th - cur.th) * 0.4) : cur.th;
+}
+
+// 场景演示下拉的"方案一/方案二"选项直接对应「领取规则设置」的全局方案（同一时间只有一个方案生效），
+// 因此切换到这两个场景时同步更新 claimRule.mode，使卡片过期文案与后台「领取规则设置」弹窗保持一致联动
+function setScenario(v){
+  claimScenario = v;
+  if(v === 'scheme1' || v === 'scheme2'){ claimRule.mode = v; }
+  renderClientLevels();
+}
+
+function levelTotal(r){
+  return (r.gift||0) + (r.dailyGift||0) + (r.weekGift||0) + (r.monthlyGift||0);
+}
+
+// 方案一（未领取转发）本质不作废：跨周期未领取仅同步一份站内信/邮件通知，奖励本身仍保持可领取，
+// 因此不进入"expired"态，只在 claimable 态上附加提示；只有方案二（及三/四跨期兜底统一按方案二处理）才真正作废进入"expired"态
+function rewardState(type, r){
+  if(type === 'promotion'){
+    if(r.gift <= 0 || !displayFields.gift) return 'none';
+    if(claimedState.promotion) return 'claimed';
+    if(claimScenario === 'scheme2') return 'expired';
+    return 'claimable';
+  }
+  const cfgKey = {daily:'dailyTurnover', week:'week', monthly:'monthlyTurnover'}[type];
+  const giftKey = {daily:'dailyGift', week:'weekGift', monthly:'monthlyGift'}[type];
+  if(r[giftKey] <= 0 || !displayFields[giftKey]) return 'none';
+  if(claimedState[type]) return 'claimed';
+  if(demoProgress[type] < r[cfgKey]) return 'bet';
+  // 流水已达标：默认场景直接可领取；方案三-未充值＝奖励已生成但需先充值解锁；方案四-未充值＝受众条件不满足，本期压根不生成奖励；方案二＝跨周期作废
+  if(claimScenario === 'locked') return 'locked';
+  if(claimScenario === 'blocked') return 'blocked';
+  if(claimScenario === 'scheme2') return 'expired';
+  return 'claimable';
+}
+
+// 领取规则-跨期未领取奖励的处理方案：与管理后台「领取规则设置」claimRule.mode 保持一致，
+// 方案一（未领取转发）不作废，不会走到本函数（见 rewardState 说明）；其余方案统一按"已过期作废"展示，
+// 用于当前等级"跨周期未领取"演示与历史等级的过期记录
+function expiredLabel(){
+  const ruleLabelMap = { scheme2:'方案二·未领取作废', scheme3:'方案三·受众控制领取', scheme4:'方案四·受众控制发奖' };
+  return { cls:'expired', text:'已过期作废', ruleLabel: ruleLabelMap[claimRule.mode] || '未领取作废' };
+}
+
+function thSubline(type, r){
+  return (type === 'promotion' && displayFields.threshold)
+    ? `<div class="reward-card-subline">晋级需经验值 ${fmtG(r.th)}</div>` : '';
+}
+
+// 历史等级（低于当前等级）各奖励项的领取结果演示数据：默认视为"已领取"，仅列出示例性的"跨周期未领取→过期"记录，
+// 用于展示"上一级已经领取过的内容如何展示"与"已过期未领取的历史记录如何展示"两种真实存在的历史状态
+const pastHistory = {
+  1: { daily: 'expired' },   // 示例：VIP1 曾有一期日福利礼金跨周期未领取
+  2: { week: 'expired' },    // 示例：VIP2 曾有一期周福利礼金跨周期未领取
+};
+function pastTypeStatus(level, type){
+  const hist = pastHistory[level];
+  return (hist && hist[type]) ? hist[type] : 'claimed';
+}
+
+function renderRewardCard(type, label, r, extraNote){
+  const state = rewardState(type, r);
+  if(state === 'none') return '';
+  const giftKey = {promotion:'gift', daily:'dailyGift', week:'weekGift', monthly:'monthlyGift'}[type];
+  const amount = r[giftKey];
+  const exp = expiredLabel();
+  let btnHtml;
+  if(state === 'bet') btnHtml = `<button class="reward-btn bet" onclick="goBet('${type}')">去投注</button>`;
+  else if(state === 'claimable') btnHtml = `<button class="reward-btn claim" onclick="claimReward('${type}')">领取</button>`;
+  else if(state === 'locked') btnHtml = `<button class="reward-btn claim" onclick="openRechargeModal('${type}')">领取</button>`;
+  else if(state === 'blocked') btnHtml = `<button class="reward-btn locked" onclick="blockedTip()">本期未生成</button>`;
+  else if(state === 'expired') btnHtml = `<button class="reward-btn ${exp.cls}" disabled>${exp.text}</button>`;
+  else btnHtml = `<button class="reward-btn claimed" disabled>已领取</button>`;
+
+  let scenarioNote = '';
+  if(type !== 'promotion' && state === 'locked'){
+    scenarioNote = `<div class="reward-note locked-note">🔒 奖励已生成，点击"领取"需先完成充值方可到账（领取规则-方案三·受众用户1）</div>`;
+  } else if(type !== 'promotion' && state === 'blocked'){
+    scenarioNote = `<div class="reward-note blocked-note">⛔ 本周期因未满足受众条件（充值）未生成奖励；配置天数内完成充值后，下一统计周期方可正常生成并领取（领取规则-方案四·受众用户2）</div>`;
+  } else if(type !== 'promotion' && state === 'claimable' && claimScenario === 'unlocked'){
+    scenarioNote = `<div class="reward-note unlocked-note">✅ 已在配置天数内完成充值，受众条件满足，奖励已解锁可领取</div>`;
+  } else if(state === 'claimable' && claimScenario === 'scheme1'){
+    scenarioNote = `<div class="reward-note unlocked-note">📮 已达领取条件但跨周期未领取，系统已按当前领取规则（方案一·未领取转发）同步发送站内信/邮件提醒；奖励未作废，领取入口不变，仍可直接点击领取</div>`;
+  } else if(state === 'expired'){
+    scenarioNote = `<div class="reward-note blocked-note">⌛ 已达领取条件但超过领取时限未领取，奖励已按当前领取规则（${exp.ruleLabel}）回收作废</div>`;
+  }
+
+  let bodyHtml;
+  if(type === 'promotion'){
+    bodyHtml = `<div class="reward-card-foot" style="justify-content:flex-end;margin-top:2px;">${btnHtml}</div>${scenarioNote}`;
+  } else {
+    const cfgKey = {daily:'dailyTurnover', week:'week', monthly:'monthlyTurnover'}[type];
+    const threshold = r[cfgKey];
+    const pct = Math.min(100, Math.round(demoProgress[type] / threshold * 100));
+    bodyHtml = `
+      <div class="reward-progress-track"><div class="reward-progress-fill" style="width:${pct}%;"></div></div>
+      <div class="reward-card-foot">
+        <span class="reward-progress-text">流水进度 ${fmtG(demoProgress[type])}/${fmtG(threshold)} U</span>
+        ${btnHtml}
+      </div>
+      ${scenarioNote}
+      <div class="reward-demo-adjust">
+        <button onclick="adjustProgress('${type}',-20)">－</button>
+        <button onclick="adjustProgress('${type}',20)">＋</button>
+        <span>演示：调整流水进度</span>
+      </div>`;
+  }
+
+  return `
+    <div class="reward-card">
+      <div class="reward-card-top">
+        <div><span class="reward-card-name">${label}</span>${thSubline(type, r)}</div>
+        <span class="reward-card-amount">${amount} U</span>
+      </div>
+      ${extraNote ? `<div class="reward-progress-text" style="margin-bottom:2px;">${extraNote}</div>` : ''}
+      ${bodyHtml}
+    </div>`;
+}
+
+function renderPastRewardCard(type, label, r){
+  const giftKey = {promotion:'gift', daily:'dailyGift', week:'weekGift', monthly:'monthlyGift'}[type];
+  if(r[giftKey] <= 0 || !displayFields[giftKey]) return '';
+  const amount = r[giftKey];
+  const status = pastTypeStatus(r.level, type);
+  let btnHtml;
+  if(status === 'expired' && claimRule.mode === 'scheme1'){
+    // 方案一·未领取转发：不作废，历史记录中同样展示为"领取"（仅同步过一份站内信/邮件通知，非实际可交互，供说明用）
+    btnHtml = `<button class="reward-btn claim" disabled>领取</button>`;
+  } else if(status === 'expired'){
+    const exp = expiredLabel();
+    btnHtml = `<button class="reward-btn ${exp.cls}" disabled>${exp.text}</button>`;
+  } else {
+    btnHtml = `<button class="reward-btn claimed" disabled>已领取</button>`;
+  }
+  const cond = type === 'promotion' ? '' : {
+    daily: `每日流水满 ${r.dailyTurnover} U 可领取`,
+    week: `每周流水满 ${r.week} U 可领取`,
+    monthly: `每月流水满 ${r.monthlyTurnover} U 可领取`,
+  }[type];
+  return `
+    <div class="reward-card past-card">
+      <div class="reward-card-top">
+        <div><span class="reward-card-name">${label}</span>${thSubline(type, r)}</div>
+        <span class="reward-card-amount">${amount} U</span>
+      </div>
+      ${cond ? `<div class="reward-progress-text" style="margin-bottom:2px;">${cond}</div>` : ''}
+      <div class="reward-card-foot" style="justify-content:flex-end;">
+        ${btnHtml}
+      </div>
+    </div>`;
+}
+
+function renderFutureRewardCard(type, label, r){
+  const giftKey = {promotion:'gift', daily:'dailyGift', week:'weekGift', monthly:'monthlyGift'}[type];
+  if(r[giftKey] <= 0 || !displayFields[giftKey]) return '';
+  const amount = r[giftKey];
+  const cond = type === 'promotion' ? '晋级至本等级即可获得，无需流水条件' : {
+    daily: `日流水满 ${r.dailyTurnover} U 可领取`,
+    week: `周流水满 ${r.week} U 可领取`,
+    monthly: `月流水满 ${r.monthlyTurnover} U 可领取`,
+  }[type];
+  return `
+    <div class="reward-card future-card">
+      <div class="reward-card-top">
+        <div><span class="reward-card-name">${label}</span>${thSubline(type, r)}</div>
+        <span class="reward-card-amount">${amount} U</span>
+      </div>
+      <div class="reward-card-foot">
+        <span class="reward-progress-text">${cond}</span>
+        <button class="reward-btn locked" disabled>🔒 未解锁</button>
+      </div>
+    </div>`;
+}
+
+// 计算历史等级（低于当前等级）实际已领取到账的金额合计，用于展开态标题"已领取 X / 共 Y"
+function claimedSum(r){
+  const giftKeyMap = {promotion:'gift', daily:'dailyGift', week:'weekGift', monthly:'monthlyGift'};
+  let sum = 0;
+  Object.keys(giftKeyMap).forEach(type => {
+    const giftKey = giftKeyMap[type];
+    if(r[giftKey] <= 0 || !displayFields[giftKey]) return;
+    if(pastTypeStatus(r.level, type) === 'claimed') sum += r[giftKey];
+  });
+  return fmtG(sum);
+}
+
+// 收起/展开的卡片语言在"当前/历史（上一级）/未来（下一级）"三种等级状态间保持统一：
+// 均为"90天保级流水+提现流水倍数信息行 + 统一的 .reward-card 组件"，仅卡片内按钮与状态文案随状态切换，
+// 从而使 VIP福利 形成"未解锁(future) → 投注中(bet) → 可领取(claimable) → 已领取/待解锁/未生成(claimed/locked/blocked) → 跨周期过期(expired) → 历史记录(past)"的完整闭环
+function renderLevelBody(r){
+  const keepLine = displayFields.keep ? `<div class="lv-mult-line">90天保级流水　${r.keep || '—'}</div>` : '';
+  const multLine = displayFields.mult ? `<div class="lv-mult-line">提现流水倍数　×${r.mult || '—'}</div>` : '';
+  let cardsHtml;
+  if(r.level === CUR_LEVEL){
+    cardsHtml = [
+      renderRewardCard('promotion','晋级礼金', r),
+      renderRewardCard('daily','日福利礼金', r, `每日流水满 ${r.dailyTurnover} U 可领取，次日00:00~02:00结算（北京时间）`),
+      renderRewardCard('week','周福利礼金', r, `每周流水满 ${r.week} U 可领取，每周一00:00~02:00结算（北京时间）`),
+      renderRewardCard('monthly','月福利礼金', r, `每月流水满 ${r.monthlyTurnover} U 可领取，固定每月16日结算上月流水（北京时间）`),
+    ].join('');
+  } else if(r.level < CUR_LEVEL){
+    cardsHtml = [
+      renderPastRewardCard('promotion','晋级礼金', r),
+      renderPastRewardCard('daily','日福利礼金', r),
+      renderPastRewardCard('week','周福利礼金', r),
+      renderPastRewardCard('monthly','月福利礼金', r),
+    ].join('');
+  } else {
+    cardsHtml = [
+      renderFutureRewardCard('promotion','晋级礼金', r),
+      renderFutureRewardCard('daily','日福利礼金', r),
+      renderFutureRewardCard('week','周福利礼金', r),
+      renderFutureRewardCard('monthly','月福利礼金', r),
+    ].join('');
+  }
+  if(!cardsHtml && !keepLine && !multLine){
+    return `<div class="pm-note" style="margin:0;">该等级暂无已开放的展示字段（管理后台「客户端展示设置」中均未勾选）</div>`;
+  }
+  return keepLine + multLine + cardsHtml;
+}
+
+function renderLvProgress(){
+  const cur = curRecord(), next = nextRecord();
+  if(!cur) return;
+  if(CUR_EXP === null) initCurExp();
+  const endCur = document.getElementById('lv-endlabel-cur');
+  const endNext = document.getElementById('lv-endlabel-next');
+  if(endCur) endCur.textContent = cur.name;
+  if(endNext) endNext.textContent = next ? next.name : '已达最高等级';
+  const pct = next ? Math.max(0, Math.min(100, Math.round((CUR_EXP - cur.th) / (next.th - cur.th) * 100))) : 100;
+  const fill = document.getElementById('h5-progress-fill');
+  if(fill) fill.style.width = pct + '%';
+  const expText = document.getElementById('h5-lv-exp-text');
+  if(expText) expText.textContent = next ? `当前经验值：${fmtG(CUR_EXP)}（${fmtG(CUR_EXP)}/${fmtG(next.th)}）` : `当前经验值：${fmtG(CUR_EXP)}（已达最高等级）`;
+}
+
+function renderArcSelector(){
+  const box = document.getElementById('h5-arc-selector');
+  if(!box) return;
+  const items = [prevRecord(), curRecord(), nextRecord()].filter(Boolean);
+  box.innerHTML = `
+    <div class="arc-curve"></div>
+    <div class="arc-items">
+      ${items.map(r => `
+        <div class="arc-item ${r.level === CUR_LEVEL ? 'current' : ''}">
+          <div class="arc-dot"></div>
+          <div class="arc-label">${r.name}</div>
+        </div>`).join('')}
+    </div>
+    <div class="arc-arrow">▾</div>`;
+}
+
+function renderLevelHero(){
+  const box = document.getElementById('h5-level-hero');
+  if(!box) return;
+  const cur = curRecord(), next = nextRecord();
+  if(!cur) { box.innerHTML = ''; return; }
+  const rows = [];
+  if(displayFields.keep) rows.push(`保级要求　保级90天，保级流水${fmtG(cur.keep)}`);
+  if(displayFields.threshold) rows.push(`晋级所需经验值　${next ? fmtG(next.th) : '已达最高等级'}`);
+  box.innerHTML = `
+    <div class="level-hero-icon">💎</div>
+    <div class="level-hero-title">${cur.name}</div>
+    ${rows.map(t => `<div class="level-hero-row">${t}</div>`).join('')}`;
+}
+
+function renderRuleBody(text){
+  // 后台「客户端展示设置」中若对规则文案做换行，客户端统一用圆点表示分段；单行文本则保持纯文本展示，三段规则一致处理
+  const lines = String(text).split('\n').map(l => l.trim()).filter(l => l !== '');
+  if(lines.length <= 1){
+    return `<p class="rule-para">${lines[0] || ''}</p>`;
+  }
+  return lines.map(l => `<p class="rule-para rule-bullet">${l}</p>`).join('');
+}
+function renderRuleList(){
+  const box = document.getElementById('h5-rule-list');
+  if(!box) return;
+  const items = [
+    ['晋升规则', ruleTexts.promotion],
+    ['保级规则', ruleTexts.keep],
+    ['流水福利规则', ruleTexts.week],
+  ].filter(([,text]) => text && text.trim() !== '');
+  if(!items.length){
+    box.innerHTML = `<div class="pm-note" style="margin:0;">管理后台「客户端展示设置」中三段规则文案均为空，客户端暂不展示规则说明模块</div>`;
+    return;
+  }
+  box.innerHTML = items.map(([title, text], idx) => `
+    <div class="rule-item" id="rule-item-${idx}">
+      <div class="rule-item-head" onclick="toggleRule(${idx})"><span>${title}</span><span class="rule-chevron">▾</span></div>
+      <div class="rule-item-body">${renderRuleBody(text)}</div>
+    </div>`).join('');
+}
+
+function renderClientLevels(){
+  if(!curRecord()) return;
+  if(CUR_EXP === null) initCurExp();
+  // H5：VIP0→VIP9 升序手风琴列表，仅当前等级默认展开；收起时展示"总奖金"，展开时展示"升级VIPx可获得奖金"
+  const h5box = document.getElementById('h5-vip-list');
+  if(h5box){
+    h5box.innerHTML = data.map(r => {
+      const expanded = expandedLevel === r.level;
+      const total = fmtG(levelTotal(r));
+      const statusChip = r.level < CUR_LEVEL ? '<span class="lv-status-chip past">已达成</span>'
+        : r.level > CUR_LEVEL ? '<span class="lv-status-chip future">未解锁</span>' : '';
+      let headerLine = '';
+      if(expanded){
+        if(r.level === CUR_LEVEL){
+          const claimableCount = ['promotion','daily','week','monthly'].filter(t => rewardState(t, r) === 'claimable').length;
+          const lockedCount = ['promotion','daily','week','monthly'].filter(t => rewardState(t, r) === 'locked').length;
+          const btnDisabled = (claimableCount + lockedCount) === 0;
+          const btnLabel = claimableCount > 0 ? `🎁 一键领取(${claimableCount})` : '🎁 一键领取';
+          headerLine = `<div class="lv-total-header with-btn">
+            <span>升级${r.name}可获得奖金 <b>${total} U</b></span>
+            <button class="claim-all-btn" onclick="claimAllCurrent()" ${btnDisabled ? 'disabled' : ''}>${btnLabel}</button>
+          </div>`;
+        }
+        else if(r.level < CUR_LEVEL) headerLine = `<div class="lv-total-header">${r.name} 历史权益记录 · 已领取 <b>${claimedSum(r)} U</b> / 共 ${total} U</div>`;
+        else headerLine = `<div class="lv-total-header">达到${r.name}可获得奖金 <b>${total} U</b>（需先完成晋级）</div>`;
+      }
+      return `
+      <div class="vip-level-card ${expanded ? 'expanded' : ''}">
+        <div class="vip-level-head" onclick="toggleLevel(${r.level})">
+          <div class="lv-badge">V${r.level}</div>
+          <div class="lv-name">${r.name}</div>
+          ${statusChip}
+          ${!expanded ? `<span class="lv-total">总奖金 ${total} U</span>` : ''}
+          ${r.level === CUR_LEVEL ? '<span class="lv-current-tag">当前等级</span>' : ''}
+          <span class="lv-chevron">▶</span>
+        </div>
+        <div class="vip-level-body">
+          ${headerLine}
+          ${renderLevelBody(r)}
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  renderLvProgress();
+  renderArcSelector();
+  renderLevelHero();
+  renderRuleList();
+}
+
+function toggleLevel(lvl){
+  expandedLevel = (expandedLevel === lvl) ? null : lvl;
+  renderClientLevels();
+}
+function adjustProgress(type, delta){
+  demoProgress[type] = Math.max(0, demoProgress[type] + delta);
+  renderClientLevels();
+}
+function goBet(){
+  clientToast('已跳转投注页（模拟交互，实际接入投注入口）');
+}
+function claimReward(type){
+  claimedState[type] = true;
+  clientToast(type === 'promotion' ? '晋级礼金领取成功，已计入提现流水' : '领取成功，已计入提现流水');
+  renderClientLevels();
+}
+// 一键领取：将当前等级下所有处于"可领取"状态（含方案一·未领取转发下仍可领取的记录）的奖励一次性领取，
+// 避免会员逐项点击；若其中存在"已生成但需先充值才能领取"的记录（领取规则-方案三·受众用户1，即 locked 态），
+// 一键领取时需同步弹出充值提示弹窗，而不是静默跳过——避免会员误以为这些奖励不存在
+// 处于去投注/未生成/已过期作废/已领取的记录不受一键领取影响
+function claimAllCurrent(){
+  const r = curRecord();
+  if(!r) return;
+  const claimableTypes = ['promotion','daily','week','monthly'].filter(t => rewardState(t, r) === 'claimable');
+  const lockedTypes = ['promotion','daily','week','monthly'].filter(t => rewardState(t, r) === 'locked');
+
+  if(!claimableTypes.length && !lockedTypes.length){
+    clientToast('当前没有可一键领取的奖励');
+    return;
+  }
+
+  if(claimableTypes.length){
+    claimableTypes.forEach(t => { claimedState[t] = true; });
+    clientToast(`已一键领取 ${claimableTypes.length} 项奖励，已计入提现流水`);
+    renderClientLevels();
+  }
+
+  if(lockedTypes.length){
+    openRechargeModal(null, lockedTypes.length);
+  }
+}
+let pendingRechargeType = null;
+function openRechargeModal(type, batchCount){
+  pendingRechargeType = type;
+  const textEl = document.getElementById('rechargeModalText');
+  if(textEl){
+    textEl.textContent = (batchCount && batchCount > 1)
+      ? `💰 一键领取中有 ${batchCount} 项奖励因未满足受众条件（充值）暂无法领取，完成任意一笔充值后即可解锁领取`
+      : '💰 完成任意一笔充值后，即可获得专属奖励';
+  }
+  document.getElementById('rechargeModalOverlay').classList.add('show');
+}
+function closeRechargeModal(){
+  document.getElementById('rechargeModalOverlay').classList.remove('show');
+  pendingRechargeType = null;
+}
+function goRecharge(){
+  // 交互说明：点击"充值"实际应跳转至充值/收银台页面，此处仅模拟提示，不在原型内实现真实充值流程
+  closeRechargeModal();
+  clientToast('已跳转充值页面（模拟交互，实际接入充值收银台）');
+}
+function blockedTip(){
+  clientToast('本周期未满足受众条件（充值），本期未生成该奖励；请在配置天数内完成充值，下一统计周期生效（领取规则-方案四）');
+}
+function resetDemo(){
+  demoProgress = { daily: 125, week: 320, monthly: 900 };
+  claimedState = { promotion: false, daily: false, week: false, monthly: false };
+  claimScenario = 'normal';
+  claimRule.mode = 'scheme2';   // 恢复为默认全局生效方案（方案二·未领取作废），与「领取规则设置」初始值一致
+  const sel = document.getElementById('scenarioSelect');
+  if(sel) sel.value = 'normal';
+  expandedLevel = CUR_LEVEL;
+  initCurExp();
+  renderClientLevels();
+  clientToast('已重置演示数据');
+}
+function clientToast(msg){
+  const t = document.getElementById('clientToast');
+  if(!t) return;
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 1800);
+}
+function switchH5Pane(pane){
+  document.querySelectorAll('.h5-segtab').forEach(el => el.classList.toggle('active', el.dataset.pane === pane));
+  document.getElementById('h5-pane-benefit').classList.toggle('active', pane === 'benefit');
+  document.getElementById('h5-pane-rule').classList.toggle('active', pane === 'rule');
+}
+function toggleRule(idx){
+  document.getElementById('rule-item-' + idx).classList.toggle('expanded');
+}
+
+renderClientLevels();
+
+// 置顶提示浮窗：position:fixed + 动态定位，避免被表格 overflow-x 容器裁剪遮挡
+(function(){
+  const tip = document.getElementById('globalTooltip');
+  function positionTooltip(icon){
+    const rect = icon.getBoundingClientRect();
+    tip.style.left = '-9999px';
+    tip.style.top = '-9999px';
+    tip.classList.add('show');
+    const tipRect = tip.getBoundingClientRect();
+    let left = rect.left + rect.width / 2 - tipRect.width / 2;
+    let top = rect.top - tipRect.height - 8;
+    if(top < 8){ top = rect.bottom + 8; } // 上方空间不够则翻转到图标下方
+    left = Math.max(8, Math.min(left, window.innerWidth - tipRect.width - 8));
+    tip.style.left = left + 'px';
+    tip.style.top = top + 'px';
+  }
+  document.addEventListener('mouseover', function(e){
+    const icon = e.target.closest('.tooltip-icon');
+    if(!icon) return;
+    tip.textContent = icon.getAttribute('data-tip') || '';
+    positionTooltip(icon);
+  });
+  document.addEventListener('mouseout', function(e){
+    const icon = e.target.closest('.tooltip-icon');
+    if(!icon) return;
+    tip.classList.remove('show');
+  });
+  window.addEventListener('scroll', function(){ tip.classList.remove('show'); }, true);
+})();
+</script>
+</body>
+</html>
