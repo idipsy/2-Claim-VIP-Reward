@@ -225,6 +225,49 @@
   .app-tab-divider{ width:1px; height:20px; background:#363c60; margin:0 12px; }
   .tab-content.hidden{ display:none; }
 
+
+  /* ===================== 用户端「我的」首页 + VIP入口 ===================== */
+  .client-home-wrap{ margin-bottom:18px; }
+  .my-home-screen{ background:#f4f8ff; min-height:780px; padding-bottom:78px; position:relative; }
+  .my-profile{ padding:22px 18px 14px; display:flex; align-items:center; gap:12px; }
+  .my-avatar{ width:58px; height:58px; border-radius:50%; background:linear-gradient(145deg,#f0c76f,#8165e8); border:2px solid #fff; box-shadow:0 4px 12px rgba(40,55,110,.18); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:18px; flex-shrink:0; }
+  .my-user-meta{ flex:1; min-width:0; }
+  .my-user-name-row{ display:flex; align-items:center; gap:8px; font-size:19px; font-weight:700; color:#2b3040; }
+  .my-vip-badge{ display:inline-flex; align-items:center; gap:3px; padding:3px 9px; border-radius:12px; background:linear-gradient(135deg,#ffdc7a,#ff9c64); color:#6f3c00; font-size:11px; font-weight:800; cursor:pointer; box-shadow:0 2px 8px rgba(255,156,100,.25); }
+  .my-account{ margin-top:4px; font-size:12px; color:#7d88a6; }
+  .my-icons{ display:flex; gap:12px; font-size:18px; color:#343a4b; }
+  .home-card{ background:#fff; margin:0 14px 12px; border-radius:14px; padding:14px 16px; box-shadow:0 2px 10px rgba(35,55,105,.05); }
+  .home-card-title{ display:flex; align-items:center; justify-content:space-between; font-size:15px; font-weight:700; margin-bottom:12px; }
+  .home-refresh{ font-size:11px; color:#6e7a9d; font-weight:500; }
+  .wallet-balance{ background:linear-gradient(135deg,#3d91ff,#2f7de8); color:#fff; border-radius:12px; padding:18px 16px; text-align:center; }
+  .wallet-balance small{ display:block; font-size:11px; opacity:.92; margin-bottom:4px; }
+  .wallet-balance strong{ font-size:26px; font-weight:700; }
+  .wallet-actions{ display:flex; margin-top:14px; }
+  .wallet-action{ flex:1; text-align:center; font-size:13px; font-weight:600; padding:5px 0; }
+  .wallet-action + .wallet-action{ border-left:1px solid #e1e5ef; }
+  .home-vip-card{ margin:0 14px 12px; border-radius:16px; padding:15px 16px 14px; background:linear-gradient(135deg,#fff3df 0%,#ffe7ef 52%,#eef1ff 100%); border:1px solid #f2dfd1; box-shadow:0 6px 18px rgba(170,115,85,.10); cursor:pointer; }
+  .home-vip-top{ display:flex; align-items:center; gap:10px; }
+  .home-vip-icon{ width:42px; height:42px; border-radius:12px; background:linear-gradient(135deg,#ffba46,#ff667f); color:#fff; display:flex; align-items:center; justify-content:center; font-size:20px; box-shadow:0 4px 10px rgba(255,102,127,.20); }
+  .home-vip-main{ flex:1; min-width:0; }
+  .home-vip-title{ display:flex; align-items:center; gap:7px; font-size:14px; font-weight:800; color:#342f3c; }
+  .home-vip-title .lv{ font-size:11px; padding:2px 7px; border-radius:9px; background:#2f375f; color:#fff; }
+  .home-vip-link{ font-size:11px; color:#8a5f68; font-weight:600; white-space:nowrap; }
+  .home-vip-exp-row{ display:flex; align-items:center; justify-content:space-between; margin-top:10px; font-size:10.5px; color:#7d6872; }
+  .home-vip-track{ height:7px; border-radius:6px; background:rgba(255,255,255,.72); margin-top:6px; overflow:hidden; border:1px solid rgba(255,255,255,.72); }
+  .home-vip-fill{ height:100%; border-radius:6px; background:linear-gradient(90deg,#ff7a8e,#8b72f6); }
+  .home-vip-boost{ display:inline-flex; align-items:center; gap:4px; margin-top:10px; padding:5px 9px; border-radius:10px; background:rgba(255,255,255,.66); color:#b85628; font-size:10.5px; font-weight:700; }
+  .home-vip-boost.normal{ color:#59637e; font-weight:600; }
+  .today-grid{ display:grid; grid-template-columns:repeat(3,1fr); background:#f7f8fc; border-radius:10px; overflow:hidden; }
+  .today-item{ padding:11px 4px; text-align:center; font-size:10.5px; color:#78829e; }
+  .today-item + .today-item{ border-left:1px solid #dfe3ed; }
+  .today-item b{ display:block; color:#2c3244; font-size:18px; margin-bottom:2px; }
+  .service-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:18px 8px; }
+  .service-item{ text-align:center; font-size:11px; color:#303648; }
+  .service-ic{ width:35px; height:35px; border-radius:10px; margin:0 auto 6px; background:#eef2ff; color:#8298d1; display:flex; align-items:center; justify-content:center; font-size:17px; }
+  .home-bottom-nav{ position:absolute; left:0; right:0; bottom:0; height:64px; background:#fff; border-top:1px solid #e9ebf1; display:flex; align-items:center; justify-content:space-around; color:#8790aa; font-size:10px; }
+  .home-bottom-nav b{ color:#52617f; }
+  .client-view-hidden{ display:none !important; }
+
   /* ===================== 客户端原型：H5 + PC 共用 ===================== */
   .client-page{ padding:26px; background:#eef0f6; min-height:calc(100vh - 50px); }
   .client-toolbar{ display:flex; align-items:center; justify-content:space-between; margin-bottom:18px; flex-wrap:wrap; gap:10px; }
@@ -450,6 +493,22 @@
   .flow-branch-label{ font-size:11px; color:var(--text-muted); margin:6px 0 2px; text-align:center; }
   .flow-hline-wrap{ width:100%; display:flex; justify-content:center; }
   .flow-hline{ height:2px; background:var(--border-strong); align-self:flex-start; margin-top:11px; }
+
+  /* ===== 用户端V2：改造说明/演示融合 + VIP详情横滑等级卡 ===== */
+  .client-spec-panel{background:linear-gradient(135deg,#f7f9ff 0%,#fff 58%,#fff8f2 100%);border:1px solid #dbe2ff;border-radius:14px;padding:14px 16px;margin-bottom:18px;box-shadow:0 5px 18px rgba(63,94,234,.07)}
+  .client-spec-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px}.client-spec-title{font-size:14px;font-weight:800;color:#27304a}.client-spec-sub{font-size:11px;color:#7b849d;margin-top:3px;line-height:1.55}.client-spec-chip{font-size:10px;color:#3f5eea;background:#edf1ff;border-radius:999px;padding:4px 8px;white-space:nowrap;font-weight:700}
+  .client-spec-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:12px}.client-spec-item{background:rgba(255,255,255,.88);border:1px solid #edf0f8;border-radius:10px;padding:9px 10px}.client-spec-item b{display:block;font-size:11.5px;color:#303850;margin-bottom:4px}.client-spec-item span{font-size:10.5px;color:#6f7890;line-height:1.6}
+  .client-spec-note{font-size:10.5px;color:#58627b;background:#f2f5ff;border-radius:9px;padding:8px 10px;line-height:1.65;margin-bottom:10px}.client-spec-note strong{color:#3f5eea}
+  .client-scenarios{border-top:1px dashed #dbe2f3;padding-top:10px}.client-scenarios-title{font-size:11.5px;font-weight:800;color:#303850;margin-bottom:8px}.client-scenarios .scenario-bar{margin:0 0 7px;background:transparent;border:0;padding:0;display:grid;grid-template-columns:190px minmax(280px,1fr) auto}.client-scenarios .scenario-bar label{white-space:normal;line-height:1.4}.client-scenarios .scenario-bar select{width:100%}.client-scenarios .scenario-bar:last-child{margin-bottom:0}
+  .h5-header{background:linear-gradient(180deg,#eef5ff 0%,#f8fbff 58%,#fff 100%);padding-top:12px}.h5-avatar{width:58px;height:58px;border:2px solid #fff;box-shadow:0 0 0 2px #7ba0ff,0 5px 16px rgba(49,91,190,.18);background:linear-gradient(145deg,#262f54,#7d92db)}.h5-user-name{font-size:15px}.h5-user-time{font-size:10.5px}.lv-exp-text{font-weight:600;color:#4e5c7d}
+  .vip-card-carousel{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:12px 14px 18px;scrollbar-width:none;-webkit-overflow-scrolling:touch}.vip-card-carousel::-webkit-scrollbar{display:none}
+  .vip-card-carousel .level-hero-card{flex:0 0 calc(100% - 34px);scroll-snap-align:center;position:relative;text-align:left;margin:0;border-radius:18px;padding:18px 18px 16px;overflow:hidden;background:linear-gradient(135deg,#ffefef 0%,#ffd6d8 52%,#ffb8b9 100%);color:#7d2027;box-shadow:0 9px 24px rgba(212,77,85,.16);border:1px solid rgba(229,57,69,.08);cursor:pointer;transition:transform .18s,border-color .18s,box-shadow .18s}
+  .vip-card-carousel .level-hero-card.selected{border-color:#ff7a84;box-shadow:0 10px 28px rgba(212,77,85,.23);transform:translateY(-1px)}
+  .vip-card-carousel .level-hero-card.unconfigured{background:linear-gradient(135deg,#f6f7fb,#eceff6);color:#6e7484;box-shadow:0 7px 18px rgba(60,70,95,.08);border-color:#e1e5ef}
+  .vip-card-carousel .level-hero-card:after{content:'◆';position:absolute;right:18px;top:20px;font-size:58px;color:rgba(202,35,48,.22);transform:rotate(12deg)}.vip-card-carousel .level-hero-card.unconfigured:after{color:rgba(105,112,132,.12)}
+  .level-hero-icon{position:absolute;right:28px;top:22px;font-size:30px;z-index:1}.level-hero-title{font-size:25px;font-style:italic;color:#e53945;margin-bottom:12px}.unconfigured .level-hero-title{color:#767d8f}.level-hero-row{font-size:11.5px;font-weight:600;position:relative;z-index:2;max-width:75%}.level-hero-row.keep-status{max-width:100%;font-weight:600}.level-hero-row.keep-status-normal{background:rgba(255,255,255,.45)}.level-hero-row.keep-status-decay{background:rgba(255,255,255,.55);border-color:rgba(180,55,55,.2)}.level-hero-row.keep-status-recovering{background:rgba(255,255,255,.55);border-color:rgba(45,160,110,.25);color:#176f50}.level-hero-status{display:inline-flex;font-size:9px;font-weight:700;border-radius:999px;padding:3px 7px;background:rgba(255,255,255,.65);color:#8a4650;margin-left:7px;vertical-align:middle}.vip-card-carousel-hint{text-align:center;font-size:9.5px;color:#8490ad;margin:-8px 0 10px}
+  @media(max-width:760px){.client-spec-grid{grid-template-columns:1fr}.client-scenarios .scenario-bar{grid-template-columns:1fr}.client-spec-panel{padding:12px}}
+
 </style>
 </head>
 <body>
@@ -467,39 +526,102 @@
 <div class="tab-content" id="tab-client">
   <div class="client-page">
     <div class="client-toolbar">
-      <div class="client-toolbar-title">用户端 · VIP特权（H5）<small>仅保留H5作为用户端示例；页面数据（等级字段、展示字段、规则说明文案）均直接读取管理后台「VIP列表-按抽佣」数据与「客户端展示设置」配置——在管理后台修改后，本页会同步刷新，用于验证前后台闭环</small></div>
+      <div class="client-toolbar-title">用户端 · 我的 → VIP特权（H5）<small>新增「我的」首页入口演示；页面数据（等级字段、展示字段、规则说明文案）均直接读取管理后台「VIP列表-按抽佣」数据与「客户端展示设置」配置——在管理后台修改后，本页会同步刷新，用于验证前后台闭环</small></div>
     </div>
-    <div class="client-demo-hint">💡 可交互演示：奖励卡片下方"－ / ＋"模拟流水变化，实时切换「去投注」⇄「领取」；当前等级（VIP3）「发放方式」配置为<b>人工发放</b>，点击"领取"后按钮会展示为"审核中"（彩金尚未到账），需运营在「VIP福利彩金审核」页人工审核通过后才正式发放，此为本轮新还原的口径，与"手动领取"这一领取动作是两个独立维度；下方"场景演示"下拉覆盖「领取规则设置」四个方案在VIP福利卡片上的实际交互表现（选择后会同步切换为该方案的全局生效效果；其中方案一·未领取转发本质不作废，跨周期未领取的奖励仅同步一份站内信/邮件通知，卡片上仍展示"领取"按钮可直接领取；四个方案均<b>不适用于晋级礼金</b>，晋级礼金达标即可领取、永不过期，即使切换到方案二·未领取作废，晋级礼金卡片也不会展示"已过期"）；点击"重置演示"可恢复初始状态重新演示。页面顶部固定<b>置顶展示当前等级（VIP3）</b>卡片并默认展开，无需下滑即可查看当前权益，其下以"其他等级"分割线区隔：低等级（VIP0～VIP2，已达成，展示历史领取记录）按等级降序排列，高等级（VIP4～VIP9，未解锁，展示条件预览）按等级升序排列——三类等级统一使用同一套奖励卡片样式展示，收起时均展示"总奖金"，展开时按当前/历史/未来分别展示进度、记录或条件说明。页面顶部固定展示<b>"一键领取"</b>按钮（不再逐等级单独提供入口）：可一次性领取当前等级及所有历史等级中遗漏未领取的奖励（演示数据中 VIP1 晋级礼金即为示例：早前晋级但一直未领取，因晋级礼金不过期，至今仍可通过该按钮领取），按各笔奖励所在等级的「发放方式」分别自动到账或提交人工审核，并对因未充值而不可领取的记录同步弹出充值提示；当前没有可领取奖励时按钮<b>置灰禁用</b>，而非隐藏。</div>
-    <div class="scenario-bar">
-      <label>🎬 场景演示（领取规则设置-四个方案）：</label>
-      <select id="scenarioSelect" onchange="setScenario(this.value)">
-        <option value="normal">默认：流水达标即可直接领取</option>
-        <option value="scheme1">方案一·未领取转发：跨周期未领取不作废，同步站内信/邮件提醒，仍需回页面领取</option>
-        <option value="scheme2">方案二·未领取作废：跨周期未领取，由系统自动回收作废</option>
-        <option value="locked">方案三·受众控制领取（未充值）：奖励已生成，点击领取需先完成充值</option>
-        <option value="unlocked">方案三·受众控制领取（已充值）：受众条件已满足，奖励已解锁</option>
-        <option value="blocked">方案四·受众控制发奖（未充值）：不满足受众条件，本期不生成奖励</option>
-      </select>
-      <button class="btn" style="height:30px;font-size:12px;" onclick="resetDemo()">🔄 重置演示</button>
-    </div>
-    <div class="scenario-bar">
-      <label>🎯 场景演示（保级衰退与恢复）<span class="tag-new">NEW</span>：</label>
-      <select id="keepScenarioSelect" onchange="setKeepScenario(this.value)">
-        <option value="normal">默认：本周期正常产生经验，未触发衰退</option>
-        <option value="decay1">衰退阶段1（第31-45天，1×速度）：30天保级未达标且周期内0增长</option>
-        <option value="decay2">衰退阶段2（第46-60天，2×速度）：连续15天仍无经验增长，速度提升</option>
-        <option value="decay3">衰退阶段3（第61-75天，3×速度）：再连续15天仍无经验增长</option>
-        <option value="decay4">衰退阶段4（第76天起，4×速度）：持续不活跃，维持最高衰退速度</option>
-        <option value="recovering">恢复期（2×加成）：重新产生经验，立即停止衰退</option>
-      </select>
+    <div class="client-spec-panel">
+      <div class="client-spec-head">
+        <div><div class="client-spec-title">用户端 H5 改造说明 · 交互演示</div><div class="client-spec-sub">入口、VIP详情、奖励领取、老会员初始化与保级恢复场景统一在此说明并提供可交互验证。</div></div>
+        <span class="client-spec-chip">H5 · 本轮优化</span>
+      </div>
+      <div class="client-spec-grid">
+        <div class="client-spec-item"><b>① VIP入口改造</b><span>「我的」页钱包下方新增独立VIP成长卡；玩家名称旁展示当前VIP等级徽标。点击等级徽标或VIP卡片均进入VIP特权详情。</span></div>
+        <div class="client-spec-item"><b>② VIP成长卡</b><span>展示当前等级、当前经验、距离下一等级所需经验与成长进度；处于回归恢复期时展示“2倍经验恢复中”，引导继续有效投注。</span></div>
+        <div class="client-spec-item"><b>③ VIP详情交互</b><span>保留VIP福利、规则说明、一键领取、去投注/领取/审核中等原有功能；VIP等级大卡片支持横向左右滑动浏览，展示范围以后台实际已配置等级为准，后台最多支持配置VIP0～VIP20。</span></div>
+        <div class="client-spec-item"><b>④ 奖励领取状态</b><span>四类礼金均由会员手动领取；人工发放等级领取后仅展示“审核中”。顶部“一键领取”可找回当前及历史等级遗漏奖励，并按各等级发放方式分别处理。</span></div>
+      </div>
+      <div class="client-spec-note"><strong>老会员初始化口径：</strong>首批以60天未投注筛选；原VIP3及以上统一调整至VIP3，VIP0～VIP3保持原等级。被初始化降级会员不参与本次晋级礼金补发；重新投注后进入2倍经验恢复，直至恢复到初始化降级前锁定的原VIP等级及原经验值后恢复1倍。近期活跃且初始化未降级的老会员保留当前等级，并重新发放当前等级及历史已达等级全部晋级礼金。</div>
+      <div class="client-spec-note"><strong>交互说明：</strong>奖励卡“－ / ＋”用于模拟流水变化并验证「去投注 → 领取 → 审核中/到账」状态；领取规则、老会员初始化/回归、保级衰退/恢复可通过下方场景切换。VIP详情中的<strong>大尺寸VIP卡片支持左右滑动</strong>；仅展示后台实际已配置的VIP等级卡片，后台最大支持配置VIP0～VIP20。点击卡片仅用于聚焦/预览，不改变会员真实等级。</div>
+      <div class="client-scenarios">
+        <div class="client-scenarios-title">场景演示</div>
+        <div class="scenario-bar">
+          <label>🎬 领取规则设置</label>
+          <select id="scenarioSelect" onchange="setScenario(this.value)">
+            <option value="normal">默认：流水达标即可直接领取</option><option value="scheme1">方案一·未领取转发：跨周期不作废并提醒</option><option value="scheme2">方案二·未领取作废：跨周期系统回收</option><option value="locked">方案三·受众控制领取（未充值）</option><option value="unlocked">方案三·受众控制领取（已充值）</option><option value="blocked">方案四·受众控制发奖（未充值）</option>
+          </select><button class="btn" style="height:30px;font-size:12px;" onclick="resetDemo()">🔄 重置</button>
+        </div>
+        <div class="scenario-bar">
+          <label>👤 老会员初始化 / 回归 <span class="tag-new">NEW</span></label>
+          <select id="legacyScenarioSelect" onchange="setLegacyScenario(this.value)">
+            <option value="normal">正常会员（非初始化特殊处理用户）</option><option value="activeReissue">近期活跃老会员：保留等级，重新发放当前及历史已达等级全部晋级礼金</option><option value="inactiveAdjusted">60天未投注老会员：VIP3及以上初始化统一调整至VIP3，不参与晋级礼金补发</option><option value="returning2x">初始化降级后回归：2倍经验恢复中</option><option value="restored">恢复完成：达到初始化降级前原等级及原经验值后恢复1倍</option>
+          </select><span></span>
+        </div>
+        <div class="scenario-bar">
+          <label>🎯 保级衰退与恢复 <span class="tag-new">NEW</span></label>
+          <select id="keepScenarioSelect" onchange="setKeepScenario(this.value)">
+            <option value="normal">默认：本周期正常产生经验，未触发衰退</option><option value="decay1">衰退阶段1（第31-45天，1×速度）</option><option value="decay2">衰退阶段2（第46-60天，2×速度）</option><option value="decay3">衰退阶段3（第61-75天，3×速度）</option><option value="decay4">衰退阶段4（第76天起，4×速度）</option><option value="recovering">恢复期（2×加成）：重新产生经验，恢复至衰退前经验目标</option>
+          </select><span></span>
+        </div>
+      </div>
     </div>
 
-    <div class="client-view" id="view-h5">
+    <div class="client-view client-home-wrap" id="view-my-home">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen my-home-screen">
+          <div class="my-profile">
+            <div class="my-avatar">D</div>
+            <div class="my-user-meta">
+              <div class="my-user-name-row">9nVGmF <span class="my-vip-badge" id="home-name-vip" onclick="openVipDetail(event)">◆ VIP3</span></div>
+              <div class="my-account">会员账号： dipsy01　▣</div>
+            </div>
+            <div class="my-icons"><span>♧</span><span>⚙</span></div>
+          </div>
+
+          <div class="home-card">
+            <div class="home-card-title"><span>我的钱包</span><span class="home-refresh">↻ 刷新</span></div>
+            <div class="wallet-balance"><small>钱包余额　◉</small><strong>418.17 ›</strong></div>
+            <div class="wallet-actions"><div class="wallet-action">💳　充值</div><div class="wallet-action">💵　提现</div></div>
+          </div>
+
+          <div class="home-vip-card" onclick="openVipDetail(event)">
+            <div class="home-vip-top">
+              <div class="home-vip-icon">♛</div>
+              <div class="home-vip-main">
+                <div class="home-vip-title">VIP特权 <span class="lv" id="home-vip-level">VIP3</span></div>
+                <div class="home-vip-exp-row"><span id="home-vip-exp">当前经验 340</span><span id="home-vip-gap">距离VIP4还差 60</span></div>
+                <div class="home-vip-track"><div class="home-vip-fill" id="home-vip-fill" style="width:40%;"></div></div>
+              </div>
+              <div class="home-vip-link">查看特权 ›</div>
+            </div>
+            <div class="home-vip-boost normal" id="home-vip-boost">持续有效投注可累积VIP经验，解锁更多等级权益</div>
+          </div>
+
+          <div class="home-card">
+            <div class="home-card-title"><span>今日收益 <span style="font-weight:400;color:#7f89a3;font-size:12px;">9月12日</span></span><span class="home-refresh">↻ 刷新</span></div>
+            <div class="today-grid">
+              <div class="today-item"><b>0</b>注单笔数</div><div class="today-item"><b>0.00</b>实际盈亏</div><div class="today-item"><b>0.00</b>实时返水</div>
+            </div>
+          </div>
+
+          <div class="home-card">
+            <div class="home-card-title"><span>更多服务</span></div>
+            <div class="service-grid">
+              <div class="service-item"><div class="service-ic">🎮</div>游戏管理</div><div class="service-item"><div class="service-ic">◉</div>资金管理</div><div class="service-item"><div class="service-ic">＄</div>充值教程</div><div class="service-item"><div class="service-ic">↗</div>分享</div>
+              <div class="service-item"><div class="service-ic">▤</div>新闻资讯</div><div class="service-item"><div class="service-ic">🎟</div>彩票任务</div><div class="service-item"><div class="service-ic">🛡</div>安全设置</div><div class="service-item"><div class="service-ic">💡</div>即将上线</div>
+            </div>
+          </div>
+          <div class="home-bottom-nav"><span>⌂<br>首页</span><span>🎮<br>游戏</span><span><b>⊕</b><br>充值</span><span>🎁<br>活动</span><span><b>●</b><br>我的</span></div>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="client-view client-view-hidden" id="view-h5">
       <div class="phone-frame">
         <div class="phone-notch"></div>
         <div class="phone-screen">
           <div class="h5-header">
-            <div class="back-row-center"><span class="back">‹</span><span class="title">VIP特权</span></div>
+            <div class="back-row-center"><span class="back" onclick="backToMyHome()" style="cursor:pointer;">‹</span><span class="title">VIP特权</span></div>
             <div class="h5-user-row">
               <div class="h5-avatar">V3</div>
               <div class="h5-user-name">dipsy</div>
@@ -512,9 +634,8 @@
             </div>
             <div class="lv-exp-text" id="h5-lv-exp-text"></div>
 
-            <div class="arc-selector" id="h5-arc-selector"></div>
-
-            <div class="level-hero-card" id="h5-level-hero"></div>
+            <div class="vip-card-carousel" id="h5-level-hero"></div>
+            <div class="vip-card-carousel-hint">↔ 左右滑动查看 VIP0 ～ VIP20 等级卡片</div>
           </div>
 
           <div class="h5-segtabs">
@@ -902,6 +1023,27 @@
     </div>
 
     <div class="doc-section">
+      <h3>二-A、老会员上线初始化与客户端入口调整<span class="tag-new">NEW</span></h3>
+      <h4>2A.1 首批长期未投注会员等级初始化</h4>
+      <ul>
+        <li>首批初始化以<b>连续60天未投注</b>作为筛选标准，由开发额外执行一次性脚本。</li>
+        <li>原VIP等级为<b>VIP3及以上</b>的长期未投注会员，统一调整至<b>VIP3</b>；原VIP0、VIP1、VIP2、VIP3会员保持原等级不变。</li>
+        <li>首批脚本初始化完成后，不再持续使用60天特殊口径；后续统一进入VIP二期正常规则，按<b>30天保级周期 + 经验衰退/恢复</b>机制处理。</li>
+        <li><b>被本次初始化脚本降级的会员完全不参与初始化晋级礼金补发。</b></li>
+      </ul>
+      <h4>2A.2 长期未投注会员回归后的2倍经验恢复</h4>
+      <p>被初始化调整至VIP3的长期未投注会员，后续重新产生有效投注并获得VIP经验后，进入<b>2倍经验恢复期</b>。恢复目标在初始化降级时锁定为会员<b>降级前原VIP等级 + 降级前原VIP经验值</b>；2倍加速不会在仅恢复到原VIP等级最低门槛时提前结束，必须恢复到锁定的原经验值目标后才取消，后续恢复正常1倍经验累积。</p>
+      <h4>2A.3 近期活跃老会员初始化晋级礼金</h4>
+      <p>近期仍有投注、且初始化时<b>未发生VIP降级</b>的老会员保留当前VIP等级。VIP新版本上线后，系统补发其<b>当前等级及历史已达等级对应的全部晋级礼金</b>；本次为上线初始化专项补发，<b>不区分历史是否曾经领取过，均重新发放一次</b>。</p>
+      <h4>2A.4 客户端「我的」页入口改造</h4>
+      <ul>
+        <li>「VIP特权」调整为钱包栏目下方的<b>独立成长卡片</b>，展示当前VIP等级、当前经验、距离下一等级所需经验差值及进度条；点击整张卡片进入VIP等级列表/详情页。</li>
+        <li>玩家名称旁新增当前VIP等级徽标，点击VIP等级徽标同样进入VIP等级列表/详情页。</li>
+        <li>处于2倍经验恢复期时，VIP特权卡片展示轻量状态“<b>2倍经验恢复中</b>”，并提示继续有效投注可更快恢复至原等级/经验目标，用于强化回归激励。</li>
+      </ul>
+    </div>
+
+    <div class="doc-section">
       <h3>三、核心规则设计</h3>
       <h4>3.1 手动领取机制（领取动作统一，不代表发放方式统一）</h4>
       <p>晋级礼金、日福利礼金、周福利礼金、月福利礼金四类奖励，<b>领取动作</b>统一固定为"达标后由会员在客户端主动领取"，不提供"免点击自动到账"式的可配置项。领取前不入账、不计入提现流水。需要特别说明：<b>会员点击"领取"这个动作</b>与<b>点击之后是否需要人工审核才能到账</b>是两个独立维度——前者（本节）在四类礼金间保持统一，均由会员手动点击；后者由 3.2 节的「发放方式」逐等级决定。为避免运营需要额外进入弹窗确认领取口径，后台列表表头、新增/编辑抽屉字段标签均加注"手动领取"标识。</p>
@@ -989,7 +1131,7 @@
         <tr><td>衰退阶段4</td><td>第76天起</td><td>4×</td><td>继续不活跃则维持最高倍率衰退，不再继续加速</td></tr>
       </table>
       <h4>4.3 恢复机制</h4>
-      <p>会员一旦重新产生VIP经验（不论金额大小），<b>立即停止衰退</b>，并进入<b>2倍经验恢复期</b>：期间新获得的VIP经验按2倍计入，直至恢复到衰退发生前的VIP经验水平/等级目标为止；达到后2倍加成结束，恢复正常1倍经验增长。</p>
+      <p>会员一旦重新产生VIP经验（不论金额大小），<b>立即停止衰退</b>，并进入<b>2倍经验恢复期</b>：期间新获得的VIP经验按2倍计入，直至恢复到衰退/初始化降级发生前锁定的原VIP等级及原VIP经验值目标为止；仅恢复到原等级最低门槛时不提前结束2倍加成，达到锁定原经验值后2倍加成结束，恢复正常1倍经验增长。</p>
       <h4>4.4 衰退与降级的关系（<b>本轮明确</b>，替代原90天机制的"未达标直接降1级"）</h4>
       <p>新机制下不再有"周期未达标即刻掉1级"的硬性跳变：VIP经验的衰退是持续、平滑的过程，等级本身不会仅因进入衰退而立即下降。<b>当VIP经验因持续衰退而跌破当前等级自身的晋升门槛时</b>，将于次日的定时评估中按VIP经验实时对照各等级门槛表，自然回落至对应的低等级——与晋级判定复用同一套每日评估逻辑，仅方向相反（晋级看"够不够上一级"，衰退降级看"是否已跌破当前级"）。降级后VIP经验回升，超过当前所处等级的晋升阈值时，可重新恢复至原VIP等级。</p>
       <div class="doc-callout warn"><b>本轮明确</b>：衰退过程中若发生上述自然降级，<b>衰退速度（1×/2×/3×/4×）与衰退基础值分属两个独立变量</b>——衰退速度绑定"连续不活跃天数"，不受降级影响，按自身节奏继续跳档；<b>衰退基础值则按会员"当前所处等级"动态取值</b>，降级后次日起改用新（低）等级配置的衰退基础值 × 当前衰退速度计算每日扣除量，<b>不沿用降级前那个等级的衰退基础值</b>——与晋级判定"pool值实时对照等级门槛表"复用同一套每日评估引擎、同一个"当前等级"定义，不额外引入"衰退起始等级"的独立状态。由于衰退基础值一般随等级降低而减小，降级后每日扣除的经验绝对值会自动变小，衰退不会出现越掉级越猛的连锁效应。</div>
@@ -1018,6 +1160,9 @@
         <li><b>晋级礼金不受任何领取规则方案约束、永不过期</b>：晋级礼金达标即可领取，不受方案三/四受众条件（充值）限制，也不因跨期未领取被方案一/二转发或作废，长期未领取依然保持可领取状态</li>
         <li><b>客户端新增全局"一键领取"入口</b>：页面顶部固定展示"一键领取"按钮，可一次性领取当前等级及所有历史已达成等级中遗漏未领取的奖励，按各笔奖励所在等级的「发放方式」分别判定自动到账或提交人工审核；当前没有可领取奖励时按钮置灰禁用，不隐藏</li>
         <li><b>客户端当前等级卡片置顶展示</b>：「我的特权」页当前等级卡片固定展示于列表顶部并默认展开，无需下滑即可查看当前权益；未来等级按等级升序、历史等级按等级降序依次排列于下方，并以"其他等级"分割线区隔</li>
+        <li><b>客户端「我的」页新增VIP独立入口</b>：VIP特权卡片放置于钱包下方，用户名旁增加当前VIP等级徽标；两处均可点击进入VIP等级列表/详情，卡片同步展示经验进度及回归2倍恢复轻提示。</li>
+        <li><b>首批老会员初始化规则</b>：60天未投注且原VIP4及以上统一调整至VIP3，VIP0～VIP3不调整；被脚本降级会员不参与初始化晋级礼金补发，重新投注后按2倍经验恢复至降级前锁定的原等级+原经验值后恢复1倍。</li>
+        <li><b>近期活跃老会员专项补发</b>：初始化未降级的老会员保留当前等级，并补发当前及历史已达等级全部晋级礼金，本次专项补发不区分历史是否已领取。</li>
         <li><b>「保级衰退与恢复机制」上线，替换原90天保级机制</b>（新增四、4.1~4.6节）：会员保级考核周期由90天调整为30天，未达标且周期内0增长的从第31天起进入VIP经验衰退，此后每连续15天无增长衰退速度提升一档（1×→2×→3×→4×，见4.2节对照表），重新产生经验立即停止衰退并进入2倍经验恢复期；VIP经验持续衰退跌破当前等级门槛时，于次日定时评估中按经验值自然回落至对应等级，不再是"周期未达标即刻掉1级"的硬性跳变（见4.4节）</li>
         <li><b>「VIP列表-按抽佣」页新增"衰退基础值"字段</b>：逐等级配置衰退阶段1（1×速度）每日扣除的VIP经验基础值，2×/3×/4×阶段按该值倍增；「30天保级流水」更名为「30天保级经验」（原"90天保级流水"字段沿用同一份数据，仅口径与命名调整为经验值体系，数值不变）</li>
         <li><b>衰退单日扣减不做跨等级门槛拆分（本轮明确）</b>：单日应扣金额（衰退基础值×衰退速度）整笔全额扣除，不因扣减幅度超出当前等级门槛缓冲区间而"卡线"部分扣减；扣减后重新对照等级门槛表定位所在等级，单日内允许连续下降多个等级，与晋级"单日经验增长足以连续跨越多个等级"对称一致（详见「需求背景」页4.4节）</li>
@@ -1029,6 +1174,33 @@
 <!-- ============ Tab 4：流程图 ============ -->
 <div class="tab-content hidden" id="tab-flow">
   <div class="flow-page">
+
+    <div class="flow-section">
+      <h3>流程零：老会员上线初始化与回归恢复<span class="tag-new">NEW</span></h3>
+      <div class="flow-desc">首批60天未投注一次性初始化 → 活跃老会员专项晋级礼金补发 → 被降级会员回归2倍经验恢复</div>
+      <div class="flow-col">
+        <div class="flow-node start">VIP新版本上线：执行首批老会员初始化</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node decision">会员是否连续60天未投注？</div>
+      </div>
+      <div class="flow-branch">
+        <div class="flow-branch-col"><div class="flow-branch-label">否：近期活跃</div><div class="flow-node action">保留当前VIP等级；补发当前等级及历史已达等级全部晋级礼金（历史已领取过也重新发放一次）</div></div>
+        <div class="flow-branch-col"><div class="flow-branch-label">是：长期未投注</div><div class="flow-node decision">当前VIP等级是否高于VIP3？</div></div>
+      </div>
+      <div class="flow-branch" style="margin-top:8px;">
+        <div class="flow-branch-col"><div class="flow-branch-label">VIP0～VIP3</div><div class="flow-node">保持原等级不变；不进入本次被降级会员专项恢复链路</div></div>
+        <div class="flow-branch-col"><div class="flow-branch-label">VIP4及以上</div><div class="flow-node danger">一次性脚本统一调整至VIP3；锁定降级前原VIP等级与原经验值恢复目标；本批不参与初始化晋级礼金补发</div></div>
+      </div>
+      <div class="flow-col" style="margin-top:8px;">
+        <div class="flow-node decision">被降级会员后续是否重新产生VIP经验？</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node action">是：进入2倍经验恢复期，持续有效投注获得的VIP经验按2倍计入</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node decision">是否已恢复至初始化降级前锁定的原VIP等级 + 原经验值？</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node end">是：结束2倍恢复，后续按正常1倍经验累积；否：继续2倍恢复</div>
+      </div>
+    </div>
 
     <div class="flow-section">
       <h3>流程一：VIP等级晋升 VIP经验累积流程</h3>
@@ -2004,6 +2176,7 @@ function switchAppTab(tab){
 // 用户端不再维护独立示例数据：等级字段全部读取上方管理后台 data / displayFields / ruleTexts，
 // 仅"当前会员所处等级、当前经验值、演示流水/领取状态"等属于H5原型自身的演示态。
 const CUR_LEVEL = 3;      // 演示：当前会员为 VIP3（读取 data 中 level=3 的记录）
+let previewLevel = CUR_LEVEL; // VIP详情大卡片横滑时的当前预览等级；仅影响预览，不改变真实VIP等级
 let CUR_EXP = null;       // 演示：当前经验值，初始化时按当前/下一等级门槛居中取值
 let expandedLevel = CUR_LEVEL;   // H5：仅当前等级默认展开
 let claimScenario = 'normal';    // normal | scheme1 | scheme2 | locked | unlocked | blocked —— 场景演示：领取规则设置-四个方案
@@ -2020,6 +2193,53 @@ const KEEP_DECAY_DEMO = {
   decay3: { idleDays: 66, stage: 3, mult: 3, stageLabel: '阶段3（第61-75天）' },
   decay4: { idleDays: 82, stage: 4, mult: 4, stageLabel: '阶段4（第76天起）' },
 };
+
+// 老会员初始化/回归场景：用于验证首批60天未投注会员处理、初始化晋级礼金补发与2倍恢复机制
+let legacyScenario = 'normal';
+const LEGACY_RETURN_DEMO = { originalLevel: 7, originalExp: 760, adjustedLevel: 3, currentExp: 340 };
+
+function openVipDetail(e){
+  if(e) e.stopPropagation();
+  const home = document.getElementById('view-my-home');
+  const detail = document.getElementById('view-h5');
+  if(home) home.classList.add('client-view-hidden');
+  if(detail) detail.classList.remove('client-view-hidden');
+  renderClientLevels(); renderLvProgress(); renderLevelHero(); renderRuleList();
+}
+function backToMyHome(){
+  const home = document.getElementById('view-my-home');
+  const detail = document.getElementById('view-h5');
+  if(detail) detail.classList.add('client-view-hidden');
+  if(home) home.classList.remove('client-view-hidden');
+  renderMyHome();
+}
+function renderMyHome(){
+  if(CUR_EXP === null) initCurExp();
+  const cur = curRecord(), next = nextRecord();
+  if(!cur) return;
+  const exp = legacyScenario === 'returning2x' ? LEGACY_RETURN_DEMO.currentExp : CUR_EXP;
+  const pct = next ? Math.max(0, Math.min(100, Math.round((exp-cur.th)/(next.th-cur.th)*100))) : 100;
+  const gap = next ? Math.max(0, next.th-exp) : 0;
+  const set=(id,txt)=>{ const el=document.getElementById(id); if(el) el.textContent=txt; };
+  set('home-name-vip', `◆ ${cur.name}`); set('home-vip-level', cur.name);
+  set('home-vip-exp', `当前经验 ${fmtG(exp)}`); set('home-vip-gap', next ? `距离${next.name}还差 ${fmtG(gap)}` : '已达最高等级');
+  const fill=document.getElementById('home-vip-fill'); if(fill) fill.style.width=pct+'%';
+  const boost=document.getElementById('home-vip-boost');
+  if(boost){
+    boost.classList.toggle('normal', legacyScenario !== 'returning2x');
+    if(legacyScenario === 'returning2x') boost.textContent=`⚡ 2倍经验恢复中｜继续有效投注，恢复至原${'VIP'+LEGACY_RETURN_DEMO.originalLevel}及原经验 ${LEGACY_RETURN_DEMO.originalExp} 后恢复正常成长速度`;
+    else if(legacyScenario === 'inactiveAdjusted') boost.textContent='初始化调整：60天未投注且原VIP3以上统一至VIP3，本批不参与初始化晋级礼金补发';
+    else if(legacyScenario === 'activeReissue') boost.textContent='活跃老会员：保留当前等级，并补发当前及历史已达等级全部晋级礼金';
+    else if(legacyScenario === 'restored') boost.textContent='恢复完成：已达到初始化降级前原等级及原经验值，后续经验按正常1倍累积';
+    else boost.textContent='持续有效投注可累积VIP经验，解锁更多等级权益';
+  }
+}
+function setLegacyScenario(v){
+  legacyScenario=v;
+  if(v==='returning2x'){ keepScenario='recovering'; const k=document.getElementById('keepScenarioSelect'); if(k) k.value='recovering'; }
+  if(v==='restored'){ keepScenario='normal'; const k=document.getElementById('keepScenarioSelect'); if(k) k.value='normal'; }
+  renderMyHome(); renderLevelHero();
+}
 
 function fmtG(n){ const v = Math.round((n||0)*100)/100; return v.toString(); }
 function curRecord(){ return data.find(r => r.level === CUR_LEVEL); }
@@ -2042,6 +2262,7 @@ function setScenario(v){
 function setKeepScenario(v){
   keepScenario = v;
   renderLevelHero();
+  renderMyHome();
 }
 
 function levelTotal(r){
@@ -2118,7 +2339,8 @@ function renderRewardCard(type, label, r, extraNote){
 
   let scenarioNote = '';
   if(state === 'claimed' && claimedState[type] === 'pending'){
-    scenarioNote = `<div class="reward-note locked-note">🕓 已提交领取申请，本等级发放方式为"人工发放"，需运营在「VIP福利彩金审核」页人工审核通过后彩金方可到账</div>`;
+    // 当前等级人工发放待审核：客户端仅保留“审核中”按钮，不额外展示后台审核流程说明
+    scenarioNote = '';
   } else if(type !== 'promotion' && state === 'locked'){
     scenarioNote = `<div class="reward-note locked-note">🔒 奖励已生成，点击"领取"需先完成充值方可到账（领取规则-方案三·受众用户1）</div>`;
   } else if(type !== 'promotion' && state === 'blocked'){
@@ -2190,9 +2412,7 @@ function renderPastRewardCard(type, label, r){
   }[type];
   const note = status === 'claimable'
     ? `<div class="reward-note locked-note">💡 晋级礼金不受任何领取规则方案约束、不会过期，历史未领取的晋级礼金依然可以领取</div>`
-    : status === 'pending'
-      ? `<div class="reward-note locked-note">🕓 已提交领取申请，本等级发放方式为"人工发放"，需运营在「VIP福利彩金审核」页人工审核通过后彩金方可到账</div>`
-      : '';
+    : '';
   return `
     <div class="reward-card past-card">
       <div class="reward-card-top">
@@ -2252,8 +2472,8 @@ function renderLevelBody(r){
   if(r.level === CUR_LEVEL){
     cardsHtml = [
       renderRewardCard('promotion','晋级礼金', r),
-      renderRewardCard('daily','日福利礼金', r, `每日流水满 ${r.dailyTurnover} U 可领取，次日00:00~02:00结算（北京时间）`),
-      renderRewardCard('week','周福利礼金', r, `每周流水满 ${r.week} U 可领取，每周一00:00~02:00结算（北京时间）`),
+      renderRewardCard('daily','日福利礼金', r),
+      renderRewardCard('week','周福利礼金', r),
       renderRewardCard('monthly','月福利礼金', r, `每月流水满 ${r.monthlyTurnover} U 可领取，固定每月16日结算上月流水（北京时间）`),
     ].join('');
   } else if(r.level < CUR_LEVEL){
@@ -2292,22 +2512,6 @@ function renderLvProgress(){
   if(expText) expText.textContent = next ? `当前经验值：${fmtG(CUR_EXP)}（${fmtG(CUR_EXP)}/${fmtG(next.th)}）` : `当前经验值：${fmtG(CUR_EXP)}（已达最高等级）`;
 }
 
-function renderArcSelector(){
-  const box = document.getElementById('h5-arc-selector');
-  if(!box) return;
-  const items = [prevRecord(), curRecord(), nextRecord()].filter(Boolean);
-  box.innerHTML = `
-    <div class="arc-curve"></div>
-    <div class="arc-items">
-      ${items.map(r => `
-        <div class="arc-item ${r.level === CUR_LEVEL ? 'current' : ''}">
-          <div class="arc-dot"></div>
-          <div class="arc-label">${r.name}</div>
-        </div>`).join('')}
-    </div>
-    <div class="arc-arrow">▾</div>`;
-}
-
 // 保级状态行：本30天周期正常累积经验时展示进度；周期内0增长触发衰退后展示衰退阶段与每日流失经验；
 // 一旦重新产生经验则停止衰退、展示2倍恢复期提示。三态由顶部"场景演示（保级衰退与恢复）"下拉驱动
 function renderKeepStatusRow(cur){
@@ -2329,16 +2533,36 @@ function renderKeepStatusRow(cur){
 function renderLevelHero(){
   const box = document.getElementById('h5-level-hero');
   if(!box) return;
-  const cur = curRecord(), next = nextRecord();
-  if(!cur) { box.innerHTML = ''; return; }
-  const rows = [];
-  if(displayFields.keep) rows.push(`保级要求　每30天累计经验需达到 ${fmtG(cur.keep)}`);
-  if(displayFields.threshold) rows.push(`晋级所需经验值　${next ? fmtG(next.th) : '已达最高等级'}`);
-  box.innerHTML = `
-    <div class="level-hero-icon">💎</div>
-    <div class="level-hero-title">${cur.name}</div>
-    ${rows.map(t => `<div class="level-hero-row">${t}</div>`).join('')}
-    ${renderKeepStatusRow(cur)}`;
+  const configuredLevels = data.filter(x=>x.level>=0 && x.level<=20).sort((a,b)=>a.level-b.level);
+  const highestConfiguredLevel = configuredLevels.length ? configuredLevels[configuredLevels.length-1].level : 0;
+  const cards = [];
+  configuredLevels.forEach(r=>{
+    const level = r.level;
+    const next = data.find(x=>x.level===level+1);
+    const rows = [];
+    if(displayFields.keep) rows.push(`保级要求　每30天累计经验需达到 ${fmtG(r.keep)}`);
+    if(displayFields.threshold) rows.push(`晋级所需经验值　${next ? fmtG(next.th) : '已达当前最高等级'}`);
+    const status = level===CUR_LEVEL ? '当前等级' : (level<CUR_LEVEL ? '历史已达成' : '未解锁预览');
+    cards.push(`
+      <div class="level-hero-card ${level===previewLevel ? 'selected' : ''}" data-level="${level}" onclick="selectPreviewLevel(${level})">
+        <div class="level-hero-icon">💎</div>
+        <div class="level-hero-title">${r.name}<span class="level-hero-status">${status}</span></div>
+        ${rows.map(t => `<div class="level-hero-row">${t}</div>`).join('')}
+        ${level===CUR_LEVEL ? renderKeepStatusRow(r) : ''}
+      </div>`);
+  });
+  box.innerHTML = cards.join('');
+  if(configuredLevels.length && !configuredLevels.some(x=>x.level===previewLevel)){
+    previewLevel = configuredLevels.some(x=>x.level===CUR_LEVEL) ? CUR_LEVEL : configuredLevels[0].level;
+  }
+  requestAnimationFrame(()=>{
+    const el=box.querySelector(`.level-hero-card[data-level="${previewLevel}"]`);
+    if(el) el.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+  });
+}
+function selectPreviewLevel(level){
+  previewLevel = Math.max(0, Math.min(20, Number(level)));
+  renderLevelHero();
 }
 
 function renderRuleBody(text){
@@ -2416,7 +2640,6 @@ function renderClientLevels(){
 
   renderClaimAllGlobalBar();
   renderLvProgress();
-  renderArcSelector();
   renderLevelHero();
   renderRuleList();
 }
@@ -2437,7 +2660,7 @@ function claimReward(type){
   const manual = r && r.dispatchMode === 'manual';
   claimedState[type] = manual ? 'pending' : true;
   if(manual){
-    clientToast('已提交领取申请，人工发放需运营审核通过后到账');
+    clientToast('已进入审核中');
   } else {
     clientToast(type === 'promotion' ? '晋级礼金领取成功，已计入提现流水' : '领取成功，已计入提现流水');
   }
@@ -2560,6 +2783,7 @@ function resetDemo(){
   claimRule.mode = 'scheme2';   // 恢复为默认全局生效方案（方案二·未领取作废），与「领取规则设置」初始值一致
   pastClaimOverride = {};       // 清空历史等级的手动领取覆盖记录，恢复演示数据初始的 pastHistory 状态
   keepScenario = 'normal';      // 恢复保级衰退与恢复场景演示为默认态
+  previewLevel = CUR_LEVEL;
   const sel = document.getElementById('scenarioSelect');
   if(sel) sel.value = 'normal';
   const keepSel = document.getElementById('keepScenarioSelect');
@@ -2616,6 +2840,8 @@ renderClientLevels();
   });
   window.addEventListener('scroll', function(){ tip.classList.remove('show'); }, true);
 })();
+
+renderMyHome();
 </script>
 </body>
 </html>
