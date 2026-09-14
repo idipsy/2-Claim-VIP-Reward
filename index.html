@@ -526,21 +526,22 @@
 <div class="tab-content" id="tab-client">
   <div class="client-page">
     <div class="client-toolbar">
-      <div class="client-toolbar-title">用户端 · 我的 → VIP特权（H5）<small>新增「我的」首页入口演示；页面数据（等级字段、展示字段、规则说明文案）均直接读取管理后台「VIP列表-按抽佣」数据与「客户端展示设置」配置——在管理后台修改后，本页会同步刷新，用于验证前后台闭环</small></div>
+      <div class="client-toolbar-title">用户端 · 我的 → VIP特权（H5）<small>本页包含「我的」首页VIP入口与VIP特权详情交互演示；页面数据直接读取管理后台「VIP列表-按抽佣」与「客户端展示设置」配置，用于验证入口、等级成长、福利领取、规则说明及老会员初始化/恢复的完整闭环</small></div>
     </div>
     <div class="client-spec-panel">
       <div class="client-spec-head">
-        <div><div class="client-spec-title">用户端 H5 改造说明 · 交互演示</div><div class="client-spec-sub">入口、VIP详情、奖励领取、老会员初始化与保级恢复场景统一在此说明并提供可交互验证。</div></div>
+        <div><div class="client-spec-title">用户端 H5 改造说明 · 交互演示</div><div class="client-spec-sub">「我的」页VIP入口、VIP详情、福利领取、规则说明、老会员初始化与保级恢复场景统一在此说明并提供可交互验证。</div></div>
         <span class="client-spec-chip">H5 · 本轮优化</span>
       </div>
       <div class="client-spec-grid">
-        <div class="client-spec-item"><b>① VIP入口改造</b><span>「我的」页钱包下方新增独立VIP成长卡；玩家名称旁展示当前VIP等级徽标。点击等级徽标或VIP卡片均进入VIP特权详情。</span></div>
-        <div class="client-spec-item"><b>② VIP成长卡</b><span>展示当前等级、当前经验、距离下一等级所需经验与成长进度；处于回归恢复期时展示“2倍经验恢复中”，引导继续有效投注。</span></div>
-        <div class="client-spec-item"><b>③ VIP详情交互</b><span>保留VIP福利、规则说明、一键领取、去投注/领取/审核中等原有功能；VIP等级大卡片支持横向左右滑动浏览，展示范围以后台实际已配置等级为准，后台最多支持配置VIP0～VIP20。</span></div>
-        <div class="client-spec-item"><b>④ 奖励领取状态</b><span>四类礼金均由会员手动领取；人工发放等级领取后仅展示“审核中”。顶部“一键领取”可找回当前及历史等级遗漏奖励，并按各等级发放方式分别处理。</span></div>
+        <div class="client-spec-item"><b>① VIP入口改造 <span class="tag-new">本次迭代</span></b><span>「我的」页钱包下方新增独立VIP成长卡，玩家名称旁展示当前VIP等级徽标；点击等级徽标或VIP成长卡均可进入VIP特权详情。</span></div>
+        <div class="client-spec-item"><b>② VIP等级卡片 <span class="tag-new">本次迭代</span></b><span>VIP详情页的大尺寸等级卡片支持左右滑动，只展示后台已配置的VIP等级，后台最多支持配置VIP0～VIP20；滑动仅用于查看等级权益与门槛，不改变会员真实等级。</span></div>
+        <div class="client-spec-item"><b>③ VIP福利 / 规则说明 <span class="tag-new">本次迭代</span></b><span>新增VIP福利与规则说明分栏。福利页展示当前、历史及未来等级的晋级礼金与日/周/月福利；规则说明页展示晋升、保级、流水福利等客户端规则文案。</span></div>
+        <div class="client-spec-item"><b>④ 一键领取 <span class="tag-new">本次迭代</span></b><span>页面顶部固定展示“一键领取”。可一次处理当前等级及历史已达等级中所有已达标待领取奖励；不同等级按各自「发放方式」分别直接到账或进入人工审核，无可领取奖励时按钮置灰但不隐藏。</span></div>
+        <div class="client-spec-item"><b>⑤ 去投注 / 领取 / 审核中 <span class="tag-new">本次迭代</span></b><span>日/周/月福利未达标展示“去投注”，达标后展示“领取”；会员主动领取后，自动发放直接到账，人工发放仅展示“审核中”，审核通过后再变为“已领取”。晋级礼金达标后可长期领取且不受跨期领取规则限制。</span></div>
       </div>
-      <div class="client-spec-note"><strong>老会员初始化口径：</strong>首批以60天未投注筛选；原VIP3及以上统一调整至VIP3，VIP0～VIP3保持原等级。被初始化降级会员不参与本次晋级礼金补发；重新投注后进入2倍经验恢复，直至恢复到初始化降级前锁定的原VIP等级及原经验值后恢复1倍。近期活跃且初始化未降级的老会员保留当前等级，并重新发放当前等级及历史已达等级全部晋级礼金。</div>
-      <div class="client-spec-note"><strong>交互说明：</strong>奖励卡“－ / ＋”用于模拟流水变化并验证「去投注 → 领取 → 审核中/到账」状态；领取规则、老会员初始化/回归、保级衰退/恢复可通过下方场景切换。VIP详情中的<strong>大尺寸VIP卡片支持左右滑动</strong>；仅展示后台实际已配置的VIP等级卡片，后台最大支持配置VIP0～VIP20。点击卡片仅用于聚焦/预览，不改变会员真实等级。</div>
+      <div class="client-spec-note"><strong>老会员初始化口径：</strong>首批按近60天是否有投注进行初始化判断：① 原VIP0～VIP2无论近60天是否投注，均保持原等级；其中VIP1、VIP2因等级未发生调整，初始化时仍重新发放“当前等级至VIP1”的全部晋级礼金（VIP2＝VIP2+VIP1，VIP1＝VIP1），历史是否领取过不影响本次重新发放。② 原VIP≥3且近60天<strong>未进行投注</strong>的会员，统一降至<strong>VIP3、当前经验重置为0</strong>，该批实际发生初始化降级的会员不参与本次晋级礼金专项补发；后续重新投注后进入2倍经验恢复，直至恢复到初始化降级前锁定的原VIP等级及原经验值后恢复1倍。③ 近60天有投注、初始化未降级的老会员保持当前等级，并重新发放当前等级至VIP1的全部晋级礼金。</div>
+      <div class="client-spec-note"><strong>交互说明：</strong>奖励卡“－ / ＋”用于模拟流水变化并验证本次迭代新增的「去投注 → 领取 → 审核中/到账」状态；领取规则、老会员初始化/回归、保级衰退/恢复可通过下方场景切换。VIP详情中的<strong>大尺寸VIP卡片支持左右滑动</strong>，仅展示后台实际已配置等级（后台最高支持VIP20）；点击卡片仅用于查看该等级信息，不改变会员真实等级。</div>
       <div class="client-scenarios">
         <div class="client-scenarios-title">场景演示</div>
         <div class="scenario-bar">
@@ -552,7 +553,7 @@
         <div class="scenario-bar">
           <label>👤 老会员初始化 / 回归 <span class="tag-new">NEW</span></label>
           <select id="legacyScenarioSelect" onchange="setLegacyScenario(this.value)">
-            <option value="normal">正常会员（非初始化特殊处理用户）</option><option value="activeReissue">近期活跃老会员：保留等级，重新发放当前及历史已达等级全部晋级礼金</option><option value="inactiveAdjusted">60天未投注老会员：VIP3及以上初始化统一调整至VIP3，不参与晋级礼金补发</option><option value="returning2x">初始化降级后回归：2倍经验恢复中</option><option value="restored">恢复完成：达到初始化降级前原等级及原经验值后恢复1倍</option>
+            <option value="normal">正常会员（非初始化特殊处理用户）</option><option value="activeReissue">初始化未降级老会员：当前等级至VIP1晋级礼金全部可领取</option><option value="inactiveAdjusted">60天未投注且原VIP≥3：降至VIP3、0经验，不参与晋级礼金补发</option><option value="returning2x">初始化降级后回归：从VIP3 0经验起按2倍恢复</option><option value="restored">恢复完成：达到初始化前原等级及原经验值后恢复1倍</option>
           </select><span></span>
         </div>
         <div class="scenario-bar">
@@ -597,7 +598,7 @@
           </div>
 
           <div class="home-card">
-            <div class="home-card-title"><span>今日收益 <span style="font-weight:400;color:#7f89a3;font-size:12px;">9月12日</span></span><span class="home-refresh">↻ 刷新</span></div>
+            <div class="home-card-title"><span>今日收益 <span style="font-weight:400;color:#7f89a3;font-size:12px;">9月14日</span></span><span class="home-refresh">↻ 刷新</span></div>
             <div class="today-grid">
               <div class="today-item"><b>0</b>注单笔数</div><div class="today-item"><b>0.00</b>实际盈亏</div><div class="today-item"><b>0.00</b>实时返水</div>
             </div>
@@ -613,7 +614,6 @@
           <div class="home-bottom-nav"><span>⌂<br>首页</span><span>🎮<br>游戏</span><span><b>⊕</b><br>充值</span><span>🎁<br>活动</span><span><b>●</b><br>我的</span></div>
         </div>
       </div>
-      
     </div>
 
     <div class="client-view client-view-hidden" id="view-h5">
@@ -635,7 +635,7 @@
             <div class="lv-exp-text" id="h5-lv-exp-text"></div>
 
             <div class="vip-card-carousel" id="h5-level-hero"></div>
-            <div class="vip-card-carousel-hint">↔ 左右滑动查看 VIP0 ～ VIP20 等级卡片</div>
+            <div class="vip-card-carousel-hint">↔ 左右滑动查看后台已配置的VIP等级卡片</div>
           </div>
 
           <div class="h5-segtabs">
@@ -1017,7 +1017,7 @@
       <h3>二、涉及范围</h3>
       <ul>
         <li><b>管理后台</b>：VIP列表-按抽佣 主表格字段、新增/编辑抽屉字段、客户端展示设置弹窗、新增的领取规则设置弹窗</li>
-        <li><b>客户端</b>：H5 与 PC 双端「我的特权」/ VIP详情页，含等级进度、四类礼金卡片、去投注/领取按钮、规则说明文案展示</li>
+        <li><b>客户端</b>：H5 与 PC 双端VIP详情页；本次迭代包含等级卡片滑动、VIP福利/规则说明、一键领取、去投注/领取/审核中状态、日/周/月福利展示及老会员初始化/恢复场景</li>
         <li>不涉及：投注、返水、代理推广等其他后台模块（本次仅围绕"VIP列表-按抽佣"单一模块展开）</li>
       </ul>
     </div>
@@ -1027,15 +1027,17 @@
       <h4>2A.1 首批长期未投注会员等级初始化</h4>
       <ul>
         <li>首批初始化以<b>连续60天未投注</b>作为筛选标准，由开发额外执行一次性脚本。</li>
-        <li>原VIP等级为<b>VIP3及以上</b>的长期未投注会员，统一调整至<b>VIP3</b>；原VIP0、VIP1、VIP2、VIP3会员保持原等级不变。</li>
-        <li>首批脚本初始化完成后，不再持续使用60天特殊口径；后续统一进入VIP二期正常规则，按<b>30天保级周期 + 经验衰退/恢复</b>机制处理。</li>
-        <li><b>被本次初始化脚本降级的会员完全不参与初始化晋级礼金补发。</b></li>
+        <li>原VIP0～VIP2：<b>保持原等级不变</b>，不因60天未投注执行等级重置。</li>
+        <li>原VIP≥3：仅当会员<b>近60天未进行投注</b>时，统一初始化为<b>VIP3、当前VIP经验=0</b>；近60天仍有投注则保持原等级及原经验。</li>
+        <li>只有“原VIP≥3且近60天未投注”这一批实际发生初始化降级的会员，<b>不参与本次初始化晋级礼金专项补发</b>。</li>
+        <li>VIP1、VIP2即使近60天未投注，由于等级未发生调整，仍参与初始化晋级礼金重新发放：VIP2重新发放VIP2、VIP1；VIP1重新发放VIP1。</li>
+        <li>首批脚本初始化完成后，不再持续使用60天特殊口径；后续统一进入VIP二期常规规则，按<b>30天保级周期 + 经验衰退/恢复</b>机制处理。</li>
       </ul>
       <h4>2A.2 长期未投注会员回归后的2倍经验恢复</h4>
-      <p>被初始化调整至VIP3的长期未投注会员，后续重新产生有效投注并获得VIP经验后，进入<b>2倍经验恢复期</b>。恢复目标在初始化降级时锁定为会员<b>降级前原VIP等级 + 降级前原VIP经验值</b>；2倍加速不会在仅恢复到原VIP等级最低门槛时提前结束，必须恢复到锁定的原经验值目标后才取消，后续恢复正常1倍经验累积。</p>
-      <h4>2A.3 近期活跃老会员初始化晋级礼金</h4>
-      <p>近期仍有投注、且初始化时<b>未发生VIP降级</b>的老会员保留当前VIP等级。VIP新版本上线后，系统补发其<b>当前等级及历史已达等级对应的全部晋级礼金</b>；本次为上线初始化专项补发，<b>不区分历史是否曾经领取过，均重新发放一次</b>。</p>
-      <h4>2A.4 客户端「我的」页入口改造</h4>
+      <p>原VIP≥3且近60天未投注、被初始化为<b>VIP3且0经验</b>的会员，后续重新产生有效投注并获得VIP经验后，进入<b>2倍经验恢复期</b>。恢复目标在初始化降级时锁定为会员<b>降级前原VIP等级 + 降级前原VIP经验值</b>；2倍加速不会在仅恢复到原VIP等级最低门槛时提前结束，必须恢复到锁定的原经验值目标后才取消，后续恢复正常1倍经验累积。</p>
+      <h4>2A.3 初始化未降级老会员晋级礼金重新发放</h4>
+      <p>初始化时<b>未发生VIP降级</b>的老会员，VIP新版本上线后统一重新发放其<b>当前等级至VIP1</b>的全部晋级礼金，本次专项发放<b>不区分历史是否曾领取过</b>。该规则同时包含：①近60天仍有投注的活跃老会员；②近60天未投注但原等级为VIP1或VIP2、因此等级保持不变的老会员。例如当前VIP3重新发放VIP3、VIP2、VIP1；当前VIP2重新发放VIP2、VIP1；当前VIP1重新发放VIP1。VIP0无晋级礼金可补发。</p>
+      <h4>2A.4 客户端VIP入口需求说明（本原型不再单独演示「我的」首页）</h4>
       <ul>
         <li>「VIP特权」调整为钱包栏目下方的<b>独立成长卡片</b>，展示当前VIP等级、当前经验、距离下一等级所需经验差值及进度条；点击整张卡片进入VIP等级列表/详情页。</li>
         <li>玩家名称旁新增当前VIP等级徽标，点击VIP等级徽标同样进入VIP等级列表/详情页。</li>
@@ -1154,15 +1156,15 @@
         <li>领取动作：晋级礼金、日/周/月福利礼金统一固定为会员手动领取，UI三处（列表表头、抽屉字段、领取规则弹窗提示）加注"手动领取"标识</li>
         <li><b>手动领取与发放方式关联明确</b>：「发放方式」（自动发放/人工发放，逐等级配置）决定会员点击"领取"这一手动领取动作之后是否需要人工审核——自动发放＝会员领取后系统自动审核通过直接到账，人工发放＝会员领取后进入待审核，需运营在「VIP福利彩金审核」页人工审核通过后才发放；与"手动领取"（领取动作本身）是两个独立维度，互不影响，新增/编辑抽屉与主列表均沿用「发放方式」字段</li>
         <li>新增「领取规则设置」独立弹窗（未放入客户端展示设置，避免该弹窗内容过多）：四选一处理方案 + 类型速记标签</li>
-        <li>客户端「我的特权」页新增日/月福利礼金展示、去投注/领取双态按钮、仅当前等级默认展开的浏览逻辑</li>
+        <li>客户端「VIP特权」页本次新增/调整：日/月福利礼金、去投注/领取/审核中状态、一键领取、规则说明及等级卡片滑动浏览</li>
         <li>后台「客户端展示设置」规则文案支持按换行分段：编辑时换行录入，客户端自动以圆点"•"分段展示，三段规则统一处理；不换行则展示为一段纯文本</li>
         <li>规则文案字段合并：因日/周/月流水的达标判定逻辑一致，「周流水规则」更名为「流水福利规则」，文案内容统一说明日/周/月三档的结算周期与达标判定，多等级流水规则、未达标流水结转两条例外规则仍保留并明确标注"仅周流水适用"；后台文案字段与客户端展示仍维持三段结构（晋升规则/保级规则/流水福利规则），不新增字段</li>
         <li><b>晋级礼金不受任何领取规则方案约束、永不过期</b>：晋级礼金达标即可领取，不受方案三/四受众条件（充值）限制，也不因跨期未领取被方案一/二转发或作废，长期未领取依然保持可领取状态</li>
         <li><b>客户端新增全局"一键领取"入口</b>：页面顶部固定展示"一键领取"按钮，可一次性领取当前等级及所有历史已达成等级中遗漏未领取的奖励，按各笔奖励所在等级的「发放方式」分别判定自动到账或提交人工审核；当前没有可领取奖励时按钮置灰禁用，不隐藏</li>
         <li><b>客户端当前等级卡片置顶展示</b>：「我的特权」页当前等级卡片固定展示于列表顶部并默认展开，无需下滑即可查看当前权益；未来等级按等级升序、历史等级按等级降序依次排列于下方，并以"其他等级"分割线区隔</li>
-        <li><b>客户端「我的」页新增VIP独立入口</b>：VIP特权卡片放置于钱包下方，用户名旁增加当前VIP等级徽标；两处均可点击进入VIP等级列表/详情，卡片同步展示经验进度及回归2倍恢复轻提示。</li>
-        <li><b>首批老会员初始化规则</b>：60天未投注且原VIP4及以上统一调整至VIP3，VIP0～VIP3不调整；被脚本降级会员不参与初始化晋级礼金补发，重新投注后按2倍经验恢复至降级前锁定的原等级+原经验值后恢复1倍。</li>
-        <li><b>近期活跃老会员专项补发</b>：初始化未降级的老会员保留当前等级，并补发当前及历史已达等级全部晋级礼金，本次专项补发不区分历史是否已领取。</li>
+        <li><b>客户端VIP入口调整</b>：客户端「我的」页钱包下方新增VIP特权独立成长卡，用户名旁增加当前VIP等级徽标，两处均可进入VIP详情；本HTML保留「我的」首页入口演示，用于验证入口到VIP详情页的完整跳转闭环。</li>
+        <li><b>首批老会员初始化规则</b>：VIP0～VIP2保持原等级；原VIP≥3且近60天未投注时统一调整为VIP3、0经验。仅实际发生初始化降级的会员不参与专项晋级礼金补发；重新投注后从VIP3 0经验起按2倍经验恢复至初始化前锁定的原等级+原经验值后恢复1倍。</li>
+        <li><b>初始化未降级老会员晋级礼金重新发放</b>：所有未发生初始化降级的老会员均重新发放当前等级至VIP1的晋级礼金，不区分历史是否已领取；包括近60天未投注但等级保持不变的VIP1、VIP2会员。</li>
         <li><b>「保级衰退与恢复机制」上线，替换原90天保级机制</b>（新增四、4.1~4.6节）：会员保级考核周期由90天调整为30天，未达标且周期内0增长的从第31天起进入VIP经验衰退，此后每连续15天无增长衰退速度提升一档（1×→2×→3×→4×，见4.2节对照表），重新产生经验立即停止衰退并进入2倍经验恢复期；VIP经验持续衰退跌破当前等级门槛时，于次日定时评估中按经验值自然回落至对应等级，不再是"周期未达标即刻掉1级"的硬性跳变（见4.4节）</li>
         <li><b>「VIP列表-按抽佣」页新增"衰退基础值"字段</b>：逐等级配置衰退阶段1（1×速度）每日扣除的VIP经验基础值，2×/3×/4×阶段按该值倍增；「30天保级流水」更名为「30天保级经验」（原"90天保级流水"字段沿用同一份数据，仅口径与命名调整为经验值体系，数值不变）</li>
         <li><b>衰退单日扣减不做跨等级门槛拆分（本轮明确）</b>：单日应扣金额（衰退基础值×衰退速度）整笔全额扣除，不因扣减幅度超出当前等级门槛缓冲区间而"卡线"部分扣减；扣减后重新对照等级门槛表定位所在等级，单日内允许连续下降多个等级，与晋级"单日经验增长足以连续跨越多个等级"对称一致（详见「需求背景」页4.4节）</li>
@@ -2213,11 +2215,12 @@ function backToMyHome(){
   if(home) home.classList.remove('client-view-hidden');
   renderMyHome();
 }
+
 function renderMyHome(){
   if(CUR_EXP === null) initCurExp();
   const cur = curRecord(), next = nextRecord();
   if(!cur) return;
-  const exp = legacyScenario === 'returning2x' ? LEGACY_RETURN_DEMO.currentExp : CUR_EXP;
+  const exp = legacyScenario === 'inactiveAdjusted' ? 0 : (legacyScenario === 'returning2x' ? LEGACY_RETURN_DEMO.currentExp : CUR_EXP);
   const pct = next ? Math.max(0, Math.min(100, Math.round((exp-cur.th)/(next.th-cur.th)*100))) : 100;
   const gap = next ? Math.max(0, next.th-exp) : 0;
   const set=(id,txt)=>{ const el=document.getElementById(id); if(el) el.textContent=txt; };
@@ -2228,17 +2231,29 @@ function renderMyHome(){
   if(boost){
     boost.classList.toggle('normal', legacyScenario !== 'returning2x');
     if(legacyScenario === 'returning2x') boost.textContent=`⚡ 2倍经验恢复中｜继续有效投注，恢复至原${'VIP'+LEGACY_RETURN_DEMO.originalLevel}及原经验 ${LEGACY_RETURN_DEMO.originalExp} 后恢复正常成长速度`;
-    else if(legacyScenario === 'inactiveAdjusted') boost.textContent='初始化调整：60天未投注且原VIP3以上统一至VIP3，本批不参与初始化晋级礼金补发';
-    else if(legacyScenario === 'activeReissue') boost.textContent='活跃老会员：保留当前等级，并补发当前及历史已达等级全部晋级礼金';
+    else if(legacyScenario === 'inactiveAdjusted') boost.textContent='初始化调整：原VIP≥3且近60天未投注 → VIP3、0经验；本批不参与初始化晋级礼金补发';
+    else if(legacyScenario === 'activeReissue') boost.textContent='初始化未降级老会员：当前等级至VIP1晋级礼金全部重新发放';
     else if(legacyScenario === 'restored') boost.textContent='恢复完成：已达到初始化降级前原等级及原经验值，后续经验按正常1倍累积';
     else boost.textContent='持续有效投注可累积VIP经验，解锁更多等级权益';
   }
 }
 function setLegacyScenario(v){
   legacyScenario=v;
+
+  // 切换老会员初始化场景时，先恢复晋级礼金演示状态，避免上一个场景的领取结果串到下一个场景。
+  // 「初始化未降级老会员」专项规则：等级未发生变化，初始化时重新发放当前等级至VIP1的全部晋级礼金；包括近60天未投注但保持VIP1/VIP2的会员。
+  // 例如当前VIP3，则VIP3、VIP2、VIP1晋级礼金均展示为“可领取”；VIP0不参与晋级礼金补发。
+  claimedState.promotion = false;
+  pastClaimOverride = {};
+  if(v==='activeReissue'){
+    data.filter(d => d.level >= 1 && d.level < CUR_LEVEL).forEach(d => {
+      if((d.gift || 0) > 0) pastClaimOverride[`${d.level}_promotion`] = 'claimable';
+    });
+  }
+
   if(v==='returning2x'){ keepScenario='recovering'; const k=document.getElementById('keepScenarioSelect'); if(k) k.value='recovering'; }
   if(v==='restored'){ keepScenario='normal'; const k=document.getElementById('keepScenarioSelect'); if(k) k.value='normal'; }
-  renderMyHome(); renderLevelHero();
+  renderMyHome(); renderClientLevels(); renderLevelHero();
 }
 
 function fmtG(n){ const v = Math.round((n||0)*100)/100; return v.toString(); }
@@ -2809,6 +2824,7 @@ function toggleRule(idx){
   document.getElementById('rule-item-' + idx).classList.toggle('expanded');
 }
 
+renderMyHome();
 renderClientLevels();
 
 // 置顶提示浮窗：position:fixed + 动态定位，避免被表格 overflow-x 容器裁剪遮挡
