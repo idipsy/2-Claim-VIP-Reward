@@ -1,8 +1,9 @@
 <!DOCTYPE html>
+
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>VIP列表-按抽佣 - 后台原型</title>
 <style>
   :root{
@@ -509,1199 +510,1306 @@
   .level-hero-icon{position:absolute;right:28px;top:22px;font-size:30px;z-index:1}.level-hero-title{font-size:25px;font-style:italic;color:#e53945;margin-bottom:12px}.unconfigured .level-hero-title{color:#767d8f}.level-hero-row{font-size:11.5px;font-weight:600;position:relative;z-index:2;max-width:75%}.level-hero-row.keep-status{max-width:100%;font-weight:600}.level-hero-row.keep-status-normal{background:rgba(255,255,255,.45)}.level-hero-row.keep-status-decay{background:rgba(255,255,255,.55);border-color:rgba(180,55,55,.2)}.level-hero-row.keep-status-recovering{background:rgba(255,255,255,.55);border-color:rgba(45,160,110,.25);color:#176f50}.level-hero-status{display:inline-flex;font-size:9px;font-weight:700;border-radius:999px;padding:3px 7px;background:rgba(255,255,255,.65);color:#8a4650;margin-left:7px;vertical-align:middle}.vip-card-carousel-hint{text-align:center;font-size:9.5px;color:#8490ad;margin:-8px 0 10px}
   @media(max-width:760px){.client-spec-grid{grid-template-columns:1fr}.client-scenarios .scenario-bar{grid-template-columns:1fr}.client-spec-panel{padding:12px}}
 
+
+  .phase3-del{ text-decoration:line-through; text-decoration-thickness:1.5px; color:#9aa0ab; opacity:.82; }
+  .phase3-badge{ display:inline-block; margin-left:6px; padding:1px 6px; border-radius:9px; background:#f1f1f5; color:#8b9099; font-size:11px; font-weight:600; text-decoration:none !important; }
+  .phase3-item{ opacity:.72; background:#fafafa !important; }
+  .phase3-item label{ text-decoration:line-through; color:#9aa0ab; }
+  .phase3-item input,.phase3-item select{ pointer-events:none; }
+
+/* 2026-09-19 流程图Tab规范化重构 */
+.flow-page{max-width:1280px;margin:0 auto;padding:28px 28px 70px}
+.flow-guide{background:#f7f8fc;border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin-bottom:22px;font-size:12px;line-height:1.8;color:var(--text-secondary)}
+.flow-guide b{color:var(--text-primary)}
+.flow-section{margin-bottom:34px;background:#fff;border:1px solid var(--border);border-radius:12px;padding:24px 26px;box-shadow:0 2px 10px rgba(20,22,50,.04)}
+.flow-section h3{font-size:16px;margin:0 0 8px;padding-left:10px;border-left:3px solid var(--accent)}
+.flow-part-title{font-size:13px;font-weight:700;color:var(--text-primary);margin:18px 0 8px}
+.flow-scope,.flow-check{font-size:12px;line-height:1.75;color:var(--text-secondary);background:#fafbfe;border:1px solid #e8eaf2;border-radius:8px;padding:11px 13px}
+.flow-check.warn{background:#fff9ed;border-color:#f2dfb4;color:#76591d}
+.flow-check.ok{background:#f3faf6;border-color:#cfe8d8;color:#356247}
+.mermaid-wrap{overflow-x:auto;border:1px solid #e5e7ef;border-radius:10px;background:#fff;padding:18px;margin-top:8px}
+.mermaid{min-width:780px;text-align:center}
+details.mermaid-edit{margin-top:10px;border:1px dashed #cfd4e5;border-radius:8px;background:#fafbfe}
+details.mermaid-edit summary{cursor:pointer;padding:10px 12px;font-size:12px;font-weight:600;color:#46517f}
+.mermaid-source{margin:0;padding:14px;white-space:pre;overflow:auto;font-size:11px;line-height:1.55;background:#111827;color:#e5e7eb;border-radius:0 0 8px 8px;user-select:text}
+.node-table-wrap{overflow-x:auto;margin-top:8px}
+.node-table{width:100%;border-collapse:collapse;font-size:11px;min-width:1180px}
+.node-table th{background:#f1f3f8;color:#30354f;font-weight:700;padding:8px;border:1px solid #dfe2eb;white-space:nowrap}
+.node-table td{padding:8px;border:1px solid #e4e6ed;vertical-align:top;line-height:1.55;color:#4b5068}
+.phase3-mark{text-decoration:line-through;color:#999}.phase3-tag{display:inline-block;margin-left:5px;padding:1px 6px;border-radius:8px;background:#f1f1f1;color:#888;font-size:10px;text-decoration:none}
+.flow-legend{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.flow-legend span{font-size:10px;padding:3px 8px;border-radius:10px;background:#f4f5f8;color:#666}
+
+/* 2026-09-19 流程图Tab全面重构：图为主体 */
+.biz-flow-page{max-width:1500px;margin:0 auto;padding:24px 24px 80px;background:#f7f8fb}
+.biz-flow-title{background:#fff;border:1px solid var(--border);border-radius:14px;padding:20px 24px;margin-bottom:14px}
+.biz-flow-title h2{margin:0 0 6px;font-size:20px;color:var(--text-primary)}
+.biz-flow-title p{margin:0;color:var(--text-muted);font-size:12px}
+.flow-jump{position:sticky;top:0;z-index:20;display:flex;gap:8px;flex-wrap:wrap;padding:10px 0 14px;background:#f7f8fb}
+.flow-jump button{border:1px solid #dfe2ec;background:#fff;border-radius:8px;padding:8px 12px;font-size:12px;color:#454a60;cursor:pointer}
+.flow-jump button:hover{border-color:var(--accent);color:var(--accent)}
+.biz-flow-section{margin:0 0 34px;background:#fff;border:1px solid var(--border);border-radius:14px;padding:22px 24px;box-shadow:0 2px 12px rgba(20,22,50,.04)}
+.biz-flow-head{margin-bottom:14px}.biz-flow-head h3{font-size:17px;margin:0 0 6px;color:var(--text-primary)}.biz-flow-head p{font-size:12px;color:var(--text-muted);margin:0;line-height:1.7}
+.biz-mermaid-wrap{width:100%;overflow:auto}
+.biz-mermaid-wrap .mermaid{text-align:center}.biz-mermaid-wrap svg{max-width:none!important;height:auto!important}
+.biz-flow-notes{margin-top:14px;padding:12px 14px;border-left:3px solid #7279d8;background:#f7f7ff;border-radius:6px;font-size:12px;line-height:1.8;color:#4e5265}
+.biz-flow-section .mermaid-edit{margin-top:12px;border:1px solid #e5e7ef;border-radius:8px;background:#fafbfc}.biz-flow-section .mermaid-edit summary{padding:10px 12px;cursor:pointer;font-size:12px;color:#666b7d}.biz-flow-section .mermaid-source{white-space:pre;overflow:auto;max-height:420px;margin:0;padding:14px;background:#20232a;color:#e9ecf3;font-size:11px;line-height:1.55}
+@media(max-width:900px){.biz-flow-page{padding:14px 10px 60px}.biz-flow-section{padding:16px 12px}.biz-mermaid-wrap{padding:18px 8px}.flow-jump{position:static}}
 </style>
-</head>
+<style>
+.mermaid-render-target{width:100%;min-width:0;text-align:center;min-height:240px;display:flex;align-items:flex-start;justify-content:center;transform-origin:top center}
+.mermaid-render-target svg{max-width:none!important;height:auto!important;display:block;margin:0 auto;overflow:visible}
+.mermaid-render-target svg .flowchart-link{stroke:#5f6673!important;stroke-width:1.35px!important}
+.mermaid-render-target svg marker path{fill:#5f6673!important;stroke:#5f6673!important}
+.mermaid-render-target svg .edgeLabel{background:#fff!important;color:#454b57!important;font-size:11px!important}
+.mermaid-render-target svg .edgeLabel rect{fill:#fff!important;opacity:.96!important}
+.mermaid-render-target svg .nodeLabel,.mermaid-render-target svg .label{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif!important;font-size:12px!important;line-height:1.35!important}
+.mermaid-render-error{min-width:0;padding:28px;border:1px solid #f1b5b5;border-radius:10px;background:#fff7f7;color:#a33;text-align:center;font-weight:600}
+.flow-view-toolbar{display:flex;justify-content:flex-end;align-items:center;gap:6px;margin:0 0 10px;padding:6px 8px;background:#f7f8fa;border:1px solid #e5e7eb;border-radius:8px;position:sticky;top:8px;z-index:4}
+.flow-view-toolbar button{height:28px;padding:0 10px;border:1px solid #d8dbe2;border-radius:6px;background:#fff;color:#4a4f5b;font-size:12px;cursor:pointer}.flow-view-toolbar button:hover{border-color:#9aa2b1;background:#f3f5f8}.flow-view-toolbar .zoom-value{min-width:42px;text-align:center;font-size:11px;color:#727784}
+.biz-mermaid-wrap{width:100%;overflow:auto;border:1px solid #e1e4ea;border-radius:12px;background:#fff;padding:16px 14px 22px;min-height:420px;scrollbar-gutter:stable}
+.biz-flow-section{max-width:1180px;margin:0 auto 26px!important;padding:18px 20px!important;background:#fff;border:1px solid #e5e7eb!important;border-radius:12px!important;box-shadow:0 1px 3px rgba(20,24,35,.04)!important}
+.biz-flow-head{margin-bottom:14px!important}.biz-flow-head h3{font-size:16px!important;color:#252a34!important}.biz-flow-head p{margin-top:5px!important;color:#707684!important;line-height:1.6!important}
+.biz-flow-notes{font-size:12px!important;line-height:1.7!important;background:#f7f8fb!important;border-left-color:#8b93a3!important;color:#555b67!important}
+@media(max-width:900px){.biz-flow-section{padding:14px 10px!important}.biz-mermaid-wrap{padding:12px 8px 18px}.flow-view-toolbar{position:static}}
+</style></head>
 <body>
-
 <div class="app-tabs">
-  <div class="brand">JUAN<span>365</span> 原型</div>
-  <div class="app-tab active" data-tab="client" onclick="switchAppTab('client')">用户端</div>
-  <div class="app-tab" data-tab="admin" onclick="switchAppTab('admin')">管理后台</div>
-  <div class="app-tab-divider"></div>
-  <div class="app-tab" data-tab="background" onclick="switchAppTab('background')">需求背景</div>
-  <div class="app-tab" data-tab="flow" onclick="switchAppTab('flow')">流程图</div>
+<div class="brand">JUAN<span>365</span> 原型</div>
+<div class="app-tab active" data-tab="client" onclick="switchAppTab('client')">用户端</div>
+<div class="app-tab" data-tab="admin" onclick="switchAppTab('admin')">管理后台</div>
+<div class="app-tab-divider"></div>
+<div class="app-tab" data-tab="background" onclick="switchAppTab('background')">需求背景</div>
+<div class="app-tab" data-tab="flow" onclick="switchAppTab('flow')">流程图</div>
 </div>
-
 <!-- ============ Tab 1：用户端（仅H5，直接读取管理后台"VIP列表数据"与"客户端展示设置"配置） ============ -->
 <div class="tab-content" id="tab-client">
-  <div class="client-page">
-    <div class="client-toolbar">
-      <div class="client-toolbar-title">用户端 · 我的 → VIP特权（H5）<small>本页包含「我的」首页VIP入口与VIP特权详情交互演示；页面数据直接读取管理后台「VIP列表-按抽佣」与「客户端展示设置」配置，用于验证入口、等级成长、福利领取、规则说明及老会员初始化/恢复的完整闭环</small></div>
-    </div>
-    <div class="client-spec-panel">
-      <div class="client-spec-head">
-        <div><div class="client-spec-title">用户端 H5 改造说明 · 交互演示</div><div class="client-spec-sub">「我的」页VIP入口、VIP详情、福利领取、规则说明、老会员初始化与保级恢复场景统一在此说明并提供可交互验证。</div></div>
-        <span class="client-spec-chip">H5 · 本轮优化</span>
-      </div>
-      <div class="client-spec-grid">
-        <div class="client-spec-item"><b>① VIP入口改造 <span class="tag-new">本次迭代</span></b><span>「我的」页钱包下方新增独立VIP成长卡，玩家名称旁展示当前VIP等级徽标；点击等级徽标或VIP成长卡均可进入VIP特权详情。</span></div>
-        <div class="client-spec-item"><b>② VIP等级卡片 <span class="tag-new">本次迭代</span></b><span>VIP详情页的大尺寸等级卡片支持左右滑动，只展示后台已配置的VIP等级，后台最多支持配置VIP0～VIP20；滑动仅用于查看等级权益与门槛，不改变会员真实等级。</span></div>
-        <div class="client-spec-item"><b>③ VIP福利 / 规则说明 <span class="tag-new">本次迭代</span></b><span>新增VIP福利与规则说明分栏。福利页展示当前、历史及未来等级的晋级礼金与日/周/月福利；规则说明页展示晋升、保级、流水福利等客户端规则文案。</span></div>
-        <div class="client-spec-item"><b>④ 一键领取 <span class="tag-new">本次迭代</span></b><span>页面顶部固定展示“一键领取”。可一次处理当前等级及历史已达等级中所有已达标待领取奖励；不同等级按各自「发放方式」分别直接到账或进入人工审核，无可领取奖励时按钮置灰但不隐藏。</span></div>
-        <div class="client-spec-item"><b>⑤ 去投注 / 领取 / 审核中 <span class="tag-new">本次迭代</span></b><span>日/周/月福利未达标展示“去投注”，达标后展示“领取”；会员主动领取后，自动发放直接到账，人工发放仅展示“审核中”，审核通过后再变为“已领取”。晋级礼金达标后可长期领取且不受跨期领取规则限制。</span></div>
-      </div>
-      <div class="client-spec-note"><strong>老会员初始化口径：</strong>首批按近60天是否有投注进行初始化判断：① 原VIP0～VIP2无论近60天是否投注，均保持原等级；其中VIP1、VIP2因等级未发生调整，初始化时仍重新发放“当前等级至VIP1”的全部晋级礼金（VIP2＝VIP2+VIP1，VIP1＝VIP1），历史是否领取过不影响本次重新发放。② 原VIP≥3且近60天<strong>未进行投注</strong>的会员，统一降至<strong>VIP3、当前经验重置为0</strong>，该批实际发生初始化降级的会员不参与本次晋级礼金专项补发；后续重新投注后进入2倍经验恢复，直至恢复到初始化降级前锁定的原VIP等级及原经验值后恢复1倍。③ 近60天有投注、初始化未降级的老会员保持当前等级，并重新发放当前等级至VIP1的全部晋级礼金。</div>
-      <div class="client-spec-note"><strong>交互说明：</strong>奖励卡“－ / ＋”用于模拟流水变化并验证本次迭代新增的「去投注 → 领取 → 审核中/到账」状态；领取规则、老会员初始化/回归、保级衰退/恢复可通过下方场景切换。VIP详情中的<strong>大尺寸VIP卡片支持左右滑动</strong>，仅展示后台实际已配置等级（后台最高支持VIP20）；点击卡片仅用于查看该等级信息，不改变会员真实等级。</div>
-      <div class="client-scenarios">
-        <div class="client-scenarios-title">场景演示</div>
-        <div class="scenario-bar">
-          <label>🎬 领取规则设置</label>
-          <select id="scenarioSelect" onchange="setScenario(this.value)">
-            <option value="normal">默认：流水达标即可直接领取</option><option value="scheme1">方案一·未领取转发：跨周期不作废并提醒</option><option value="scheme2">方案二·未领取作废：跨周期系统回收</option><option value="locked">方案三·受众控制领取（未充值）</option><option value="unlocked">方案三·受众控制领取（已充值）</option><option value="blocked">方案四·受众控制发奖（未充值）</option>
-          </select><button class="btn" style="height:30px;font-size:12px;" onclick="resetDemo()">🔄 重置</button>
-        </div>
-        <div class="scenario-bar">
-          <label>👤 老会员初始化 / 回归 <span class="tag-new">NEW</span></label>
-          <select id="legacyScenarioSelect" onchange="setLegacyScenario(this.value)">
-            <option value="normal">正常会员（非初始化特殊处理用户）</option><option value="activeReissue">初始化未降级老会员：当前等级至VIP1晋级礼金全部可领取</option><option value="inactiveAdjusted">60天未投注且原VIP≥3：降至VIP3、0经验，不参与晋级礼金补发</option><option value="returning2x">初始化降级后回归：从VIP3 0经验起按2倍恢复</option><option value="restored">恢复完成：达到初始化前原等级及原经验值后恢复1倍</option>
-          </select><span></span>
-        </div>
-        <div class="scenario-bar">
-          <label>🎯 保级衰退与恢复 <span class="tag-new">NEW</span></label>
-          <select id="keepScenarioSelect" onchange="setKeepScenario(this.value)">
-            <option value="normal">默认：本周期正常产生经验，未触发衰退</option><option value="decay1">衰退阶段1（第31-45天，1×速度）</option><option value="decay2">衰退阶段2（第46-60天，2×速度）</option><option value="decay3">衰退阶段3（第61-75天，3×速度）</option><option value="decay4">衰退阶段4（第76天起，4×速度）</option><option value="recovering">恢复期（2×加成）：重新产生经验，恢复至衰退前经验目标</option>
-          </select><span></span>
-        </div>
-      </div>
-    </div>
-
-    <div class="client-view client-home-wrap" id="view-my-home">
-      <div class="phone-frame">
-        <div class="phone-notch"></div>
-        <div class="phone-screen my-home-screen">
-          <div class="my-profile">
-            <div class="my-avatar">D</div>
-            <div class="my-user-meta">
-              <div class="my-user-name-row">9nVGmF <span class="my-vip-badge" id="home-name-vip" onclick="openVipDetail(event)">◆ VIP3</span></div>
-              <div class="my-account">会员账号： dipsy01　▣</div>
-            </div>
-            <div class="my-icons"><span>♧</span><span>⚙</span></div>
-          </div>
-
-          <div class="home-card">
-            <div class="home-card-title"><span>我的钱包</span><span class="home-refresh">↻ 刷新</span></div>
-            <div class="wallet-balance"><small>钱包余额　◉</small><strong>418.17 ›</strong></div>
-            <div class="wallet-actions"><div class="wallet-action">💳　充值</div><div class="wallet-action">💵　提现</div></div>
-          </div>
-
-          <div class="home-vip-card" onclick="openVipDetail(event)">
-            <div class="home-vip-top">
-              <div class="home-vip-icon">♛</div>
-              <div class="home-vip-main">
-                <div class="home-vip-title">VIP特权 <span class="lv" id="home-vip-level">VIP3</span></div>
-                <div class="home-vip-exp-row"><span id="home-vip-exp">当前经验 340</span><span id="home-vip-gap">距离VIP4还差 60</span></div>
-                <div class="home-vip-track"><div class="home-vip-fill" id="home-vip-fill" style="width:40%;"></div></div>
-              </div>
-              <div class="home-vip-link">查看特权 ›</div>
-            </div>
-            <div class="home-vip-boost normal" id="home-vip-boost">持续有效投注可累积VIP经验，解锁更多等级权益</div>
-          </div>
-
-          <div class="home-card">
-            <div class="home-card-title"><span>今日收益 <span style="font-weight:400;color:#7f89a3;font-size:12px;">9月14日</span></span><span class="home-refresh">↻ 刷新</span></div>
-            <div class="today-grid">
-              <div class="today-item"><b>0</b>注单笔数</div><div class="today-item"><b>0.00</b>实际盈亏</div><div class="today-item"><b>0.00</b>实时返水</div>
-            </div>
-          </div>
-
-          <div class="home-card">
-            <div class="home-card-title"><span>更多服务</span></div>
-            <div class="service-grid">
-              <div class="service-item"><div class="service-ic">🎮</div>游戏管理</div><div class="service-item"><div class="service-ic">◉</div>资金管理</div><div class="service-item"><div class="service-ic">＄</div>充值教程</div><div class="service-item"><div class="service-ic">↗</div>分享</div>
-              <div class="service-item"><div class="service-ic">▤</div>新闻资讯</div><div class="service-item"><div class="service-ic">🎟</div>彩票任务</div><div class="service-item"><div class="service-ic">🛡</div>安全设置</div><div class="service-item"><div class="service-ic">💡</div>即将上线</div>
-            </div>
-          </div>
-          <div class="home-bottom-nav"><span>⌂<br>首页</span><span>🎮<br>游戏</span><span><b>⊕</b><br>充值</span><span>🎁<br>活动</span><span><b>●</b><br>我的</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="client-view client-view-hidden" id="view-h5">
-      <div class="phone-frame">
-        <div class="phone-notch"></div>
-        <div class="phone-screen">
-          <div class="h5-header">
-            <div class="back-row-center"><span class="back" onclick="backToMyHome()" style="cursor:pointer;">‹</span><span class="title">VIP特权</span></div>
-            <div class="h5-user-row">
-              <div class="h5-avatar">V3</div>
-              <div class="h5-user-name">dipsy</div>
-              <div class="h5-user-time" id="h5-promote-time">最近晋升时间：2026-09-01 16:26:08</div>
-            </div>
-            <div class="lv-progress-row">
-              <span class="lv-progress-endlabel" id="lv-endlabel-cur"></span>
-              <div class="h5-progress-track" style="flex:1;"><div class="h5-progress-fill" id="h5-progress-fill" style="width:0%;"></div></div>
-              <span class="lv-progress-endlabel" id="lv-endlabel-next"></span>
-            </div>
-            <div class="lv-exp-text" id="h5-lv-exp-text"></div>
-
-            <div class="vip-card-carousel" id="h5-level-hero"></div>
-            <div class="vip-card-carousel-hint">↔ 左右滑动查看后台已配置的VIP等级卡片</div>
-          </div>
-
-          <div class="h5-segtabs">
-            <div class="h5-segtab active" data-pane="benefit" onclick="switchH5Pane('benefit')">VIP福利</div>
-            <div class="h5-segtab" data-pane="rule" onclick="switchH5Pane('rule')">规则说明</div>
-          </div>
-
-          <div class="h5-tabpane active" id="h5-pane-benefit">
-            <div class="claim-all-global-bar" id="claim-all-global-bar"></div>
-            <div class="vip-accordion" id="h5-vip-list" style="margin-top:0;"></div>
-          </div>
-          <div class="h5-tabpane" id="h5-pane-rule">
-            <div class="rule-accordion" id="h5-rule-list" style="margin-top:0;"></div>
-          </div>
-          <div style="height:22px;"></div>
-        </div>
-      </div>
-      <div class="pm-note" style="max-width:375px;margin-left:auto;margin-right:auto;">
-        <b>设计说明：</b>当前/历史（低于当前）/未来（高于当前）三类等级的收起态与展开态统一采用同一套 30天保级经验／衰退基础值／提现流水倍数信息行＋奖励卡片组件展示，不再对非当前等级使用单独的纯文本样式；历史等级展开后展示"已领取 X / 共 Y"，各奖励项同步展示对应的流水要求，与当前/未来等级口径一致；未来等级展开后展示"🔒 未解锁"及达标条件预览；当前等级新增"跨周期未领取"场景，过期文案随管理后台「领取规则设置」的方案联动——方案一·未领取转发本质不作废，仅同步一份站内信/邮件通知，卡片仍展示"领取"按钮可直接领取，其余方案按"已过期作废"处理并禁用按钮；页面顶部固定展示全局"一键领取"入口，可将当前等级及所有历史等级下已达标待领取的奖励一次性领取；若其中存在方案三·受众用户1下"已生成但需先充值"的记录，一键领取会先正常领取其余可领取项，再同步弹出充值提示弹窗提醒用户完成充值解锁，不会静默跳过；点击"领取"后，若当前等级「发放方式」为人工发放，按钮转为"审核中"（彩金尚未到账，需运营在「VIP福利彩金审核」页人工审核通过后才发放），若为自动发放则直接展示为"已领取"。顶部诊断卡片同步展示当前30天保级周期进度／衰退阶段／恢复加成状态。由此 VIP福利 形成"未解锁→投注中→可领取→审核中/已领取/待解锁/未生成→跨周期过期→历史记录"的完整闭环展示。
-      </div>
-    </div>
-  </div>
+<div class="client-page">
+<div class="client-toolbar">
+<div class="client-toolbar-title">用户端 · 我的 → VIP特权（H5）<small>本页包含「我的」首页VIP入口与VIP特权详情交互演示；页面数据直接读取管理后台「VIP列表-按抽佣」与「客户端展示设置」配置，用于验证入口、等级成长、福利领取、规则说明及老会员初始化/恢复的完整闭环</small></div>
 </div>
-
+<div class="client-spec-panel">
+<div class="client-spec-head">
+<div><div class="client-spec-title">用户端 H5 改造说明 · 交互演示</div><div class="client-spec-sub">「我的」页VIP入口、VIP详情、福利领取、规则说明、老会员初始化与保级恢复场景统一在此说明并提供可交互验证。</div></div>
+<span class="client-spec-chip">H5 · 本轮优化</span>
+</div>
+<div class="client-spec-grid">
+<div class="client-spec-item"><b>① VIP入口改造 <span class="tag-new">本次迭代</span></b><span>「我的」页钱包下方新增独立VIP成长卡，玩家名称旁展示当前VIP等级徽标；点击等级徽标或VIP成长卡均可进入VIP特权详情。</span></div>
+<div class="client-spec-item"><b>② VIP等级卡片 <span class="tag-new">本次迭代</span></b><span>VIP详情页的大尺寸等级卡片支持左右滑动，只展示后台已配置的VIP等级，后台最多支持配置VIP0～VIP20；滑动仅用于查看等级权益与门槛，不改变会员真实等级。</span></div>
+<div class="client-spec-item"><b>③ VIP福利 / 规则说明 <span class="tag-new">本次迭代</span></b><span>新增VIP福利与规则说明分栏。福利页展示当前、历史及未来等级的晋级礼金与日/周/月福利；规则说明页展示晋升、保级、流水福利等客户端规则文案。</span></div>
+<div class="client-spec-item"><b>④ 一键领取 <span class="tag-new">本次迭代</span></b><span>页面顶部固定展示“一键领取”。可一次处理当前等级及历史已达等级中所有已达标待领取奖励；不同等级按各自「发放方式」分别直接到账或进入人工审核，无可领取奖励时按钮置灰但不隐藏。</span></div>
+<div class="client-spec-item"><b>⑤ 去投注 / 领取 / 审核中 <span class="tag-new">本次迭代</span></b><span>日/周/月福利未达标展示“去投注”，达标后展示“领取”；会员主动领取后，自动发放直接到账，人工发放仅展示“审核中”，审核通过后再变为“已领取”。晋级礼金达标后可长期领取且不受跨期领取规则限制。</span></div>
+</div>
+<div class="client-spec-note"><strong>老会员初始化口径：</strong>首批按近60天是否有投注进行初始化判断：① 原VIP0～VIP2无论近60天是否投注，均保持原等级；其中VIP1、VIP2因等级未发生调整，初始化时仍重新发放“当前等级至VIP1”的全部晋级礼金（VIP2＝VIP2+VIP1，VIP1＝VIP1），历史是否领取过不影响本次重新发放。② 原VIP≥3且近60天<strong>未进行投注</strong>的会员，统一降至<strong>VIP3、当前经验重置为0</strong>，该批实际发生初始化降级的会员不参与本次晋级礼金专项补发；后续重新投注后进入2倍经验恢复，直至恢复到初始化降级前锁定的原VIP等级及原经验值后恢复1倍。③ 近60天有投注、初始化未降级的老会员保持当前等级，并重新发放当前等级至VIP1的全部晋级礼金。</div>
+<div class="client-spec-note"><strong>交互说明：</strong>奖励卡“－ / ＋”用于模拟流水变化并验证本次迭代新增的「去投注 → 领取 → 审核中/到账」状态；领取规则、老会员初始化/回归、保级衰退/恢复可通过下方场景切换。VIP详情中的<strong>大尺寸VIP卡片支持左右滑动</strong>，仅展示后台实际已配置等级（后台最高支持VIP20）；点击卡片仅用于查看该等级信息，不改变会员真实等级。</div>
+<div class="client-scenarios">
+<div class="client-scenarios-title">场景演示</div>
+<div class="scenario-bar">
+<label>🎬 领取规则设置</label>
+<select id="scenarioSelect" onchange="setScenario(this.value)">
+<option value="normal">默认：流水达标即可直接领取</option><option value="scheme2">未领取作废：跨周期系统回收（二期生效）</option>
+</select><button class="btn" onclick="resetDemo()" style="height:30px;font-size:12px;">🔄 重置</button>
+</div>
+<div class="scenario-bar">
+<label>👤 老会员初始化 / 回归 <span class="tag-new">NEW</span></label>
+<select id="legacyScenarioSelect" onchange="setLegacyScenario(this.value)">
+<option value="normal">正常会员（非初始化特殊处理用户）</option><option value="activeReissue">初始化未降级老会员：当前等级至VIP1晋级礼金全部可领取</option><option value="inactiveAdjusted">60天未投注且原VIP≥3：降至VIP3、0经验，不参与晋级礼金补发</option><option value="returning2x">初始化降级后回归：从VIP3 0经验起按2倍恢复</option><option value="restored">恢复完成：达到初始化前原等级及原经验值后恢复1倍</option>
+</select><span></span>
+</div>
+<div class="scenario-bar">
+<label>🎯 保级衰退与恢复 <span class="tag-new">NEW</span></label>
+<select id="keepScenarioSelect" onchange="setKeepScenario(this.value)">
+<option value="normal">默认：本周期正常产生经验，未触发衰退</option><option value="decay1">衰退阶段1（第31-45天，1×速度）</option><option value="decay2">衰退阶段2（第46-60天，2×速度）</option><option value="decay3">衰退阶段3（第61-75天，3×速度）</option><option value="decay4">衰退阶段4（第76天起，4×速度）</option><option value="recovering">恢复期（2×加成）：重新产生经验，恢复至衰退前经验目标</option>
+</select><span></span>
+</div>
+</div>
+</div>
+<div class="client-view client-home-wrap" id="view-my-home">
+<div class="phone-frame">
+<div class="phone-notch"></div>
+<div class="phone-screen my-home-screen">
+<div class="my-profile">
+<div class="my-avatar">D</div>
+<div class="my-user-meta">
+<div class="my-user-name-row">9nVGmF <span class="my-vip-badge" id="home-name-vip" onclick="openVipDetail(event)">◆ VIP3</span></div>
+<div class="my-account">会员账号： dipsy01　▣</div>
+</div>
+<div class="my-icons"><span>♧</span><span>⚙</span></div>
+</div>
+<div class="home-card">
+<div class="home-card-title"><span>我的钱包</span><span class="home-refresh">↻ 刷新</span></div>
+<div class="wallet-balance"><small>钱包余额　◉</small><strong>418.17 ›</strong></div>
+<div class="wallet-actions"><div class="wallet-action">💳　充值</div><div class="wallet-action">💵　提现</div></div>
+</div>
+<div class="home-vip-card" onclick="openVipDetail(event)">
+<div class="home-vip-top">
+<div class="home-vip-icon">♛</div>
+<div class="home-vip-main">
+<div class="home-vip-title">VIP特权 <span class="lv" id="home-vip-level">VIP3</span></div>
+<div class="home-vip-exp-row"><span id="home-vip-exp">当前经验 340</span><span id="home-vip-gap">距离VIP4还差 60</span></div>
+<div class="home-vip-track"><div class="home-vip-fill" id="home-vip-fill" style="width:40%;"></div></div>
+</div>
+<div class="home-vip-link">查看特权 ›</div>
+</div>
+<div class="home-vip-boost normal" id="home-vip-boost">持续有效投注可累积VIP经验，解锁更多等级权益</div>
+</div>
+<div class="home-card">
+<div class="home-card-title"><span>今日收益 <span style="font-weight:400;color:#7f89a3;font-size:12px;">9月14日</span></span><span class="home-refresh">↻ 刷新</span></div>
+<div class="today-grid">
+<div class="today-item"><b>0</b>注单笔数</div><div class="today-item"><b>0.00</b>实际盈亏</div><div class="today-item"><b>0.00</b>实时返水</div>
+</div>
+</div>
+<div class="home-card">
+<div class="home-card-title"><span>更多服务</span></div>
+<div class="service-grid">
+<div class="service-item"><div class="service-ic">🎮</div>游戏管理</div><div class="service-item"><div class="service-ic">◉</div>资金管理</div><div class="service-item"><div class="service-ic">＄</div>充值教程</div><div class="service-item"><div class="service-ic">↗</div>分享</div>
+<div class="service-item"><div class="service-ic">▤</div>新闻资讯</div><div class="service-item"><div class="service-ic">🎟</div>彩票任务</div><div class="service-item"><div class="service-ic">🛡</div>安全设置</div><div class="service-item"><div class="service-ic">💡</div>即将上线</div>
+</div>
+</div>
+<div class="home-bottom-nav"><span>⌂<br/>首页</span><span>🎮<br/>游戏</span><span><b>⊕</b><br/>充值</span><span>🎁<br/>活动</span><span><b>●</b><br/>我的</span></div>
+</div>
+</div>
+</div>
+<div class="client-view client-view-hidden" id="view-h5">
+<div class="phone-frame">
+<div class="phone-notch"></div>
+<div class="phone-screen">
+<div class="h5-header">
+<div class="back-row-center"><span class="back" onclick="backToMyHome()" style="cursor:pointer;">‹</span><span class="title">VIP特权</span></div>
+<div class="h5-user-row">
+<div class="h5-avatar">V3</div>
+<div class="h5-user-name">dipsy</div>
+<div class="h5-user-time" id="h5-promote-time">最近晋升时间：2026-09-01 16:26:08</div>
+</div>
+<div class="lv-progress-row">
+<span class="lv-progress-endlabel" id="lv-endlabel-cur"></span>
+<div class="h5-progress-track" style="flex:1;"><div class="h5-progress-fill" id="h5-progress-fill" style="width:0%;"></div></div>
+<span class="lv-progress-endlabel" id="lv-endlabel-next"></span>
+</div>
+<div class="lv-exp-text" id="h5-lv-exp-text"></div>
+<div class="vip-card-carousel" id="h5-level-hero"></div>
+<div class="vip-card-carousel-hint">↔ 左右滑动查看后台已配置的VIP等级卡片</div>
+</div>
+<div class="h5-segtabs">
+<div class="h5-segtab active" data-pane="benefit" onclick="switchH5Pane('benefit')">VIP福利</div>
+<div class="h5-segtab" data-pane="rule" onclick="switchH5Pane('rule')">规则说明</div>
+</div>
+<div class="h5-tabpane active" id="h5-pane-benefit">
+<div class="claim-all-global-bar" id="claim-all-global-bar"></div>
+<div class="vip-accordion" id="h5-vip-list" style="margin-top:0;"></div>
+</div>
+<div class="h5-tabpane" id="h5-pane-rule">
+<div class="rule-accordion" id="h5-rule-list" style="margin-top:0;"></div>
+</div>
+<div style="height:22px;"></div>
+</div>
+</div>
+<div class="pm-note" style="max-width:375px;margin-left:auto;margin-right:auto;">
+<b>设计说明：</b>当前/历史（低于当前）/未来（高于当前）三类等级的收起态与展开态统一采用同一套 30天保级经验／衰退基础值／提现流水倍数信息行＋奖励卡片组件展示，不再对非当前等级使用单独的纯文本样式；历史等级展开后展示"已领取 X / 共 Y"，各奖励项同步展示对应的流水要求，与当前/未来等级口径一致；未来等级展开后展示"🔒 未解锁"及达标条件预览；当前等级新增"跨周期未领取"场景，过期文案随管理后台「领取规则设置」的方案联动——方案一·未领取转发本质不作废，仅同步一份站内信/邮件通知，卡片仍展示"领取"按钮可直接领取，其余方案按"已过期作废"处理并禁用按钮；页面顶部固定展示全局"一键领取"入口，可将当前等级及所有历史等级下已达标待领取的奖励一次性领取；若其中存在方案三·受众用户1下"已生成但需先充值"的记录，一键领取会先正常领取其余可领取项，再同步弹出充值提示弹窗提醒用户完成充值解锁，不会静默跳过；点击"领取"后，若当前等级「发放方式」为人工发放，按钮转为"审核中"（彩金尚未到账，需运营在「VIP福利彩金审核」页人工审核通过后才发放），若为自动发放则直接展示为"已领取"。顶部诊断卡片同步展示当前30天保级周期进度／衰退阶段／恢复加成状态。由此 VIP福利 形成"未解锁→投注中→可领取→审核中/已领取/待解锁/未生成→跨周期过期→历史记录"的完整闭环展示。
+      </div>
+</div>
+</div>
+</div>
 <!-- ============ Tab 2：管理后台（原有原型内容） ============ -->
 <div class="tab-content hidden" id="tab-admin">
 <div class="shell">
-  <div class="sidebar">
-    <div class="logo">JUAN<span>365</span></div>
-    <div class="nav-group-label">会员</div>
-    <div class="nav-item">全部会员</div>
-    <div class="nav-item">会员账单</div>
-    <div class="nav-item">账单详情</div>
-    <div class="nav-item">VIP列表-按投注</div>
-    <div class="nav-item active" id="nav-viplist" onclick="switchAdminPage('viplist')">VIP列表-按抽佣</div>
-    <div class="nav-item" id="nav-audit" onclick="switchAdminPage('audit')">VIP福利彩金审核</div>
-    <div class="nav-item">会员投注</div>
-    <div class="nav-item">会员返水</div>
-    <div class="nav-item">资金处理</div>
-    <div class="nav-item">提款策略</div>
-    <div class="nav-item">返水策略</div>
-    <div class="nav-item">代理推广</div>
-    <div class="nav-item">会员返佣</div>
-    <div class="nav-item">登录日志</div>
-    <div class="nav-item">会员消息</div>
-    <div class="nav-item">标签管理</div>
-    <div class="nav-item">全民推广</div>
-  </div>
-
-  <div class="main">
-    <div class="topbar">仪表盘 &nbsp;/&nbsp; <b id="admin-topbar-title">VIP列表-按抽佣</b></div>
-    <div class="tabstrip">
-      <div class="tab">仪表盘 <span class="x">×</span></div>
-      <div class="tab">会员盈亏 <span class="x">×</span></div>
-      <div class="tab">全部会员 <span class="x">×</span></div>
-      <div class="tab active" id="tab-strip-viplist" onclick="switchAdminPage('viplist')">VIP列表-按抽佣 <span class="x">×</span></div>
-      <div class="tab" id="tab-strip-audit" onclick="switchAdminPage('audit')">VIP福利彩金审核 <span class="x">×</span></div>
-    </div>
-
-    <div class="content">
-    <div class="admin-page" id="admin-page-viplist">
-      <details class="change-note">
-        <summary><span class="chevron">▶</span>本次改动说明（VIP列表页 / 礼金统一固定手动领取 + 日/月福利礼金 + 领取规则 + 手动领取与发放方式关联说明 + 保级衰退与恢复机制）— 点击展开查看变更详情</summary>
-        <div class="note-body">
-
-          <h4>一、字段变更</h4>
-          <ul>
-            <li><b>彩金领取方式</b>与<b>是否需要人工审核</b>是两个独立维度，请勿混淆：①晋级礼金、日福利礼金、周福利礼金、月福利礼金的<b>领取动作统一固定为会员手动领取</b>（不提供"自动生成即到账"式的免点击发放，此项与上一轮一致，未再调整）；②「发放方式」（自动发放／人工发放，逐等级配置，非逐礼金类型单独配置）决定会员点击"领取"后彩金是<b>系统自动审核通过直接到账</b>，还是<b>进入待审核状态、需运营在「VIP福利彩金审核」页人工审核通过后才发放</b>，新增/编辑抽屉与主列表均沿用该字段。为了让运营在后台就能清楚识别"手动领取"这一固定口径，表格对应4个礼金列头、以及新增/编辑抽屉对应4个字段标签，均加上<span class="tag-manual">手动领取</span>标识</li>
-            <li><b>新增</b>：日福利礼金<span class="tag-new">NEW</span>、日流水<span class="tag-new">NEW</span>（日福利礼金的达标门槛，逻辑与"周流水→周福利礼金"一致）</li>
-            <li><b>新增</b>：月福利礼金<span class="tag-new">NEW</span>、月流水<span class="tag-new">NEW</span>（逻辑同上）；月福利礼金固定<b>每月16日</b>结算生成上一自然月的奖励</li>
-            <li>日/月福利礼金不再提供逐等级"是否启用"勾选：某等级若不需要该项福利，直接将对应金额配置为 0 即可；是否面向全体等级"整体开放"该福利，统一由「客户端展示设置」中的展示字段勾选控制（勾选状态同时决定是否实际生成待领取记录，见第五节）</li>
-          </ul>
-
-          <h4>二、晋级礼金 / 日福利礼金 / 周福利礼金 / 月福利礼金：统一手动领取</h4>
-          <ul>
-            <li>达标后礼金进入"待领取"状态，由会员在客户端「我的特权」页主动点击领取；<b>领取前不入账，也不计入提现流水</b>，领取后按该等级配置的「发放礼金稽核倍数」（客户端展示别名"提现流水倍数"）计入提现流水门槛——若该等级发放方式为<b>人工发放</b>，则需运营审核通过后才计入；若为<b>自动发放</b>，会员点击"领取"后系统即自动审核通过并计入</li>
-            <li>日 / 周 / 月福利礼金能否"生成"，分别取决于对应周期内是否满足日流水 / 周流水 / 月流水门槛；跨级晋级礼金仍按每一级依次生成独立的"待领取"记录，不合并</li>
-            <li>可见性：表格中晋级礼金 / 日福利礼金 / 周福利礼金 / 月福利礼金 4 个对应列头，以及新增/编辑抽屉对应 4 个字段标签，均标注"手动领取"标识，运营无需进入配置弹窗即可在主列表直接确认领取方式</li>
-          </ul>
-
-          <h4>三、发放方式：自动发放 / 人工发放，决定是否需要人工审核</h4>
-          <ul>
-            <li><b>入口</b>：新增/编辑抽屉底部的「发放方式」单选（自动发放／人工发放），<b>逐等级配置</b>；主列表同步展示「发放方式」列，运营无需进入抽屉即可确认口径</li>
-            <li><b>自动发放</b>：会员在客户端点击"领取"后，系统直接判定<b>审核通过</b>，彩金立即到账，「VIP福利彩金审核」页记录审核方式＝"自动"、审核人＝"系统"</li>
-            <li><b>人工发放</b>：会员在客户端点击"领取"后，进入<b>待审核</b>状态（客户端按钮展示为"审核中"，彩金尚未到账），需运营在「VIP福利彩金审核」页人工审核通过后，才正式发放到账，审核方式＝"手动"、审核人＝实际操作的运营账号</li>
-            <li><b>与「领取规则设置」的关系</b>：两者是互不影响的独立维度——「发放方式」决定"会员点击领取之后，钱多久/怎么到账"；「领取规则设置」（见第四节）决定"会员迟迟不点领取，奖励本身要不要过期作废"。一笔奖励从生成到会员实际点击领取之前，均按「领取规则设置」的方案处理；会员点击领取的那一刻起，才切换到「发放方式」决定的审核流程</li>
-          </ul>
-
-          <h4>四、领取规则<span class="tag-new">NEW</span>：统一配置，处理跨期未领取奖励</h4>
-          <ul>
-            <li><b>入口</b>：工具栏新增独立按钮「领取规则设置」，单独弹窗配置，<b>全局统一生效</b>，覆盖晋级礼金 / 日福利礼金 / 周福利礼金 / 月福利礼金四类奖励，不分等级单独配置；其中方案三/方案四的"受众条件（充值）"仅用于控制日/周/月福利礼金<b>能否领取/是否生成</b>，<b>不适用于晋级礼金</b>——晋级礼金只要达标即可领取，不受充值等受众条件限制，详见第六节说明</li>
-            <li>所有统计、结算、判定时间均按<b>北京时间（UTC+8）</b>执行；生成方式为<b>定时统计生成，不按流水达标实时生成</b>：日福利礼金次日 00:00~02:00 结算上一自然日；周福利礼金每周一 00:00~02:00 结算上一自然周（与周流水结算节点一致）；月福利礼金每月16日 00:00~02:00 结算上一自然月；晋级礼金为一次性奖励，以"跨天"为界，晋级次日 00:00 判定是否已领取</li>
-            <li>四选一处理方案（天数下拉沿用需求约定的 5 / 7 / 15 / 30 天内充值可选）：
+<div class="sidebar">
+<div class="logo">JUAN<span>365</span></div>
+<div class="nav-group-label">会员</div>
+<div class="nav-item">全部会员</div>
+<div class="nav-item">会员账单</div>
+<div class="nav-item">账单详情</div>
+<div class="nav-item">VIP列表-按投注</div>
+<div class="nav-item active" id="nav-viplist" onclick="switchAdminPage('viplist')">VIP列表-按抽佣</div>
+<div class="nav-item" id="nav-audit" onclick="switchAdminPage('audit')">VIP福利彩金审核</div>
+<div class="nav-item">会员投注</div>
+<div class="nav-item">会员返水</div>
+<div class="nav-item">资金处理</div>
+<div class="nav-item">提款策略</div>
+<div class="nav-item">返水策略</div>
+<div class="nav-item">代理推广</div>
+<div class="nav-item">会员返佣</div>
+<div class="nav-item">登录日志</div>
+<div class="nav-item">会员消息</div>
+<div class="nav-item">标签管理</div>
+<div class="nav-item">全民推广</div>
+</div>
+<div class="main">
+<div class="topbar">仪表盘  /  <b id="admin-topbar-title">VIP列表-按抽佣</b></div>
+<div class="tabstrip">
+<div class="tab">仪表盘 <span class="x">×</span></div>
+<div class="tab">会员盈亏 <span class="x">×</span></div>
+<div class="tab">全部会员 <span class="x">×</span></div>
+<div class="tab active" id="tab-strip-viplist" onclick="switchAdminPage('viplist')">VIP列表-按抽佣 <span class="x">×</span></div>
+<div class="tab" id="tab-strip-audit" onclick="switchAdminPage('audit')">VIP福利彩金审核 <span class="x">×</span></div>
+</div>
+<div class="content">
+<div class="admin-page" id="admin-page-viplist">
+<details class="change-note">
+<summary><span class="chevron">▶</span>本次改动说明（VIP列表页 / 礼金统一固定手动领取 + 日/月福利礼金 + 领取规则 + 手动领取与发放方式关联说明 + 保级衰退与恢复机制）— 点击展开查看变更详情</summary>
+<div class="note-body">
+<h4>一、字段变更</h4>
+<ul>
+<li><b>彩金领取方式</b>与<b>是否需要人工审核</b>是两个独立维度，请勿混淆：①晋级礼金、日福利礼金、周福利礼金、月福利礼金的<b>领取动作统一固定为会员手动领取</b>（不提供"自动生成即到账"式的免点击发放，此项与上一轮一致，未再调整）；②「发放方式」（自动发放／人工发放，逐等级配置，非逐礼金类型单独配置）决定会员点击"领取"后彩金是<b>系统自动审核通过直接到账</b>，还是<b>进入待审核状态、需运营在「VIP福利彩金审核」页人工审核通过后才发放</b>，新增/编辑抽屉与主列表均沿用该字段。为了让运营在后台就能清楚识别"手动领取"这一固定口径，表格对应4个礼金列头、以及新增/编辑抽屉对应4个字段标签，均加上<span class="tag-manual">手动领取</span>标识</li>
+<li><b>新增</b>：日福利礼金<span class="tag-new">NEW</span>、日流水<span class="tag-new">NEW</span>（日福利礼金的达标门槛，逻辑与"周流水→周福利礼金"一致）</li>
+<li><b>新增</b>：月福利礼金<span class="tag-new">NEW</span>、月流水<span class="tag-new">NEW</span>（逻辑同上）；月福利礼金固定<b>每月16日</b>结算生成上一自然月的奖励</li>
+<li>日/月福利礼金不再提供逐等级"是否启用"勾选：某等级若不需要该项福利，直接将对应金额配置为 0 即可；是否面向全体等级"整体开放"该福利，统一由「客户端展示设置」中的展示字段勾选控制（勾选状态同时决定是否实际生成待领取记录，见第五节）</li>
+</ul>
+<h4>二、晋级礼金 / 日福利礼金 / 周福利礼金 / 月福利礼金：统一手动领取</h4>
+<ul>
+<li>达标后礼金进入"待领取"状态，由会员在客户端「我的特权」页主动点击领取；<b>领取前不入账，也不计入提现流水</b>，领取后按该等级配置的「发放礼金稽核倍数」（客户端展示别名"提现流水倍数"）计入提现流水门槛——若该等级发放方式为<b>人工发放</b>，则需运营审核通过后才计入；若为<b>自动发放</b>，会员点击"领取"后系统即自动审核通过并计入</li>
+<li>日 / 周 / 月福利礼金能否"生成"，分别取决于对应周期内是否满足日流水 / 周流水 / 月流水门槛；跨级晋级礼金仍按每一级依次生成独立的"待领取"记录，不合并</li>
+<li>可见性：表格中晋级礼金 / 日福利礼金 / 周福利礼金 / 月福利礼金 4 个对应列头，以及新增/编辑抽屉对应 4 个字段标签，均标注"手动领取"标识，运营无需进入配置弹窗即可在主列表直接确认领取方式</li>
+</ul>
+<h4>三、发放方式：自动发放 / 人工发放，决定是否需要人工审核</h4>
+<ul>
+<li><b>入口</b>：新增/编辑抽屉底部的「发放方式」单选（自动发放／人工发放），<b>逐等级配置</b>；主列表同步展示「发放方式」列，运营无需进入抽屉即可确认口径</li>
+<li><b>自动发放</b>：会员在客户端点击"领取"后，系统直接判定<b>审核通过</b>，彩金立即到账，「VIP福利彩金审核」页记录审核方式＝"自动"、审核人＝"系统"</li>
+<li><b>人工发放</b>：会员在客户端点击"领取"后，进入<b>待审核</b>状态（客户端按钮展示为"审核中"，彩金尚未到账），需运营在「VIP福利彩金审核」页人工审核通过后，才正式发放到账，审核方式＝"手动"、审核人＝实际操作的运营账号</li>
+<li><b>与「领取规则设置」的关系</b>：两者是互不影响的独立维度——「发放方式」决定"会员点击领取之后，钱多久/怎么到账"；「领取规则设置」（见第四节）决定"会员迟迟不点领取，奖励本身要不要过期作废"。一笔奖励从生成到会员实际点击领取之前，均按「领取规则设置」的方案处理；会员点击领取的那一刻起，才切换到「发放方式」决定的审核流程</li>
+</ul>
+<h4>四、领取规则<span class="tag-new">NEW</span>：二期仅保留「未领取作废」</h4>
+<ul>
+<li><b>二期生效范围</b>：本期「领取规则设置」仅保留<b>未领取作废</b>，作为全局统一规则；适用于日福利礼金、周福利礼金、月福利礼金。<b>晋级礼金不受跨期作废限制，达标生成后永久保留至会员领取</b>。</li>
+<li><b>未领取作废</b>：跨天、跨周、跨月时，对应周期福利仍未领取的，由系统自动回收作废；数据库保留作废记录供查询核对，客户端不再展示该笔可领取奖励。</li>
+<li>所有统计、结算、判定时间均按<b>北京时间（UTC+8）</b>执行；日福利次日00:00~02:00结算上一自然日；周福利每周一00:00~02:00结算上一自然周；月福利每月16日00:00~02:00结算上一自然月。</li>
+<li><b>三期预留（本期不开发）</b>：以下三项仅保留需求痕迹，统一以删除线标识，不进入二期开发/测试范围：
               <table>
-                <tr><th style="width:36px;">方案</th><th style="width:96px;">类型</th><th>规则内容</th></tr>
-                <tr><td>1</td><td>未领取转发</td><td>跨天，跨周，跨月时，未领取奖励<b>不作废</b>——奖励继续保留为待领取状态，系统同步发送一条站内信/邮件<b>提醒</b>告知会员有奖励未领取；<b>领取入口和领取方式不变</b>，会员仍需回到VIP福利页面点击"领取"才能到账，站内信/邮件仅作提示，不是发放渠道，也无需在消息中心操作</td></tr>
-                <tr><td>2</td><td>未领取作废</td><td>跨天，跨周，跨月时，未领取奖励<b>系统回收作废</b>——由系统自动回收并作废，作废后领取金额、奖励状态、客户端展示数据全部清零，数据库保留作废记录，客户端不展示</td></tr>
-                <tr><td>3</td><td>受众控制领取</td><td><b>受众用户1</b>：跨天，跨周，跨月时，未领取奖励系统回收作废——受众条件仅控制"是否可领取"，不影响是否生成；奖励照常按周期生成，不满足受众条件时客户端展示为"不可领取"；用户在配置天数内如有任意一笔成功充值到账（不限金额），当前周期内已生成、未领取、未作废的奖励立即实时解锁为可领取；跨期仍未领取的，按方案2作废</td></tr>
-                <tr><td>4</td><td>受众控制发奖</td><td><b>受众用户2</b>：跨天，跨周，跨月时，不满足受众条件不派发奖励，未领取奖励系统回收作废——受众条件控制"是否生成奖励"，定时统计时先判断受众条件，不满足则本周期直接不生成（非作废，是压根不产生记录）；满足受众条件且流水达标才生成奖励并允许领取；跨期仍未领取的，按方案2作废</td></tr>
-              </table>
-              <div class="section-sub" style="margin:2px 0 0;">类型命名口径：<b>未领取转发</b>=奖励生成后跨周期仍保留为待领取状态并同步发送消息提醒，不作废，领取入口不变；<b>未领取作废</b>=奖励生成后跨周期自动回收；<b>受众控制领取</b>=奖励正常生成，满足受众条件后才可领取；<b>受众控制发奖</b>=满足受众条件才生成奖励</div>
-            </li>
-            <li><b>闭环补充</b>：VIP经验衰退、跌破当前等级门槛后自然回落至低等级，均仅影响「VIP经验」本身，<b>不影响</b>已生成但尚未领取的礼金记录，这些记录仍按自身周期边界与本规则独立处理（保级衰退与恢复机制详见「需求背景」页第四节）</li>
-            <li><b>规则闭环状态流转对照表</b>（按场景逐条列出四类礼金在各方案下的完整状态流转，便于开发/测试对照实现）：
+<tr><th style="width:110px;">迭代</th><th style="width:130px;">规则</th><th>说明</th></tr>
+<tr class="phase3-item"><td><span class="phase3-del">三期</span></td><td><span class="phase3-del">未领取转发</span></td><td><span class="phase3-del">跨周期奖励继续保留并发送站内信/邮件提醒。</span><span class="phase3-badge">三期，本期不开发</span></td></tr>
+<tr class="phase3-item"><td><span class="phase3-del">三期</span></td><td><span class="phase3-del">受众控制领取</span></td><td><span class="phase3-del">通过充值受众条件控制已生成奖励是否可领取。</span><span class="phase3-badge">三期，本期不开发</span></td></tr>
+<tr class="phase3-item"><td><span class="phase3-del">三期</span></td><td><span class="phase3-del">受众控制发奖</span></td><td><span class="phase3-del">通过充值受众条件控制奖励是否生成。</span><span class="phase3-badge">三期，本期不开发</span></td></tr>
+</table>
+</li>
+<li><b>二期状态闭环</b>：周期奖励生成 → 待领取 → 会员领取 → 按等级发放方式进入自动审核通过或人工待审核；若跨周期仍未领取 → 系统自动回收作废。晋级礼金不进入跨期作废分支。</li>
+</ul>
+<h4>五、日/周/月流水门槛与客户端展示设置调整</h4>
+<ul>
+<li>新增展示字段：日流水<span class="tag-new">NEW</span>、月流水<span class="tag-new">NEW</span>、日福利礼金<span class="tag-new">NEW</span>、月福利礼金<span class="tag-new">NEW</span></li>
+<li>「晋级礼金」「周福利礼金」「日福利礼金」「月福利礼金」四项<b>不只是控制客户端展示</b>：取消勾选后，即使对应VIP等级已经配置了具体金额，系统也<b>不会再实际生成待领取记录</b>（即不派发该项礼金）；其余字段（VIP等级名称、门槛、日流水、周流水、月流水、30天保级经验、衰退基础值、提现流水倍数）取消勾选仅影响客户端是否显示，不影响后台判定和实际发放</li>
+<li>「客户端展示设置」中的规则文案字段<b>「周流水规则」更名为「流水福利规则」</b>：因日/周/月流水的达标判定逻辑一致（达标发放、未达标不发放），不再单独按周期区分文案字段，统一在同一段文案中说明日/周/月三档的结算周期与判定逻辑，多等级流水规则、未达标流水结转两条例外规则保留并注明"仅周流水适用"；字段仍维持三段结构（晋升规则/保级规则/流水福利规则），不新增字段，不影响其余两段文案</li>
+</ul>
+<h4>六、晋级礼金不受「领取规则设置」任何方案约束、永不过期<span class="tag-new">NEW</span></h4>
+<ul>
+<li>「领取规则设置」方案三·受众控制领取、方案四·受众控制发奖中的"受众条件"特指<b>充值条件</b>，其作用范围<b>仅为日/周/月福利礼金</b>，用于控制这三类礼金"是否可领取"（方案三）或"是否生成"（方案四）；方案一/二"跨期未领取转发/作废"同样仅作用于日/周/月福利礼金</li>
+<li><b>晋级礼金不受方案一/二/三/四任何一项约束</b>：只要会员达到晋级门槛，晋级礼金即正常生成为"待领取"状态，不需要在配置天数内完成充值即可领取，不存在"已生成但需先充值"或"因未充值本期不生成"的情形</li>
+<li><b>晋级礼金不会过期作废</b>：达标生成后，无论间隔多久、跨多少个自然日仍未领取，都<b>不会</b>被系统按方案一/二回收作废，始终保持可领取，会员可随时回到VIP福利页面完成领取（历史等级中长期未领取的晋级礼金同理，可通过页面顶部"一键领取"一并领取）</li>
+</ul>
+<h4>七、保级衰退与恢复机制，替换原90天保级机制<span class="tag-new">NEW</span></h4>
+<ul>
+<li><b>90天保级流水字段更名为「30天保级经验」</b>：保级考核周期由90天调整为30天，字段口径由"流水金额"统一改为与晋级门槛一致的"VIP经验"（即原「待换算预期抽佣金额余量(pool)」，数值沿用同一份数据不变，仅命名与口径调整）；周期内累计经验达标则保级成功，重新开始下一轮30天周期</li>
+<li>新增<b>「衰退基础值」</b>字段（逐等级配置，单位：经验/天）：30天内未达标且周期内VIP经验<b>完全没有任何增长</b>的，从第31天起按该值开始扣除VIP经验，正式进入衰退；周期内哪怕有部分增长（即使未达标），也不触发衰退，顺延至下一个30天周期继续观察</li>
+<li><b>衰退加速</b>：进入衰退后每连续15天仍无经验增长，衰退速度提升一档，直至重新产生经验为止：
               <table>
-                <tr><th style="width:230px;">场景</th><th>处理规则</th></tr>
-                <tr><td>当前周期内满足流水</td><td>定时任务统计后，根据当前生效的领取规则方案生成或处理奖励</td></tr>
-                <tr><td>当前周期内未满足流水</td><td>不生成奖励</td></tr>
-                <tr><td>方案1：奖励已生成但未领取</td><td>跨周期后继续保留为待领取状态，同步发送站内信/邮件提醒；领取入口不变，用户仍需回到VIP福利页面点击"领取"</td></tr>
-                <tr><td>方案2：奖励已生成但未领取</td><td>跨周期后由系统自动回收并作废</td></tr>
-                <tr><td>方案3：满足流水但未成功充值到账</td><td>奖励照常生成，但客户端展示为不可领取</td></tr>
-                <tr><td>方案3：满足流水且在配置天数内成功充值到账</td><td>奖励实时解锁为可领取，无需等待下一次定时统计</td></tr>
-                <tr><td>方案3：充值金额校验</td><td>不校验金额大小，任意一笔成功充值到账即可满足受众条件</td></tr>
-                <tr><td>方案3：充值成功后的更新时机</td><td>立即将当前有效周期内已生成、未领取、未作废的奖励更新为可领取状态，不等待下一次定时统计</td></tr>
-                <tr><td>方案4：满足流水但不满足受众条件</td><td>不生成奖励（非作废，是压根不产生记录）</td></tr>
-                <tr><td>方案4：满足流水且满足受众条件</td><td>正常生成奖励，客户端可领取</td></tr>
-                <tr><td>方案2 / 3 / 4：奖励已生成但跨周期仍未领取</td><td>自动回收并作废，领取金额、奖励状态、客户端展示数据全部清零</td></tr>
-                <tr><td>已作废奖励后续重新满足条件</td><td>不因用户后续重新满足流水或完成充值而恢复，只能参与下一统计周期的奖励统计</td></tr>
-                <tr><td>奖励作废后</td><td>数据库保留作废记录供查询核对；客户端不再展示该笔已作废奖励</td></tr>
-                <tr><td>后台留痕要求</td><td>方案3"不可领取→充值解锁→跨期作废"的完整过程、方案4"不满足受众条件不生成奖励"的原因，均需记录，对应「VIP福利彩金审核」页审核备注信息</td></tr>
-              </table>
-            </li>
-            <li><b>已确认口径</b>（本轮与运营/研发确认后的关键口径汇总，供开发/测试快速核对）：
-              <table>
-                <tr><th style="width:170px;">项目</th><th>已确认规则</th></tr>
-                <tr><td>奖励类型</td><td>日福利礼金、周福利礼金、月福利礼金三类周期性奖励；晋级礼金为一次性奖励，不纳入本表周期性口径</td></tr>
-                <tr><td>统计周期</td><td>按<b>北京时间（UTC+8）</b>计算自然日、自然周、自然月</td></tr>
-                <tr><td>生成方式</td><td>定时统计生成，不按流水达标实时生成</td></tr>
-                <tr><td>方案3受众条件作用点</td><td>控制"是否可领取"，不控制"是否生成奖励"</td></tr>
-                <tr><td>方案4受众条件作用点</td><td>控制"是否生成奖励"</td></tr>
-                <tr><td>方案3充值判定</td><td>以"成功充值到账"为准</td></tr>
-                <tr><td>方案3充值金额</td><td>不限制金额，任意一笔成功充值到账即可</td></tr>
-                <tr><td>方案3解锁时机</td><td>充值成功到账后实时解锁，仅对当前有效周期内已生成、未领取、未作废的奖励生效</td></tr>
-                <tr><td>已作废奖励</td><td>作废后不可恢复，不因后续充值或重新满足条件而重新开放领取</td></tr>
-                <tr><td>后台记录要求</td><td>保留方案3"不可领取/充值解锁/作废"记录，以及方案4"不生成奖励"的原因记录</td></tr>
-                <tr><td>作废清零范围</td><td>领取金额、奖励状态、客户端展示数据全部清零</td></tr>
-                <tr><td>作废记录</td><td>数据库保留，客户端不展示</td></tr>
-              </table>
-            </li>
-          </ul>
-
-          <h4>五、日/周/月流水门槛与客户端展示设置调整</h4>
-          <ul>
-            <li>新增展示字段：日流水<span class="tag-new">NEW</span>、月流水<span class="tag-new">NEW</span>、日福利礼金<span class="tag-new">NEW</span>、月福利礼金<span class="tag-new">NEW</span></li>
-            <li>「晋级礼金」「周福利礼金」「日福利礼金」「月福利礼金」四项<b>不只是控制客户端展示</b>：取消勾选后，即使对应VIP等级已经配置了具体金额，系统也<b>不会再实际生成待领取记录</b>（即不派发该项礼金）；其余字段（VIP等级名称、门槛、日流水、周流水、月流水、30天保级经验、衰退基础值、提现流水倍数）取消勾选仅影响客户端是否显示，不影响后台判定和实际发放</li>
-            <li>「客户端展示设置」中的规则文案字段<b>「周流水规则」更名为「流水福利规则」</b>：因日/周/月流水的达标判定逻辑一致（达标发放、未达标不发放），不再单独按周期区分文案字段，统一在同一段文案中说明日/周/月三档的结算周期与判定逻辑，多等级流水规则、未达标流水结转两条例外规则保留并注明"仅周流水适用"；字段仍维持三段结构（晋升规则/保级规则/流水福利规则），不新增字段，不影响其余两段文案</li>
-          </ul>
-
-          <h4>六、晋级礼金不受「领取规则设置」任何方案约束、永不过期<span class="tag-new">NEW</span></h4>
-          <ul>
-            <li>「领取规则设置」方案三·受众控制领取、方案四·受众控制发奖中的"受众条件"特指<b>充值条件</b>，其作用范围<b>仅为日/周/月福利礼金</b>，用于控制这三类礼金"是否可领取"（方案三）或"是否生成"（方案四）；方案一/二"跨期未领取转发/作废"同样仅作用于日/周/月福利礼金</li>
-            <li><b>晋级礼金不受方案一/二/三/四任何一项约束</b>：只要会员达到晋级门槛，晋级礼金即正常生成为"待领取"状态，不需要在配置天数内完成充值即可领取，不存在"已生成但需先充值"或"因未充值本期不生成"的情形</li>
-            <li><b>晋级礼金不会过期作废</b>：达标生成后，无论间隔多久、跨多少个自然日仍未领取，都<b>不会</b>被系统按方案一/二回收作废，始终保持可领取，会员可随时回到VIP福利页面完成领取（历史等级中长期未领取的晋级礼金同理，可通过页面顶部"一键领取"一并领取）</li>
-          </ul>
-
-          <h4>七、保级衰退与恢复机制，替换原90天保级机制<span class="tag-new">NEW</span></h4>
-          <ul>
-            <li><b>90天保级流水字段更名为「30天保级经验」</b>：保级考核周期由90天调整为30天，字段口径由"流水金额"统一改为与晋级门槛一致的"VIP经验"（即原「待换算预期抽佣金额余量(pool)」，数值沿用同一份数据不变，仅命名与口径调整）；周期内累计经验达标则保级成功，重新开始下一轮30天周期</li>
-            <li>新增<b>「衰退基础值」</b>字段（逐等级配置，单位：经验/天）：30天内未达标且周期内VIP经验<b>完全没有任何增长</b>的，从第31天起按该值开始扣除VIP经验，正式进入衰退；周期内哪怕有部分增长（即使未达标），也不触发衰退，顺延至下一个30天周期继续观察</li>
-            <li><b>衰退加速</b>：进入衰退后每连续15天仍无经验增长，衰退速度提升一档，直至重新产生经验为止：
-              <table>
-                <tr><th style="width:100px;">阶段</th><th style="width:110px;">连续未活跃时间</th><th style="width:80px;">衰退倍率</th><th>说明</th></tr>
-                <tr><td>正常保级期</td><td>第1-30天</td><td>0</td><td>未触发衰退</td></tr>
-                <tr><td>衰退阶段1</td><td>第31-45天</td><td>1×</td><td>按该等级「衰退基础值」每日扣除VIP经验</td></tr>
-                <tr><td>衰退阶段2</td><td>第46-60天</td><td>2×</td><td>连续15天仍无经验增长后加速</td></tr>
-                <tr><td>衰退阶段3</td><td>第61-75天</td><td>3×</td><td>再次连续15天仍无经验增长</td></tr>
-                <tr><td>衰退阶段4</td><td>第76天起</td><td>4×</td><td>继续不活跃则维持最高倍率衰退，不再继续加速</td></tr>
-              </table>
-            </li>
-            <li><b>恢复机制</b>：会员一旦重新产生VIP经验，立即停止衰退，进入<b>2倍经验恢复期</b>，期间新获得经验按2倍计入，直至恢复到衰退/初始化调整前锁定的原VIP等级及原经验值，之后恢复正常1倍增速</li>
-            <li><b>恢复期再次不活跃（边界规则，本轮明确）</b>：尚未恢复至锁定目标便再次停止产生经验时，不立即衰退、不沿用上一轮衰退倍率，重新进入30天保级观察；只有完整30天未达保级要求且0经验增长，才从第31天重新按1×衰退。原恢复目标持续保留，后续再次活跃时重新按2倍经验继续恢复至原目标</li>
-            <li><b>与降级的关系（本轮明确）</b>：新机制不再有"周期未达标即刻掉1级"的硬性跳变；VIP经验因持续衰退跌破当前等级自身门槛时，于次日定时评估中按经验值实时对照等级门槛表自然回落至对应低等级，与晋级判定复用同一套每日评估逻辑（方向相反）；经验回升超过当前所处等级晋升阈值后可重新恢复原等级</li>
-            <li><b>降级后衰退基础值如何取值（本轮明确）</b>：衰退速度（1×/2×/3×/4×）绑定"连续不活跃天数"，不受降级影响，按自身节奏继续跳档；衰退基础值则按会员<b>当前所处等级</b>动态取值，降级后次日起改用新（低）等级配置的衰退基础值计算每日扣除量，<b>不沿用降级前那个等级的衰退基础值</b>，不额外引入"衰退起始等级"状态</li>
-            <li>衰退与降级仅影响VIP经验与等级判定本身，<b>不影响</b>已生成但尚未领取的日/周/月/晋级礼金记录，详见「需求背景」页第四节</li>
-            <li><b>衰退单日扣减不做跨等级门槛拆分（本轮明确）</b>：当日应扣金额（衰退基础值×衰退速度）整笔全额扣除，不因超出当前等级门槛缓冲区间而"卡线"部分扣减、剩余顺延次日；扣减后重新对照等级门槛表定位所在等级，单日内允许连续下降多个等级，与晋级"单日连续跨越多个等级"对称一致。示例：VIP3（门槛300）会员VIP经验315，当日应扣45（衰退基础值45×1倍），扣后270，跌破VIP3门槛300但仍≥VIP2门槛200，直接降至VIP2，次日起改用VIP2自身衰退基础值计算</li>
-          </ul>
-
-        </div>
-      </details>
-
-      <div class="toolbar">
-        <div class="toolbar-left">
-          <button class="btn btn-primary" onclick="openDrawer('add')">＋ 新增</button>
-          <button class="btn" onclick="openCopyModal()">客户端展示设置</button>
-          <button class="btn" onclick="openClaimRuleModal()">领取规则设置<span class="tag-new">NEW</span></button>
-        </div>
-        <div class="icon-row">
-          <span title="刷新">⟳</span>
-          <span title="搜索">🔍</span>
-          <span title="打印">🖶</span>
-          <span title="设置">⚙</span>
-        </div>
-      </div>
-
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>VIP等级</th>
-              <th>VIP等级名称</th>
-              <th>抽佣系数</th>
-              <th>晋升所需经验值门槛</th>
-              <th>预期抽佣金额<span class="tooltip-icon" data-tip="有效投注 ×（1 - 理论RTP - 实际返水率）">ⓘ</span></th>
-              <th>晋级礼金(U)<span class="tag-manual">手动领取</span></th>
-              <th class="new-col">日流水(U)<span class="tag-new">NEW</span></th>
-              <th class="new-col">日福利礼金(U)<span class="tag-new">NEW</span><span class="tag-manual">手动领取</span></th>
-              <th>周流水(U)</th>
-              <th>周福利礼金(U)<span class="tag-manual">手动领取</span></th>
-              <th class="new-col">月流水(U)<span class="tag-new">NEW</span></th>
-              <th class="new-col">月福利礼金(U)<span class="tag-new">NEW</span><span class="tag-manual">手动领取</span></th>
-              <th>30天保级经验</th>
-              <th class="new-col">衰退基础值(经验/天)<span class="tag-new">NEW</span></th>
-              <th>发放方式</th>
-              <th>发放礼金稽核倍数</th>
-              <th>编辑时间</th>
-              <th>编辑人</th>
-              <th>操作</th>
-            </tr>
-          </thead>
-          <tbody id="tbody"></tbody>
-        </table>
-      </div>
-    </div>
-    <!-- /admin-page-viplist -->
-
-    <div class="admin-page hidden" id="admin-page-audit">
-      <details class="change-note">
-        <summary><span class="chevron">▶</span>本次改动说明（审核方式还原为自动/手动两项 / 待审核为人工发放下的正式审核环节 / 审核人与审核备注信息生成规则 / 领取规则四个方案在本页的展示方式）— 点击展开查看变更详情</summary>
-        <div class="note-body">
-
-          <h4>一、页面说明</h4>
-          <ul>
-            <li>用于集中查看晋级礼金／日／周／月福利礼金的<b>领取审核</b>与<b>跨周期过期</b>两类记录，供运营审核与客服对账使用</li>
-            <li>晋级礼金／日／周／月福利礼金的<b>领取动作统一固定为会员手动领取</b>（不变）；但会员点击"领取"之后是否需要人工审核，由「VIP列表-按抽佣」页逐等级配置的「发放方式」决定：<b>自动发放</b>的等级，记录直接为系统自动判定后的留痕；<b>人工发放</b>的等级，会员领取后先进入"待审核"，需运营在本页完成审核，是本页真实存在的前置人工审批环节，并非预留/待定功能</li>
-          </ul>
-
-          <h4>二、审核状态与查询范围</h4>
-          <ul>
-            <li>审核状态筛选支持<span class="tag-type">待审核</span><span class="tag-type">审核通过</span><span class="tag-type">审核拒绝</span>三态查询，<b>默认展示全部状态</b>；方案四"受众条件未满足、本期不生成奖励"的场景统一归入<b>审核拒绝</b>，不再单独设置状态，口径详见本节第六点</li>
-            <li>「申领时间」筛选<b>默认展示近一周</b>（今日往前推7天，含首尾两天），页面首次进入时数据即按该范围展示；可按需调整会员ID／账号／代理ID／VIP等级／彩金类型／彩金金额／审核方式／审核人／审核时间等条件后点击"查询"，点击"重置"恢复默认近一周范围</li>
-            <li><b>待审核</b>状态及其操作列的"审核"入口为<b>正式功能</b>：仅当会员所在VIP等级的「发放方式」配置为<b>人工发放</b>时才会出现该状态，点击"审核"打开弹窗，在弹窗内选择审核状态（通过/不通过）并填写审核备注信息后提交；「发放方式」为<b>自动发放</b>的等级不会产生"待审核"记录，会员领取后系统直接判定为审核通过；<b>操作列仅"待审核"状态展示该入口，其余审核状态不展示任何操作</b></li>
-          </ul>
-
-          <h4>三、审核时间口径</h4>
-          <ul>
-            <li><b>自动发放 → 会员领取后自动审核通过</b>：会员在客户端点击"领取"，系统即刻判定审核通过，<b>审核时间＝会员领取时间</b>，<b>审核方式＝"自动"</b>，<b>审核人固定为"sysadmin"</b>，审核备注信息由系统按对应发放规则自动生成描述文案（不可编辑）</li>
-            <li><b>人工发放 → 会员领取后进入待审核</b>：会员点击"领取"即提交领取申请，此时<b>审核方式已可读取为"手动"</b>（只要后台生成了领取数据，该等级配置的自动/手动即可读取到，不存在审核方式为"—"的情况），仅<b>审核人／审核时间在运营完成审核前为"—"</b>；直至运营在本页完成人工审核，才分别转为审核通过或审核拒绝，<b>审核人固定为"dipsy01"</b>，审核时间＝运营操作时间；<b>审核方式为"手动"时，"待审核"与"审核拒绝"两种状态下列表均不展示审核备注信息</b></li>
-            <li><b>跨周期过期 → 审核拒绝</b>：未在周期内领取的奖励由系统按「领取规则设置」自动回收作废，与该等级的「发放方式」配置无关，<b>审核方式统一记为"自动"</b>（系统自动处理，非运营人工操作），<b>审核人固定为"sysadmin"</b>，<b>审核时间＝过期回收时间</b>；此类记录的"申领时间"展示为<b>该期奖励生成时间</b>（而非领取时间），因会员实际未申领</li>
-          </ul>
-
-          <h4>四、审核方式筛选项</h4>
-          <ul>
-            <li>审核方式筛选分<b>"自动"／"手动"两项</b>：<b>自动</b>＝系统自动判定产生的记录，覆盖"自动发放等级会员领取后自动审核通过"与"跨周期过期系统自动回收作废"两种场景；<b>手动</b>＝运营在本页人工审核产生的记录，对应"人工发放等级"的审核通过/审核拒绝</li>
-          </ul>
-
-          <h4>五、审核人 / 审核备注信息生成规则（按场景对照，便于测试核对）</h4>
-          <ul>
-            <li>审核人与审核备注信息的生成方式由<b>审核方式</b>决定，与「发放方式」是否人工发放一一对应，不存在人工审核记录使用系统模板文案、或自动记录由人工填写的交叉情况。下表按场景逐一对照：</li>
-          </ul>
-          <table>
-            <thead>
-              <tr><th style="width:16%">场景</th><th style="width:10%">审核方式</th><th style="width:12%">审核人</th><th style="width:44%">审核备注信息生成规则</th><th style="width:18%">对应记录</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>自动发放等级，会员点击"领取"</td><td>自动</td><td><code>sysadmin</code></td><td>系统按该记录对应的发放规则（正常领取/受众解锁领取等）自动生成描述文案，不可编辑</td><td>ID 1、7、10（示例）</td></tr>
-              <tr><td>人工发放等级，会员点击"领取"，运营<b>尚未审核</b></td><td>手动</td><td>—</td><td>该场景下<b>列表不展示审核备注信息</b>（已领取即已生成数据，审核方式可读取为"手动"；审核人/审核时间需运营完成审核后才生成）</td><td>ID 6、12、13（待审核）</td></tr>
-              <tr><td>人工发放等级，运营完成人工审核（<b>通过</b>）</td><td>手动</td><td><code>dipsy01</code></td><td>由运营在本页填写审核备注信息后确认</td><td>ID 1-4、8、11、15（示例）</td></tr>
-              <tr><td>人工发放等级，运营完成人工审核（<b>拒绝</b>）</td><td>手动</td><td><code>dipsy01</code></td><td>由运营在本页填写审核备注信息后确认，但<b>该场景下列表不展示审核备注信息</b>（审核拒绝＋审核方式为手动时统一隐藏，与其余场景的展示规则不同）</td><td>本页可实操验证，暂无历史示例行</td></tr>
-              <tr><td>跨周期未领取，系统自动回收作废（方案二 / 方案三未解锁）</td><td>自动</td><td><code>sysadmin</code></td><td>系统按当前「领取规则设置」生效方案自动生成作废原因描述文案，不可编辑</td><td>ID 5、9、14、16（示例）</td></tr>
-              <tr><td>方案四受众条件未满足，本期不生成奖励</td><td>自动</td><td><code>sysadmin</code></td><td>系统固定生成"受众条件未满足，本期不生成奖励"文案，不可编辑；归为<b>审核拒绝</b>（因未达到礼金生成标准，与其他系统自动判定场景保持统一口径）</td><td>ID 17、18（示例）</td></tr>
-            </tbody>
-          </table>
-
-          <h4>六、领取规则四个方案在本页的展示方式（便于开发/测试理解）</h4>
-          <ul>
-            <li>「领取规则设置」的四个方案与「发放方式」的自动/人工是<b>两个独立维度</b>：领取规则决定"奖励生成后，会员迟迟不领取要不要过期作废"；发放方式决定"会员点击领取之后，要不要人工审核才能到账"。同一等级、同一笔奖励，会先后经历这两层判定。「领取规则设置」为<b>全局唯一生效</b>的配置，同一时间只有一个方案在跑，因此<b>审核备注信息不逐条标注具体方案编号</b>，只需清楚描述该记录的特殊处理原因即可；下方按方案分别说明本页应呈现的效果，仅为对照说明</li>
-            <li><b>方案一·未领取转发</b>：跨天/跨周/跨月时，未领取奖励<b>不作废</b>，继续保留为待领取状态，领取入口和方式不变，系统仅同步发送一条站内信/邮件提醒。本页表现为：<b>跨期未领取期间不产生审核记录</b>（既非"审核通过"也非"审核拒绝"，因为会员尚未发生实际领取动作，奖励也未被回收）；直到会员之后主动回到VIP福利页面点击"领取"，才按该等级的「发放方式」进入"自动审核通过"或"待审核"，与是否跨过周期无关</li>
-            <li><b>方案二·未领取作废</b>：跨天/跨周/跨月时，未领取奖励由系统<b>回收作废</b>。本页表现为：<b>审核拒绝</b>，审核方式＝"自动"（系统自动处理），审核备注信息说明作废原因；下方演示数据中已包含多条示例</li>
-            <li><b>方案三·受众控制领取</b>：仅约束日/周/月福利礼金，<b>不影响晋级礼金</b>（详见「VIP列表-按抽佣」页第六节说明）。奖励按周期正常生成，仅"是否可领取"受充值条件控制。会员在配置天数内完成充值并领取的，记录与普通领取<b>无差异</b>，之后按该等级「发放方式」进入自动审核通过或待审核（备注信息可标注"受众充值解锁后领取"便于追溯来源）；配置天数内始终未完成充值、跨期仍未领取的，按<b>方案二</b>同样的作废逻辑处理，审核方式＝"自动"（备注信息标注"受众未在时限内充值解锁"）。下方演示数据中已包含这两类标注示例</li>
-            <li><b>方案四·受众控制发奖</b>：同样仅约束日/周/月福利礼金，<b>不影响晋级礼金</b>。受众条件（充值）在生成时点就不满足时，<b>本期直接不生成奖励记录</b>（不是先生成再作废）；但「VIP列表-按抽佣」页需求中明确要求<b>后台仍需留痕"不满足受众条件不生成奖励"的原因</b>，供客服核对。本页表现为：因未达到礼金生成标准，统一归入<b>审核拒绝</b>（与其他审核状态口径保持一致），审核方式＝"自动"，审核人固定为"sysadmin"，审核备注信息说明"受众条件未满足，本期不生成奖励"；彩金金额按<b>配置金额</b>正常展示。下方演示数据中已包含该场景示例</li>
-          </ul>
-
-        </div>
-      </details>
-
-      <div class="filter-bar">
-        <div class="filter-row">
-          <div class="filter-item"><label>会员ID</label><input type="text" id="af_memberId" placeholder="请输入会员ID"></div>
-          <div class="filter-item"><label>会员账号</label><input type="text" id="af_account" placeholder="请输入会员账号"></div>
-          <div class="filter-item"><label>上级代理ID</label><input type="text" id="af_agent" placeholder="请输入上级代理ID"></div>
-          <div class="filter-item"><label>VIP等级</label><select id="af_level"><option value="">请选择VIP等级</option></select></div>
-        </div>
-        <div class="filter-row">
-          <div class="filter-item"><label>审核状态</label>
-            <select id="af_status">
-              <option value="">全部状态</option>
-              <option value="pending">待审核</option>
-              <option value="approved">审核通过</option>
-              <option value="rejected">审核拒绝</option>
-            </select>
-          </div>
-          <div class="filter-item"><label>彩金类型</label>
-            <select id="af_type">
-              <option value="">请选择彩金类型</option>
-              <option value="晋级礼金">晋级礼金</option>
-              <option value="日福利礼金">日福利礼金</option>
-              <option value="周福利礼金">周福利礼金</option>
-              <option value="月福利礼金">月福利礼金</option>
-            </select>
-          </div>
-          <div class="filter-item filter-item-range"><label>彩金金额</label>
-            <div class="range-pair"><input type="number" id="af_amountMin" placeholder="请输入彩金金额"><span class="sep">~</span><input type="number" id="af_amountMax" placeholder="请输入彩金金额"></div>
-          </div>
-          <div class="filter-item filter-item-range"><label>申领时间</label>
-            <div class="range-pair"><input type="date" id="af_claimFrom"><span class="sep">-</span><input type="date" id="af_claimTo"></div>
-          </div>
-        </div>
-        <div class="filter-row">
-          <div class="filter-item"><label>审核方式</label>
-            <select id="af_method">
-              <option value="">请选择审核方式</option>
-              <option value="自动">自动</option>
-              <option value="手动">手动</option>
-            </select>
-          </div>
-          <div class="filter-item"><label>审核人</label><input type="text" id="af_auditor" placeholder="请输入审核人"></div>
-          <div class="filter-item filter-item-range"><label>审核时间</label>
-            <div class="range-pair"><input type="date" id="af_auditFrom"><span class="sep">-</span><input type="date" id="af_auditTo"></div>
-          </div>
-          <div class="filter-item filter-actions">
-            <button class="btn btn-primary" onclick="applyAuditFilter()">🔍 查询</button>
-            <button class="btn" onclick="resetAuditFilter()">⟲ 重置</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>会员ID</th>
-              <th>会员账号</th>
-              <th>上级代理ID</th>
-              <th>VIP等级</th>
-              <th>审核状态</th>
-              <th>彩金类型</th>
-              <th>彩金金额</th>
-              <th>申领时间</th>
-              <th>审核方式</th>
-              <th>审核人</th>
-              <th>审核时间</th>
-              <th>审核备注信息</th>
-              <th>操作</th>
-            </tr>
-          </thead>
-          <tbody id="audit-tbody"></tbody>
-        </table>
-      </div>
-      <div class="pager" id="audit-pager"></div>
-    </div>
-    <!-- /admin-page-audit -->
-  </div>
-  </div>
+<tr><th style="width:100px;">阶段</th><th style="width:110px;">连续未活跃时间</th><th style="width:80px;">衰退倍率</th><th>说明</th></tr>
+<tr><td>正常保级期</td><td>第1-30天</td><td>0</td><td>未触发衰退</td></tr>
+<tr><td>衰退阶段1</td><td>第31-45天</td><td>1×</td><td>按该等级「衰退基础值」每日扣除VIP经验</td></tr>
+<tr><td>衰退阶段2</td><td>第46-60天</td><td>2×</td><td>连续15天仍无经验增长后加速</td></tr>
+<tr><td>衰退阶段3</td><td>第61-75天</td><td>3×</td><td>再次连续15天仍无经验增长</td></tr>
+<tr><td>衰退阶段4</td><td>第76天起</td><td>4×</td><td>继续不活跃则维持最高倍率衰退，不再继续加速</td></tr>
+</table>
+</li>
+<li><b>恢复机制</b>：会员一旦重新产生VIP经验，立即停止衰退，进入<b>2倍经验恢复期</b>，期间新获得经验按2倍计入，直至恢复到衰退/初始化调整前锁定的原VIP等级及原经验值，之后恢复正常1倍增速</li>
+<li><b>恢复期再次不活跃（边界规则，本轮明确）</b>：尚未恢复至锁定目标便再次停止产生经验时，不立即衰退、不沿用上一轮衰退倍率，重新进入30天保级观察；只有完整30天未达保级要求且0经验增长，才从第31天重新按1×衰退。原恢复目标持续保留，后续再次活跃时重新按2倍经验继续恢复至原目标</li>
+<li><b>与降级的关系（本轮明确）</b>：新机制不再有"周期未达标即刻掉1级"的硬性跳变；VIP经验因持续衰退跌破当前等级自身门槛时，于次日定时评估中按经验值实时对照等级门槛表自然回落至对应低等级，与晋级判定复用同一套每日评估逻辑（方向相反）；经验回升超过当前所处等级晋升阈值后可重新恢复原等级</li>
+<li><b>降级后衰退基础值如何取值（本轮明确）</b>：衰退速度（1×/2×/3×/4×）绑定"连续不活跃天数"，不受降级影响，按自身节奏继续跳档；衰退基础值则按会员<b>当前所处等级</b>动态取值，降级后次日起改用新（低）等级配置的衰退基础值计算每日扣除量，<b>不沿用降级前那个等级的衰退基础值</b>，不额外引入"衰退起始等级"状态</li>
+<li>衰退与降级仅影响VIP经验与等级判定本身，<b>不影响</b>已生成但尚未领取的日/周/月/晋级礼金记录，详见「需求背景」页第四节</li>
+<li><b>衰退单日扣减不做跨等级门槛拆分（本轮明确）</b>：当日应扣金额（衰退基础值×衰退速度）整笔全额扣除，不因超出当前等级门槛缓冲区间而"卡线"部分扣减、剩余顺延次日；扣减后重新对照等级门槛表定位所在等级，单日内允许连续下降多个等级，与晋级"单日连续跨越多个等级"对称一致。示例：VIP3（门槛300）会员VIP经验315，当日应扣45（衰退基础值45×1倍），扣后270，跌破VIP3门槛300但仍≥VIP2门槛200，直接降至VIP2，次日起改用VIP2自身衰退基础值计算</li>
+</ul>
+</div>
+</details>
+<div class="toolbar">
+<div class="toolbar-left">
+<button class="btn btn-primary" onclick="openDrawer('add')">＋ 新增</button>
+<button class="btn" onclick="openCopyModal()">客户端展示设置</button>
+<button class="btn" onclick="openClaimRuleModal()">领取规则设置<span class="tag-new">NEW</span></button>
+</div>
+<div class="icon-row">
+<span title="刷新">⟳</span>
+<span title="搜索">🔍</span>
+<span title="打印">🖶</span>
+<span title="设置">⚙</span>
+</div>
+</div>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>VIP等级</th>
+<th>VIP等级名称</th>
+<th>抽佣系数</th>
+<th>晋升所需经验值门槛</th>
+<th>预期抽佣金额<span class="tooltip-icon" data-tip="有效投注 ×（1 - 理论RTP - 实际返水率）">ⓘ</span></th>
+<th>晋级礼金(U)<span class="tag-manual">手动领取</span></th>
+<th class="new-col">日流水(U)<span class="tag-new">NEW</span></th>
+<th class="new-col">日福利礼金(U)<span class="tag-new">NEW</span><span class="tag-manual">手动领取</span></th>
+<th>周流水(U)</th>
+<th>周福利礼金(U)<span class="tag-manual">手动领取</span></th>
+<th class="new-col">月流水(U)<span class="tag-new">NEW</span></th>
+<th class="new-col">月福利礼金(U)<span class="tag-new">NEW</span><span class="tag-manual">手动领取</span></th>
+<th>30天保级经验</th>
+<th class="new-col">衰退基础值(经验/天)<span class="tag-new">NEW</span></th>
+<th>发放方式</th>
+<th>发放礼金稽核倍数</th>
+<th>编辑时间</th>
+<th>编辑人</th>
+<th>操作</th>
+</tr>
+</thead>
+<tbody id="tbody"></tbody>
+</table>
+</div>
+</div>
+<!-- /admin-page-viplist -->
+<div class="admin-page hidden" id="admin-page-audit">
+<details class="change-note">
+<summary><span class="chevron">▶</span>本次改动说明（人工发放领取即记录“手动” / 审核人按实际操作账号记录 / 待审核与手动拒绝隐藏审核备注 / 二期仅保留“未领取作废”）— 点击展开查看变更详情</summary>
+<div class="note-body">
+<h4>一、页面说明</h4>
+<ul>
+<li>用于集中查看晋级礼金／日／周／月福利礼金的<b>领取审核</b>与<b>跨周期过期</b>两类记录，供运营审核与客服对账使用</li>
+<li>晋级礼金／日／周／月福利礼金的<b>领取动作统一固定为会员手动领取</b>（不变）；但会员点击"领取"之后是否需要人工审核，由「VIP列表-按抽佣」页逐等级配置的「发放方式」决定：<b>自动发放</b>的等级，记录直接为系统自动判定后的留痕；<b>人工发放</b>的等级，会员领取后先进入"待审核"，需运营在本页完成审核，是本页真实存在的前置人工审批环节，并非预留/待定功能</li>
+</ul>
+<h4>二、审核状态与查询范围</h4>
+<ul>
+<li>审核状态筛选支持<span class="tag-type">待审核</span><span class="tag-type">审核通过</span><span class="tag-type">审核拒绝</span>三态查询，<b>默认展示全部状态</b>；方案四"受众条件未满足、本期不生成奖励"的场景统一归入<b>审核拒绝</b>，不再单独设置状态，口径详见本节第六点</li>
+<li>「申领时间」筛选<b>默认展示近一周</b>（今日往前推7天，含首尾两天），页面首次进入时数据即按该范围展示；可按需调整会员ID／账号／代理ID／VIP等级／彩金类型／彩金金额／审核方式／审核人／审核时间等条件后点击"查询"，点击"重置"恢复默认近一周范围</li>
+<li><b>待审核</b>状态及其操作列的"审核"入口为<b>正式功能</b>：仅当会员所在VIP等级的「发放方式」配置为<b>人工发放</b>时才会出现该状态，点击"审核"打开弹窗，在弹窗内选择审核状态（通过/不通过）并填写审核备注信息后提交；「发放方式」为<b>自动发放</b>的等级不会产生"待审核"记录，会员领取后系统直接判定为审核通过；<b>操作列仅"待审核"状态展示该入口，其余审核状态不展示任何操作</b></li>
+</ul>
+<h4>三、审核时间口径</h4>
+<ul>
+<li><b>自动发放 → 会员领取后自动审核通过</b>：会员在客户端点击"领取"，系统即刻判定审核通过，<b>审核时间＝会员领取时间</b>，<b>审核方式＝"自动"</b>，<b>审核人固定为"sysadmin"</b>，审核备注信息由系统按对应发放规则自动生成描述文案（不可编辑）</li>
+<li><b>人工发放 → 会员领取后进入待审核</b>：会员点击"领取"即提交领取申请，此时<b>审核方式立即记录为"手动"</b>。只要后台已生成领取数据，即可读取该等级配置的自动/手动发放方式，<b>不存在审核方式为"—"的情况</b>；运营完成审核前，仅<b>审核人／审核时间＝"—"</b>。运营在本页完成审核后，状态转为审核通过或审核拒绝，<b>审核人＝实际执行审核的运营账号（谁审核记录谁）</b>，审核时间＝运营操作时间。原型示例统一使用账号 <code>dipsy01</code>，仅用于演示，不代表线上固定审核人。<b>审核方式为"手动"时，待审核与审核拒绝两种状态列表均不展示审核备注信息；审核通过可展示运营填写的审核备注</b>。</li>
+<li><b>跨周期过期 → 审核拒绝</b>：未在周期内领取的奖励由系统按「领取规则设置」自动回收作废，与该等级的「发放方式」配置无关，<b>审核方式统一记为"自动"</b>（系统自动处理，非运营人工操作），<b>审核人固定为"sysadmin"</b>，<b>审核时间＝过期回收时间</b>；此类记录的"申领时间"展示为<b>该期奖励生成时间</b>（而非领取时间），因会员实际未申领</li>
+</ul>
+<h4>四、审核方式筛选项</h4>
+<ul>
+<li>审核方式筛选分<b>"自动"／"手动"两项</b>：<b>自动</b>＝系统自动判定产生的记录，覆盖"自动发放等级会员领取后自动审核通过"与"跨周期过期系统自动回收作废"两种场景；<b>手动</b>＝运营在本页人工审核产生的记录，对应"人工发放等级"的审核通过/审核拒绝</li>
+</ul>
+<h4>五、审核人 / 审核备注信息生成规则（按场景对照，便于测试核对）</h4>
+<ul>
+<li>审核人与审核备注信息的生成方式由<b>审核方式</b>决定，与「发放方式」是否人工发放一一对应，不存在人工审核记录使用系统模板文案、或自动记录由人工填写的交叉情况。下表按场景逐一对照：</li>
+</ul>
+<table>
+<thead>
+<tr><th style="width:16%">场景</th><th style="width:10%">审核方式</th><th style="width:12%">审核人</th><th style="width:44%">审核备注信息生成规则</th><th style="width:18%">对应记录</th></tr>
+</thead>
+<tbody>
+<tr><td>自动发放等级，会员点击"领取"</td><td>自动</td><td><code>sysadmin</code></td><td>系统按该记录对应的发放规则（正常领取/受众解锁领取等）自动生成描述文案，不可编辑</td><td>ID 1、7、10（示例）</td></tr>
+<tr><td>人工发放等级，会员点击"领取"，运营<b>尚未审核</b></td><td>手动</td><td>—</td><td>该场景下<b>列表不展示审核备注信息</b>（已领取即已生成数据，审核方式可读取为"手动"；审核人/审核时间需运营完成审核后才生成）</td><td>ID 6、12、13（待审核）</td></tr>
+<tr><td>人工发放等级，运营完成人工审核（<b>通过</b>）</td><td>手动</td><td>实际审核账号<br/><code>dipsy01</code>（原型示例）</td><td>由运营填写审核备注；审核通过后列表可展示</td><td>原型示例</td></tr>
+<tr><td>人工发放等级，运营完成人工审核（<b>拒绝</b>）</td><td>手动</td><td>实际审核账号<br/><code>dipsy01</code>（原型示例）</td><td>运营可在审核弹窗填写备注留痕，但<b>列表不展示审核备注信息</b></td><td>本页可实操验证</td></tr>
+<tr><td>跨周期未领取，系统自动回收作废（二期：未领取作废）</td><td>自动</td><td><code>sysadmin</code></td><td>系统按当前「领取规则设置」生效方案自动生成作废原因描述文案，不可编辑</td><td>ID 5、9、14、16（示例）</td></tr>
+<tr class="phase3-item"><td><span class="phase3-del">受众控制发奖：受众条件未满足，本期不生成奖励</span></td><td><span class="phase3-del">自动</span></td><td><span class="phase3-del">sysadmin</span></td><td><span class="phase3-del">三期预留，本期不开发</span></td><td><span class="phase3-badge">三期</span></td></tr>
+</tbody>
+</table>
+<h4>六、领取规则在本页的展示方式（二期范围）</h4>
+<ul>
+<li><b>二期仅生效「未领取作废」</b>：日/周/月福利跨周期仍未领取时，由系统自动回收作废；本页记录为<b>审核拒绝</b>，审核方式＝"自动"，审核人＝<code>sysadmin</code>，审核时间＝系统回收时间，审核备注由系统生成作废原因。</li>
+<li><b>晋级礼金不适用未领取作废</b>：历史未领取晋级礼金持续保留可领取，不因跨日/周/月被回收。</li>
+<li><span class="phase3-del">未领取转发 / 受众控制领取 / 受众控制发奖相关审核展示逻辑</span><span class="phase3-badge">三期，本期不开发</span></li>
+</ul>
+</div>
+</details>
+<div class="filter-bar">
+<div class="filter-row">
+<div class="filter-item"><label>会员ID</label><input id="af_memberId" placeholder="请输入会员ID" type="text"/></div>
+<div class="filter-item"><label>会员账号</label><input id="af_account" placeholder="请输入会员账号" type="text"/></div>
+<div class="filter-item"><label>上级代理ID</label><input id="af_agent" placeholder="请输入上级代理ID" type="text"/></div>
+<div class="filter-item"><label>VIP等级</label><select id="af_level"><option value="">请选择VIP等级</option></select></div>
+</div>
+<div class="filter-row">
+<div class="filter-item"><label>审核状态</label>
+<select id="af_status">
+<option value="">全部状态</option>
+<option value="pending">待审核</option>
+<option value="approved">审核通过</option>
+<option value="rejected">审核拒绝</option>
+</select>
+</div>
+<div class="filter-item"><label>彩金类型</label>
+<select id="af_type">
+<option value="">请选择彩金类型</option>
+<option value="晋级礼金">晋级礼金</option>
+<option value="日福利礼金">日福利礼金</option>
+<option value="周福利礼金">周福利礼金</option>
+<option value="月福利礼金">月福利礼金</option>
+</select>
+</div>
+<div class="filter-item filter-item-range"><label>彩金金额</label>
+<div class="range-pair"><input id="af_amountMin" placeholder="请输入彩金金额" type="number"/><span class="sep">~</span><input id="af_amountMax" placeholder="请输入彩金金额" type="number"/></div>
+</div>
+<div class="filter-item filter-item-range"><label>申领时间</label>
+<div class="range-pair"><input id="af_claimFrom" type="date"/><span class="sep">-</span><input id="af_claimTo" type="date"/></div>
+</div>
+</div>
+<div class="filter-row">
+<div class="filter-item"><label>审核方式</label>
+<select id="af_method">
+<option value="">请选择审核方式</option>
+<option value="自动">自动</option>
+<option value="手动">手动</option>
+</select>
+</div>
+<div class="filter-item"><label>审核人</label><input id="af_auditor" placeholder="请输入审核人" type="text"/></div>
+<div class="filter-item filter-item-range"><label>审核时间</label>
+<div class="range-pair"><input id="af_auditFrom" type="date"/><span class="sep">-</span><input id="af_auditTo" type="date"/></div>
+</div>
+<div class="filter-item filter-actions">
+<button class="btn btn-primary" onclick="applyAuditFilter()">🔍 查询</button>
+<button class="btn" onclick="resetAuditFilter()">⟲ 重置</button>
+</div>
+</div>
+</div>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>会员ID</th>
+<th>会员账号</th>
+<th>上级代理ID</th>
+<th>VIP等级</th>
+<th>审核状态</th>
+<th>彩金类型</th>
+<th>彩金金额</th>
+<th>申领时间</th>
+<th>审核方式</th>
+<th>审核人</th>
+<th>审核时间</th>
+<th>审核备注信息</th>
+<th>操作</th>
+</tr>
+</thead>
+<tbody id="audit-tbody"></tbody>
+</table>
+</div>
+<div class="pager" id="audit-pager"></div>
+</div>
+<!-- /admin-page-audit -->
+</div>
+</div>
 </div>
 </div>
 <!-- /Tab 2：管理后台 -->
-
 <!-- ============ Tab 3：需求背景 ============ -->
 <div class="tab-content hidden" id="tab-background">
-  <div class="doc-page">
-    <h2>VIP列表-按抽佣 · 需求背景说明</h2>
-    <div class="doc-sub">整理自本轮迭代（管理后台礼金机制调整 + 客户端交互升级）需求沟通，供产品、运营、研发对齐口径使用</div>
-
-    <div class="doc-section">
-      <h3>一、背景与目标</h3>
-      <p>VIP-按抽佣体系用于承接按抽佣系数折算的会员等级成长与权益发放。此前版本仅支持"晋级礼金"与"周福利礼金"两类奖励，会员活跃度激励颗粒度较粗，且发放方式（自动/人工/手动）在不同礼金类型间不统一，运营难以在列表页直接判断当前发放口径。本轮迭代的目标：①补齐"日、月"两个更高频/更长周期的流水福利礼金，让激励覆盖日/周/月/晋级四个颗粒度，形成完整的活跃度体系；②将四类礼金的<b>领取动作</b>统一为"会员手动领取"，并与「发放方式」（自动发放/人工发放，逐等级配置）明确关联——决定会员领取后是否需要运营人工审核，通过UI标识让运营无需进入配置弹窗即可确认领取口径与发放口径；③新增「领取规则设置」，明确会员逾期未领取奖励时系统应如何处理，补齐业务闭环，并明确该规则四个方案<b>均不适用于晋级礼金</b>——晋级礼金达标即可无限期领取，不会因跨期未领取或未充值等条件被限制、作废或过期；④同步升级客户端「我的特权」页交互，引入"去投注 / 领取"双态按钮、当前等级卡片置顶展示、页面顶部全局"一键领取"跨等级找回遗漏奖励入口，提升会员端可用性；⑤原"90天保级流水，未达标直接降1级"的保级机制判定过于生硬、缺乏活跃度衰减的缓冲空间，本轮引入「保级衰退与恢复机制」替换之——保级考核周期缩短为30天，未达标且周期内0经验增长的才进入VIP经验衰退，衰退速度随连续不活跃天数分档加速，重新活跃后立即停止衰退并获得2倍经验恢复加成，等级本身不再因单次周期未达标而硬性跳变式下降，详见第四节。</p>
-    </div>
-
-    <div class="doc-section">
-      <h3>二、涉及范围</h3>
-      <ul>
-        <li><b>管理后台</b>：VIP列表-按抽佣 主表格字段、新增/编辑抽屉字段、客户端展示设置弹窗、新增的领取规则设置弹窗</li>
-        <li><b>客户端</b>：H5 与 PC 双端VIP详情页；本次迭代包含等级卡片滑动、VIP福利/规则说明、一键领取、去投注/领取/审核中状态、日/周/月福利展示及老会员初始化/恢复场景</li>
-        <li>不涉及：投注、返水、代理推广等其他后台模块（本次仅围绕"VIP列表-按抽佣"单一模块展开）</li>
-      </ul>
-    </div>
-
-    <div class="doc-section">
-      <h3>三、老会员上线初始化与客户端入口调整<span class="tag-new">NEW</span></h3>
-      <h4>3.1 首批长期未投注会员等级初始化</h4>
-      <ul>
-        <li>首批初始化以<b>连续60天未投注</b>作为筛选标准，由开发额外执行一次性脚本。</li>
-        <li>原VIP0～VIP2：<b>保持原等级不变</b>，不因60天未投注执行等级重置。</li>
-        <li>原VIP≥3：仅当会员<b>近60天未进行投注</b>时，统一初始化为<b>VIP3、当前VIP经验=0</b>；近60天仍有投注则保持原等级及原经验。</li>
-        <li>原VIP≥3且近60天未投注、被本次脚本初始化调整为<b>VIP3且当前VIP经验=0</b>的会员，<b>不参与本次初始化晋级礼金专项补发</b>。</li>
-        <li>VIP1、VIP2即使近60天未投注，由于等级未发生调整，仍参与初始化晋级礼金重新发放：VIP2重新发放VIP2、VIP1；VIP1重新发放VIP1。</li>
-        <li>首批脚本初始化完成后，不再持续使用60天特殊口径；后续统一进入VIP二期常规规则，按<b>30天保级周期 + 经验衰退/恢复</b>机制处理。</li>
-      </ul>
-      <h4>3.2 长期未投注会员回归后的2倍经验恢复</h4>
-      <p>原VIP≥3且近60天未投注、被初始化为<b>VIP3且0经验</b>的会员，后续重新产生有效投注并获得VIP经验后，进入<b>2倍经验恢复期</b>。恢复目标在初始化降级时锁定为会员<b>降级前原VIP等级 + 降级前原VIP经验值</b>；2倍加速不会在仅恢复到原VIP等级最低门槛时提前结束，必须恢复到锁定的原经验值目标后才取消，后续恢复正常1倍经验累积。</p>
-      <h4>3.3 初始化未调整老会员晋级礼金重新发放</h4>
-      <p>初始化时<b>未发生上述VIP3/0经验特殊调整</b>的老会员，VIP新版本上线后统一重新发放其<b>当前等级至VIP1</b>的全部晋级礼金，本次专项发放<b>不区分历史是否曾领取过</b>。该规则同时包含：①近60天仍有投注的活跃老会员；②近60天未投注但原等级为VIP1或VIP2、因此等级保持不变的老会员。例如当前VIP3重新发放VIP3、VIP2、VIP1；当前VIP2重新发放VIP2、VIP1；当前VIP1重新发放VIP1。VIP0无晋级礼金可补发。</p>
-      <h4>3.4 客户端VIP入口需求说明</h4>
-      <ul>
-        <li>「VIP特权」调整为钱包栏目下方的<b>独立成长卡片</b>，展示当前VIP等级、当前经验、距离下一等级所需经验差值及进度条；点击整张卡片进入VIP等级列表/详情页。</li>
-        <li>玩家名称旁新增当前VIP等级徽标，点击VIP等级徽标同样进入VIP等级列表/详情页。</li>
-        <li>处于2倍经验恢复期时，VIP特权卡片展示轻量状态“<b>2倍经验恢复中</b>”，并提示继续有效投注可更快恢复至原等级/经验目标，用于强化回归激励。</li>
-      </ul>
-    </div>
-
-    <div class="doc-section">
-      <h3>四、核心规则设计</h3>
-      <h4>4.1 手动领取机制（领取动作统一，不代表发放方式统一）</h4>
-      <p>晋级礼金、日福利礼金、周福利礼金、月福利礼金四类奖励，<b>领取动作</b>统一固定为"达标后由会员在客户端主动领取"，不提供"免点击自动到账"式的可配置项。领取前不入账、不计入提现流水。需要特别说明：<b>会员点击"领取"这个动作</b>与<b>点击之后是否需要人工审核才能到账</b>是两个独立维度——前者（本节）在四类礼金间保持统一，均由会员手动点击；后者由 3.2 节的「发放方式」逐等级决定。为避免运营需要额外进入弹窗确认领取口径，后台列表表头、新增/编辑抽屉字段标签均加注"手动领取"标识。</p>
-      <h4>4.2 发放方式：自动发放 / 人工发放（决定是否需要人工审核）</h4>
-      <p>「VIP列表-按抽佣」新增/编辑抽屉底部的「发放方式」字段，<b>逐VIP等级配置</b>，二选一：</p>
-      <ul>
-        <li><b>自动发放</b>：会员点击"领取"后，系统直接判定<b>审核通过</b>，彩金立即到账；「VIP福利彩金审核」页对应记录审核方式为"自动"、审核人为"系统"</li>
-        <li><b>人工发放</b>：会员点击"领取"后，进入<b>待审核</b>状态（彩金尚未到账，客户端按钮展示为"审核中"），需运营在「VIP福利彩金审核」页人工审核通过后，才按该等级配置的"发放礼金稽核倍数"（客户端展示别名"提现流水倍数"）计入提现流水门槛并正式发放；若审核拒绝，该笔奖励作废</li>
-      </ul>
-      <p>「发放方式」与 3.4 节的「领取规则设置」是两个互不影响的独立维度：领取规则决定"奖励生成后，会员迟迟不点领取，要不要过期作废"；发放方式决定"会员点击领取之后，要不要人工审核才能到账"。一笔奖励从生成到会员实际点击领取之前，按领取规则处理；会员点击领取的那一刻起，才切换到发放方式决定的审核流程。</p>
-      <h4>4.3 日 / 周 / 月流水福利礼金</h4>
-      <p>新增"日流水→日福利礼金""月流水→月福利礼金"两组字段，与既有"周流水→周福利礼金"逻辑一致：会员在对应统计周期内的有效投注流水达到门槛，即生成该等级对应的待领取奖励。某等级若不需要开放某项福利，将金额配置为 0 即可；是否面向全体等级整体开放该福利，由「客户端展示设置」中对应展示字段的勾选统一控制（该勾选同时决定是否实际生成待领取记录）。月福利礼金固定于每月16日结算生成上一自然月的奖励。</p>
-      <p>其中周福利礼金额外遵循两条判定规则（本轮明确，日/月福利礼金同一账号在同一周期内仅对应单一等级门槛，不涉及多级重叠判定）：<b>①多等级流水规则</b>——同一统计周期内若会员的有效投注流水同时满足多个VIP等级的周流水门槛，不逐级叠加发放，仅按会员当前所处的VIP等级发放对应最高等级的周福利礼金；<b>②未达标流水结转</b>——若当前统计周期内未满足当前VIP等级（含本周内晋升后的新等级）的周流水门槛，本周期不发放任何周福利礼金，且未达标部分的有效投注流水自动结转至下一统计周期继续累计，不清零。</p>
-      <h4>4.4 领取规则：跨期未领取奖励处理（全局统一配置，覆盖四类礼金）</h4>
-      <p>奖励生成后若跨天/跨周/跨月仍未领取，按运营在「领取规则设置」中选定的方案统一处理，单选、全局生效：</p>
-      <table class="doc-table">
-        <tr><th style="width:58px;">方案</th><th style="width:96px;">类型</th><th>规则内容</th></tr>
-        <tr><td>方案一</td><td>未领取转发</td><td>跨天/跨周/跨月时，未领取奖励不作废，继续保留为待领取状态，系统同步发送一条站内信/邮件提醒告知会员有奖励未领取；领取入口和领取方式不变，会员仍需回到VIP福利页面点击"领取"才能到账，站内信/邮件仅作提示，不是发放渠道</td></tr>
-        <tr><td>方案二</td><td>未领取作废</td><td>跨天/跨周/跨月时，未领取奖励由系统自动回收作废，作废后领取金额、奖励状态、客户端展示数据全部清零</td></tr>
-        <tr><td>方案三</td><td>受众控制领取</td><td>受众用户1：<b>仅约束日/周/月福利礼金，不适用于晋级礼金</b>（见4.5）。奖励照常按周期生成，受众条件仅控制"是否可领取"；不满足受众条件时展示为不可领取，用户在配置天数（3/7/15/30天）内如有任意一笔成功充值，当前周期内已生成、未领取、未作废的奖励立即实时解锁为可领取；跨期仍未领取按方案二作废</td></tr>
-        <tr><td>方案四</td><td>受众控制发奖</td><td>受众用户2：<b>仅约束日/周/月福利礼金，不适用于晋级礼金</b>（见4.5）。受众条件控制"是否生成奖励"，定时统计时先判断受众条件（配置口径与方案三一致，3/7/15/30天内充值），不满足则本周期直接不生成奖励；满足受众条件且流水达标才生成并允许领取；跨期仍未领取按方案二作废</td></tr>
-      </table>
-      <div class="doc-callout warn">方案一（未领取转发）不涉及作废，领取入口和领取方式不变，会员始终可回到VIP福利页面点击"领取"拿到奖励，站内信/邮件仅作提醒；方案二/三/四一旦跨期作废<b>不可恢复</b>，即使用户后续重新满足流水或完成充值，也不会恢复该周期已作废的奖励，只能参与下一周期的统计。</div>
-      <h4>4.5 晋级礼金不受「领取规则设置」任何方案约束、永不过期</h4>
-      <p>「领取规则设置」四选一处理方案（方案一/二/三/四）<b>均不适用于晋级礼金</b>，仅对日/周/月福利礼金生效：方案三·受众控制领取、方案四·受众控制发奖中的"受众条件"特指充值条件，其作用范围<b>仅为日/周/月福利礼金</b>，不存在"已生成但需先充值才能领取"（方案三效果）或"因未充值本期不生成"（方案四效果）的情形；方案一/二"跨期未领取转发/作废"的处理同样<b>不适用于晋级礼金</b>。<b>晋级礼金只要达到晋级门槛即正常生成为"待领取"状态，此后无论间隔多久、跨多少个自然日，只要尚未领取就始终保持可领取，不会被系统回收作废</b>，会员可随时回到VIP福利页面完成领取（领取后是否需要人工审核仍按该等级「发放方式」独立判定，与本规则无关）。</p>
-      <h4>4.6 时区与结算口径</h4>
-      <p>所有统计、结算、判定时间均按<b>北京时间（UTC+8）</b>执行。生成方式为<b>定时统计生成，不按流水达标实时生成</b>：日福利礼金次日 00:00~02:00 结算上一自然日；周福利礼金每周一 00:00~02:00 结算上一自然周；月福利礼金每月16日 00:00~02:00 结算上一自然月；晋级礼金为一次性奖励，达标即生成，<b>不设"跨天判定是否已领取"的时效判断</b>，长期未领取仍保持可领取状态（见4.5）。</p>
-      <h4>4.7 规则闭环状态流转对照表</h4>
-      <p>下表按"场景 → 处理规则"逐条列出四类礼金在各领取规则方案下的完整状态流转，便于开发/测试对照实现：</p>
-      <table class="doc-table">
-        <tr><th style="width:260px;">场景</th><th>处理规则</th></tr>
-        <tr><td>当前周期内满足流水</td><td>定时任务统计后，根据当前生效的领取规则方案生成或处理奖励</td></tr>
-        <tr><td>当前周期内未满足流水</td><td>不生成奖励</td></tr>
-        <tr><td>方案一：奖励已生成但未领取</td><td>跨周期后继续保留为待领取状态，同步发送站内信/邮件提醒；领取入口不变，用户仍需回到VIP福利页面点击"领取"</td></tr>
-        <tr><td>方案二：奖励已生成但未领取</td><td>跨周期后由系统自动回收并作废</td></tr>
-        <tr><td>方案三：满足流水但未成功充值到账（仅日/周/月福利礼金）</td><td>奖励照常生成，但客户端展示为不可领取</td></tr>
-        <tr><td>方案三：满足流水且在配置天数内成功充值到账（仅日/周/月福利礼金）</td><td>奖励实时解锁为可领取，无需等待下一次定时统计</td></tr>
-        <tr><td>方案三：充值金额校验</td><td>不校验金额大小，任意一笔成功充值到账即可满足受众条件</td></tr>
-        <tr><td>方案三：充值成功后的更新时机</td><td>立即将当前有效周期内已生成、未领取、未作废的奖励更新为可领取状态，不等待下一次定时统计</td></tr>
-        <tr><td>方案四：满足流水但不满足受众条件（仅日/周/月福利礼金）</td><td>不生成奖励（非作废，是压根不产生记录）</td></tr>
-        <tr><td>方案四：满足流水且满足受众条件（仅日/周/月福利礼金）</td><td>正常生成奖励，客户端可领取</td></tr>
-        <tr><td>晋级礼金与四个方案的关系</td><td>不受方案一/二/三/四任何一项约束，达标即正常生成待领取，长期未领取始终保持可领取，不会过期作废（见4.5）</td></tr>
-        <tr><td>方案二/三/四：奖励已生成但跨周期仍未领取</td><td>自动回收并作废，领取金额、奖励状态、客户端展示数据全部清零</td></tr>
-        <tr><td>已作废奖励后续重新满足条件</td><td>不因用户后续重新满足流水或完成充值而恢复，只能参与下一统计周期的奖励统计</td></tr>
-        <tr><td>奖励作废后</td><td>数据库保留作废记录供查询核对；客户端不再展示该笔已作废奖励</td></tr>
-        <tr><td>会员点击"领取"之后（自动发放等级）</td><td>系统直接判定审核通过，彩金立即到账</td></tr>
-        <tr><td>会员点击"领取"之后（人工发放等级）</td><td>进入待审核状态，需运营在「VIP福利彩金审核」页人工审核通过后才正式到账；审核拒绝则奖励作废</td></tr>
-        <tr><td>后台留痕要求</td><td>方案三"不可领取→充值解锁→跨期作废"的完整过程、方案四"不满足受众条件不生成奖励"的原因、人工发放的审核通过/拒绝记录，均需记录，对应「VIP福利彩金审核」页审核备注信息</td></tr>
-      </table>
-      <h4>4.8 已确认口径</h4>
-      <p>以下为本轮与运营/研发确认后的关键口径，汇总供开发/测试快速核对：</p>
-      <table class="doc-table">
-        <tr><th style="width:200px;">项目</th><th>已确认规则</th></tr>
-        <tr><td>奖励类型</td><td>日福利礼金、周福利礼金、月福利礼金三类周期性奖励；晋级礼金为一次性奖励，不纳入本表周期性口径</td></tr>
-        <tr><td>统计周期</td><td>按<b>北京时间（UTC+8）</b>计算自然日、自然周、自然月</td></tr>
-        <tr><td>生成方式</td><td>定时统计生成，不按流水达标实时生成</td></tr>
-        <tr><td>发放方式与领取动作的关系</td><td>领取动作（会员手动点击）四类礼金统一，不受发放方式影响；发放方式（自动/人工）逐等级配置，决定领取后是否需要人工审核</td></tr>
-        <tr><td>晋级礼金与领取规则方案的关系</td><td>不受方案一/二/三/四任何一项约束：不受方案三/四受众条件（充值）限制可领取性/生成，也不因跨期未领取被方案一/二转发或作废，达标即可无限期领取</td></tr>
-        <tr><td>方案三受众条件作用点</td><td>控制日/周/月福利礼金"是否可领取"，不控制"是否生成奖励"，不适用于晋级礼金</td></tr>
-        <tr><td>方案四受众条件作用点</td><td>控制日/周/月福利礼金"是否生成奖励"，不适用于晋级礼金</td></tr>
-        <tr><td>方案三充值判定</td><td>以"成功充值到账"为准</td></tr>
-        <tr><td>方案三充值金额</td><td>不限制金额，任意一笔成功充值到账即可</td></tr>
-        <tr><td>方案三解锁时机</td><td>充值成功到账后实时解锁，仅对当前有效周期内已生成、未领取、未作废的奖励生效</td></tr>
-        <tr><td>已作废奖励</td><td>作废后不可恢复，不因后续充值或重新满足条件而重新开放领取</td></tr>
-        <tr><td>后台记录要求</td><td>保留方案三"不可领取/充值解锁/作废"记录、方案四"不生成奖励"的原因记录，以及人工发放的审核通过/拒绝记录</td></tr>
-        <tr><td>作废清零范围</td><td>领取金额、奖励状态、客户端展示数据全部清零</td></tr>
-        <tr><td>作废记录</td><td>数据库保留，客户端不展示</td></tr>
-      </table>
-    </div>
-
-    <div class="doc-section">
-      <h3>五、与晋级 / 保级衰退与恢复机制的关系（闭环说明）</h3>
-      <p>会员有效投注最终折算为"<b>VIP经验</b>"（即后台字段与「待换算预期抽佣金额余量(pool)」同一概念，本节统一按"VIP经验"表述），与各等级"晋升所需经验值门槛"处于同一把绝对刻度上；具体折算口径由抽佣系数等后台参数决定，属既有实现范畴，本节不再展开。<b>保级衰退与恢复机制（详见5.1~5.4节）直接作用于这个已折算完成的"VIP经验"绝对值本身</b>，与投注如何折算为经验是两套相互独立的机制，衰退扣减、降级后重新定位等级，均不需要反向拆解回投注金额重新折算。晋级判定收敛为<b>每日一次的定时评估</b>（评估时间为当日凌晨0点后）：系统统计会员当前VIP经验，若达到下一等级的"晋升所需经验值门槛"即触发晋级，生成一次性晋级礼金待领取记录，并开启该等级的30天保级周期；同一账号若单日内经验增长足以连续跨越多个等级，各等级晋级礼金依次发放。</p>
-      <h4>5.1 30天保级周期与衰退触发（<b>本轮替换原90天保级机制</b>）</h4>
-      <p>会员达到当前VIP等级后，以<b>30天</b>为一个保级考核周期（每等级独立配置"30天保级经验"门槛）：周期内累计VIP经验达到该等级的保级经验要求，本周期保级成功，等级和已获得的VIP经验正常保留，并重新开始下一轮30天周期；若30天内未达到保级经验要求，且<b>整个周期内没有任何VIP经验增长</b>，则从第31天起按该等级的"衰退基础值"开始扣除VIP经验，正式进入衰退。</p>
-      <div class="doc-callout warn">30天内虽未达到保级经验要求，但周期内有任意VIP经验增长（哪怕未达标）的，<b>本轮明确</b>：不视为触发衰退的"0增长"条件，本周期结束后直接顺延开启下一个30天周期继续观察，不清零已有VIP经验，仅当连续出现"整个30天周期内0增长"时才会进入衰退——与「产品规则摘要」"30天未保级且0经验增长"的双重条件表述保持一致。</div>
-      <h4>5.2 连续不活跃加速衰退</h4>
-      <p>进入衰退后，若会员仍然没有任何VIP经验增长，则<b>每连续15天</b>提升一次衰退速度，直至重新产生经验为止：</p>
-      <table class="doc-table">
-        <tr><th style="width:120px;">阶段</th><th style="width:130px;">连续未活跃时间</th><th style="width:90px;">衰退倍率</th><th>说明</th></tr>
-        <tr><td>正常保级期</td><td>第1-30天</td><td>0</td><td>未触发衰退</td></tr>
-        <tr><td>衰退阶段1</td><td>第31-45天</td><td>1×</td><td>按该等级"衰退基础值"每日扣除VIP经验</td></tr>
-        <tr><td>衰退阶段2</td><td>第46-60天</td><td>2×</td><td>连续15天仍无经验增长后加速</td></tr>
-        <tr><td>衰退阶段3</td><td>第61-75天</td><td>3×</td><td>再次连续15天仍无经验增长</td></tr>
-        <tr><td>衰退阶段4</td><td>第76天起</td><td>4×</td><td>继续不活跃则维持最高倍率衰退，不再继续加速</td></tr>
-      </table>
-      <h4>5.3 恢复机制</h4>
-      <p>会员一旦重新产生VIP经验（不论金额大小），<b>立即停止衰退</b>，并进入<b>2倍经验恢复期</b>：期间新获得的VIP经验按2倍计入，直至恢复到衰退/初始化降级发生前锁定的原VIP等级及原VIP经验值目标为止；仅恢复到原等级最低门槛时不提前结束2倍加成，达到锁定原经验值后2倍加成结束，恢复正常1倍经验增长。</p>
-      <div class="doc-callout warn"><b>恢复期再次不活跃（边界规则，本轮明确）</b>：会员进入2倍经验恢复期后，如尚未恢复至锁定目标便再次停止产生VIP经验，<b>不立即恢复衰退，也不沿用上一次1×/2×/3×/4×衰退倍率</b>；从再次停止产生经验之日起，重新进入一轮<b>30天保级观察周期</b>。若该30天内达到当前等级「30天保级经验」要求，则保级成功并开启下一周期；若未达标但周期内曾产生VIP经验，则本周期不触发衰退，顺延下一轮30天继续观察；仅当某一完整30天周期<b>未达到保级要求且周期内0经验增长</b>时，才从该轮第31天重新进入<b>衰退阶段1（1×）</b>，后续再按连续不活跃天数每15天提升至2×、3×、4×。期间原「恢复目标等级 + 恢复目标经验值」持续保留、不重置；会员之后再次产生VIP经验时，停止新的衰退并重新按<b>2倍经验</b>继续向原锁定目标恢复，直至完全恢复后才清除恢复目标。</div>
-      <h4>5.4 衰退与降级的关系（<b>本轮明确</b>，替代原90天机制的"未达标直接降1级"）</h4>
-      <p>新机制下不再有"周期未达标即刻掉1级"的硬性跳变：VIP经验的衰退是持续、平滑的过程，等级本身不会仅因进入衰退而立即下降。<b>当VIP经验因持续衰退而跌破当前等级自身的晋升门槛时</b>，将于次日的定时评估中按VIP经验实时对照各等级门槛表，自然回落至对应的低等级——与晋级判定复用同一套每日评估逻辑，仅方向相反（晋级看"够不够上一级"，衰退降级看"是否已跌破当前级"）。降级后VIP经验回升，超过当前所处等级的晋升阈值时，可重新恢复至原VIP等级。</p>
-      <div class="doc-callout warn"><b>本轮明确</b>：衰退过程中若发生上述自然降级，<b>衰退速度（1×/2×/3×/4×）与衰退基础值分属两个独立变量</b>——衰退速度绑定"连续不活跃天数"，不受降级影响，按自身节奏继续跳档；<b>衰退基础值则按会员"当前所处等级"动态取值</b>，降级后次日起改用新（低）等级配置的衰退基础值 × 当前衰退速度计算每日扣除量，<b>不沿用降级前那个等级的衰退基础值</b>——与晋级判定"pool值实时对照等级门槛表"复用同一套每日评估引擎、同一个"当前等级"定义，不额外引入"衰退起始等级"的独立状态。由于衰退基础值一般随等级降低而减小，降级后每日扣除的经验绝对值会自动变小，衰退不会出现越掉级越猛的连锁效应。</div>
-      <div class="doc-callout warn"><b>本轮明确</b>：单日衰退扣减<b>不做"跨等级门槛拆分"</b>——不会因为当日应扣金额（衰退基础值×衰退速度）超出到当前等级门槛的缓冲区间，就只扣到刚好卡在门槛线上、剩余部分顺延到次日再扣；系统按当日应扣金额<b>整笔全额扣除</b>，扣减后再重新对照等级门槛表定位所在等级——若扣减幅度较大，允许单日内连续下降多个等级，与晋级判定"同一账号单日经验增长足以连续跨越多个等级、各级晋级礼金依次发放"对称一致。示例：会员当前VIP3（门槛300），VIP经验315，当日衰退基础值45、速度1×：整笔扣除45，315－45＝270；270已跌破VIP3门槛300，但仍≥VIP2门槛200，故直接降级至VIP2；次日起改用VIP2自身的衰退基础值计算扣除量（与上一条"降级后衰退基础值如何取值"衔接）。</div>
-      <h4>5.5 与四类礼金的关系</h4>
-      <p><b>VIP经验衰退、降级仅影响VIP经验值与等级判定本身，不影响已生成但尚未领取的日/周/月/晋级礼金记录</b>——这些记录仍按自身周期边界与「领取规则设置」独立处理，不随等级升降或经验衰退而联动清零或恢复（与「领取规则设置」四个方案的关系见4.5节：晋级礼金不受任何方案约束、达标即可无限期领取，不因等级衰退/降级而作废已生成的晋级礼金）。四类礼金、晋级/保级衰退与恢复机制、领取规则三者共同构成完整闭环：晋级/保级决定"能拿到哪个等级的权益"，日/周/月流水门槛决定"该周期是否生成奖励"，领取规则决定"生成后未及时领取如何处理"，保级衰退与恢复机制决定"经验/等级本身如何随活跃度变化"。</p>
-      <h4>5.6 建议后台字段</h4>
-      <p>沿用现有会员等级数据模型，围绕保级衰退与恢复新增以下会员维度跟踪字段（区别于「VIP列表-按抽佣」页按等级配置的"30天保级经验""衰退基础值"）：</p>
-      <ul>
-        <li>当前VIP等级、当前VIP经验</li>
-        <li>当前30天保级周期累计经验、当前保级周期开始时间</li>
-        <li>连续无经验增长天数、当前衰退倍率（0/1×/2×/3×/4×）</li>
-        <li>衰退前VIP等级/经验恢复目标、是否处于经验恢复期（2倍加成生效中）；恢复目标在恢复未完成期间持续保留，恢复期再次不活跃/二次衰退时不重置</li>
-      </ul>
-    </div>
-
-    <div class="doc-section">
-      <h3>六、本轮迭代变更摘要</h3>
-      <ul>
-        <li>领取动作：晋级礼金、日/周/月福利礼金统一固定为会员手动领取，UI三处（列表表头、抽屉字段、领取规则弹窗提示）加注"手动领取"标识</li>
-        <li><b>手动领取与发放方式关联明确</b>：「发放方式」（自动发放/人工发放，逐等级配置）决定会员点击"领取"这一手动领取动作之后是否需要人工审核——自动发放＝会员领取后系统自动审核通过直接到账，人工发放＝会员领取后进入待审核，需运营在「VIP福利彩金审核」页人工审核通过后才发放；与"手动领取"（领取动作本身）是两个独立维度，互不影响，新增/编辑抽屉与主列表均沿用「发放方式」字段</li>
-        <li>新增「领取规则设置」独立弹窗（未放入客户端展示设置，避免该弹窗内容过多）：四选一处理方案 + 类型速记标签</li>
-        <li>客户端「VIP特权」页本次新增/调整：日/月福利礼金、去投注/领取/审核中状态、一键领取、规则说明及等级卡片滑动浏览</li>
-        <li>后台「客户端展示设置」规则文案支持按换行分段：编辑时换行录入，客户端自动以圆点"•"分段展示，三段规则统一处理；不换行则展示为一段纯文本</li>
-        <li>规则文案字段合并：因日/周/月流水的达标判定逻辑一致，「周流水规则」更名为「流水福利规则」，文案内容统一说明日/周/月三档的结算周期与达标判定，多等级流水规则、未达标流水结转两条例外规则仍保留并明确标注"仅周流水适用"；后台文案字段与客户端展示仍维持三段结构（晋升规则/保级规则/流水福利规则），不新增字段</li>
-        <li><b>晋级礼金不受任何领取规则方案约束、永不过期</b>：晋级礼金达标即可领取，不受方案三/四受众条件（充值）限制，也不因跨期未领取被方案一/二转发或作废，长期未领取依然保持可领取状态</li>
-        <li><b>客户端新增全局"一键领取"入口</b>：页面顶部固定展示"一键领取"按钮，可一次性领取当前等级及所有历史已达成等级中遗漏未领取的奖励，按各笔奖励所在等级的「发放方式」分别判定自动到账或提交人工审核；当前没有可领取奖励时按钮置灰禁用，不隐藏</li>
-        <li><b>客户端当前等级卡片置顶展示</b>：「我的特权」页当前等级卡片固定展示于列表顶部并默认展开，无需下滑即可查看当前权益；未来等级按等级升序、历史等级按等级降序依次排列于下方，并以"其他等级"分割线区隔</li>
-        <li><b>客户端VIP入口调整</b>：客户端「我的」页钱包下方新增VIP特权独立成长卡，用户名旁增加当前VIP等级徽标，两处均可进入VIP详情；本HTML保留「我的」首页入口演示，用于验证入口到VIP详情页的完整跳转闭环。</li>
-        <li><b>首批老会员初始化规则</b>：VIP0～VIP2保持原等级；原VIP≥3且近60天未投注时统一调整为VIP3、0经验。原VIP≥3且近60天未投注、被初始化为VIP3且0经验的会员不参与专项晋级礼金补发；重新投注后从VIP3 0经验起按2倍经验恢复至初始化前锁定的原等级+原经验值后恢复1倍。</li>
-        <li><b>初始化未降级老会员晋级礼金重新发放</b>：所有未发生VIP3/0经验特殊调整的老会员均重新发放当前等级至VIP1的晋级礼金，不区分历史是否已领取；包括近60天未投注但等级保持不变的VIP1、VIP2会员。</li>
-        <li><b>「保级衰退与恢复机制」上线，替换原90天保级机制</b>（新增五、5.1~5.6节）：会员保级考核周期由90天调整为30天，未达标且周期内0增长的从第31天起进入VIP经验衰退，此后每连续15天无增长衰退速度提升一档（1×→2×→3×→4×，见5.2节对照表），重新产生经验立即停止衰退并进入2倍经验恢复期；VIP经验持续衰退跌破当前等级门槛时，于次日定时评估中按经验值自然回落至对应等级，不再是"周期未达标即刻掉1级"的硬性跳变（见5.4节）</li>
-        <li><b>「VIP列表-按抽佣」页新增"衰退基础值"字段</b>：逐等级配置衰退阶段1（1×速度）每日扣除的VIP经验基础值，2×/3×/4×阶段按该值倍增；「30天保级流水」更名为「30天保级经验」（原"90天保级流水"字段沿用同一份数据，仅口径与命名调整为经验值体系，数值不变）</li>
-        <li><b>衰退单日扣减不做跨等级门槛拆分（本轮明确）</b>：单日应扣金额（衰退基础值×衰退速度）整笔全额扣除，不因扣减幅度超出当前等级门槛缓冲区间而"卡线"部分扣减；扣减后重新对照等级门槛表定位所在等级，单日内允许连续下降多个等级，与晋级"单日经验增长足以连续跨越多个等级"对称一致（详见「需求背景」页4.4节）</li>
-      </ul>
-    </div>
-  </div>
+<div class="doc-page">
+<h2>VIP列表-按抽佣 · 需求背景说明</h2>
+<div class="doc-sub">整理自本轮迭代（管理后台礼金机制调整 + 客户端交互升级）需求沟通，供产品、运营、研发对齐口径使用</div>
+<div class="doc-section">
+<h3>一、背景与目标</h3>
+<p>VIP-按抽佣体系用于承接按抽佣系数折算的会员等级成长与权益发放。此前版本仅支持"晋级礼金"与"周福利礼金"两类奖励，会员活跃度激励颗粒度较粗，且发放方式（自动/人工/手动）在不同礼金类型间不统一，运营难以在列表页直接判断当前发放口径。本轮迭代的目标：①补齐"日、月"两个更高频/更长周期的流水福利礼金，让激励覆盖日/周/月/晋级四个颗粒度，形成完整的活跃度体系；②将四类礼金的<b>领取动作</b>统一为"会员手动领取"，并与「发放方式」（自动发放/人工发放，逐等级配置）明确关联——决定会员领取后是否需要运营人工审核，通过UI标识让运营无需进入配置弹窗即可确认领取口径与发放口径；③新增「领取规则设置」，二期仅保留<b>未领取作废</b>，明确会员逾期未领取奖励时系统自动回收，补齐业务闭环；<span class="phase3-del">未领取转发 / 受众控制领取 / 受众控制发奖</span><span class="phase3-badge">三期</span>；同时明确未领取作废<b>不适用于晋级礼金</b>——晋级礼金达标即可无限期领取，不会因跨期未领取或未充值等条件被限制、作废或过期；④同步升级客户端「我的特权」页交互，引入"去投注 / 领取"双态按钮、当前等级卡片置顶展示、页面顶部全局"一键领取"跨等级找回遗漏奖励入口，提升会员端可用性；⑤原"90天保级流水，未达标直接降1级"的保级机制判定过于生硬、缺乏活跃度衰减的缓冲空间，本轮引入「保级衰退与恢复机制」替换之——保级考核周期缩短为30天，未达标且周期内0经验增长的才进入VIP经验衰退，衰退速度随连续不活跃天数分档加速，重新活跃后立即停止衰退并获得2倍经验恢复加成，等级本身不再因单次周期未达标而硬性跳变式下降，详见第四节。</p>
 </div>
-
+<div class="doc-section">
+<h3>二、涉及范围</h3>
+<ul>
+<li><b>管理后台</b>：VIP列表-按抽佣 主表格字段、新增/编辑抽屉字段、客户端展示设置弹窗、新增的领取规则设置弹窗</li>
+<li><b>客户端</b>：H5 与 PC 双端VIP详情页；本次迭代包含等级卡片滑动、VIP福利/规则说明、一键领取、去投注/领取/审核中状态、日/周/月福利展示及老会员初始化/恢复场景</li>
+<li>不涉及：投注、返水、代理推广等其他后台模块（本次仅围绕"VIP列表-按抽佣"单一模块展开）</li>
+</ul>
+</div>
+<div class="doc-section">
+<h3>三、老会员上线初始化与客户端入口调整<span class="tag-new">NEW</span></h3>
+<h4>3.1 首批长期未投注会员等级初始化</h4>
+<ul>
+<li>首批初始化以<b>连续60天未投注</b>作为筛选标准，由开发额外执行一次性脚本。</li>
+<li>原VIP0～VIP2：<b>保持原等级不变</b>，不因60天未投注执行等级重置。</li>
+<li>原VIP≥3：仅当会员<b>近60天未进行投注</b>时，统一初始化为<b>VIP3、当前VIP经验=0</b>；近60天仍有投注则保持原等级及原经验。</li>
+<li>原VIP≥3且近60天未投注、被本次脚本初始化调整为<b>VIP3且当前VIP经验=0</b>的会员，<b>不参与本次初始化晋级礼金专项补发</b>。</li>
+<li>VIP1、VIP2即使近60天未投注，由于等级未发生调整，仍参与初始化晋级礼金重新发放：VIP2重新发放VIP2、VIP1；VIP1重新发放VIP1。</li>
+<li>首批脚本初始化完成后，不再持续使用60天特殊口径；后续统一进入VIP二期常规规则，按<b>30天保级周期 + 经验衰退/恢复</b>机制处理。</li>
+</ul>
+<h4>3.2 长期未投注会员回归后的2倍经验恢复</h4>
+<p>原VIP≥3且近60天未投注、被初始化为<b>VIP3且0经验</b>的会员，后续重新产生有效投注并获得VIP经验后，进入<b>2倍经验恢复期</b>。恢复目标在初始化降级时锁定为会员<b>降级前原VIP等级 + 降级前原VIP经验值</b>；2倍加速不会在仅恢复到原VIP等级最低门槛时提前结束，必须恢复到锁定的原经验值目标后才取消，后续恢复正常1倍经验累积。</p>
+<h4>3.3 初始化未调整老会员晋级礼金重新发放</h4>
+<p>初始化时<b>未发生上述VIP3/0经验特殊调整</b>的老会员，VIP新版本上线后统一重新发放其<b>当前等级至VIP1</b>的全部晋级礼金，本次专项发放<b>不区分历史是否曾领取过</b>。该规则同时包含：①近60天仍有投注的活跃老会员；②近60天未投注但原等级为VIP1或VIP2、因此等级保持不变的老会员。例如当前VIP3重新发放VIP3、VIP2、VIP1；当前VIP2重新发放VIP2、VIP1；当前VIP1重新发放VIP1。VIP0无晋级礼金可补发。</p>
+<h4>3.4 客户端VIP入口需求说明</h4>
+<ul>
+<li>「VIP特权」调整为钱包栏目下方的<b>独立成长卡片</b>，展示当前VIP等级、当前经验、距离下一等级所需经验差值及进度条；点击整张卡片进入VIP等级列表/详情页。</li>
+<li>玩家名称旁新增当前VIP等级徽标，点击VIP等级徽标同样进入VIP等级列表/详情页。</li>
+<li>处于2倍经验恢复期时，VIP特权卡片展示轻量状态“<b>2倍经验恢复中</b>”，并提示继续有效投注可更快恢复至原等级/经验目标，用于强化回归激励。</li>
+</ul>
+</div>
+<div class="doc-section">
+<h3>四、核心规则设计</h3>
+<h4>4.1 手动领取机制（领取动作统一，不代表发放方式统一）</h4>
+<p>晋级礼金、日福利礼金、周福利礼金、月福利礼金四类奖励，<b>领取动作</b>统一固定为"达标后由会员在客户端主动领取"，不提供"免点击自动到账"式的可配置项。领取前不入账、不计入提现流水。需要特别说明：<b>会员点击"领取"这个动作</b>与<b>点击之后是否需要人工审核才能到账</b>是两个独立维度——前者（本节）在四类礼金间保持统一，均由会员手动点击；后者由 3.2 节的「发放方式」逐等级决定。为避免运营需要额外进入弹窗确认领取口径，后台列表表头、新增/编辑抽屉字段标签均加注"手动领取"标识。</p>
+<h4>4.2 发放方式：自动发放 / 人工发放（决定是否需要人工审核）</h4>
+<p>「VIP列表-按抽佣」新增/编辑抽屉底部的「发放方式」字段，<b>逐VIP等级配置</b>，二选一：</p>
+<ul>
+<li><b>自动发放</b>：会员点击"领取"后，系统直接判定<b>审核通过</b>，彩金立即到账；「VIP福利彩金审核」页对应记录审核方式为"自动"、审核人为"系统"</li>
+<li><b>人工发放</b>：会员点击"领取"后，进入<b>待审核</b>状态（彩金尚未到账，客户端按钮展示为"审核中"），需运营在「VIP福利彩金审核」页人工审核通过后，才按该等级配置的"发放礼金稽核倍数"（客户端展示别名"提现流水倍数"）计入提现流水门槛并正式发放；若审核拒绝，该笔奖励作废</li>
+</ul>
+<p>「发放方式」与 3.4 节的「领取规则设置」是两个互不影响的独立维度：领取规则决定"奖励生成后，会员迟迟不点领取，要不要过期作废"；发放方式决定"会员点击领取之后，要不要人工审核才能到账"。一笔奖励从生成到会员实际点击领取之前，按领取规则处理；会员点击领取的那一刻起，才切换到发放方式决定的审核流程。</p>
+<h4>4.3 日 / 周 / 月流水福利礼金</h4>
+<p>新增"日流水→日福利礼金""月流水→月福利礼金"两组字段，与既有"周流水→周福利礼金"逻辑一致：会员在对应统计周期内的有效投注流水达到门槛，即生成该等级对应的待领取奖励。某等级若不需要开放某项福利，将金额配置为 0 即可；是否面向全体等级整体开放该福利，由「客户端展示设置」中对应展示字段的勾选统一控制（该勾选同时决定是否实际生成待领取记录）。月福利礼金固定于每月16日结算生成上一自然月的奖励。</p>
+<p>其中周福利礼金额外遵循两条判定规则（本轮明确，日/月福利礼金同一账号在同一周期内仅对应单一等级门槛，不涉及多级重叠判定）：<b>①多等级流水规则</b>——同一统计周期内若会员的有效投注流水同时满足多个VIP等级的周流水门槛，不逐级叠加发放，仅按会员当前所处的VIP等级发放对应最高等级的周福利礼金；<b>②未达标流水结转</b>——若当前统计周期内未满足当前VIP等级（含本周内晋升后的新等级）的周流水门槛，本周期不发放任何周福利礼金，且未达标部分的有效投注流水自动结转至下一统计周期继续累计，不清零。</p>
+<h4>4.4 领取规则：跨期未领取奖励处理（二期范围收口）</h4>
+<div class="doc-callout warn"><b>二期范围：</b>「领取规则设置」本期仅实现并生效<b>方案二·未领取作废</b>。以下方案一、方案三、方案四保留需求痕迹，但统一以删除线标记并归入<b>三期迭代，本期不开发、不测试、不验收</b>。</div>
+<table class="doc-table">
+<tr><th style="width:58px;">方案</th><th style="width:110px;">类型</th><th>规则内容</th><th style="width:110px;">迭代范围</th></tr>
+<tr class="phase3-item"><td><span class="phase3-del">方案一</span></td><td><span class="phase3-del">未领取转发</span></td><td><span class="phase3-del">跨天/跨周/跨月时，未领取奖励不作废，继续保留为待领取状态，并发送站内信/邮件提醒。</span></td><td><span class="phase3-badge">三期，本期不开发</span></td></tr>
+<tr><td><b>方案二</b></td><td><b>未领取作废</b></td><td>日福利跨日、周福利跨周、月福利跨月仍未领取时，由系统自动回收作废；作废后客户端不再展示为可领取，数据库保留作废记录供查询核对。<b>晋级礼金不适用该规则，长期未领取仍永久保留。</b></td><td><b>二期生效</b></td></tr>
+<tr class="phase3-item"><td><span class="phase3-del">方案三</span></td><td><span class="phase3-del">受众控制领取</span></td><td><span class="phase3-del">奖励按周期生成，受众充值条件控制是否可领取；满足条件后实时解锁，跨期未领取再作废。</span></td><td><span class="phase3-badge">三期，本期不开发</span></td></tr>
+<tr class="phase3-item"><td><span class="phase3-del">方案四</span></td><td><span class="phase3-del">受众控制发奖</span></td><td><span class="phase3-del">受众充值条件控制是否生成日/周/月福利奖励；不满足条件时本周期不生成奖励。</span></td><td><span class="phase3-badge">三期，本期不开发</span></td></tr>
+</table>
+<h4>4.5 晋级礼金不受「未领取作废」约束、永不过期</h4>
+<p>二期「领取规则设置」仅生效<b>未领取作废</b>，且该规则<b>仅作用于日/周/月福利礼金，不适用于晋级礼金</b>。晋级礼金只要达到晋级门槛即正常生成为“待领取”状态，此后无论间隔多久、跨多少个自然日，只要尚未领取就始终保持可领取，不会被系统回收作废；领取后是否需要人工审核仍按该等级「发放方式」独立判定。</p>
+<p class="phase3-item"><span class="phase3-del">方案一·未领取转发、方案三·受众控制领取、方案四·受众控制发奖与晋级礼金的适用关系及受众充值条件处理逻辑。</span><span class="phase3-badge">三期，本期不开发</span></p>
+<h4>4.6 时区与结算口径</h4>
+<p>所有统计、结算、判定时间均按<b>北京时间（UTC+8）</b>执行。生成方式为<b>定时统计生成，不按流水达标实时生成</b>：日福利礼金次日 00:00~02:00 结算上一自然日；周福利礼金每周一 00:00~02:00 结算上一自然周；月福利礼金每月16日 00:00~02:00 结算上一自然月；晋级礼金为一次性奖励，达标即生成，长期未领取仍保持可领取状态（见4.5）。</p>
+<h4>4.7 规则闭环状态流转对照表（二期）</h4>
+<p>下表优先列出二期实际开发/测试口径；三期领取规则仅保留删除线痕迹，不纳入本期实现。</p>
+<table class="doc-table">
+<tr><th style="width:270px;">场景</th><th>处理规则</th><th style="width:110px;">迭代范围</th></tr>
+<tr><td>当前周期内满足流水</td><td>定时任务统计后生成对应日/周/月福利待领取记录。</td><td><b>二期</b></td></tr>
+<tr><td>当前周期内未满足流水</td><td>不生成对应周期奖励。</td><td><b>二期</b></td></tr>
+<tr><td>日/周/月奖励已生成但跨周期仍未领取</td><td>按「未领取作废」由系统自动回收并作废；数据库保留记录，客户端不再展示为可领取。</td><td><b>二期</b></td></tr>
+<tr><td>晋级礼金长期未领取</td><td>不参与跨期作废，持续保留可领取。</td><td><b>二期</b></td></tr>
+<tr><td>会员点击“领取”（自动发放等级）</td><td>系统直接发放彩金并更新为已领取。</td><td><b>二期</b></td></tr>
+<tr><td>会员点击“领取”（人工发放等级）</td><td>立即生成领取申请并进入待审核；审核方式可直接读取为“手动”，审核人/审核时间在运营操作前为“—”；运营审核通过后发放，拒绝则不发放。</td><td><b>二期</b></td></tr>
+<tr class="phase3-item"><td><span class="phase3-del">方案一：未领取转发及站内信/邮件提醒</span></td><td><span class="phase3-del">跨周期继续保留待领取并发送提醒。</span></td><td><span class="phase3-badge">三期</span></td></tr>
+<tr class="phase3-item"><td><span class="phase3-del">方案三：受众控制领取、充值解锁、充值金额/时间窗口判断</span></td><td><span class="phase3-del">奖励先生成，再根据受众充值条件控制是否可领取及实时解锁。</span></td><td><span class="phase3-badge">三期</span></td></tr>
+<tr class="phase3-item"><td><span class="phase3-del">方案四：受众控制发奖</span></td><td><span class="phase3-del">根据受众充值条件决定日/周/月福利是否生成。</span></td><td><span class="phase3-badge">三期</span></td></tr>
+</table>
+<h4>4.8 已确认口径</h4>
+<table class="doc-table">
+<tr><th style="width:210px;">项目</th><th>已确认规则</th><th style="width:110px;">迭代范围</th></tr>
+<tr><td>领取动作</td><td>晋级、日、周、月四类礼金均由会员手动点击领取。</td><td><b>二期</b></td></tr>
+<tr><td>发放方式</td><td>逐VIP等级配置自动/人工；自动发放领取后直接到账，人工发放领取后进入待审核。</td><td><b>二期</b></td></tr>
+<tr><td>二期领取规则</td><td><b>仅保留「未领取作废」</b>：只对日/周/月福利生效。</td><td><b>二期</b></td></tr>
+<tr><td>晋级礼金</td><td>不适用未领取作废，达标生成后长期保持可领取。</td><td><b>二期</b></td></tr>
+<tr><td>作废记录</td><td>系统自动回收后数据库保留作废记录，客户端不再展示该笔奖励为可领取。</td><td><b>二期</b></td></tr>
+<tr class="phase3-item"><td><span class="phase3-del">未领取转发</span></td><td><span class="phase3-del">跨期保留待领取并发送站内信/邮件提醒。</span></td><td><span class="phase3-badge">三期，本期不开发</span></td></tr>
+<tr class="phase3-item"><td><span class="phase3-del">受众控制领取</span></td><td><span class="phase3-del">充值条件控制日/周/月福利是否可领取及实时解锁。</span></td><td><span class="phase3-badge">三期，本期不开发</span></td></tr>
+<tr class="phase3-item"><td><span class="phase3-del">受众控制发奖</span></td><td><span class="phase3-del">充值条件控制日/周/月福利是否生成。</span></td><td><span class="phase3-badge">三期，本期不开发</span></td></tr>
+</table>
+</div>
+<div class="doc-section">
+<h3>五、与晋级 / 保级衰退与恢复机制的关系（闭环说明）</h3>
+<p>会员有效投注最终折算为"<b>VIP经验</b>"（即后台字段与「待换算预期抽佣金额余量(pool)」同一概念，本节统一按"VIP经验"表述），与各等级"晋升所需经验值门槛"处于同一把绝对刻度上；具体折算口径由抽佣系数等后台参数决定，属既有实现范畴，本节不再展开。<b>保级衰退与恢复机制（详见5.1~5.4节）直接作用于这个已折算完成的"VIP经验"绝对值本身</b>，与投注如何折算为经验是两套相互独立的机制，衰退扣减、降级后重新定位等级，均不需要反向拆解回投注金额重新折算。晋级判定收敛为<b>每日一次的定时评估</b>（评估时间为当日凌晨0点后）：系统统计会员当前VIP经验，若达到下一等级的"晋升所需经验值门槛"即触发晋级，生成一次性晋级礼金待领取记录，并开启该等级的30天保级周期；同一账号若单日内经验增长足以连续跨越多个等级，各等级晋级礼金依次发放。</p>
+<h4>5.1 30天保级周期与衰退触发（<b>本轮替换原90天保级机制</b>）</h4>
+<p>会员达到当前VIP等级后，以<b>30天</b>为一个保级考核周期（每等级独立配置"30天保级经验"门槛）：周期内累计VIP经验达到该等级的保级经验要求，本周期保级成功，等级和已获得的VIP经验正常保留，并重新开始下一轮30天周期；若30天内未达到保级经验要求，且<b>整个周期内没有任何VIP经验增长</b>，则从第31天起按该等级的"衰退基础值"开始扣除VIP经验，正式进入衰退。</p>
+<div class="doc-callout warn">30天内虽未达到保级经验要求，但周期内有任意VIP经验增长（哪怕未达标）的，<b>本轮明确</b>：不视为触发衰退的"0增长"条件，本周期结束后直接顺延开启下一个30天周期继续观察，不清零已有VIP经验，仅当连续出现"整个30天周期内0增长"时才会进入衰退——与「产品规则摘要」"30天未保级且0经验增长"的双重条件表述保持一致。</div>
+<h4>5.2 连续不活跃加速衰退</h4>
+<p>进入衰退后，若会员仍然没有任何VIP经验增长，则<b>每连续15天</b>提升一次衰退速度，直至重新产生经验为止：</p>
+<table class="doc-table">
+<tr><th style="width:120px;">阶段</th><th style="width:130px;">连续未活跃时间</th><th style="width:90px;">衰退倍率</th><th>说明</th></tr>
+<tr><td>正常保级期</td><td>第1-30天</td><td>0</td><td>未触发衰退</td></tr>
+<tr><td>衰退阶段1</td><td>第31-45天</td><td>1×</td><td>按该等级"衰退基础值"每日扣除VIP经验</td></tr>
+<tr><td>衰退阶段2</td><td>第46-60天</td><td>2×</td><td>连续15天仍无经验增长后加速</td></tr>
+<tr><td>衰退阶段3</td><td>第61-75天</td><td>3×</td><td>再次连续15天仍无经验增长</td></tr>
+<tr><td>衰退阶段4</td><td>第76天起</td><td>4×</td><td>继续不活跃则维持最高倍率衰退，不再继续加速</td></tr>
+</table>
+<h4>5.3 恢复机制</h4>
+<p>会员一旦重新产生VIP经验（不论金额大小），<b>立即停止衰退</b>，并进入<b>2倍经验恢复期</b>：期间新获得的VIP经验按2倍计入，直至恢复到衰退/初始化降级发生前锁定的原VIP等级及原VIP经验值目标为止；仅恢复到原等级最低门槛时不提前结束2倍加成，达到锁定原经验值后2倍加成结束，恢复正常1倍经验增长。</p>
+<div class="doc-callout warn"><b>恢复期再次不活跃（边界规则，本轮明确）</b>：会员进入2倍经验恢复期后，如尚未恢复至锁定目标便再次停止产生VIP经验，<b>不立即恢复衰退，也不沿用上一次1×/2×/3×/4×衰退倍率</b>；从再次停止产生经验之日起，重新进入一轮<b>30天保级观察周期</b>。若该30天内达到当前等级「30天保级经验」要求，则保级成功并开启下一周期；若未达标但周期内曾产生VIP经验，则本周期不触发衰退，顺延下一轮30天继续观察；仅当某一完整30天周期<b>未达到保级要求且周期内0经验增长</b>时，才从该轮第31天重新进入<b>衰退阶段1（1×）</b>，后续再按连续不活跃天数每15天提升至2×、3×、4×。期间原「恢复目标等级 + 恢复目标经验值」持续保留、不重置；会员之后再次产生VIP经验时，停止新的衰退并重新按<b>2倍经验</b>继续向原锁定目标恢复，直至完全恢复后才清除恢复目标。</div>
+<h4>5.4 衰退与降级的关系（<b>本轮明确</b>，替代原90天机制的"未达标直接降1级"）</h4>
+<p>新机制下不再有"周期未达标即刻掉1级"的硬性跳变：VIP经验的衰退是持续、平滑的过程，等级本身不会仅因进入衰退而立即下降。<b>当VIP经验因持续衰退而跌破当前等级自身的晋升门槛时</b>，将于次日的定时评估中按VIP经验实时对照各等级门槛表，自然回落至对应的低等级——与晋级判定复用同一套每日评估逻辑，仅方向相反（晋级看"够不够上一级"，衰退降级看"是否已跌破当前级"）。降级后VIP经验回升，超过当前所处等级的晋升阈值时，可重新恢复至原VIP等级。</p>
+<div class="doc-callout warn"><b>本轮明确</b>：衰退过程中若发生上述自然降级，<b>衰退速度（1×/2×/3×/4×）与衰退基础值分属两个独立变量</b>——衰退速度绑定"连续不活跃天数"，不受降级影响，按自身节奏继续跳档；<b>衰退基础值则按会员"当前所处等级"动态取值</b>，降级后次日起改用新（低）等级配置的衰退基础值 × 当前衰退速度计算每日扣除量，<b>不沿用降级前那个等级的衰退基础值</b>——与晋级判定"pool值实时对照等级门槛表"复用同一套每日评估引擎、同一个"当前等级"定义，不额外引入"衰退起始等级"的独立状态。由于衰退基础值一般随等级降低而减小，降级后每日扣除的经验绝对值会自动变小，衰退不会出现越掉级越猛的连锁效应。</div>
+<div class="doc-callout warn"><b>本轮明确</b>：单日衰退扣减<b>不做"跨等级门槛拆分"</b>——不会因为当日应扣金额（衰退基础值×衰退速度）超出到当前等级门槛的缓冲区间，就只扣到刚好卡在门槛线上、剩余部分顺延到次日再扣；系统按当日应扣金额<b>整笔全额扣除</b>，扣减后再重新对照等级门槛表定位所在等级——若扣减幅度较大，允许单日内连续下降多个等级，与晋级判定"同一账号单日经验增长足以连续跨越多个等级、各级晋级礼金依次发放"对称一致。示例：会员当前VIP3（门槛300），VIP经验315，当日衰退基础值45、速度1×：整笔扣除45，315－45＝270；270已跌破VIP3门槛300，但仍≥VIP2门槛200，故直接降级至VIP2；次日起改用VIP2自身的衰退基础值计算扣除量（与上一条"降级后衰退基础值如何取值"衔接）。</div>
+<h4>5.5 与四类礼金的关系</h4>
+<p><b>VIP经验衰退、降级仅影响VIP经验值与等级判定本身，不影响已生成但尚未领取的日/周/月/晋级礼金记录</b>——这些记录仍按自身周期边界与「领取规则设置」独立处理，不随等级升降或经验衰退而联动清零或恢复（与「领取规则设置」四个方案的关系见4.5节：晋级礼金不受任何方案约束、达标即可无限期领取，不因等级衰退/降级而作废已生成的晋级礼金）。四类礼金、晋级/保级衰退与恢复机制、领取规则三者共同构成完整闭环：晋级/保级决定"能拿到哪个等级的权益"，日/周/月流水门槛决定"该周期是否生成奖励"，领取规则决定"生成后未及时领取如何处理"，保级衰退与恢复机制决定"经验/等级本身如何随活跃度变化"。</p>
+<h4>5.6 建议后台字段</h4>
+<p>沿用现有会员等级数据模型，围绕保级衰退与恢复新增以下会员维度跟踪字段（区别于「VIP列表-按抽佣」页按等级配置的"30天保级经验""衰退基础值"）：</p>
+<ul>
+<li>当前VIP等级、当前VIP经验</li>
+<li>当前30天保级周期累计经验、当前保级周期开始时间</li>
+<li>连续无经验增长天数、当前衰退倍率（0/1×/2×/3×/4×）</li>
+<li>衰退前VIP等级/经验恢复目标、是否处于经验恢复期（2倍加成生效中）；恢复目标在恢复未完成期间持续保留，恢复期再次不活跃/二次衰退时不重置</li>
+</ul>
+</div>
+<div class="doc-section">
+<h3>六、本轮迭代变更摘要</h3>
+<ul>
+<li>领取动作：晋级礼金、日/周/月福利礼金统一固定为会员手动领取，UI三处（列表表头、抽屉字段、领取规则弹窗提示）加注"手动领取"标识</li>
+<li><b>手动领取与发放方式关联明确</b>：「发放方式」（自动发放/人工发放，逐等级配置）决定会员点击"领取"这一手动领取动作之后是否需要人工审核——自动发放＝会员领取后系统自动审核通过直接到账，人工发放＝会员领取后进入待审核，需运营在「VIP福利彩金审核」页人工审核通过后才发放；与"手动领取"（领取动作本身）是两个独立维度，互不影响，新增/编辑抽屉与主列表均沿用「发放方式」字段</li>
+<li>新增「领取规则设置」独立弹窗（未放入客户端展示设置，避免该弹窗内容过多）：四选一处理方案 + 类型速记标签</li>
+<li>客户端「VIP特权」页本次新增/调整：日/月福利礼金、去投注/领取/审核中状态、一键领取、规则说明及等级卡片滑动浏览</li>
+<li>后台「客户端展示设置」规则文案支持按换行分段：编辑时换行录入，客户端自动以圆点"•"分段展示，三段规则统一处理；不换行则展示为一段纯文本</li>
+<li>规则文案字段合并：因日/周/月流水的达标判定逻辑一致，「周流水规则」更名为「流水福利规则」，文案内容统一说明日/周/月三档的结算周期与达标判定，多等级流水规则、未达标流水结转两条例外规则仍保留并明确标注"仅周流水适用"；后台文案字段与客户端展示仍维持三段结构（晋升规则/保级规则/流水福利规则），不新增字段</li>
+<li><b>晋级礼金不受任何领取规则方案约束、永不过期</b>：晋级礼金达标即可领取，不受方案三/四受众条件（充值）限制，也不因跨期未领取被方案一/二转发或作废，长期未领取依然保持可领取状态</li>
+<li><b>客户端新增全局"一键领取"入口</b>：页面顶部固定展示"一键领取"按钮，可一次性领取当前等级及所有历史已达成等级中遗漏未领取的奖励，按各笔奖励所在等级的「发放方式」分别判定自动到账或提交人工审核；当前没有可领取奖励时按钮置灰禁用，不隐藏</li>
+<li><b>客户端当前等级卡片置顶展示</b>：「我的特权」页当前等级卡片固定展示于列表顶部并默认展开，无需下滑即可查看当前权益；未来等级按等级升序、历史等级按等级降序依次排列于下方，并以"其他等级"分割线区隔</li>
+<li><b>客户端VIP入口调整</b>：客户端「我的」页钱包下方新增VIP特权独立成长卡，用户名旁增加当前VIP等级徽标，两处均可进入VIP详情；本HTML保留「我的」首页入口演示，用于验证入口到VIP详情页的完整跳转闭环。</li>
+<li><b>首批老会员初始化规则</b>：VIP0～VIP2保持原等级；原VIP≥3且近60天未投注时统一调整为VIP3、0经验。原VIP≥3且近60天未投注、被初始化为VIP3且0经验的会员不参与专项晋级礼金补发；重新投注后从VIP3 0经验起按2倍经验恢复至初始化前锁定的原等级+原经验值后恢复1倍。</li>
+<li><b>初始化未降级老会员晋级礼金重新发放</b>：所有未发生VIP3/0经验特殊调整的老会员均重新发放当前等级至VIP1的晋级礼金，不区分历史是否已领取；包括近60天未投注但等级保持不变的VIP1、VIP2会员。</li>
+<li><b>「保级衰退与恢复机制」上线，替换原90天保级机制</b>（新增五、5.1~5.6节）：会员保级考核周期由90天调整为30天，未达标且周期内0增长的从第31天起进入VIP经验衰退，此后每连续15天无增长衰退速度提升一档（1×→2×→3×→4×，见5.2节对照表），重新产生经验立即停止衰退并进入2倍经验恢复期；VIP经验持续衰退跌破当前等级门槛时，于次日定时评估中按经验值自然回落至对应等级，不再是"周期未达标即刻掉1级"的硬性跳变（见5.4节）</li>
+<li><b>「VIP列表-按抽佣」页新增"衰退基础值"字段</b>：逐等级配置衰退阶段1（1×速度）每日扣除的VIP经验基础值，2×/3×/4×阶段按该值倍增；「30天保级流水」更名为「30天保级经验」（原"90天保级流水"字段沿用同一份数据，仅口径与命名调整为经验值体系，数值不变）</li>
+<li><b>衰退单日扣减不做跨等级门槛拆分（本轮明确）</b>：单日应扣金额（衰退基础值×衰退速度）整笔全额扣除，不因扣减幅度超出当前等级门槛缓冲区间而"卡线"部分扣减；扣减后重新对照等级门槛表定位所在等级，单日内允许连续下降多个等级，与晋级"单日经验增长足以连续跨越多个等级"对称一致（详见「需求背景」页4.4节）</li>
+</ul>
+</div>
+</div>
+</div>
 <!-- ============ Tab 4：流程图 ============ -->
 <div class="tab-content hidden" id="tab-flow">
-  <div class="flow-page">
-
-    <div class="flow-section">
-      <h3>流程一：老会员上线初始化与回归恢复<span class="tag-new">NEW</span></h3>
-      <div class="flow-desc">首批60天未投注一次性初始化 → 活跃老会员专项晋级礼金补发 → 被初始化调整会员回归2倍经验恢复</div>
-      <div class="flow-col">
-        <div class="flow-node start">VIP新版本上线：执行首批老会员初始化</div>
-        <div class="flow-arrow"></div>
-        <div class="flow-node decision">会员是否连续60天未投注？</div>
-      </div>
-      <div class="flow-branch">
-        <div class="flow-branch-col"><div class="flow-branch-label">否：近期活跃</div><div class="flow-node action">保留当前VIP等级；补发当前等级及历史已达等级全部晋级礼金（历史已领取过也重新发放一次）</div></div>
-        <div class="flow-branch-col"><div class="flow-branch-label">是：长期未投注</div><div class="flow-node decision">当前VIP等级是否为VIP3及以上？</div></div>
-      </div>
-      <div class="flow-branch" style="margin-top:8px;">
-        <div class="flow-branch-col"><div class="flow-branch-label">VIP0～VIP2</div><div class="flow-node">保持原等级不变；不执行VIP3/0经验特殊调整，后续按正常VIP二期规则运行</div></div>
-        <div class="flow-branch-col"><div class="flow-branch-label">VIP3及以上</div><div class="flow-node danger">一次性脚本统一调整为VIP3、当前VIP经验=0；锁定调整前原VIP等级与原经验值作为恢复目标；本批不参与初始化晋级礼金专项补发</div></div>
-      </div>
-      <div class="flow-col" style="margin-top:8px;">
-        <div class="flow-node decision">被初始化调整会员后续是否重新产生VIP经验？</div>
-        <div class="flow-arrow"></div>
-        <div class="flow-node action">是：进入2倍经验恢复期，持续有效投注获得的VIP经验按2倍计入</div>
-        <div class="flow-arrow"></div>
-        <div class="flow-node decision">是否已恢复至初始化降级前锁定的原VIP等级 + 原经验值？</div>
-        <div class="flow-arrow"></div>
-        <div class="flow-node end">是：结束2倍恢复，后续按正常1倍经验累积；否：继续2倍恢复</div>
-      </div>
-    </div>
-
-    <div class="flow-section">
-      <h3>流程二：VIP等级晋升 VIP经验累积流程</h3>
-      <div class="flow-desc">对应「抽佣系数 × 有效投注」折算晋级门槛的核心算法，与礼金发放相互独立</div>
-      <div class="flow-col">
-        <div class="flow-node start">会员产生有效投注</div>
-        <div class="flow-arrow"></div>
-        <div class="flow-node action">按"抽佣系数"将投注折算为VIP经验（原「待换算预期抽佣金额余量(pool)」），累加至当前VIP经验</div>
-        <div class="flow-arrow"></div>
-        <div class="flow-node action">每日凌晨0点后执行一次晋升评估：统计会员当前VIP经验</div>
-        <div class="flow-arrow"></div>
-        <div class="flow-node decision">VIP经验是否达到下一等级"晋升所需经验值门槛"？</div>
-        <div class="flow-arrow"></div>
-        <div class="flow-arrow-label">是</div>
-        <div class="flow-node action">触发晋级：等级 +1，生成本级晋级礼金待领取记录（手动领取）；同日内经验增长足以连续跨级时，各等级晋级礼金依次发放</div>
-        <div class="flow-arrow"></div>
-        <div class="flow-node end">开启该等级30天保级周期，进入「流程二：VIP等级保级衰退与恢复流程」</div>
-      </div>
-    </div>
-
-    <div class="flow-section">
-      <h3>流程三：VIP等级保级衰退与恢复流程<span class="tag-new">NEW</span></h3>
-      <div class="flow-desc">30天保级周期 → 连续不活跃加速衰退 → 重新活跃2倍恢复 的完整闭环，<b>本轮替换原90天保级机制</b>（未达标直接降1级）</div>
-      <div class="flow-col">
-        <div class="flow-node start">开启30天保级周期</div>
-        <div class="flow-arrow"></div>
-        <div class="flow-node decision">30天周期结束：VIP经验是否达到当前等级「30天保级经验」要求？</div>
-      </div>
-      <div class="flow-branch">
-        <div class="flow-branch-col">
-          <div class="flow-branch-label">是</div>
-          <div class="flow-node action">保级成功：等级与经验正常保留，重新开始下一轮30天周期</div>
-        </div>
-        <div class="flow-branch-col">
-          <div class="flow-branch-label">否</div>
-          <div class="flow-node decision">周期内是否产生过任意VIP经验增长（哪怕未达标）？</div>
-        </div>
-      </div>
-      <div class="flow-branch" style="margin-top:8px;">
-        <div class="flow-branch-col">
-          <div class="flow-branch-label">否的"是"：有增长但未达标</div>
-          <div class="flow-node">本周期不计为保级成功，但也<b>不触发衰退</b>：已获得经验不清零，顺延开启下一轮30天周期继续观察</div>
-        </div>
-        <div class="flow-branch-col">
-          <div class="flow-branch-label">否的"否"：整个周期0增长</div>
-          <div class="flow-node danger">从第31天起进入衰退：按当前等级「衰退基础值」开始扣除VIP经验</div>
-        </div>
-      </div>
-      <div class="flow-col" style="margin-top:8px;">
-        <div class="flow-node decision">衰退期间，是否已连续15天仍无经验增长？</div>
-      </div>
-      <div class="flow-branch">
-        <div class="flow-branch-col">
-          <div class="flow-branch-label">是</div>
-          <div class="flow-node danger">衰退速度提升一档：阶段1(1×)→2(2×)→3(3×)→4(4×)，最高4×后不再继续加速</div>
-        </div>
-        <div class="flow-branch-col">
-          <div class="flow-branch-label">否</div>
-          <div class="flow-node">维持当前衰退速度继续扣减</div>
-        </div>
-      </div>
-      <div class="flow-col" style="margin-top:8px;">
-        <div class="flow-node decision">衰退期间，会员是否重新产生VIP经验？</div>
-      </div>
-      <div class="flow-branch">
-        <div class="flow-branch-col">
-          <div class="flow-branch-label">是</div>
-          <div class="flow-node action">立即停止衰退，进入2倍经验恢复期：新获得经验按2倍计入</div>
-        </div>
-        <div class="flow-branch-col">
-          <div class="flow-branch-label">否</div>
-          <div class="flow-node danger">继续按当前速度衰退</div>
-        </div>
-      </div>
-      <div class="flow-col" style="margin-top:8px;">
-        <div class="flow-node decision">恢复期内，VIP经验是否已回升至衰退发生前水平？</div>
-      </div>
-      <div class="flow-branch">
-        <div class="flow-branch-col">
-          <div class="flow-branch-label">是</div>
-          <div class="flow-node end">2倍加成结束，恢复正常1倍经验增长</div>
-        </div>
-        <div class="flow-branch-col">
-          <div class="flow-branch-label">否</div>
-          <div class="flow-node">未达到恢复目标：有经验增长时继续按2倍累积；若再次停止产生经验，则暂停2倍实际增长并重新进入30天保级观察，不立即衰退、不沿用上一轮衰退倍率</div>
-        </div>
-      </div>
-      <div class="flow-col" style="margin-top:8px;">
-        <div class="flow-node decision">恢复目标未完成且再次不活跃：新的30天观察周期是否达到保级要求？</div>
-      </div>
-      <div class="flow-branch">
-        <div class="flow-branch-col"><div class="flow-branch-label">达标</div><div class="flow-node action">保级成功，重新开始下一轮30天周期；原恢复目标继续保留，后续产生经验仍按2倍向原目标恢复</div></div>
-        <div class="flow-branch-col"><div class="flow-branch-label">未达标</div><div class="flow-node">若周期内有经验增长：不衰退，顺延下一周期；若完整30天0经验增长：第31天重新从衰退阶段1（1×）开始</div></div>
-      </div>
-      <div class="flow-col" style="margin-top:8px;">
-        <div class="flow-node action">二次衰退后再次产生经验：立即停止衰退，继续按2倍恢复；恢复目标仍为最初锁定的原VIP等级 + 原经验值，不重置</div>
-      </div>
-      <div class="flow-col" style="margin-top:16px;">
-        <div class="flow-node end">补充：VIP经验持续衰退跌破当前等级自身门槛时，于次日定时评估中按经验值对照等级门槛表自然回落至对应低等级（与「流程二」晋级判定复用同一套每日评估引擎，方向相反）；经验回升超过当前所处等级晋升阈值后，可重新恢复原等级</div>
-      </div>
-    </div>
-
-    <div class="flow-section">
-      <h3>流程四：日 / 周 / 月福利礼金 手动领取 + 跨期未领取处理闭环</h3>
-      <div class="flow-desc">对应「领取规则设置」四方案的完整业务闭环（全局统一配置，覆盖四类礼金；其中方案三/四受众条件仅约束日/周/月福利礼金，不影响晋级礼金），以及领取后按「发放方式」（逐等级配置）决定是否需要人工审核</div>
-      <div class="flow-col">
-        <div class="flow-node start">定时任务：日/周/月结算节点（北京时间）</div>
-        <div class="flow-arrow"></div>
-        <div class="flow-node action">统计对应周期内有效投注流水</div>
-        <div class="flow-arrow"></div>
-        <div class="flow-node decision">流水是否达到对应门槛（日/周/月流水）？</div>
-      </div>
-      <div class="flow-branch">
-        <div class="flow-branch-col">
-          <div class="flow-branch-label">否</div>
-          <div class="flow-node">本周期不生成待领取记录，客户端展示"去投注"（周福利礼金：未达标的有效投注流水自动结转至下一统计周期，不清零）</div>
-        </div>
-        <div class="flow-branch-col">
-          <div class="flow-branch-label">是（若为方案四且受众条件不满足，同样不生成）</div>
-          <div class="flow-node action">生成待领取奖励记录，客户端展示"领取"（周福利礼金：若同一周期内流水同时满足多个等级门槛，仅按会员当前所处等级发放对应最高等级的周福利礼金，不逐级叠加）</div>
-        </div>
-      </div>
-      <div class="flow-col" style="margin-top:8px;">
-        <div class="flow-arrow"></div>
-        <div class="flow-node decision">会员是否在本周期结束前完成领取？</div>
-      </div>
-      <div class="flow-branch">
-        <div class="flow-branch-col">
-          <div class="flow-branch-label">是</div>
-          <div class="flow-node decision">该VIP等级「发放方式」配置为？</div>
-        </div>
-        <div class="flow-branch-col">
-          <div class="flow-branch-label">否（跨天/跨周/跨月）</div>
-          <div class="flow-node decision">按「领取规则设置」当前生效方案处理</div>
-        </div>
-      </div>
-      <div class="flow-branch" style="margin-top:8px;">
-        <div class="flow-branch-col"><div class="flow-branch-label">自动发放</div><div class="flow-node action">系统自动审核通过，按"发放礼金稽核倍数"计入提现流水</div></div>
-        <div class="flow-branch-col"><div class="flow-branch-label">人工发放</div><div class="flow-node">进入待审核，运营在「VIP福利彩金审核」页审核通过后计入提现流水；审核拒绝则奖励作废</div></div>
-      </div>
-      <div class="flow-branch" style="margin-top:8px;">
-        <div class="flow-branch-col"><div class="flow-branch-label">方案一</div><div class="flow-node">不作废，同步站内信/邮件提醒，仍需回VIP福利页领取</div></div>
-        <div class="flow-branch-col"><div class="flow-branch-label">方案二</div><div class="flow-node danger">系统回收作废，不可恢复</div></div>
-        <div class="flow-branch-col"><div class="flow-branch-label">方案三（仅日/周/月）</div><div class="flow-node">受众条件内充值可解锁再领取，否则按方案二作废；不影响晋级礼金</div></div>
-        <div class="flow-branch-col"><div class="flow-branch-label">方案四（仅日/周/月）</div><div class="flow-node">不满足受众条件本就未生成；已生成未领取按方案二作废；不影响晋级礼金</div></div>
-      </div>
-      <div class="flow-col" style="margin-top:16px;">
-        <div class="flow-node end">进入下一统计周期，重新执行本流程</div>
-      </div>
-    </div>
-
-  </div>
+<div class="biz-flow-page">
+<div class="biz-flow-title"><h2>VIP二期｜详细业务流程图</h2><p>流程图为本页主体。按箭头即可完成产品评审、开发逻辑理解、测试场景拆分与运营操作确认。</p></div>
+<div class="flow-jump"><button onclick="document.getElementById('flow01').scrollIntoView({behavior:'smooth'})">01 生命周期</button><button onclick="document.getElementById('flow02').scrollIntoView({behavior:'smooth'})">02 等级/经验/保级/衰退</button><button onclick="document.getElementById('flow03').scrollIntoView({behavior:'smooth'})">03 福利产生/领取/过期</button><button onclick="document.getElementById('flow04').scrollIntoView({behavior:'smooth'})">04 审核/发放</button><button onclick="document.getElementById('flow05').scrollIntoView({behavior:'smooth'})">05 老会员初始化</button><button onclick="document.getElementById('flow06').scrollIntoView({behavior:'smooth'})">06 福利状态流转</button></div>
+<div id="flow01"><section class="biz-flow-section">
+<div class="biz-flow-head"><h3>流程图01｜VIP会员生命周期总流程图</h3><p>总览会员从进入VIP体系、投注成长、晋级、保级、衰退到2倍恢复并重新回归正常生命周期的完整闭环。</p></div>
+<div class="biz-mermaid-wrap"><div class="mermaid-render-target" data-source-id="vip-flow-source-01" id="vip-flow-01">正在渲染流程图…</div></div>
+<details class="mermaid-edit"><summary>展开 Mermaid 源码</summary><pre class="mermaid-source" contenteditable="true" id="vip-flow-source-01">flowchart TD
+  A([开始：会员进入VIP体系]):::startend --&gt; B[系统读取会员当前VIP等级]:::action
+  B --&gt; C[系统读取会员当前VIP经验值]:::action
+  C --&gt; D[会员产生有效投注]:::action
+  D --&gt; E[系统获取有效投注数据]:::action
+  E --&gt; F[系统计算VIP经验值]:::action
+  F --&gt; G{会员当前是否处于2倍恢复期？}:::decision
+  G -- 否 --&gt; H[系统按正常1倍累计经验]:::action
+  G -- 是 --&gt; I[系统按恢复2倍累计经验]:::action
+  H --&gt; J{累计经验是否达到下一等级门槛？}:::decision
+  I --&gt; J
+  J -- 达到 --&gt; K[系统更新会员VIP等级]:::state
+  K --&gt; L[系统生成对应等级晋级礼金]:::action
+  L --&gt; M{经验是否仍达到更高等级门槛？}:::decision
+  M -- 是 --&gt; K
+  M -- 否 --&gt; N[系统进入当前等级30天保级周期]:::state
+  J -- 未达到 --&gt; N
+  N --&gt; O{30天保级经验是否达标？}:::decision
+  O -- 达标 --&gt; P[系统判定保级成功]:::state
+  P --&gt; Q[系统重启下一30天保级周期]:::action
+  Q --&gt; D
+  O -- 未达标 --&gt; R{本保级周期是否存在经验增长？}:::decision
+  R -- 是 --&gt; S[系统本周期不启动衰退]:::state
+  S --&gt; Q
+  R -- 否 --&gt; T[系统从第31天进入1倍经验衰退]:::state
+  T --&gt; U[系统按衰退规则每日扣减经验]:::action
+  U --&gt; V{扣减后是否跌破当前等级门槛？}:::decision
+  V -- 是 --&gt; W[系统按剩余经验重新定位VIP等级]:::state
+  V -- 否 --&gt; X[系统保持当前VIP等级]:::state
+  W --&gt; Y{会员是否重新产生VIP经验？}:::decision
+  X --&gt; Y
+  Y -- 否 --&gt; Z[系统继续按连续不活跃天数执行衰退]:::action
+  Z --&gt; U
+  Y -- 是 --&gt; AA[系统停止经验衰退]:::action
+  AA --&gt; AB[系统进入2倍经验恢复期]:::state
+  AB --&gt; AC[系统按2倍累计新产生经验]:::action
+  AC --&gt; AD{是否恢复至锁定的原等级+原经验？}:::decision
+  AD -- 是 --&gt; AE[系统结束恢复期并恢复正常1倍成长]:::state
+  AE --&gt; Q
+  AD -- 否 --&gt; AF{会员是否继续产生经验？}:::decision
+  AF -- 是 --&gt; AC
+  AF -- 否 --&gt; AG[系统重新进入30天保级观察]:::state
+  AG --&gt; AH{30天内是否重新产生经验？}:::decision
+  AH -- 是 --&gt; AB
+  AH -- 否 --&gt; AI{30天保级经验是否达标？}:::decision
+  AI -- 达标 --&gt; P
+  AI -- 未达标 --&gt; AJ[系统从1倍重新进入衰退；原恢复目标保持不变]:::state
+  AJ --&gt; U
+  class A startend; class B,C,D,E,F,H,I,L,Q,U,Z,AA,AC action; class G,J,M,O,R,V,Y,AD,AF,AH,AI decision; class K,N,P,S,T,W,X,AB,AE,AG,AJ state;
+classDef startend fill:#eef2ff,stroke:#5965d8,stroke-width:1.5px,color:#20264d;
+classDef action fill:#ffffff,stroke:#8b91a7,stroke-width:1px,color:#20232d;
+classDef decision fill:#fff8e6,stroke:#c78b20,stroke-width:1.3px,color:#5b4214;
+classDef state fill:#edf8f2,stroke:#4d9a73,stroke-width:1.2px,color:#244f39;
+classDef exception fill:#fff0f0,stroke:#c95a5a,stroke-width:1.2px,color:#702c2c;
+classDef phase3 fill:#f5f5f7,stroke:#9b9ba5,stroke-dasharray: 5 4,color:#777;
+</pre></details>
+</section></div>
+<div id="flow02"><section class="biz-flow-section">
+<div class="biz-flow-head"><h3>流程图02｜VIP等级、经验值、保级及衰退详细流程图</h3><p>详细展开经验计算、VIPn→VIPn+1、30天保级、1×/2×/3×/4×衰退、等级回落、2×恢复及二次保级观察。</p></div>
+<div class="biz-mermaid-wrap"><div class="mermaid-render-target" data-source-id="vip-flow-source-02" id="vip-flow-02">正在渲染流程图…</div></div>
+<div class="biz-flow-notes"><b>实现提示：</b>衰退倍率由连续无经验增长天数决定；等级回落不重置连续不活跃天数与衰退倍率，但从下一次扣减起使用新当前等级的衰退基础值。</div>
+<details class="mermaid-edit"><summary>展开 Mermaid 源码</summary><pre class="mermaid-source" contenteditable="true" id="vip-flow-source-02">flowchart TD
+  A([开始：会员产生有效投注]):::startend --&gt; B[系统获取有效投注数据]:::action
+  B --&gt; C[系统计算预期抽佣金额]:::action
+  C --&gt; D[系统按当前等级系数换算基础VIP经验]:::action
+  D --&gt; E{当前经验状态是什么？}:::decision
+  E -- 正常成长 --&gt; F[系统使用正常1倍经验倍率]:::state
+  E -- 恢复成长 --&gt; G[系统使用恢复2倍经验倍率]:::state
+  F --&gt; H[系统计算本次实际增加经验]:::action
+  G --&gt; H
+  H --&gt; I[系统累计会员VIP经验]:::action
+  I --&gt; J{是否达到下一等级晋级门槛？}:::decision
+  J -- 达到 --&gt; K[系统将VIPn更新为VIPn+1]:::state
+  K --&gt; L[系统读取新等级晋级门槛]:::action
+  L --&gt; M{累计经验是否继续达到下一门槛？}:::decision
+  M -- 达到 --&gt; K
+  M -- 未达到 --&gt; N[系统进入当前等级30天保级周期]:::state
+  J -- 未达到 --&gt; N
+  N --&gt; O[系统累计本保级周期经验]:::action
+  O --&gt; P{30天保级经验是否达标？}:::decision
+  P -- 达标 --&gt; Q[系统判定保级成功并重置周期]:::state
+  Q --&gt; A
+  P -- 未达标 --&gt; R{整个30天周期是否0经验增长？}:::decision
+  R -- 否 --&gt; S[系统本周期不进入衰退并重置周期]:::state
+  S --&gt; A
+  R -- 是 --&gt; T[系统锁定衰退前等级与经验；作为恢复目标]:::action
+  T --&gt; U[系统进入第31～45天1倍衰退]:::state
+  U --&gt; U1[系统按1×衰退基础值扣减经验]:::action
+  U1 --&gt; V{是否重新产生VIP经验？}:::decision
+  V -- 是 --&gt; RR[系统停止衰退并进入恢复2倍]:::state
+  V -- 否 --&gt; W{连续不活跃是否达到46天？}:::decision
+  W -- 否 --&gt; U1
+  W -- 是 --&gt; X[系统进入第46～60天2倍衰退]:::state
+  X --&gt; X1[系统按2×衰退基础值扣减经验]:::action
+  X1 --&gt; X2{是否重新产生VIP经验？}:::decision
+  X2 -- 是 --&gt; RR
+  X2 -- 否 --&gt; Y{连续不活跃是否达到61天？}:::decision
+  Y -- 否 --&gt; X1
+  Y -- 是 --&gt; Z[系统进入第61～75天3倍衰退]:::state
+  Z --&gt; Z1[系统按3×衰退基础值扣减经验]:::action
+  Z1 --&gt; Z2{是否重新产生VIP经验？}:::decision
+  Z2 -- 是 --&gt; RR
+  Z2 -- 否 --&gt; AA{连续不活跃是否达到76天？}:::decision
+  AA -- 否 --&gt; Z1
+  AA -- 是 --&gt; AB[系统进入第76天起4倍衰退]:::state
+  AB --&gt; AB1[系统按4×衰退基础值扣减经验]:::action
+  AB1 --&gt; AB2{是否重新产生VIP经验？}:::decision
+  AB2 -- 否 --&gt; AB1
+  AB2 -- 是 --&gt; RR
+  U1 --&gt; DD{扣减后是否跌破当前等级门槛？}:::decision
+  X1 --&gt; DD
+  Z1 --&gt; DD
+  AB1 --&gt; DD
+  DD -- 是 --&gt; DE[系统按剩余经验重新定位VIP等级；次日评估可连续回落多级]:::state
+  DD -- 否 --&gt; DF[系统保持当前VIP等级]:::state
+  DE --&gt; DG[系统切换为新当前等级的衰退基础值；连续不活跃天数与倍率不重置]:::action
+  DG --&gt; V
+  DF --&gt; V
+  RR --&gt; RS[系统按恢复2倍累计新经验]:::action
+  RS --&gt; RT{是否恢复至锁定的原等级+原经验？}:::decision
+  RT -- 是 --&gt; RU[系统清除恢复状态并恢复正常1倍]:::state
+  RU --&gt; N
+  RT -- 否 --&gt; RV{会员是否继续产生经验？}:::decision
+  RV -- 是 --&gt; RS
+  RV -- 否 --&gt; RW[系统重新进入30天保级观察；恢复目标不重置]:::state
+  RW --&gt; RX{30天内是否产生经验？}:::decision
+  RX -- 是 --&gt; RR
+  RX -- 否 --&gt; RY{30天保级经验是否达标？}:::decision
+  RY -- 达标 --&gt; Q
+  RY -- 未达标 --&gt; RZ[系统从1倍重新进入衰退]:::state
+  RZ --&gt; U1
+  class A startend; class B,C,D,H,I,L,O,T,U1,X1,Z1,AB1,DG,RS action; class E,J,M,P,R,V,W,X2,Y,Z2,AA,AB2,DD,RT,RV,RX,RY decision; class F,G,K,N,Q,S,U,X,Z,AB,DE,DF,RR,RU,RW,RZ state;
+classDef startend fill:#eef2ff,stroke:#5965d8,stroke-width:1.5px,color:#20264d;
+classDef action fill:#ffffff,stroke:#8b91a7,stroke-width:1px,color:#20232d;
+classDef decision fill:#fff8e6,stroke:#c78b20,stroke-width:1.3px,color:#5b4214;
+classDef state fill:#edf8f2,stroke:#4d9a73,stroke-width:1.2px,color:#244f39;
+classDef exception fill:#fff0f0,stroke:#c95a5a,stroke-width:1.2px,color:#702c2c;
+classDef phase3 fill:#f5f5f7,stroke:#9b9ba5,stroke-dasharray: 5 4,color:#777;
+</pre></details>
+</section></div>
+<div id="flow03"><section class="biz-flow-section">
+<div class="biz-flow-head"><h3>流程图03｜VIP福利产生、领取及过期处理详细流程图</h3><p>分别展开晋级礼金、日福利、周福利、月福利的产生、待领取、主动领取与跨期处理。</p></div>
+<div class="biz-mermaid-wrap"><div class="mermaid-render-target" data-source-id="vip-flow-source-03" id="vip-flow-03">正在渲染流程图…</div></div>
+<div class="biz-flow-notes"><b>规则补充：</b>二期实际生效的跨期规则仅为「未领取作废」；晋级礼金永不过期。原“未领取转发/邮件提醒、受众控制领取、受众控制发奖”已调整至三期，因此图中仅以灰色虚线标记规划位置，不参与二期主链路。</div>
+<details class="mermaid-edit"><summary>展开 Mermaid 源码</summary><pre class="mermaid-source" contenteditable="true" id="vip-flow-source-03">flowchart TD
+  A([开始：达到福利产生条件]):::startend --&gt; B{福利类型？}:::decision
+  B -- 晋级礼金 --&gt; C[系统确认会员完成VIP晋级]:::action
+  C --&gt; D[系统生成晋级礼金待领取记录]:::state
+  B -- 日福利 --&gt; E[定时任务结算上一自然日有效投注]:::action
+  E --&gt; F{是否达到当前等级日福利条件？}:::decision
+  F -- 否 --&gt; END0([本周期不生成日福利]):::startend
+  F -- 是 --&gt; G[系统生成日福利待领取记录]:::state
+  B -- 周福利 --&gt; H[定时任务结算上一自然周有效投注]:::action
+  H --&gt; I{是否达到当前等级周福利条件？}:::decision
+  I -- 否 --&gt; J[系统结转未达标有效投注至下一周期]:::action
+  J --&gt; END1([本周期周福利处理结束]):::startend
+  I -- 是 --&gt; K[系统仅生成当前等级对应周福利]:::state
+  B -- 月福利 --&gt; L[每月16日定时任务结算上一自然月]:::action
+  L --&gt; M{是否达到当前等级月福利条件？}:::decision
+  M -- 否 --&gt; END2([本周期不生成月福利]):::startend
+  M -- 是 --&gt; N[系统生成月福利待领取记录]:::state
+  D --&gt; O{会员是否主动点击领取？}:::decision
+  G --&gt; O
+  K --&gt; O
+  N --&gt; O
+  O -- 是 --&gt; P[系统进入彩金审核及发放流程]:::action
+  P --&gt; Q([福利领取流程结束]):::startend
+  O -- 否 --&gt; R{是否为晋级礼金？}:::decision
+  R -- 是 --&gt; S[系统持续保留待领取状态；晋级礼金永不过期]:::state
+  S --&gt; O
+  R -- 否 --&gt; T{是否已跨对应领取周期？}:::decision
+  T -- 否 --&gt; O
+  T -- 是 --&gt; U[系统执行二期规则：未领取作废]:::action
+  U --&gt; V[系统将福利状态更新为已回收/作废]:::state
+  V --&gt; W([跨期处理结束]):::startend
+  T -. 三期规划 .-&gt; P3A{系统判断受众条件是否满足？}:::phase3
+  P3A -. 满足 .-&gt; P3B[三期：未领取转发/邮件提醒等规则]:::phase3
+  P3A -. 不满足 .-&gt; P3C[三期：受众控制领取/发奖规则]:::phase3
+  P3B -. 本期不执行 .-&gt; W
+  P3C -. 本期不执行 .-&gt; W
+  class A,END0,END1,END2,Q,W startend; class C,E,H,J,L,P,U action; class B,F,I,M,O,R,T decision; class D,G,K,N,S,V state; class P3A,P3B,P3C phase3;
+classDef startend fill:#eef2ff,stroke:#5965d8,stroke-width:1.5px,color:#20264d;
+classDef action fill:#ffffff,stroke:#8b91a7,stroke-width:1px,color:#20232d;
+classDef decision fill:#fff8e6,stroke:#c78b20,stroke-width:1.3px,color:#5b4214;
+classDef state fill:#edf8f2,stroke:#4d9a73,stroke-width:1.2px,color:#244f39;
+classDef exception fill:#fff0f0,stroke:#c95a5a,stroke-width:1.2px,color:#702c2c;
+classDef phase3 fill:#f5f5f7,stroke:#9b9ba5,stroke-dasharray: 5 4,color:#777;
+</pre></details>
+</section></div>
+<div id="flow04"><section class="biz-flow-section">
+<div class="biz-flow-head"><h3>流程图04｜VIP福利彩金审核及发放详细泳道流程图</h3><p>按会员端｜VIP服务端｜运营后台三个角色完整展示自动发放、人工审核、拒绝与发放异常。</p></div>
+<div class="biz-mermaid-wrap"><div class="mermaid-render-target" data-source-id="vip-flow-source-04" id="vip-flow-04">正在渲染流程图…</div></div>
+<div class="biz-flow-notes"><b>审核口径：</b>手动发放时，会员领取后即生成待审核数据且审核方式=手动；待审核阶段审核人/审核时间为“—”。审核完成后，审核人记录实际操作账号（原型示例可为 dipsy01），审核时间记录运营操作时间。手动方式下“待审核”“审核拒绝”不展示审核备注。</div>
+<details class="mermaid-edit"><summary>展开 Mermaid 源码</summary><pre class="mermaid-source" contenteditable="true" id="vip-flow-source-04">flowchart TD
+  subgraph U[会员端]
+    U0([开始：福利状态=待领取]):::startend
+    U1[会员点击领取福利]:::action
+    U2[会员查看领取结果]:::action
+    U3([领取流程结束]):::startend
+  end
+  subgraph S[VIP服务端]
+    S1[系统接收领取请求]:::action
+    S2{领取资格是否有效？}:::decision
+    S3[系统返回不可领取原因]:::exception
+    S4[系统生成领取数据]:::action
+    S5[系统读取该等级发放方式]:::action
+    S6{发放方式？}:::decision
+    S7[系统执行自动彩金发放]:::action
+    S8{彩金发放是否成功？}:::decision
+    S9[系统更新状态为已发放/已领取]:::state
+    S10[系统记录发放失败]:::exception
+    S11[系统创建待审核记录；审核方式=手动]:::state
+    S12[系统记录审核人=实际操作账号]:::action
+    S13[系统记录审核时间=操作时间]:::action
+    S14[系统更新审核状态=审核通过]:::state
+    S15[系统执行彩金发放]:::action
+    S16{彩金发放是否成功？}:::decision
+    S17[系统更新最终状态=已发放/已领取]:::state
+    S18[系统记录发放失败]:::exception
+    S19[系统记录审核结果=审核拒绝]:::state
+  end
+  subgraph O[运营后台]
+    O1[后台展示待审核数据；审核人/审核时间=—]:::state
+    O2[运营人员审核彩金申请]:::action
+    O3{审核结果？}:::decision
+    O4[后台展示审核通过结果]:::state
+    O5[后台展示审核拒绝结果；不展示审核备注]:::state
+  end
+  U0 --&gt; U1 --&gt; S1 --&gt; S2
+  S2 -- 无效 --&gt; S3 --&gt; U2 --&gt; U3
+  S2 -- 有效 --&gt; S4 --&gt; S5 --&gt; S6
+  S6 -- 自动 --&gt; S7 --&gt; S8
+  S8 -- 成功 --&gt; S9 --&gt; U2
+  S8 -- 失败 --&gt; S10 --&gt; U2
+  S6 -- 手动 --&gt; S11 --&gt; O1 --&gt; O2 --&gt; O3
+  O3 -- 通过 --&gt; S12 --&gt; S13 --&gt; S14 --&gt; O4 --&gt; S15 --&gt; S16
+  S16 -- 成功 --&gt; S17 --&gt; U2
+  S16 -- 失败 --&gt; S18 --&gt; U2
+  O3 -- 拒绝 --&gt; S12 --&gt; S13 --&gt; S19 --&gt; O5 --&gt; U2
+  class U0,U3 startend; class U1,U2,S1,S4,S5,S7,S12,S13,S15,O2 action; class S2,S6,S8,S16,O3 decision; class S9,S11,S14,S17,S19,O1,O4,O5 state; class S3,S10,S18 exception;
+classDef startend fill:#eef2ff,stroke:#5965d8,stroke-width:1.5px,color:#20264d;
+classDef action fill:#ffffff,stroke:#8b91a7,stroke-width:1px,color:#20232d;
+classDef decision fill:#fff8e6,stroke:#c78b20,stroke-width:1.3px,color:#5b4214;
+classDef state fill:#edf8f2,stroke:#4d9a73,stroke-width:1.2px,color:#244f39;
+classDef exception fill:#fff0f0,stroke:#c95a5a,stroke-width:1.2px,color:#702c2c;
+classDef phase3 fill:#f5f5f7,stroke:#9b9ba5,stroke-dasharray: 5 4,color:#777;
+</pre></details>
+</section></div>
+<div id="flow05"><section class="biz-flow-section">
+<div class="biz-flow-head"><h3>流程图05｜老VIP会员初始化详细决策流程图</h3><p>一次性处理存量会员：60天投注判断、等级初始化、晋级礼金补发以及长期未投注会员回归后的2倍恢复。</p></div>
+<div class="biz-mermaid-wrap"><div class="mermaid-render-target" data-source-id="vip-flow-source-05" id="vip-flow-05">正在渲染流程图…</div></div>
+<div class="biz-flow-notes"><b>初始化口径：</b>首批一次性处理：VIP0～VIP2不因60天未投注调整等级；原VIP≥3且近60天未投注统一初始化为VIP3、0经验，并锁定原等级+原经验作为恢复目标。未发生该特殊调整的老会员重新发放当前等级至VIP1晋级礼金。</div>
+<details class="mermaid-edit"><summary>展开 Mermaid 源码</summary><pre class="mermaid-source" contenteditable="true" id="vip-flow-source-05">flowchart TD
+  A([开始：获取存量VIP会员]):::startend --&gt; B[系统读取会员原VIP等级与原经验]:::action
+  B --&gt; C{最近60天是否存在投注？}:::decision
+  C -- 是 --&gt; D[系统保留原VIP等级与原经验]:::state
+  C -- 否 --&gt; E{原VIP等级是否为VIP0～VIP2？}:::decision
+  E -- 是 --&gt; F[系统保留原VIP等级与原经验]:::state
+  E -- 否：VIP3及以上 --&gt; G[系统将会员初始化为VIP3]:::state
+  G --&gt; H[系统将初始化经验设置为0]:::state
+  H --&gt; I[系统锁定初始化前原等级+原经验；作为2倍恢复目标]:::action
+  D --&gt; J{是否属于未发生VIP3/0特殊调整会员？}:::decision
+  F --&gt; J
+  J -- 是 --&gt; K{初始化后VIP等级？}:::decision
+  K -- VIP0 --&gt; L[系统不补发晋级礼金]:::state
+  K -- VIP1 --&gt; M[系统补发VIP1晋级礼金]:::action
+  K -- VIP2 --&gt; N[系统补发VIP2、VIP1晋级礼金]:::action
+  K -- VIP3及以上 --&gt; O[系统补发当前等级至VIP1；全部晋级礼金]:::action
+  L --&gt; P[系统设置正常经验倍率=1倍]:::state
+  M --&gt; P
+  N --&gt; P
+  O --&gt; P
+  J -- 否 --&gt; Q[系统不执行初始化晋级礼金补发]:::state
+  I --&gt; Q
+  Q --&gt; R{会员后续是否重新产生有效投注？}:::decision
+  R -- 否 --&gt; S[系统保持VIP3/0经验；后续进入正常30天保级观察]:::state
+  R -- 是 --&gt; T[系统进入2倍经验恢复期]:::state
+  T --&gt; U[系统按2倍累计VIP经验]:::action
+  U --&gt; V{是否恢复至初始化前原等级+原经验？}:::decision
+  V -- 未恢复 --&gt; W{会员是否继续产生经验？}:::decision
+  W -- 是 --&gt; U
+  W -- 否 --&gt; X[系统重新进入30天保级观察；恢复目标不重置]:::state
+  X --&gt; Y{是否重新产生经验？}:::decision
+  Y -- 是 --&gt; T
+  Y -- 否 --&gt; Z{完整30天是否未达保级且0增长？}:::decision
+  Z -- 是 --&gt; ZA[系统从1倍进入衰退；恢复目标保持不变]:::state
+  Z -- 否 --&gt; X
+  V -- 已恢复 --&gt; ZB[系统结束恢复并恢复正常1倍]:::state
+  P --&gt; ZC([初始化完成：等级/经验保留；已按规则补发，倍率1倍]):::startend
+  S --&gt; ZD([初始化完成：VIP3/0经验；不补发，等待回归]):::startend
+  ZA --&gt; ZE([初始化完成：进入后续VIP生命周期]):::startend
+  ZB --&gt; ZF([初始化完成：恢复原目标；倍率回到1倍]):::startend
+  class A,ZC,ZD,ZE,ZF startend; class B,I,M,N,O,U action; class C,E,J,K,R,V,W,Y,Z decision; class D,F,G,H,L,P,Q,S,T,X,ZA,ZB state;
+classDef startend fill:#eef2ff,stroke:#5965d8,stroke-width:1.5px,color:#20264d;
+classDef action fill:#ffffff,stroke:#8b91a7,stroke-width:1px,color:#20232d;
+classDef decision fill:#fff8e6,stroke:#c78b20,stroke-width:1.3px,color:#5b4214;
+classDef state fill:#edf8f2,stroke:#4d9a73,stroke-width:1.2px,color:#244f39;
+classDef exception fill:#fff0f0,stroke:#c95a5a,stroke-width:1.2px,color:#702c2c;
+classDef phase3 fill:#f5f5f7,stroke:#9b9ba5,stroke-dasharray: 5 4,color:#777;
+</pre></details>
+</section></div>
+<div id="flow06"><section class="biz-flow-section">
+<div class="biz-flow-head"><h3>流程图06｜VIP福利状态流转详细流程图</h3><p>从“未产生”开始，把待领取、待审核、审核通过/拒绝、发放中、已发放、发放失败与跨期回收的触发动作完整串联。</p></div>
+<div class="biz-mermaid-wrap"><div class="mermaid-render-target" data-source-id="vip-flow-source-06" id="vip-flow-06">正在渲染流程图…</div></div>
+<div class="biz-flow-notes"><b>状态口径：</b>本图只展示PRD已明确状态与触发动作；三期领取规则仅灰色虚线标记，不作为二期状态流转。</div>
+<details class="mermaid-edit"><summary>展开 Mermaid 源码</summary><pre class="mermaid-source" contenteditable="true" id="vip-flow-source-06">flowchart TD
+  A([开始：福利尚未产生]):::startend --&gt; B{是否达到对应福利产生条件？}:::decision
+  B -- 否 --&gt; A
+  B -- 是 --&gt; C[系统生成福利记录]:::action
+  C --&gt; D[系统更新福利状态=待领取]:::state
+  D --&gt; E{会员是否点击领取？}:::decision
+  E -- 否 --&gt; F{是否为晋级礼金？}:::decision
+  F -- 是 --&gt; D
+  F -- 否 --&gt; G{是否跨对应周期？}:::decision
+  G -- 否 --&gt; D
+  G -- 是 --&gt; H[系统执行未领取作废]:::action
+  H --&gt; I[系统更新福利状态=已回收/作废]:::state
+  I --&gt; Z([该笔福利流程结束]):::startend
+  E -- 是 --&gt; J[系统校验领取资格]:::action
+  J --&gt; K{资格是否有效？}:::decision
+  K -- 否 --&gt; K1[系统保持原状态并返回失败原因]:::exception
+  K1 --&gt; D
+  K -- 是 --&gt; L{发放方式？}:::decision
+  L -- 自动 --&gt; M[系统进入发放处理中]:::state
+  M --&gt; N[系统执行彩金发放]:::action
+  N --&gt; O{发放是否成功？}:::decision
+  O -- 成功 --&gt; P[系统更新状态=已发放/已领取]:::state
+  O -- 失败 --&gt; Q[系统更新状态=发放失败]:::exception
+  P --&gt; Z
+  Q --&gt; Z
+  L -- 手动 --&gt; R[系统更新审核状态=待审核]:::state
+  R --&gt; S[运营执行人工审核]:::action
+  S --&gt; T{审核是否通过？}:::decision
+  T -- 拒绝 --&gt; U[系统更新审核状态=审核拒绝]:::state
+  U --&gt; Z
+  T -- 通过 --&gt; V[系统更新审核状态=审核通过]:::state
+  V --&gt; W[系统进入发放处理中]:::state
+  W --&gt; X[系统执行彩金发放]:::action
+  X --&gt; Y{发放是否成功？}:::decision
+  Y -- 成功 --&gt; P
+  Y -- 失败 --&gt; Q
+  G -. 三期规划 .-&gt; P3[三期其他跨期/受众领取规则；本期不执行]:::phase3
+  P3 -. 返回二期范围 .-&gt; Z
+  class A,Z startend; class C,H,J,N,S,X action; class B,E,F,G,K,L,O,T,Y decision; class D,I,M,P,R,U,V,W state; class K1,Q exception; class P3 phase3;
+classDef startend fill:#eef2ff,stroke:#5965d8,stroke-width:1.5px,color:#20264d;
+classDef action fill:#ffffff,stroke:#8b91a7,stroke-width:1px,color:#20232d;
+classDef decision fill:#fff8e6,stroke:#c78b20,stroke-width:1.3px,color:#5b4214;
+classDef state fill:#edf8f2,stroke:#4d9a73,stroke-width:1.2px,color:#244f39;
+classDef exception fill:#fff0f0,stroke:#c95a5a,stroke-width:1.2px,color:#702c2c;
+classDef phase3 fill:#f5f5f7,stroke:#9b9ba5,stroke-dasharray: 5 4,color:#777;
+</pre></details>
+</section></div>
 </div>
-
+</div>
 <!-- 新增/编辑 抽屉 -->
 <div class="overlay" id="overlay">
-  <div class="drawer">
-    <div class="drawer-header">
-      <span id="drawerTitle">新增</span>
-      <span class="close" onclick="closeDrawer()">✕</span>
-    </div>
-
-    <div class="field">
-      <label><span class="req">*</span>VIP等级</label>
-      <div class="stepper">
-        <button type="button" onclick="alert('等级由系统按顺序自动生成，不可手动调整')">－</button>
-        <input type="text" id="f_level" disabled>
-        <button type="button" onclick="alert('等级由系统按顺序自动生成，不可手动调整')">＋</button>
-      </div>
-      <div class="hint">新增或编辑时不能与当前已存在级别相同或与已存在的最大级别跨级别输入</div>
-    </div>
-
-    <div class="field">
-      <label><span class="req">*</span>VIP等级名称</label>
-      <input type="text" id="f_name" placeholder="请输入VIP等级名称">
-    </div>
-
-    <div class="field">
-      <label><span class="req">*</span>抽佣系数</label>
-      <div class="stepper">
-        <button type="button" onclick="step('f_coef',-0.1)">－</button>
-        <input type="number" id="f_coef" step="0.1" value="1.0" oninput="updatePreview()">
-        <button type="button" onclick="step('f_coef',0.1)">＋</button>
-      </div>
-      <div class="hint">真实判定用，必须大于0，不对外展示给客户端</div>
-      <div class="err" id="err_coef">抽佣系数必须大于0</div>
-    </div>
-
-    <div class="field">
-      <label><span class="req">*</span>晋升所需经验值门槛</label>
-      <div class="stepper">
-        <button type="button" onclick="step('f_th',-10)">－</button>
-        <input type="number" id="f_th" step="10" value="100" oninput="updatePreview()">
-        <button type="button" onclick="step('f_th',10)">＋</button>
-      </div>
-      <div class="hint">该数值为本等级独立的绝对判定门槛，不与其他等级累加；建议整体保持递增趋势，避免高等级门槛低于低等级</div>
-      <div class="warn" id="warn_th">建议不低于上一等级的门槛值，否则整体递增趋势可能异常</div>
-    </div>
-
-    <div class="preview-box">
-      <p class="label">系数与门槛换算预览</p>
-      <p class="formula" id="previewFormula">门槛 100 ÷ 系数 1.0</p>
-      <p class="label" style="margin-top:10px;">预期抽佣金额（折算门槛，晋级判定实际使用）<span class="tooltip-icon" data-tip="有效投注 ×（1 - 理论RTP - 实际返水率）">ⓘ</span></p>
-      <p class="estimate" id="previewEstimate">≈ 100 U</p>
-      <p style="font-size:11px; color:#5a6bc4; margin:6px 0 0;">该值即晋级判定实际使用的"折算门槛"：会员待换算预期抽佣金额余量(pool)达到此值即可晋级本等级</p>
-    </div>
-
-    <div class="field">
-      <label><span class="req">*</span>晋级礼金<span class="tag-manual">手动领取</span></label>
-      <div class="stepper">
-        <button type="button" onclick="step('f_gift',-1)">－</button>
-        <input type="number" id="f_gift" step="1" value="0">
-        <span class="unit">U</span>
-        <button type="button" onclick="step('f_gift',1)">＋</button>
-      </div>
-      <div class="hint">达标后由会员在客户端主动领取；逾期未领取按「领取规则设置」处理</div>
-    </div>
-
-    <div class="field">
-      <label><span class="req">*</span>日流水<span class="tag-new">NEW</span></label>
-      <div class="stepper">
-        <button type="button" onclick="step('f_dailyTurnover',-10)">－</button>
-        <input type="number" id="f_dailyTurnover" step="10" value="0">
-        <span class="unit">U</span>
-        <button type="button" onclick="step('f_dailyTurnover',10)">＋</button>
-      </div>
-    </div>
-
-    <div class="field">
-      <label><span class="req">*</span>日福利礼金<span class="tag-new">NEW</span><span class="tag-manual">手动领取</span></label>
-      <div class="stepper">
-        <button type="button" onclick="step('f_daily',-1)">－</button>
-        <input type="number" id="f_daily" step="1" value="0">
-        <span class="unit">U</span>
-        <button type="button" onclick="step('f_daily',1)">＋</button>
-      </div>
-      <div class="hint">满足左侧日流水后由会员在客户端主动领取，逾期未领取按「领取规则设置」处理；本等级如不需要该福利，金额填0即可</div>
-    </div>
-
-    <div class="field">
-      <label><span class="req">*</span>周流水</label>
-      <div class="stepper">
-        <button type="button" onclick="step('f_week',-10)">－</button>
-        <input type="number" id="f_week" step="10" value="0">
-        <span class="unit">U</span>
-        <button type="button" onclick="step('f_week',10)">＋</button>
-      </div>
-    </div>
-
-    <div class="field">
-      <label><span class="req">*</span>周福利礼金<span class="tag-manual">手动领取</span></label>
-      <div class="stepper">
-        <button type="button" onclick="step('f_weekgift',-1)">－</button>
-        <input type="number" id="f_weekgift" step="1" value="0">
-        <span class="unit">U</span>
-        <button type="button" onclick="step('f_weekgift',1)">＋</button>
-      </div>
-      <div class="hint">达标后由会员在客户端主动领取；逾期未领取按「领取规则设置」处理</div>
-    </div>
-
-    <div class="field">
-      <label><span class="req">*</span>月流水<span class="tag-new">NEW</span></label>
-      <div class="stepper">
-        <button type="button" onclick="step('f_monthlyTurnover',-10)">－</button>
-        <input type="number" id="f_monthlyTurnover" step="10" value="0">
-        <span class="unit">U</span>
-        <button type="button" onclick="step('f_monthlyTurnover',10)">＋</button>
-      </div>
-    </div>
-
-    <div class="field">
-      <label><span class="req">*</span>月福利礼金<span class="tag-new">NEW</span><span class="tag-manual">手动领取</span></label>
-      <div class="stepper">
-        <button type="button" onclick="step('f_monthly',-1)">－</button>
-        <input type="number" id="f_monthly" step="1" value="0">
-        <span class="unit">U</span>
-        <button type="button" onclick="step('f_monthly',1)">＋</button>
-      </div>
-      <div class="hint">固定每月16日结算生成后由会员在客户端主动领取，逾期未领取按「领取规则设置」处理；本等级如不需要该福利，金额填0即可</div>
-    </div>
-
-    <div class="field">
-      <label><span class="req">*</span>30天保级经验</label>
-      <div class="stepper">
-        <button type="button" onclick="step('f_keep',-10)">－</button>
-        <input type="number" id="f_keep" step="10" value="0">
-        <button type="button" onclick="step('f_keep',10)">＋</button>
-      </div>
-      <div class="hint">会员达到本等级后，每30天为一个保级考核周期，周期内累计VIP经验需达到该值才算保级成功；未达标且周期内0增长则从第31天起进入经验衰退（见下方"衰退基础值"）</div>
-    </div>
-
-    <div class="field">
-      <label><span class="req">*</span>衰退基础值<span class="tag-new">NEW</span></label>
-      <div class="stepper">
-        <button type="button" onclick="step('f_decayBase',-1)">－</button>
-        <input type="number" id="f_decayBase" step="1" value="0">
-        <span class="unit">经验/天</span>
-        <button type="button" onclick="step('f_decayBase',1)">＋</button>
-      </div>
-      <div class="hint">进入衰退阶段1（第31-45天）后每日扣除的VIP经验基础值；此后每连续15天仍无经验增长，衰退速度在此基础上依次提升至2倍、3倍、4倍</div>
-    </div>
-
-    <div class="field">
-      <label><span class="req">*</span>发放礼金稽核倍数</label>
-      <div class="stepper">
-        <button type="button" onclick="step('f_mult',-1)">－</button>
-        <input type="number" id="f_mult" step="1" value="1">
-        <button type="button" onclick="step('f_mult',1)">＋</button>
-      </div>
-    </div>
-
-    <div class="field">
-      <label><span class="req">*</span>发放方式</label>
-      <div class="radio-row">
-        <label class="radio-inline"><input type="radio" name="f_dispatch" value="auto"> 自动发放</label>
-        <label class="radio-inline"><input type="radio" name="f_dispatch" value="manual"> 人工发放</label>
-      </div>
-    </div>
-
-    <div class="drawer-footer">
-      <button class="btn" onclick="closeDrawer()">关闭</button>
-      <button class="btn btn-primary" onclick="saveDrawer()">保存</button>
-    </div>
-  </div>
+<div class="drawer">
+<div class="drawer-header">
+<span id="drawerTitle">新增</span>
+<span class="close" onclick="closeDrawer()">✕</span>
 </div>
-
+<div class="field">
+<label><span class="req">*</span>VIP等级</label>
+<div class="stepper">
+<button onclick="alert('等级由系统按顺序自动生成，不可手动调整')" type="button">－</button>
+<input disabled="" id="f_level" type="text"/>
+<button onclick="alert('等级由系统按顺序自动生成，不可手动调整')" type="button">＋</button>
+</div>
+<div class="hint">新增或编辑时不能与当前已存在级别相同或与已存在的最大级别跨级别输入</div>
+</div>
+<div class="field">
+<label><span class="req">*</span>VIP等级名称</label>
+<input id="f_name" placeholder="请输入VIP等级名称" type="text"/>
+</div>
+<div class="field">
+<label><span class="req">*</span>抽佣系数</label>
+<div class="stepper">
+<button onclick="step('f_coef',-0.1)" type="button">－</button>
+<input id="f_coef" oninput="updatePreview()" step="0.1" type="number" value="1.0"/>
+<button onclick="step('f_coef',0.1)" type="button">＋</button>
+</div>
+<div class="hint">真实判定用，必须大于0，不对外展示给客户端</div>
+<div class="err" id="err_coef">抽佣系数必须大于0</div>
+</div>
+<div class="field">
+<label><span class="req">*</span>晋升所需经验值门槛</label>
+<div class="stepper">
+<button onclick="step('f_th',-10)" type="button">－</button>
+<input id="f_th" oninput="updatePreview()" step="10" type="number" value="100"/>
+<button onclick="step('f_th',10)" type="button">＋</button>
+</div>
+<div class="hint">该数值为本等级独立的绝对判定门槛，不与其他等级累加；建议整体保持递增趋势，避免高等级门槛低于低等级</div>
+<div class="warn" id="warn_th">建议不低于上一等级的门槛值，否则整体递增趋势可能异常</div>
+</div>
+<div class="preview-box">
+<p class="label">系数与门槛换算预览</p>
+<p class="formula" id="previewFormula">门槛 100 ÷ 系数 1.0</p>
+<p class="label" style="margin-top:10px;">预期抽佣金额（折算门槛，晋级判定实际使用）<span class="tooltip-icon" data-tip="有效投注 ×（1 - 理论RTP - 实际返水率）">ⓘ</span></p>
+<p class="estimate" id="previewEstimate">≈ 100 U</p>
+<p style="font-size:11px; color:#5a6bc4; margin:6px 0 0;">该值即晋级判定实际使用的"折算门槛"：会员待换算预期抽佣金额余量(pool)达到此值即可晋级本等级</p>
+</div>
+<div class="field">
+<label><span class="req">*</span>晋级礼金<span class="tag-manual">手动领取</span></label>
+<div class="stepper">
+<button onclick="step('f_gift',-1)" type="button">－</button>
+<input id="f_gift" step="1" type="number" value="0"/>
+<span class="unit">U</span>
+<button onclick="step('f_gift',1)" type="button">＋</button>
+</div>
+<div class="hint">达标后由会员在客户端主动领取；逾期未领取按「领取规则设置」处理</div>
+</div>
+<div class="field">
+<label><span class="req">*</span>日流水<span class="tag-new">NEW</span></label>
+<div class="stepper">
+<button onclick="step('f_dailyTurnover',-10)" type="button">－</button>
+<input id="f_dailyTurnover" step="10" type="number" value="0"/>
+<span class="unit">U</span>
+<button onclick="step('f_dailyTurnover',10)" type="button">＋</button>
+</div>
+</div>
+<div class="field">
+<label><span class="req">*</span>日福利礼金<span class="tag-new">NEW</span><span class="tag-manual">手动领取</span></label>
+<div class="stepper">
+<button onclick="step('f_daily',-1)" type="button">－</button>
+<input id="f_daily" step="1" type="number" value="0"/>
+<span class="unit">U</span>
+<button onclick="step('f_daily',1)" type="button">＋</button>
+</div>
+<div class="hint">满足左侧日流水后由会员在客户端主动领取，逾期未领取按「领取规则设置」处理；本等级如不需要该福利，金额填0即可</div>
+</div>
+<div class="field">
+<label><span class="req">*</span>周流水</label>
+<div class="stepper">
+<button onclick="step('f_week',-10)" type="button">－</button>
+<input id="f_week" step="10" type="number" value="0"/>
+<span class="unit">U</span>
+<button onclick="step('f_week',10)" type="button">＋</button>
+</div>
+</div>
+<div class="field">
+<label><span class="req">*</span>周福利礼金<span class="tag-manual">手动领取</span></label>
+<div class="stepper">
+<button onclick="step('f_weekgift',-1)" type="button">－</button>
+<input id="f_weekgift" step="1" type="number" value="0"/>
+<span class="unit">U</span>
+<button onclick="step('f_weekgift',1)" type="button">＋</button>
+</div>
+<div class="hint">达标后由会员在客户端主动领取；逾期未领取按「领取规则设置」处理</div>
+</div>
+<div class="field">
+<label><span class="req">*</span>月流水<span class="tag-new">NEW</span></label>
+<div class="stepper">
+<button onclick="step('f_monthlyTurnover',-10)" type="button">－</button>
+<input id="f_monthlyTurnover" step="10" type="number" value="0"/>
+<span class="unit">U</span>
+<button onclick="step('f_monthlyTurnover',10)" type="button">＋</button>
+</div>
+</div>
+<div class="field">
+<label><span class="req">*</span>月福利礼金<span class="tag-new">NEW</span><span class="tag-manual">手动领取</span></label>
+<div class="stepper">
+<button onclick="step('f_monthly',-1)" type="button">－</button>
+<input id="f_monthly" step="1" type="number" value="0"/>
+<span class="unit">U</span>
+<button onclick="step('f_monthly',1)" type="button">＋</button>
+</div>
+<div class="hint">固定每月16日结算生成后由会员在客户端主动领取，逾期未领取按「领取规则设置」处理；本等级如不需要该福利，金额填0即可</div>
+</div>
+<div class="field">
+<label><span class="req">*</span>30天保级经验</label>
+<div class="stepper">
+<button onclick="step('f_keep',-10)" type="button">－</button>
+<input id="f_keep" step="10" type="number" value="0"/>
+<button onclick="step('f_keep',10)" type="button">＋</button>
+</div>
+<div class="hint">会员达到本等级后，每30天为一个保级考核周期，周期内累计VIP经验需达到该值才算保级成功；未达标且周期内0增长则从第31天起进入经验衰退（见下方"衰退基础值"）</div>
+</div>
+<div class="field">
+<label><span class="req">*</span>衰退基础值<span class="tag-new">NEW</span></label>
+<div class="stepper">
+<button onclick="step('f_decayBase',-1)" type="button">－</button>
+<input id="f_decayBase" step="1" type="number" value="0"/>
+<span class="unit">经验/天</span>
+<button onclick="step('f_decayBase',1)" type="button">＋</button>
+</div>
+<div class="hint">进入衰退阶段1（第31-45天）后每日扣除的VIP经验基础值；此后每连续15天仍无经验增长，衰退速度在此基础上依次提升至2倍、3倍、4倍</div>
+</div>
+<div class="field">
+<label><span class="req">*</span>发放礼金稽核倍数</label>
+<div class="stepper">
+<button onclick="step('f_mult',-1)" type="button">－</button>
+<input id="f_mult" step="1" type="number" value="1"/>
+<button onclick="step('f_mult',1)" type="button">＋</button>
+</div>
+</div>
+<div class="field">
+<label><span class="req">*</span>发放方式</label>
+<div class="radio-row">
+<label class="radio-inline"><input name="f_dispatch" type="radio" value="auto"/> 自动发放</label>
+<label class="radio-inline"><input name="f_dispatch" type="radio" value="manual"/> 人工发放</label>
+</div>
+</div>
+<div class="drawer-footer">
+<button class="btn" onclick="closeDrawer()">关闭</button>
+<button class="btn btn-primary" onclick="saveDrawer()">保存</button>
+</div>
+</div>
+</div>
 <!-- 删除确认 -->
 <div class="confirm-overlay" id="confirmOverlay">
-  <div class="confirm-box">
-    <p>ⓘ 确定要删除该数据吗？</p>
-    <div class="confirm-actions">
-      <button class="btn" onclick="closeConfirm()">取消</button>
-      <button class="btn btn-primary" onclick="doDelete()">确定</button>
-    </div>
-  </div>
+<div class="confirm-box">
+<p>ⓘ 确定要删除该数据吗？</p>
+<div class="confirm-actions">
+<button class="btn" onclick="closeConfirm()">取消</button>
+<button class="btn btn-primary" onclick="doDelete()">确定</button>
 </div>
-
+</div>
+</div>
 <!-- 客户端展示设置 -->
 <div class="copy-modal-overlay" id="copyModalOverlay">
-  <div class="copy-modal">
-    <div class="copy-modal-header">
-      <span>客户端展示设置</span>
-      <span class="close" onclick="closeCopyModal()">✕</span>
-    </div>
-    <div class="copy-warn">⚠ 以下设置将展示在客户端「我的特权」页，对所有VIP等级统一生效。规则文案请勿包含具体计算公式、真实系数或门槛数值等涉及游戏利润空间的内容。</div>
-
-    <div class="section-divider" style="margin-top:0; padding-top:0; border-top:none;">
-      <div class="section-title">展示字段</div>
-      <div class="section-sub">勾选后，客户端「VIP详情」表格将对所有等级统一显示该列，未勾选的字段不会透出给任何等级的会员</div>
-      <div class="hint" style="color:#b5760a; background:#fff8ec; border:0.5px solid #f0dfb5; border-radius:var(--radius); padding:8px 10px; margin-bottom:12px;">
+<div class="copy-modal">
+<div class="copy-modal-header">
+<span>客户端展示设置</span>
+<span class="close" onclick="closeCopyModal()">✕</span>
+</div>
+<div class="copy-warn">⚠ 以下设置将展示在客户端「我的特权」页，对所有VIP等级统一生效。规则文案请勿包含具体计算公式、真实系数或门槛数值等涉及游戏利润空间的内容。</div>
+<div class="section-divider" style="margin-top:0; padding-top:0; border-top:none;">
+<div class="section-title">展示字段</div>
+<div class="section-sub">勾选后，客户端「VIP详情」表格将对所有等级统一显示该列，未勾选的字段不会透出给任何等级的会员</div>
+<div class="hint" style="color:#b5760a; background:#fff8ec; border:0.5px solid #f0dfb5; border-radius:var(--radius); padding:8px 10px; margin-bottom:12px;">
         ⚠ 「晋级礼金」「周福利礼金」「日福利礼金」「月福利礼金」这几项<b>不只是控制客户端展示</b>：取消勾选后，即使对应VIP等级已经配置了具体金额，系统<b>也不会再实际生成待领取记录</b>（不派发该项礼金）；其余字段（VIP等级名称、门槛、日流水、周流水、月流水、30天保级经验、衰退基础值、提现流水倍数）取消勾选仅影响客户端是否显示，不影响后台判定和实际发放。「提现流水倍数」对应后台字段「发放礼金稽核倍数」，客户端展示用名不同，实际是同一份数据。
       </div>
-      <div class="checkbox-grid">
-        <label class="checkbox-item"><input type="checkbox" id="g_name" checked>VIP等级名称</label>
-        <label class="checkbox-item"><input type="checkbox" id="g_threshold" checked>晋升所需经验值门槛</label>
-        <label class="checkbox-item"><input type="checkbox" id="g_gift" checked>晋级礼金</label>
-        <label class="checkbox-item"><input type="checkbox" id="g_dailyTurnover" checked>日流水<span class="tag-new">NEW</span></label>
-        <label class="checkbox-item"><input type="checkbox" id="g_dailyGift" checked>日福利礼金<span class="tag-new">NEW</span></label>
-        <label class="checkbox-item"><input type="checkbox" id="g_week" checked>周流水</label>
-        <label class="checkbox-item"><input type="checkbox" id="g_weekGift" checked>周福利礼金</label>
-        <label class="checkbox-item"><input type="checkbox" id="g_monthlyTurnover" checked>月流水<span class="tag-new">NEW</span></label>
-        <label class="checkbox-item"><input type="checkbox" id="g_monthlyGift" checked>月福利礼金<span class="tag-new">NEW</span></label>
-        <label class="checkbox-item"><input type="checkbox" id="g_keep" checked>30天保级经验</label>
-        <label class="checkbox-item"><input type="checkbox" id="g_decayBase" checked>衰退基础值<span class="tag-new">NEW</span></label>
-        <label class="checkbox-item"><input type="checkbox" id="g_mult" checked>提现流水倍数</label>
-      </div>
-    </div>
-
-    <div class="section-divider">
-      <div class="section-title">规则说明文案</div>
-      <div class="section-sub">展示在客户端「我的特权」页底部，对所有等级统一生效；<b>三段文案均为非必填项，若留空，客户端对应模块不展示该内容</b>；文案中按回车换行，客户端将自动按段落用圆点"•"展示（三段规则均按此规则统一处理）；不换行则展示为一段纯文本</div>
-    </div>
-
-    <div class="field">
-      <label>晋升规则<span class="optional-tag">非必填</span></label>
-      <textarea id="copy_promotion" rows="6" oninput="updateEmptyHint('promotion')"></textarea>
-      <div class="hint" id="hint_promotion"></div>
-    </div>
-    <div class="field">
-      <label>保级规则<span class="optional-tag">非必填</span></label>
-      <textarea id="copy_keep" rows="6" oninput="updateEmptyHint('keep')"></textarea>
-      <div class="hint" id="hint_keep"></div>
-    </div>
-    <div class="field">
-      <label>流水福利规则<span class="optional-tag">非必填</span></label>
-      <textarea id="copy_week" rows="8" oninput="updateEmptyHint('week')"></textarea>
-      <div class="hint" id="hint_week"></div>
-    </div>
-
-    <div class="drawer-footer">
-      <button class="btn" onclick="closeCopyModal()">关闭</button>
-      <button class="btn btn-primary" onclick="saveCopyModal()">保存</button>
-    </div>
-  </div>
+<div class="checkbox-grid">
+<label class="checkbox-item"><input checked="" id="g_name" type="checkbox"/>VIP等级名称</label>
+<label class="checkbox-item"><input checked="" id="g_threshold" type="checkbox"/>晋升所需经验值门槛</label>
+<label class="checkbox-item"><input checked="" id="g_gift" type="checkbox"/>晋级礼金</label>
+<label class="checkbox-item"><input checked="" id="g_dailyTurnover" type="checkbox"/>日流水<span class="tag-new">NEW</span></label>
+<label class="checkbox-item"><input checked="" id="g_dailyGift" type="checkbox"/>日福利礼金<span class="tag-new">NEW</span></label>
+<label class="checkbox-item"><input checked="" id="g_week" type="checkbox"/>周流水</label>
+<label class="checkbox-item"><input checked="" id="g_weekGift" type="checkbox"/>周福利礼金</label>
+<label class="checkbox-item"><input checked="" id="g_monthlyTurnover" type="checkbox"/>月流水<span class="tag-new">NEW</span></label>
+<label class="checkbox-item"><input checked="" id="g_monthlyGift" type="checkbox"/>月福利礼金<span class="tag-new">NEW</span></label>
+<label class="checkbox-item"><input checked="" id="g_keep" type="checkbox"/>30天保级经验</label>
+<label class="checkbox-item"><input checked="" id="g_decayBase" type="checkbox"/>衰退基础值<span class="tag-new">NEW</span></label>
+<label class="checkbox-item"><input checked="" id="g_mult" type="checkbox"/>提现流水倍数</label>
 </div>
-
+</div>
+<div class="section-divider">
+<div class="section-title">规则说明文案</div>
+<div class="section-sub">展示在客户端「我的特权」页底部，对所有等级统一生效；<b>三段文案均为非必填项，若留空，客户端对应模块不展示该内容</b>；文案中按回车换行，客户端将自动按段落用圆点"•"展示（三段规则均按此规则统一处理）；不换行则展示为一段纯文本</div>
+</div>
+<div class="field">
+<label>晋升规则<span class="optional-tag">非必填</span></label>
+<textarea id="copy_promotion" oninput="updateEmptyHint('promotion')" rows="6"></textarea>
+<div class="hint" id="hint_promotion"></div>
+</div>
+<div class="field">
+<label>保级规则<span class="optional-tag">非必填</span></label>
+<textarea id="copy_keep" oninput="updateEmptyHint('keep')" rows="6"></textarea>
+<div class="hint" id="hint_keep"></div>
+</div>
+<div class="field">
+<label>流水福利规则<span class="optional-tag">非必填</span></label>
+<textarea id="copy_week" oninput="updateEmptyHint('week')" rows="8"></textarea>
+<div class="hint" id="hint_week"></div>
+</div>
+<div class="drawer-footer">
+<button class="btn" onclick="closeCopyModal()">关闭</button>
+<button class="btn btn-primary" onclick="saveCopyModal()">保存</button>
+</div>
+</div>
+</div>
 <!-- 领取规则设置：领取动作已统一固定为手动领取，本弹窗仅配置跨期未领取奖励的处理规则；发放方式（自动/人工）在「VIP列表-按抽佣」新增/编辑抽屉中逐等级配置 -->
 <div class="copy-modal-overlay" id="claimRuleModalOverlay">
-  <div class="copy-modal" style="width:640px;">
-    <div class="copy-modal-header">
-      <span>领取规则设置<span class="tag-new">NEW</span></span>
-      <span class="close" onclick="closeClaimRuleModal()">✕</span>
-    </div>
-    <div class="copy-warn">⚠ 晋级礼金、日福利礼金、周福利礼金、月福利礼金均<b>统一固定为手动领取</b>，会员达标后需在客户端主动领取。本规则统一处理"跨期后仍未领取"的奖励，对所有VIP等级统一生效。</div>
-
-    <div class="section-divider" style="margin-top:0; padding-top:0; border-top:none;">
-      <div class="section-title">统计周期</div>
-      <div class="section-sub">均由定时任务统计生成，不随流水达标实时生成：日福利礼金次日00:00~02:00结算上一自然日；周福利礼金每周一00:00~02:00结算上一自然周；月福利礼金每月16日00:00~02:00结算上一自然月；晋级礼金为一次性奖励，以跨天为界</div>
-    </div>
-
-    <div class="section-divider">
-      <div class="section-title">未领取奖励处理方案（单选，全局生效）</div>
-      <div class="claim-rule-list">
-
-        <div class="claim-rule-item">
-          <label><input type="radio" name="claim_mode" value="scheme1"><span class="tag-type">未领取转发</span>跨天，跨周，跨月时，未领取奖励不作废，同步发送站内信/邮件提醒，领取入口不变，仍需回VIP福利页面点击领取</label>
-        </div>
-
-        <div class="claim-rule-item">
-          <label><input type="radio" name="claim_mode" value="scheme2"><span class="tag-type">未领取作废</span>跨天，跨周，跨月时，未领取奖励系统回收作废</label>
-        </div>
-
-        <div class="claim-rule-item">
-          <label><input type="radio" name="claim_mode" value="scheme3"><span class="tag-type">受众控制领取</span>受众用户1：跨天，跨周，跨月时，未领取奖励系统回收作废</label>
-          <div class="claim-rule-sub">
-            <select id="claim_scheme3_days">
-              <option value="3">3天内充值</option>
-              <option value="7">7天内充值</option>
-              <option value="15">15天内充值</option>
-              <option value="30">30天内充值</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="claim-rule-item">
-          <label><input type="radio" name="claim_mode" value="scheme4"><span class="tag-type">受众控制发奖</span>受众用户2：跨天，跨周，跨月时，不满足受众条件不派发奖励，未领取奖励系统回收作废</label>
-          <div class="claim-rule-sub">
-            <select id="claim_scheme4_days">
-              <option value="3">3天内充值</option>
-              <option value="7">7天内充值</option>
-              <option value="15">15天内充值</option>
-              <option value="30">30天内充值</option>
-            </select>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="drawer-footer">
-      <button class="btn" onclick="closeClaimRuleModal()">关闭</button>
-      <button class="btn btn-primary" onclick="saveClaimRule()">保存</button>
-    </div>
-  </div>
+<div class="copy-modal" style="width:640px;">
+<div class="copy-modal-header">
+<span>领取规则设置<span class="tag-new">NEW</span></span>
+<span class="close" onclick="closeClaimRuleModal()">✕</span>
 </div>
-
+<div class="copy-warn"><b>二期范围收口：</b>领取规则仅实现「未领取作废」；<span class="phase3-del">未领取转发、受众控制领取、受众控制发奖</span><span class="phase3-badge">三期，本期不开发</span></div>
+<div class="copy-warn">⚠ 晋级礼金、日福利礼金、周福利礼金、月福利礼金均<b>统一固定为手动领取</b>，会员达标后需在客户端主动领取。本规则统一处理"跨期后仍未领取"的奖励，对所有VIP等级统一生效。</div>
+<div class="section-divider" style="margin-top:0; padding-top:0; border-top:none;">
+<div class="section-title">统计周期</div>
+<div class="section-sub">均由定时任务统计生成，不随流水达标实时生成：日福利礼金次日00:00~02:00结算上一自然日；周福利礼金每周一00:00~02:00结算上一自然周；月福利礼金每月16日00:00~02:00结算上一自然月；晋级礼金为一次性奖励，以跨天为界</div>
+</div>
+<div class="section-divider">
+<div class="section-title">未领取奖励处理方案（单选，全局生效）</div>
+<div class="claim-rule-list">
+<div class="claim-rule-item phase3-item">
+<label><input disabled="" name="claim_mode" type="radio" value="scheme1"/><span class="tag-type">未领取转发</span>跨天，跨周，跨月时，未领取奖励不作废，同步发送站内信/邮件提醒，领取入口不变，仍需回VIP福利页面点击领取</label><span class="phase3-badge">三期，本期不开发</span>
+</div>
+<div class="claim-rule-item">
+<label><input checked="" name="claim_mode" type="radio" value="scheme2"/><span class="tag-type">未领取作废</span>跨天，跨周，跨月时，未领取奖励系统回收作废</label>
+</div>
+<div class="claim-rule-item phase3-item">
+<label><input disabled="" name="claim_mode" type="radio" value="scheme3"/><span class="tag-type">受众控制领取</span>受众用户1：跨天，跨周，跨月时，未领取奖励系统回收作废</label>
+<div class="claim-rule-sub">
+<select id="claim_scheme3_days">
+<option value="3">3天内充值</option>
+<option value="7">7天内充值</option>
+<option value="15">15天内充值</option>
+<option value="30">30天内充值</option>
+</select>
+</div><span class="phase3-badge">三期，本期不开发</span>
+</div>
+<div class="claim-rule-item phase3-item">
+<label><input disabled="" name="claim_mode" type="radio" value="scheme4"/><span class="tag-type">受众控制发奖</span>受众用户2：跨天，跨周，跨月时，不满足受众条件不派发奖励，未领取奖励系统回收作废</label>
+<div class="claim-rule-sub">
+<select id="claim_scheme4_days">
+<option value="3">3天内充值</option>
+<option value="7">7天内充值</option>
+<option value="15">15天内充值</option>
+<option value="30">30天内充值</option>
+</select>
+</div><span class="phase3-badge">三期，本期不开发</span>
+</div>
+</div>
+</div>
+<div class="drawer-footer">
+<button class="btn" onclick="closeClaimRuleModal()">关闭</button>
+<button class="btn btn-primary" onclick="saveClaimRule()">保存</button>
+</div>
+</div>
+</div>
 <!-- VIP福利彩金审核：人工发放下"待审核"记录的审核操作弹窗（现有系统规则：审核状态-通过/不通过，审核备注信息字数限制1000） -->
 <div class="copy-modal-overlay" id="auditActionModalOverlay">
-  <div class="copy-modal" style="width:440px;">
-    <div class="copy-modal-header">
-      <span id="auditActionModalTitle">审核操作</span>
-      <span class="close" onclick="closeAuditActionModal()">✕</span>
-    </div>
-    <div class="field">
-      <label><span class="req">*</span>审核状态</label>
-      <div class="radio-row">
-        <label class="radio-inline"><input type="radio" name="auditActionStatus" value="approve" onchange="onAuditActionStatusChange()"> 通过</label>
-        <label class="radio-inline"><input type="radio" name="auditActionStatus" value="reject" onchange="onAuditActionStatusChange()"> 不通过</label>
-      </div>
-    </div>
-    <div class="field">
-      <label>审核备注信息</label>
-      <textarea id="auditActionNote" rows="4" maxlength="1000" placeholder="请输入审核备注信息" oninput="document.getElementById('auditActionNoteCount').textContent = this.value.length"></textarea>
-      <div class="hint" style="text-align:right;"><span id="auditActionNoteCount">0</span>/1000</div>
-    </div>
-    <div class="drawer-footer">
-      <button class="btn" onclick="closeAuditActionModal()">取消</button>
-      <button class="btn btn-primary" id="auditActionConfirmBtn" onclick="submitAuditAction()">确认</button>
-    </div>
-  </div>
+<div class="copy-modal" style="width:440px;">
+<div class="copy-modal-header">
+<span id="auditActionModalTitle">审核操作</span>
+<span class="close" onclick="closeAuditActionModal()">✕</span>
 </div>
-
+<div class="field">
+<label><span class="req">*</span>审核状态</label>
+<div class="radio-row">
+<label class="radio-inline"><input name="auditActionStatus" onchange="onAuditActionStatusChange()" type="radio" value="approve"/> 通过</label>
+<label class="radio-inline"><input name="auditActionStatus" onchange="onAuditActionStatusChange()" type="radio" value="reject"/> 不通过</label>
+</div>
+</div>
+<div class="field">
+<label>审核备注信息</label>
+<textarea id="auditActionNote" maxlength="1000" oninput="document.getElementById('auditActionNoteCount').textContent = this.value.length" placeholder="请输入审核备注信息" rows="4"></textarea>
+<div class="hint" style="text-align:right;"><span id="auditActionNoteCount">0</span>/1000</div>
+</div>
+<div class="drawer-footer">
+<button class="btn" onclick="closeAuditActionModal()">取消</button>
+<button class="btn btn-primary" id="auditActionConfirmBtn" onclick="submitAuditAction()">确认</button>
+</div>
+</div>
+</div>
 <!-- 用户端：方案三"已生成未充值"场景下，点击领取（含"一键领取"命中需充值的记录时）弹出的充值提示弹窗 -->
 <div class="confirm-overlay" id="rechargeModalOverlay">
-  <div class="confirm-box" style="width:300px;">
-    <p id="rechargeModalText" style="display:block;">💰 完成任意一笔充值后，即可获得专属奖励</p>
-    <div class="confirm-actions">
-      <button class="btn" onclick="closeRechargeModal()">取消</button>
-      <button class="btn btn-primary" onclick="goRecharge()">充值</button>
-    </div>
-  </div>
+<div class="confirm-box" style="width:300px;">
+<p id="rechargeModalText" style="display:block;">💰 完成任意一笔充值后，即可获得专属奖励</p>
+<div class="confirm-actions">
+<button class="btn" onclick="closeRechargeModal()">取消</button>
+<button class="btn btn-primary" onclick="goRecharge()">充值</button>
 </div>
-
+</div>
+</div>
 <div class="toast" id="toast"></div>
 <div class="toast" id="clientToast"></div>
 <div class="global-tooltip" id="globalTooltip"></div>
-
 <script>
 let data = [
   {level:0, name:'VIP0', coef:0,   th:0,   gift:0,    dailyTurnover:0,   dailyGift:0,  week:0,    weekGift:0,  monthlyTurnover:0,    monthlyGift:0,  keep:0,   decayBase:0,  mult:0, dispatchMode:'auto',   editTime:'2026-04-16 13:23:07', editor:'adminNathan'},
@@ -1723,7 +1831,7 @@ let displayFields = {name:true, threshold:true, gift:true, dailyTurnover:true, d
 
 // 领取规则：晋级礼金/日/周/月福利礼金均统一固定为"手动领取"这一领取动作，本规则处理跨期未领取奖励，全局统一配置；
 // 领取后是否需要人工审核由各VIP等级的「发放方式」（data[].dispatchMode）决定，与本规则相互独立
-let claimRule = { mode: 'scheme2', scheme3Days: 7, scheme4Days: 7 };
+let claimRule = { mode: 'scheme2' }; // 二期固定：未领取作废；其余规则三期再启用
 
 let ruleTexts = {
   promotion: '等级调整周期：系统每日对会员等级进行一次晋升评估，评估时间为当日凌晨0点后。\n晋升判定标准：会员的有效投注按平台规则实时累积为"VIP经验"，当VIP经验达到目标等级所需的"晋升所需经验值门槛"时，即可自动晋升至该等级；VIP经验同时会受「保级规则」中的衰退机制影响，详见保级规则说明。\n多级晋升规则：同一会员账号在同一天内，若VIP经验增长足以连续跨越多个等级，将依次晋升并发放对应每个等级的"晋级礼金"。',
@@ -1957,8 +2065,7 @@ function saveCopyModal(){
 
 function openClaimRuleModal(){
   document.querySelector(`input[name=claim_mode][value="${claimRule.mode}"]`).checked = true;
-  document.getElementById('claim_scheme3_days').value = claimRule.scheme3Days;
-  document.getElementById('claim_scheme4_days').value = claimRule.scheme4Days;
+  // 二期仅保留未领取作废；三期预留项在原型中禁用并以删除线标识
   document.getElementById('claimRuleModalOverlay').classList.add('show');
 }
 function closeClaimRuleModal(){
@@ -1966,9 +2073,7 @@ function closeClaimRuleModal(){
 }
 function saveClaimRule(){
   const checked = document.querySelector('input[name=claim_mode]:checked');
-  claimRule.mode = checked ? checked.value : claimRule.mode;
-  claimRule.scheme3Days = parseInt(document.getElementById('claim_scheme3_days').value);
-  claimRule.scheme4Days = parseInt(document.getElementById('claim_scheme4_days').value);
+  claimRule.mode = 'scheme2'; // 二期固定，不允许切换至三期预留规则
   closeClaimRuleModal();
   showToast('领取规则已保存，对所有VIP等级统一生效');
 }
@@ -1991,7 +2096,7 @@ function switchAdminPage(page){
 // 自动＝该VIP等级「发放方式」配置为自动发放，会员领取后系统自动审核通过，审核人固定为"sysadmin"，审核备注
 // 信息为系统按对应发放规则自动生成的描述文案；手动＝该等级「发放方式」配置为人工发放，由运营在本页点击"通过"
 // /"拒绝"打开审核弹窗完成人工审核（见 openAuditActionModal/submitAuditAction），弹窗内容为现有系统规则：
-// 审核状态-通过/不通过，审核备注信息-字数限制1000；审核人固定为"dipsy01"；跨期过期作废与方案四受众条件未
+// 审核状态-通过/不通过，审核备注信息-字数限制1000；审核人由实际执行审核的运营账号写入（原型示例使用"dipsy01"）；跨期过期作废为系统自动判定；三期规则本期不开发。原方案四受众条件未
 // 满足（均归为 rejected）为系统自动判定，与「发放方式」无关，审核方式统一记为"自动"，审核人同样固定为
 // "sysadmin"。
 // 审核方式只要后台生成了领取数据即可读取该等级配置，不存在"—"的情况：待审核（pending）为人工发放下会员已
@@ -2168,7 +2273,7 @@ function submitAuditAction(){
   const note = document.getElementById('auditActionNote').value.trim().slice(0, 1000); // 审核备注信息：字数限制1000
   row.status = action === 'approve' ? 'approved' : 'rejected';
   row.method = '手动';
-  row.auditor = 'dipsy01';
+  row.auditor = 'dipsy01'; // 原型示例账号；线上规则：记录实际执行审核的运营账号（谁审核记录谁）
   row.auditTime = new Date().toISOString().slice(0,19).replace('T',' '); // 演示：以当前操作时间作为审核时间
   row.note = note;
   renderAuditTable();
@@ -2193,7 +2298,7 @@ const CUR_LEVEL = 3;      // 演示：当前会员为 VIP3（读取 data 中 lev
 let previewLevel = CUR_LEVEL; // VIP详情大卡片横滑时的当前预览等级；仅影响预览，不改变真实VIP等级
 let CUR_EXP = null;       // 演示：当前经验值，初始化时按当前/下一等级门槛居中取值
 let expandedLevel = CUR_LEVEL;   // H5：仅当前等级默认展开
-let claimScenario = 'normal';    // normal | scheme1 | scheme2 | locked | unlocked | blocked —— 场景演示：领取规则设置-四个方案
+let claimScenario = 'normal';    // 二期仅演示 normal / scheme2；其余领取规则移至三期
 let demoProgress = { daily: 125, week: 320, monthly: 900 }; // 演示流水进度，可通过 +/- 调整触发按钮态切换（日流水默认已达标，便于演示锁定态）
 let claimedState = { promotion: false, daily: false, week: false, monthly: false };
 
@@ -2871,5 +2976,111 @@ renderClientLevels();
 
 renderMyHome();
 </script>
-</body>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script><script>
+(function(){
+  const vipFlowViewState={};
+  function getSvgNaturalSize(svg){
+    const vb=svg.viewBox && svg.viewBox.baseVal;
+    return {w:(vb&&vb.width)||parseFloat(svg.getAttribute('width'))||900,h:(vb&&vb.height)||parseFloat(svg.getAttribute('height'))||600};
+  }
+  function applyFlowScale(container,scale){
+    const svg=container.querySelector('svg'); if(!svg)return;
+    const size=getSvgNaturalSize(svg); scale=Math.max(.55,Math.min(1.6,scale));
+    vipFlowViewState[container.id]=scale;
+    svg.style.width=(size.w*scale)+'px'; svg.style.height=(size.h*scale)+'px';
+    const v=container.closest('.biz-mermaid-wrap')?.querySelector('.zoom-value'); if(v)v.textContent=Math.round(scale*100)+'%';
+  }
+  function fitFlowWidth(container){
+    const svg=container.querySelector('svg'); if(!svg)return;
+    const wrap=container.closest('.biz-mermaid-wrap'); const size=getSvgNaturalSize(svg);
+    const available=Math.max(720,(wrap?.clientWidth||1000)-36);
+    // 默认优先可读性：最多缩到78%，避免为塞进一屏而把文字压得过小
+    applyFlowScale(container,Math.min(1,Math.max(.78,available/size.w)));
+  }
+  function setupFlowViewport(container,svg,suffix){
+    const wrap=container.closest('.biz-mermaid-wrap'); if(!wrap)return;
+    let bar=wrap.querySelector('.flow-view-toolbar');
+    if(!bar){
+      bar=document.createElement('div'); bar.className='flow-view-toolbar';
+      bar.innerHTML='<button type="button" data-act="fit">适应宽度</button><button type="button" data-act="actual">100%</button><button type="button" data-act="out">缩小</button><span class="zoom-value">100%</span><button type="button" data-act="in">放大</button><button type="button" data-act="reset">重置</button>';
+      wrap.insertBefore(bar,container);
+      bar.addEventListener('click',function(e){
+        const b=e.target.closest('button'); if(!b)return; const act=b.dataset.act; const cur=vipFlowViewState[container.id]||1;
+        if(act==='fit'||act==='reset') fitFlowWidth(container);
+        else if(act==='actual') applyFlowScale(container,1);
+        else if(act==='in') applyFlowScale(container,cur+.1);
+        else if(act==='out') applyFlowScale(container,cur-.1);
+      });
+    }
+    requestAnimationFrame(()=>fitFlowWidth(container));
+  }
+  async function renderVipFlow(index){
+    const suffix=String(index).padStart(2,'0');
+    const container=document.getElementById('vip-flow-'+suffix);
+    const sourceNode=document.getElementById('vip-flow-source-'+suffix);
+    if(!container || !sourceNode) return false;
+    if(container.dataset.rendered==='true' && container.querySelector('svg')) return true;
+    const source=sourceNode.textContent.trim();
+    try{
+      await mermaid.parse(source);
+      const renderId='vip-flow-svg-'+suffix;
+      const result=await mermaid.render(renderId,source);
+      container.innerHTML=result.svg;
+      if(typeof result.bindFunctions==='function') result.bindFunctions(container);
+      const svg=container.querySelector('svg');
+      if(!svg) throw new Error('Mermaid render completed without SVG output');
+      svg.removeAttribute('height');
+      svg.style.height='auto';
+      svg.style.maxWidth='none';
+      setupFlowViewport(container, svg, suffix);
+      container.dataset.rendered='true';
+      return true;
+    }catch(error){
+      console.error('[VIP Mermaid] 流程图'+suffix+'渲染失败',error,source);
+      container.dataset.rendered='false';
+      container.innerHTML='<div class="mermaid-render-error">流程图渲染失败，请检查 Mermaid 语法</div>';
+      return false;
+    }
+  }
+  async function renderAllVipFlows(){
+    if(!window.mermaid){
+      console.error('[VIP Mermaid] Mermaid.js 加载失败');
+      document.querySelectorAll('.mermaid-render-target').forEach(function(container){
+        container.innerHTML='<div class="mermaid-render-error">流程图渲染失败，请检查 Mermaid 语法</div>';
+      });
+      return;
+    }
+    mermaid.initialize({
+      startOnLoad:false,
+      securityLevel:'loose',
+      theme:'base',
+      themeVariables:{
+        fontFamily:'-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Microsoft YaHei, sans-serif',
+        fontSize:'12px',
+        lineColor:'#5f6673',
+        primaryTextColor:'#252a34',
+        edgeLabelBackground:'#ffffff'
+      },
+      flowchart:{
+        curve:'linear',
+        htmlLabels:false,
+        useMaxWidth:false,
+        nodeSpacing:22,
+        rankSpacing:34,
+        diagramPadding:8,
+        wrappingWidth:180
+      }
+    });
+    for(let i=1;i<=6;i++){
+      await renderVipFlow(i);
+    }
+  }
+  window.renderVipFlow=renderVipFlow;
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',renderAllVipFlows,{once:true});
+  }else{
+    renderAllVipFlows();
+  }
+})();
+</script></body>
 </html>
