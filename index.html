@@ -508,17 +508,18 @@
   .vip-card-carousel .level-hero-card.unconfigured{background:linear-gradient(135deg,#f6f7fb,#eceff6);color:#6e7484;box-shadow:0 7px 18px rgba(60,70,95,.08);border-color:#e1e5ef}
   .vip-card-carousel .level-hero-card:after{content:'◆';position:absolute;right:18px;top:20px;font-size:58px;color:rgba(202,35,48,.22);transform:rotate(12deg)}.vip-card-carousel .level-hero-card.unconfigured:after{color:rgba(105,112,132,.12)}
   .level-hero-icon{position:absolute;right:28px;top:22px;font-size:30px;z-index:1}.level-hero-title{font-size:25px;font-style:italic;color:#e53945;margin-bottom:12px}.unconfigured .level-hero-title{color:#767d8f}.level-hero-row{font-size:11.5px;font-weight:600;position:relative;z-index:2;max-width:75%}.level-hero-row.keep-status{max-width:100%;font-weight:600}.level-hero-row.keep-status-normal{background:rgba(255,255,255,.45)}.level-hero-row.keep-status-decay{background:rgba(255,255,255,.55);border-color:rgba(180,55,55,.2)}.level-hero-row.keep-status-recovering{background:rgba(255,255,255,.55);border-color:rgba(45,160,110,.25);color:#176f50}.level-hero-status{display:inline-flex;font-size:9px;font-weight:700;border-radius:999px;padding:3px 7px;background:rgba(255,255,255,.65);color:#8a4650;margin-left:7px;vertical-align:middle}
-.level-hero-card{position:relative;padding-bottom:42px}
-.vip-keep-status-line{position:absolute;left:18px;right:18px;bottom:12px;z-index:8;font-size:10.5px;line-height:18px;font-weight:650;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#7d2027}
-.vip-keep-status-line.decay{color:#a13b42}
-.vip-keep-status-line.recovering{color:#176f50}
-.vip-keep-status-line:empty{display:none}
+.level-hero-card{position:relative;padding-bottom:34px}
+.vip-keep-help{position:absolute;left:14px;bottom:10px;z-index:8}
+.vip-keep-help-btn{width:20px;height:20px;border-radius:50%;border:1px solid rgba(69,86,122,.42);background:rgba(255,255,255,.82);color:#52627f;font-size:12px;font-weight:800;line-height:18px;text-align:center;cursor:pointer;padding:0;box-shadow:none}
+.vip-keep-help-btn:hover{background:#fff}
+.vip-keep-popover{display:none;position:absolute;left:0;bottom:28px;width:290px;max-width:calc(100vw - 64px);padding:10px 12px;border:1px solid #d9dfeb;border-radius:9px;background:#fff;color:#39445a;font-size:11px;line-height:1.65;font-weight:500;box-shadow:0 8px 24px rgba(28,43,70,.14);text-align:left;z-index:20}
+.vip-keep-popover.show{display:block}
+.vip-keep-popover:after{content:"";position:absolute;left:7px;bottom:-6px;width:10px;height:10px;background:#fff;border-right:1px solid #d9dfeb;border-bottom:1px solid #d9dfeb;transform:rotate(45deg)}
+.vip-keep-popover-title{font-weight:700;color:#27344d;margin-bottom:3px}
 .vip-card-carousel-hint{text-align:center;font-size:9.5px;color:#8490ad;margin:-8px 0 10px}
   @media(max-width:760px){.client-spec-grid{grid-template-columns:1fr}.client-scenarios .scenario-bar{grid-template-columns:1fr}.client-spec-panel{padding:12px}}
 
 
-  .phase3-disabled-btn{cursor:not-allowed!important;opacity:.58!important;color:#8f96a3!important;background:#f7f8fa!important;border-color:#dfe3e8!important;text-decoration:line-through;text-decoration-thickness:1.5px;box-shadow:none!important}
-  .phase3-disabled-btn .phase3-badge{text-decoration:none!important;opacity:1}
   .phase3-del{ text-decoration:line-through; text-decoration-thickness:1.5px; color:#9aa0ab; opacity:.82; }
   .phase3-badge{ display:inline-block; margin-left:6px; padding:1px 6px; border-radius:9px; background:#f1f1f5; color:#8b9099; font-size:11px; font-weight:600; text-decoration:none !important; }
   .phase3-item{ opacity:.72; background:#fafafa !important; }
@@ -658,10 +659,10 @@ details.mermaid-edit summary{cursor:pointer;padding:10px 12px;font-size:12px;fon
 <div class="client-spec-item"><b>② VIP等级卡片 <span class="tag-new">本次迭代</span></b><span>VIP详情页的大尺寸等级卡片支持左右滑动，只展示后台已配置的VIP等级，后台最多支持配置VIP0～VIP20；滑动仅用于查看等级权益与门槛，不改变会员真实等级。</span></div>
 <div class="client-spec-item"><b>③ VIP福利 / 规则说明 <span class="tag-new">本次迭代</span></b><span>新增VIP福利与规则说明分栏。福利页展示当前、历史及未来等级的晋级礼金与日/周/月福利；规则说明页展示晋升、保级、流水福利等客户端规则文案。</span></div>
 <div class="client-spec-item"><b>④ 一键领取 <span class="tag-new">本次迭代</span></b><span>页面顶部固定展示“一键领取”。可一次处理当前等级及历史已达等级中所有已达标待领取奖励；不同等级按各自「发放方式」分别直接到账或进入人工审核，无可领取奖励时按钮置灰但不隐藏。</span></div>
-<div class="client-spec-item"><b>⑤ 去投注 / 领取 / 审核中 <span class="tag-new">本次迭代</span></b><span>日/周/月福利未达标展示“去投注”，达标后展示“领取”；会员主动领取后，自动发放直接到账，人工发放仅展示“审核中”，审核通过后再变为“已领取”。晋级礼金达标后可长期领取且不受跨期领取规则限制。</span></div>
+<div class="client-spec-item"><b>⑤ 福利按钮状态 <span class="tag-new">本次迭代</span></b><span>日/周/月福利未达标展示“去投注”，达标后展示“领取福利”；会员点击领取后，人工发放展示“审核中”，审核通过展示“已领取”；审核拒绝展示“暂不可领取”并置灰；跨周期未领取作废展示“已过期”并置灰。晋级礼金达标后可长期领取且不受跨期领取规则限制。</span></div>
 </div>
 <div class="client-spec-note"><strong>老会员初始化口径：</strong>首批按近60天是否有投注进行初始化判断：① 原VIP0～VIP2无论近60天是否投注，均保持原等级；其中VIP1、VIP2因等级未发生调整，初始化时仍重新发放“当前等级至VIP1”的全部晋级礼金（VIP2＝VIP2+VIP1，VIP1＝VIP1），历史是否领取过不影响本次重新发放。② 原VIP≥3且近60天<strong>未进行投注</strong>的会员，统一降至<strong>VIP3、当前经验重置为0</strong>，该批实际发生初始化降级的会员不参与本次晋级礼金专项补发；后续重新投注后进入2倍经验恢复，直至恢复到初始化降级前锁定的原VIP等级及原经验值后恢复1倍。③ 近60天有投注、初始化未降级的老会员保持当前等级，并重新发放当前等级至VIP1的全部晋级礼金。</div>
-<div class="client-spec-note"><strong>交互说明：</strong>奖励卡“－ / ＋”用于模拟流水变化并验证本次迭代新增的「去投注 → 领取 → 审核中/到账」状态；领取规则、老会员初始化/回归、保级衰退/恢复可通过下方场景切换。VIP详情中的<strong>大尺寸VIP卡片支持左右滑动</strong>，仅展示后台实际已配置等级（后台最高支持VIP20）；点击卡片仅用于查看该等级信息，不改变会员真实等级。</div>
+<div class="client-spec-note"><strong>交互说明：</strong>奖励卡“－ / ＋”用于模拟流水变化并验证「去投注 → 领取 → 审核中/已领取」状态；审核拒绝与跨周期作废状态在原型中补充展示，按钮均为不可点击状态。领取规则、老会员初始化/回归、保级衰退/恢复可通过下方场景切换。VIP详情中的<strong>大尺寸VIP卡片支持左右滑动</strong>，仅展示后台实际已配置等级（后台最高支持VIP20）；点击卡片仅用于查看该等级信息，不改变会员真实等级。</div>
 <div class="client-scenarios">
 <div class="client-scenarios-title">场景演示</div>
 <div class="scenario-bar">
@@ -669,6 +670,12 @@ details.mermaid-edit summary{cursor:pointer;padding:10px 12px;font-size:12px;fon
 <select id="scenarioSelect" onchange="setScenario(this.value)">
 <option value="normal">默认：流水达标即可直接领取</option><option value="scheme2">未领取作废：跨周期系统回收（二期生效）</option>
 </select><button class="btn" onclick="resetDemo()" style="height:30px;font-size:12px;">🔄 重置</button>
+</div>
+<div class="scenario-bar">
+<label>🎛️ 福利按钮状态 <span class="tag-new">本次迭代</span></label>
+<select id="clientButtonScenarioSelect" onchange="setClientButtonScenario(this.value)">
+<option value="normal">正常状态：按领取流程展示</option><option value="rejected">审核拒绝：展示“暂不可领取”并置灰</option><option value="expired">过期作废：展示“已过期”并置灰</option>
+</select><span></span>
 </div>
 <div class="scenario-bar">
 <label>👤 老会员初始化 / 回归 <span class="tag-new">NEW</span></label>
@@ -765,7 +772,7 @@ details.mermaid-edit summary{cursor:pointer;padding:10px 12px;font-size:12px;fon
 </div>
 </div>
 <div class="pm-note" style="max-width:375px;margin-left:auto;margin-right:auto;">
-<b>设计说明：</b>当前/历史（低于当前）/未来（高于当前）三类等级的收起态与展开态统一采用同一套 30天保级经验／衰退基础值／提现流水倍数信息行＋奖励卡片组件展示，不再对非当前等级使用单独的纯文本样式；历史等级展开后展示"已领取 X / 共 Y"，各奖励项同步展示对应的流水要求，与当前/未来等级口径一致；未来等级展开后展示"🔒 未解锁"及达标条件预览；当前等级新增"跨周期未领取"场景，过期文案随管理后台「领取规则设置」的方案联动——方案一·未领取转发本质不作废，仅同步一份站内信/邮件通知，卡片仍展示"领取"按钮可直接领取，其余方案按"已过期作废"处理并禁用按钮；页面顶部固定展示全局"一键领取"入口，可将当前等级及所有历史等级下已达标待领取的奖励一次性领取；若其中存在方案三·受众用户1下"已生成但需先充值"的记录，一键领取会先正常领取其余可领取项，再同步弹出充值提示弹窗提醒用户完成充值解锁，不会静默跳过；点击"领取"后，若当前等级「发放方式」为人工发放，按钮转为"审核中"（彩金尚未到账，需运营在「VIP福利彩金审核」页人工审核通过后才发放），若为自动发放则直接展示为"已领取"。顶部诊断卡片同步展示当前30天保级周期进度／衰退阶段／恢复加成状态。由此 VIP福利 形成"未解锁→投注中→可领取→审核中/已领取/待解锁/未生成→跨周期过期→历史记录"的完整闭环展示。
+<b>设计说明：</b>当前/历史（低于当前）/未来（高于当前）三类等级的收起态与展开态统一采用同一套 30天保级经验／衰退基础值／提现流水倍数信息行＋奖励卡片组件展示，不再对非当前等级使用单独的纯文本样式；历史等级展开后展示"已领取 X / 共 Y"，各奖励项同步展示对应的流水要求，与当前/未来等级口径一致；未来等级展开后展示"🔒 未解锁"及达标条件预览；当前等级新增"跨周期未领取"场景，过期文案随管理后台「领取规则设置」的方案联动——方案一·未领取转发本质不作废，仅同步一份站内信/邮件通知，卡片仍展示"领取"按钮可直接领取，其余方案按"已过期"处理并禁用按钮；页面顶部固定展示全局"一键领取"入口，可将当前等级及所有历史等级下已达标待领取的奖励一次性领取；若其中存在方案三·受众用户1下"已生成但需先充值"的记录，一键领取会先正常领取其余可领取项，再同步弹出充值提示弹窗提醒用户完成充值解锁，不会静默跳过；点击"领取"后，若当前等级「发放方式」为人工发放，按钮转为"审核中"（彩金尚未到账，需运营在「VIP福利彩金审核」页人工审核通过后才发放），若为自动发放则直接展示为"已领取"。顶部诊断卡片同步展示当前30天保级周期进度／衰退阶段／恢复加成状态。由此 VIP福利形成“未解锁→投注中→可领取→审核中/已领取/暂不可领取/已过期/待解锁/未生成→历史记录”的完整闭环展示。
       </div>
 </div>
 </div>
@@ -810,7 +817,7 @@ details.mermaid-edit summary{cursor:pointer;padding:10px 12px;font-size:12px;fon
 <div class="note-body">
 <h4>一、字段变更</h4>
 <ul>
-<li><b>彩金领取方式</b>与<b>是否需要人工审核</b>是两个独立维度，请勿混淆：①晋级礼金、日福利礼金、周福利礼金、月福利礼金的<b>领取动作统一固定为会员手动领取</b>（不提供"自动生成即到账"式的免点击发放，此项与上一轮一致，未再调整）；②「发放方式」（自动发放／人工发放，逐等级配置，非逐礼金类型单独配置）决定会员点击"领取"后彩金是<b>系统自动审核通过直接到账</b>，还是<b>进入待审核状态、需运营在「VIP福利彩金审核」页人工审核通过后才发放</b>，新增/编辑抽屉与主列表均沿用该字段。为了让运营在后台就能清楚识别"手动领取"这一固定口径，表格对应4个礼金列头、以及新增/编辑抽屉对应4个字段标签，均加上<span class="tag-manual">手动领取</span>标识</li>
+<li><b>彩金领取方式</b>与<b>是否需要人工审核</b>是两个独立维度，请勿混淆：①晋级礼金、日福利礼金、周福利礼金、月福利礼金的<b>领取动作统一固定为会员手动领取</b>（不提供"自动生成即到账"式的免点击发放，此项与上一轮一致，未再调整）；②「发放方式」（自动发放／人工发放，逐等级配置，非逐礼金类型单独配置）决定会员点击"领取"后彩金是<b>系统自动审核通过直接到账</b>，还是<b>进入待审核状态、需运营在「VIP福利彩金审核」页人工审核通过后才发放</b>，新增/编辑抽屉与主列表均沿用该字段。</li>
 <li><b>新增</b>：日福利礼金<span class="tag-new">NEW</span>、日流水<span class="tag-new">NEW</span>（日福利礼金的达标门槛，逻辑与"周流水→周福利礼金"一致）</li>
 <li><b>新增</b>：月福利礼金<span class="tag-new">NEW</span>、月流水<span class="tag-new">NEW</span>（逻辑同上）；月福利礼金固定<b>每月16日</b>结算生成上一自然月的奖励</li>
 <li>日/月福利礼金不再提供逐等级"是否启用"勾选：某等级若不需要该项福利，直接将对应金额配置为 0 即可；是否面向全体等级"整体开放"该福利，统一由「客户端展示设置」中的展示字段勾选控制（勾选状态同时决定是否实际生成待领取记录，见第五节）</li>
@@ -819,7 +826,7 @@ details.mermaid-edit summary{cursor:pointer;padding:10px 12px;font-size:12px;fon
 <ul>
 <li>达标后礼金进入"待领取"状态，由会员在客户端「我的特权」页主动点击领取；<b>领取前不入账，也不计入提现流水</b>，领取后按该等级配置的「发放礼金稽核倍数」（客户端展示别名"提现流水倍数"）计入提现流水门槛——若该等级发放方式为<b>人工发放</b>，则需运营审核通过后才计入；若为<b>自动发放</b>，会员点击"领取"后系统即自动审核通过并计入</li>
 <li>日 / 周 / 月福利礼金能否"生成"，分别取决于对应周期内是否满足日流水 / 周流水 / 月流水门槛；跨级晋级礼金仍按每一级依次生成独立的"待领取"记录，不合并</li>
-<li>可见性：表格中晋级礼金 / 日福利礼金 / 周福利礼金 / 月福利礼金 4 个对应列头，以及新增/编辑抽屉对应 4 个字段标签，均标注"手动领取"标识，运营无需进入配置弹窗即可在主列表直接确认领取方式</li>
+
 </ul>
 <h4>三、发放方式：自动发放 / 人工发放，决定是否需要人工审核</h4>
 <ul>
@@ -871,7 +878,7 @@ details.mermaid-edit summary{cursor:pointer;padding:10px 12px;font-size:12px;fon
 </li>
 <li><b>恢复机制</b>：会员一旦重新产生VIP经验，立即停止衰退，进入<b>2倍经验恢复期</b>，期间新获得经验按2倍计入，直至恢复到衰退/初始化调整前锁定的原VIP等级及原经验值，之后恢复正常1倍增速</li>
 <li><b>恢复期再次不活跃（边界规则，本轮明确）</b>：尚未恢复至锁定目标便再次停止产生经验时，不立即衰退、不沿用上一轮衰退倍率，重新进入30天保级观察；只有完整30天未达保级要求且0经验增长，才从第31天重新按1×衰退。原恢复目标持续保留，后续再次活跃时重新按2倍经验继续恢复至原目标</li>
-<li><b>与降级的关系（本轮明确）</b>：新机制不再有"周期未达标即刻掉1级"的硬性跳变；VIP经验因持续衰退跌破当前等级自身门槛时，于次日定时评估中按经验值实时对照等级门槛表自然回落至对应低等级，与晋级判定复用同一套每日评估逻辑（方向相反）；经验回升超过当前所处等级晋升阈值后可重新恢复原等级</li>
+<li><b>与降级的关系（本轮明确）</b>：新机制不再有"周期未达标即刻掉1级"的硬性跳变；VIP经验因持续衰退跌破当前等级自身门槛时，于次日定时评估中按经验值实时对照等级门槛表自然回落至对应低等级，与晋级判定复用同一套按「VIP经验」字段判断的等级评估逻辑（降级任务每天执行一次，方向相反）；经验回升超过当前所处等级晋升阈值后可重新恢复原等级</li>
 <li><b>降级后衰退基础值如何取值（本轮明确）</b>：衰退速度（1×/2×/3×/4×）绑定"连续不活跃天数"，不受降级影响，按自身节奏继续跳档；衰退基础值则按会员<b>当前所处等级</b>动态取值，降级后次日起改用新（低）等级配置的衰退基础值计算每日扣除量，<b>不沿用降级前那个等级的衰退基础值</b>，不额外引入"衰退起始等级"状态</li>
 <li>衰退与降级仅影响VIP经验与等级判定本身，<b>不影响</b>已生成但尚未领取的日/周/月/晋级礼金记录，详见「需求背景」页第四节</li>
 <li><b>衰退单日扣减不做跨等级门槛拆分（本轮明确）</b>：当日应扣金额（衰退基础值×衰退速度）整笔全额扣除，不因超出当前等级门槛缓冲区间而"卡线"部分扣减、剩余顺延次日；扣减后重新对照等级门槛表定位所在等级，单日内允许连续下降多个等级，与晋级"单日连续跨越多个等级"对称一致。示例：VIP3（门槛300）会员VIP经验315，当日应扣45（衰退基础值45×1倍），扣后270，跌破VIP3门槛300但仍≥VIP2门槛200，直接降至VIP2，次日起改用VIP2自身衰退基础值计算</li>
@@ -882,7 +889,7 @@ details.mermaid-edit summary{cursor:pointer;padding:10px 12px;font-size:12px;fon
 <div class="toolbar-left">
 <button class="btn btn-primary" onclick="openDrawer('add')">＋ 新增</button>
 <button class="btn" onclick="openCopyModal()">客户端展示设置</button>
-<button class="btn phase3-disabled-btn" type="button" disabled title="三期开发，本期不开放">领取规则设置<span class="phase3-badge">三期</span></button>
+<button class="btn" onclick="openClaimRuleModal()">领取规则设置<span class="tag-new">NEW</span></button>
 </div>
 <div class="icon-row">
 <span title="刷新">⟳</span>
@@ -1063,7 +1070,7 @@ details.mermaid-edit summary{cursor:pointer;padding:10px 12px;font-size:12px;fon
 <div class="doc-section">
 <h3>二、涉及范围</h3>
 <ul>
-<li><b>管理后台</b>：VIP列表-按抽佣 主表格字段、新增/编辑抽屉字段、客户端展示设置弹窗；「领取规则设置」按钮及其他三项领取规则调整至三期，本期不开放配置</li>
+<li><b>管理后台</b>：VIP列表-按抽佣 主表格字段、新增/编辑抽屉字段、客户端展示设置弹窗、新增的领取规则设置弹窗</li>
 <li><b>客户端</b>：H5 与 PC 双端VIP详情页；本次迭代包含等级卡片滑动、VIP福利/规则说明、一键领取、去投注/领取/审核中状态、日/周/月福利展示及老会员初始化/恢复场景</li>
 <li>不涉及：投注、返水、代理推广等其他后台模块（本次仅围绕"VIP列表-按抽佣"单一模块展开）</li>
 </ul>
@@ -1079,6 +1086,7 @@ details.mermaid-edit summary{cursor:pointer;padding:10px 12px;font-size:12px;fon
 <li>VIP1、VIP2即使近60天未投注，由于等级未发生调整，仍参与初始化晋级礼金重新发放：VIP2重新发放VIP2、VIP1；VIP1重新发放VIP1。</li>
 <li>首批脚本初始化完成后，不再持续使用60天特殊口径；后续统一进入VIP二期常规规则，按<b>30天保级周期 + 经验衰退/恢复</b>机制处理。</li>
 </ul>
+<div class="doc-callout" style="font-size:11px;padding:6px 10px;margin:8px 0;color:#667085;background:#f7f8fa;border-left:3px solid #98a2b3;"><span class="tag-new">9月23日更新</span> 初始化发生降级的会员，历史经验按其上一次VIP等级发生变化的日期起，重新计算该日期之后产生的抽佣经验，作为初始化前的历史经验口径。</div>
 <h4>3.2 长期未投注会员回归后的2倍经验恢复</h4>
 <p>原VIP≥3且近60天未投注、被初始化为<b>VIP3且0经验</b>的会员，后续重新产生有效投注并获得VIP经验后，进入<b>2倍经验恢复期</b>。恢复目标在初始化降级时锁定为会员<b>降级前原VIP等级 + 降级前原VIP经验值</b>；2倍加速不会在仅恢复到原VIP等级最低门槛时提前结束，必须恢复到锁定的原经验值目标后才取消，后续恢复正常1倍经验累积。</p>
 <h4>3.3 初始化未调整老会员晋级礼金重新发放</h4>
@@ -1093,7 +1101,7 @@ details.mermaid-edit summary{cursor:pointer;padding:10px 12px;font-size:12px;fon
 <div class="doc-section">
 <h3>四、核心规则设计</h3>
 <h4>4.1 手动领取机制（领取动作统一，不代表发放方式统一）</h4>
-<p>晋级礼金、日福利礼金、周福利礼金、月福利礼金四类奖励，<b>领取动作</b>统一固定为"达标后由会员在客户端主动领取"，不提供"免点击自动到账"式的可配置项。领取前不入账、不计入提现流水。需要特别说明：<b>会员点击"领取"这个动作</b>与<b>点击之后是否需要人工审核才能到账</b>是两个独立维度——前者（本节）在四类礼金间保持统一，均由会员手动点击；后者由 3.2 节的「发放方式」逐等级决定。为避免运营需要额外进入弹窗确认领取口径，后台列表表头、新增/编辑抽屉字段标签均加注"手动领取"标识。</p>
+<p>晋级礼金、日福利礼金、周福利礼金、月福利礼金四类奖励，<b>领取动作</b>统一固定为"达标后由会员在客户端主动领取"，不提供"免点击自动到账"式的可配置项。领取前不入账、不计入提现流水。需要特别说明：<b>会员点击"领取"这个动作</b>与<b>点击之后是否需要人工审核才能到账</b>是两个独立维度——前者（本节）在四类礼金间保持统一，均由会员手动点击；后者由 3.2 节的「发放方式」逐等级决定。</p>
 <h4>4.2 发放方式：自动发放 / 人工发放（决定是否需要人工审核）</h4>
 <p>「VIP列表-按抽佣」新增/编辑抽屉底部的「发放方式」字段，<b>逐VIP等级配置</b>，二选一：</p>
 <ul>
@@ -1147,7 +1155,8 @@ details.mermaid-edit summary{cursor:pointer;padding:10px 12px;font-size:12px;fon
 </div>
 <div class="doc-section">
 <h3>五、与晋级 / 保级衰退与恢复机制的关系（闭环说明）</h3>
-<p>会员有效投注最终折算为"<b>VIP经验</b>"（即后台字段与「待换算预期抽佣金额余量(pool)」同一概念，本节统一按"VIP经验"表述），与各等级"晋升所需经验值门槛"处于同一把绝对刻度上；具体折算口径由抽佣系数等后台参数决定，属既有实现范畴，本节不再展开。<b>保级衰退与恢复机制（详见5.1~5.4节）直接作用于这个已折算完成的"VIP经验"绝对值本身</b>，与投注如何折算为经验是两套相互独立的机制，衰退扣减、降级后重新定位等级，均不需要反向拆解回投注金额重新折算。晋级判定收敛为<b>每日一次的定时评估</b>（评估时间为当日凌晨0点后）：系统统计会员当前VIP经验，若达到下一等级的"晋升所需经验值门槛"即触发晋级，生成一次性晋级礼金待领取记录，并开启该等级的30天保级周期；同一账号若单日内经验增长足以连续跨越多个等级，各等级晋级礼金依次发放。</p>
+<div class="doc-callout" style="font-size:11px;padding:6px 10px;margin:8px 0;color:#667085;background:#f7f8fa;border-left:3px solid #98a2b3;"><span class="tag-new">9月23日更新</span> 升级及恢复任务调整为每20分钟执行一次；降级任务调整为每天执行一次；升降级统一以会员「VIP经验」字段为判断标准。</div>
+<p>会员有效投注最终折算为"<b>VIP经验</b>"（即后台字段与「待换算预期抽佣金额余量(pool)」同一概念，本节统一按"VIP经验"表述），与各等级"晋升所需经验值门槛"处于同一把绝对刻度上；具体折算口径由抽佣系数等后台参数决定，属既有实现范畴，本节不再展开。<b>保级衰退与恢复机制（详见5.1~5.5节）直接作用于这个已折算完成的"VIP经验"绝对值本身</b>，与投注如何折算为经验是两套相互独立的机制，衰退扣减、降级后重新定位等级，均不需要反向拆解回投注金额重新折算。晋级与恢复任务调整为<b>每20分钟执行一次</b>：系统按会员当前「VIP经验」字段实时对照等级门槛，达到下一等级的"晋升所需经验值门槛"即触发晋级；恢复期同样按当前「VIP经验」字段进行恢复判断。系统生成一次性晋级礼金待领取记录，并开启该等级的30天保级周期；同一账号若经验增长足以连续跨越多个等级，各等级晋级礼金依次发放。</p>
 <h4>5.1 30天保级周期与衰退触发（<b>本轮替换原90天保级机制</b>）</h4>
 <p>会员达到当前VIP等级后，以<b>30天</b>为一个保级考核周期（每等级独立配置"30天保级经验"门槛）：周期内累计VIP经验达到该等级的保级经验要求，本周期保级成功，等级和已获得的VIP经验正常保留，并重新开始下一轮30天周期；若30天内未达到保级经验要求，且<b>整个周期内没有任何VIP经验增长</b>，则从第31天起按该等级的"衰退基础值"开始扣除VIP经验，正式进入衰退。</p>
 <div class="doc-callout warn">30天内虽未达到保级经验要求，但周期内有任意VIP经验增长（哪怕未达标）的，<b>本轮明确</b>：不视为触发衰退的"0增长"条件，本周期结束后直接顺延开启下一个30天周期继续观察，不清零已有VIP经验，仅当连续出现"整个30天周期内0增长"时才会进入衰退——与「产品规则摘要」"30天未保级且0经验增长"的双重条件表述保持一致。</div>
@@ -1165,7 +1174,7 @@ details.mermaid-edit summary{cursor:pointer;padding:10px 12px;font-size:12px;fon
 <p>会员一旦重新产生VIP经验（不论金额大小），<b>立即停止衰退</b>，并进入<b>2倍经验恢复期</b>：期间新获得的VIP经验按2倍计入，直至恢复到衰退/初始化降级发生前锁定的原VIP等级及原VIP经验值目标为止；仅恢复到原等级最低门槛时不提前结束2倍加成，达到锁定原经验值后2倍加成结束，恢复正常1倍经验增长。</p>
 <div class="doc-callout warn"><b>恢复期再次不活跃（边界规则，本轮明确）</b>：会员进入2倍经验恢复期后，如尚未恢复至锁定目标便再次停止产生VIP经验，<b>不立即恢复衰退，也不沿用上一次1×/2×/3×/4×衰退倍率</b>；从再次停止产生经验之日起，重新进入一轮<b>30天保级观察周期</b>。若该30天内达到当前等级「30天保级经验」要求，则保级成功并开启下一周期；若未达标但周期内曾产生VIP经验，则本周期不触发衰退，顺延下一轮30天继续观察；仅当某一完整30天周期<b>未达到保级要求且周期内0经验增长</b>时，才从该轮第31天重新进入<b>衰退阶段1（1×）</b>，后续再按连续不活跃天数每15天提升至2×、3×、4×。期间原「恢复目标等级 + 恢复目标经验值」持续保留、不重置；会员之后再次产生VIP经验时，停止新的衰退并重新按<b>2倍经验</b>继续向原锁定目标恢复，直至完全恢复后才清除恢复目标。</div>
 <h4>5.4 衰退与降级的关系（<b>本轮明确</b>，替代原90天机制的"未达标直接降1级"）</h4>
-<p>新机制下不再有"周期未达标即刻掉1级"的硬性跳变：VIP经验的衰退是持续、平滑的过程，等级本身不会仅因进入衰退而立即下降。<b>当VIP经验因持续衰退而跌破当前等级自身的晋升门槛时</b>，将于次日的定时评估中按VIP经验实时对照各等级门槛表，自然回落至对应的低等级——与晋级判定复用同一套每日评估逻辑，仅方向相反（晋级看"够不够上一级"，衰退降级看"是否已跌破当前级"）。降级后VIP经验回升，超过当前所处等级的晋升阈值时，可重新恢复至原VIP等级。</p>
+<p>新机制下不再有"周期未达标即刻掉1级"的硬性跳变：VIP经验的衰退是持续、平滑的过程，等级本身不会仅因进入衰退而立即下降。<b>当VIP经验因持续衰退而跌破当前等级自身的晋升门槛时</b>，将于每日降级任务执行时按VIP经验实时对照各等级门槛表，自然回落至对应的低等级——与晋级判定复用同一套以「VIP经验」字段为判断标准的等级评估逻辑，仅方向相反（晋级看"够不够上一级"，衰退降级看"是否已跌破当前级"）。降级后VIP经验回升，超过当前所处等级的晋升阈值时，可重新恢复至原VIP等级。</p>
 <div class="doc-callout warn"><b>本轮明确</b>：衰退过程中若发生上述自然降级，<b>衰退速度（1×/2×/3×/4×）与衰退基础值分属两个独立变量</b>——衰退速度绑定"连续不活跃天数"，不受降级影响，按自身节奏继续跳档；<b>衰退基础值则按会员"当前所处等级"动态取值</b>，降级后次日起改用新（低）等级配置的衰退基础值 × 当前衰退速度计算每日扣除量，<b>不沿用降级前那个等级的衰退基础值</b>——与晋级判定"pool值实时对照等级门槛表"复用同一套每日评估引擎、同一个"当前等级"定义，不额外引入"衰退起始等级"的独立状态。由于衰退基础值一般随等级降低而减小，降级后每日扣除的经验绝对值会自动变小，衰退不会出现越掉级越猛的连锁效应。</div>
 <div class="doc-callout warn"><b>本轮明确</b>：单日衰退扣减<b>不做"跨等级门槛拆分"</b>——不会因为当日应扣金额（衰退基础值×衰退速度）超出到当前等级门槛的缓冲区间，就只扣到刚好卡在门槛线上、剩余部分顺延到次日再扣；系统按当日应扣金额<b>整笔全额扣除</b>，扣减后再重新对照等级门槛表定位所在等级——若扣减幅度较大，允许单日内连续下降多个等级，与晋级判定"同一账号单日经验增长足以连续跨越多个等级、各级晋级礼金依次发放"对称一致。示例：会员当前VIP3（门槛300），VIP经验315，当日衰退基础值45、速度1×：整笔扣除45，315－45＝270；270已跌破VIP3门槛300，但仍≥VIP2门槛200，故直接降级至VIP2；次日起改用VIP2自身的衰退基础值计算扣除量（与上一条"降级后衰退基础值如何取值"衔接）。</div>
 <h4>5.5 与四类礼金的关系</h4>
@@ -1174,9 +1183,9 @@ details.mermaid-edit summary{cursor:pointer;padding:10px 12px;font-size:12px;fon
 <div class="doc-section">
 <h3>六、本轮迭代变更摘要</h3>
 <ul>
-<li>领取动作：晋级礼金、日/周/月福利礼金统一固定为会员手动领取，UI三处（列表表头、抽屉字段、领取规则弹窗提示）加注"手动领取"标识</li>
+<li>领取动作：晋级礼金、日/周/月福利礼金统一固定为会员手动领取</li>
 <li><b>手动领取与发放方式关联明确</b>：「发放方式」（自动发放/人工发放，逐等级配置）决定会员点击"领取"这一手动领取动作之后是否需要人工审核——自动发放＝会员领取后系统自动审核通过直接到账，人工发放＝会员领取后进入待审核，需运营在「VIP福利彩金审核」页人工审核通过后才发放；与"手动领取"（领取动作本身）是两个独立维度，互不影响，新增/编辑抽屉与主列表均沿用「发放方式」字段</li>
-<li><span class="phase3-del">新增「领取规则设置」独立弹窗及四选一配置能力</span><span class="phase3-badge">三期</span>；二期后端固定执行「未领取作废」，本期不开放配置入口</li>
+<li>新增「领取规则设置」独立弹窗（未放入客户端展示设置，避免该弹窗内容过多）：四选一处理方案 + 类型速记标签</li>
 <li>客户端「VIP特权」页本次新增/调整：日/月福利礼金、去投注/领取/审核中状态、一键领取、规则说明及等级卡片滑动浏览</li>
 <li>后台「客户端展示设置」规则文案支持按换行分段：编辑时换行录入，客户端自动以圆点"•"分段展示，三段规则统一处理；不换行则展示为一段纯文本</li>
 <li>规则文案字段合并：因日/周/月流水的达标判定逻辑一致，「周流水规则」更名为「流水福利规则」，文案内容统一说明日/周/月三档的结算周期与达标判定，多等级流水规则、未达标流水结转两条例外规则仍保留并明确标注"仅周流水适用"；后台文案字段与客户端展示仍维持三段结构（晋升规则/保级规则/流水福利规则），不新增字段</li>
@@ -1186,7 +1195,7 @@ details.mermaid-edit summary{cursor:pointer;padding:10px 12px;font-size:12px;fon
 <li><b>客户端VIP入口调整</b>：客户端「我的」页钱包下方新增VIP特权独立成长卡，用户名旁增加当前VIP等级徽标，两处均可进入VIP详情；本HTML保留「我的」首页入口演示，用于验证入口到VIP详情页的完整跳转闭环。</li>
 <li><b>首批老会员初始化规则</b>：VIP0～VIP2保持原等级；原VIP≥3且近60天未投注时统一调整为VIP3、0经验。原VIP≥3且近60天未投注、被初始化为VIP3且0经验的会员不参与专项晋级礼金补发；重新投注后从VIP3 0经验起按2倍经验恢复至初始化前锁定的原等级+原经验值后恢复1倍。</li>
 <li><b>初始化未降级老会员晋级礼金重新发放</b>：所有未发生VIP3/0经验特殊调整的老会员均重新发放当前等级至VIP1的晋级礼金，不区分历史是否已领取；包括近60天未投注但等级保持不变的VIP1、VIP2会员。</li>
-<li><b>「保级衰退与恢复机制」上线，替换原90天保级机制</b>（新增五、5.1~5.6节）：会员保级考核周期由90天调整为30天，未达标且周期内0增长的从第31天起进入VIP经验衰退，此后每连续15天无增长衰退速度提升一档（1×→2×→3×→4×，见5.2节对照表），重新产生经验立即停止衰退并进入2倍经验恢复期；VIP经验持续衰退跌破当前等级门槛时，于次日定时评估中按经验值自然回落至对应等级，不再是"周期未达标即刻掉1级"的硬性跳变（见5.4节）</li>
+<li><b>「保级衰退与恢复机制」上线，替换原90天保级机制</b>（新增五、5.1~5.5节）：会员保级考核周期由90天调整为30天，未达标且周期内0增长的从第31天起进入VIP经验衰退，此后每连续15天无增长衰退速度提升一档（1×→2×→3×→4×，见5.2节对照表），重新产生经验立即停止衰退并进入2倍经验恢复期；VIP经验持续衰退跌破当前等级门槛时，于次日定时评估中按经验值自然回落至对应等级，不再是"周期未达标即刻掉1级"的硬性跳变（见5.4节）</li>
 <li><b>「VIP列表-按抽佣」页新增"衰退基础值"字段</b>：逐等级配置衰退阶段1（1×速度）每日扣除的VIP经验基础值，2×/3×/4×阶段按该值倍增；「30天保级流水」更名为「30天保级经验」（原"90天保级流水"字段沿用同一份数据，仅口径与命名调整为经验值体系，数值不变）</li>
 <li><b>衰退单日扣减不做跨等级门槛拆分（本轮明确）</b>：单日应扣金额（衰退基础值×衰退速度）整笔全额扣除，不因扣减幅度超出当前等级门槛缓冲区间而"卡线"部分扣减；扣减后重新对照等级门槛表定位所在等级，单日内允许连续下降多个等级，与晋级"单日经验增长足以连续跨越多个等级"对称一致（详见「需求背景」页4.4节）</li>
 </ul>
@@ -4400,7 +4409,7 @@ details.mermaid-edit summary{cursor:pointer;padding:10px 12px;font-size:12px;fon
 </div>
 </div>
 </div>
-<!-- 三期预留：领取规则设置弹窗。二期按钮禁用并划删除线，后端固定执行方案二「未领取作废」；发放方式（自动/人工）仍在VIP列表-按抽佣新增/编辑抽屉中逐等级配置。 -->
+<!-- 领取规则设置：领取动作已统一固定为手动领取，本弹窗仅配置跨期未领取奖励的处理规则；发放方式（自动/人工）在「VIP列表-按抽佣」新增/编辑抽屉中逐等级配置 -->
 <div class="copy-modal-overlay" id="claimRuleModalOverlay">
 <div class="copy-modal" style="width:640px;">
 <div class="copy-modal-header">
@@ -4408,7 +4417,7 @@ details.mermaid-edit summary{cursor:pointer;padding:10px 12px;font-size:12px;fon
 <span class="close" onclick="closeClaimRuleModal()">✕</span>
 </div>
 <div class="copy-warn"><b>二期范围收口：</b>领取规则仅实现「未领取作废」；<span class="phase3-del">未领取转发、受众控制领取、受众控制发奖</span><span class="phase3-badge">三期，本期不开发</span></div>
-<div class="copy-warn">⚠ 晋级礼金、日福利礼金、周福利礼金、月福利礼金均<b>统一固定为手动领取</b>，会员达标后需在客户端主动领取。本规则统一处理"跨期后仍未领取"的奖励，对所有VIP等级统一生效。</div>
+
 <div class="section-divider" style="margin-top:0; padding-top:0; border-top:none;">
 <div class="section-title">统计周期</div>
 <div class="section-sub">均由定时任务统计生成，不随流水达标实时生成：日福利礼金次日00:00~02:00结算上一自然日；周福利礼金每周一00:00~02:00结算上一自然周；月福利礼金每月16日00:00~02:00结算上一自然月；晋级礼金为一次性奖励，以跨天为界</div>
@@ -4504,6 +4513,7 @@ let data = [
   {level:9, name:'VIP9', coef:3.0, th:900, gift:1888, dailyTurnover:420, dailyGift:50, week:2100, weekGift:388,monthlyTurnover:8400, monthlyGift:680,keep:300, decayBase:30, mult:1, dispatchMode:'manual', editTime:'2026-04-04 18:17:48', editor:'superAdmin'},
 ];
 
+// 9月23日更新：升级/恢复任务每20分钟执行一次；降级任务每天执行一次；升降级统一以VIP经验字段为判断标准。
 const FIELD_LABELS = {name:'VIP等级名称', threshold:'晋升所需经验值门槛', gift:'晋级礼金', dailyTurnover:'日流水', dailyGift:'日福利礼金', week:'周流水', weekGift:'周福利礼金', monthlyTurnover:'月流水', monthlyGift:'月福利礼金', keep:'30天保级经验', decayBase:'衰退基础值(经验/天)', mult:'提现流水倍数'};
 
 // 全局展示字段设置：对所有VIP等级统一生效，而不是逐等级单独配置
@@ -4979,6 +4989,7 @@ let previewLevel = CUR_LEVEL; // VIP详情大卡片横滑时的当前预览等�
 let CUR_EXP = null;       // 演示：当前经验值，初始化时按当前/下一等级门槛居中取值
 let expandedLevel = CUR_LEVEL;   // H5：仅当前等级默认展开
 let claimScenario = 'normal';    // 二期仅演示 normal / scheme2；其余领取规则移至三期
+let clientButtonScenario = 'normal';
 let demoProgress = { daily: 125, week: 320, monthly: 900 }; // 演示流水进度，可通过 +/- 调整触发按钮态切换（日流水默认已达标，便于演示锁定态）
 let claimedState = { promotion: false, daily: false, week: false, monthly: false };
 
@@ -5064,6 +5075,11 @@ function initCurExp(){
 
 // 场景演示下拉的"方案一/方案二"选项直接对应「领取规则设置」的全局方案（同一时间只有一个方案生效），
 // 因此切换到这两个场景时同步更新 claimRule.mode，使卡片过期文案与后台「领取规则设置」弹窗保持一致联动
+function setClientButtonScenario(v){
+  clientButtonScenario = v;
+  renderClientLevels();
+}
+
 function setScenario(v){
   claimScenario = v;
   if(v === 'scheme1' || v === 'scheme2'){ claimRule.mode = v; }
@@ -5086,6 +5102,8 @@ function levelTotal(r){
 // 晋级礼金（promotion）不受「领取规则设置」任何方案（一/二/三/四）约束、不会过期：晋级达标即可无限期领取，
 // 不会因跨期未领取被方案二回收作废，因此不判断 claimScenario，始终只在 claimed/claimable 两态之间流转
 function rewardState(type, r){
+  if(clientButtonScenario === 'rejected' && type === 'daily') return 'rejected';
+  if(clientButtonScenario === 'expired' && type === 'daily') return 'expired';
   if(type === 'promotion'){
     if(r.gift <= 0 || !displayFields.gift) return 'none';
     if(claimedState.promotion) return 'claimed';
@@ -5104,11 +5122,11 @@ function rewardState(type, r){
 }
 
 // 领取规则-跨期未领取奖励的处理方案：与管理后台「领取规则设置」claimRule.mode 保持一致，
-// 方案一（未领取转发）不作废，不会走到本函数（见 rewardState 说明）；其余方案统一按"已过期作废"展示，
+// 方案一（未领取转发）不作废，不会走到本函数（见 rewardState 说明）；其余方案统一按"已过期"展示，
 // 用于当前等级"跨周期未领取"演示与历史等级的过期记录
 function expiredLabel(){
   const ruleLabelMap = { scheme2:'方案二·未领取作废', scheme3:'方案三·受众控制领取', scheme4:'方案四·受众控制发奖' };
-  return { cls:'expired', text:'已过期作废', ruleLabel: ruleLabelMap[claimRule.mode] || '未领取作废' };
+  return { cls:'expired', text:'已过期', ruleLabel: ruleLabelMap[claimRule.mode] || '未领取作废' };
 }
 
 function thSubline(type, r){
@@ -5142,10 +5160,11 @@ function renderRewardCard(type, label, r, extraNote){
   const exp = expiredLabel();
   let btnHtml;
   if(state === 'bet') btnHtml = `<button class="reward-btn bet" onclick="goBet('${type}')">去投注</button>`;
-  else if(state === 'claimable') btnHtml = `<button class="reward-btn claim" onclick="claimReward('${type}')">领取</button>`;
-  else if(state === 'locked') btnHtml = `<button class="reward-btn claim" onclick="openRechargeModal('${type}')">领取</button>`;
+  else if(state === 'claimable') btnHtml = `<button class="reward-btn claim" onclick="claimReward('${type}')">领取福利</button>`;
+  else if(state === 'locked') btnHtml = `<button class="reward-btn claim" onclick="openRechargeModal('${type}')">领取福利</button>`;
   else if(state === 'blocked') btnHtml = `<button class="reward-btn locked" onclick="blockedTip()">本期未生成</button>`;
   else if(state === 'expired') btnHtml = `<button class="reward-btn ${exp.cls}" disabled>${exp.text}</button>`;
+  else if(state === 'rejected') btnHtml = `<button class="reward-btn expired" disabled>暂不可领取</button>`;
   else if(state === 'claimed' && claimedState[type] === 'pending') btnHtml = `<button class="reward-btn pending-review" disabled>审核中</button>`;
   else btnHtml = `<button class="reward-btn claimed" disabled>已领取</button>`;
 
@@ -5163,6 +5182,8 @@ function renderRewardCard(type, label, r, extraNote){
     scenarioNote = `<div class="reward-note unlocked-note">📮 已达领取条件但跨周期未领取，系统已按当前领取规则（方案一·未领取转发）同步发送站内信/邮件提醒；奖励未作废，领取入口不变，仍可直接点击领取</div>`;
   } else if(state === 'expired'){
     scenarioNote = `<div class="reward-note blocked-note">⌛ 已达领取条件但超过领取时限未领取，奖励已按当前领取规则（${exp.ruleLabel}）回收作废</div>`;
+  } else if(state === 'rejected'){
+    scenarioNote = `<div class="reward-note blocked-note">审核拒绝：本次领取未通过审核，当前按钮不可再次操作。</div>`;
   }
 
   let bodyHtml;
@@ -5205,13 +5226,13 @@ function renderPastRewardCard(type, label, r){
   let btnHtml;
   if(status === 'expired' && claimRule.mode === 'scheme1'){
     // 方案一·未领取转发：不作废，历史记录中同样展示为"领取"（仅同步过一份站内信/邮件通知，非实际可交互，供说明用）
-    btnHtml = `<button class="reward-btn claim" disabled>领取</button>`;
+    btnHtml = `<button class="reward-btn claim" disabled>领取福利</button>`;
   } else if(status === 'expired'){
     const exp = expiredLabel();
     btnHtml = `<button class="reward-btn ${exp.cls}" disabled>${exp.text}</button>`;
   } else if(status === 'claimable'){
     // 晋级礼金不受任何领取规则方案约束、不会过期：历史等级中长期未领取的晋级礼金依然真实可领取，点击即可完成领取
-    btnHtml = `<button class="reward-btn claim" onclick="claimPastReward(${r.level}, '${type}')">领取</button>`;
+    btnHtml = `<button class="reward-btn claim" onclick="claimPastReward(${r.level}, '${type}')">领取福利</button>`;
   } else if(status === 'pending'){
     btnHtml = `<button class="reward-btn pending-review" disabled>审核中</button>`;
   } else {
@@ -5330,25 +5351,35 @@ function getKeepStatusText(cur){
   if(!displayFields.keep) return '';
   if(keepScenario === 'normal'){
     const gained = Math.round(cur.keep * KEEP_CYCLE_DEMO.gainedRatio);
-    // 达到或超过当前等级保级经验要求后，卡片底部不再展示保级状态文案
-    if(gained >= cur.keep) return '';
-    return `本周期保级进度 已获得经验${fmtG(gained)}/${fmtG(cur.keep)}（剩余${KEEP_CYCLE_DEMO.daysLeft}天）`;
+    return `📅 本周期保级进度　已获得经验 ${fmtG(gained)} / ${fmtG(cur.keep)}（剩余 ${KEEP_CYCLE_DEMO.daysLeft} 天）`;
   }
   if(KEEP_DECAY_DEMO[keepScenario]){
     const d = KEEP_DECAY_DEMO[keepScenario];
-    return `${d.mult}x经验衰退中,投注可停止衰退`;
+    const dailyLoss = fmtG(cur.decayBase * d.mult);
+    return `⚠ 已连续 ${d.idleDays} 天无经验增长，进入衰退${d.stageLabel}·${d.mult}×速度，每日扣除 ${dailyLoss} 经验，持续流失中`;
   }
   if(keepScenario === 'recovering'){
-    return '2x经验恢复中';
+    return '🚀 经验恢复期：当前所获经验按 2× 加成计算，直至恢复到衰退前经验目标为止';
   }
   return '';
 }
-function renderKeepStatus(cur){
+function renderKeepHelp(cur){
   const text = getKeepStatusText(cur);
   if(!text) return '';
-  const cls = keepScenario === 'recovering' ? ' recovering' : (KEEP_DECAY_DEMO[keepScenario] ? ' decay' : '');
-  return `<div class="vip-keep-status-line${cls}">${text}</div>`;
+  return `<div class="vip-keep-help" onclick="event.stopPropagation()">
+    <button type="button" class="vip-keep-help-btn" aria-label="查看保级衰退与恢复说明" title="保级衰退与恢复" onclick="toggleKeepHelp(event,this)">?</button>
+    <div class="vip-keep-popover" role="tooltip"><div class="vip-keep-popover-title">保级衰退与恢复</div><div>${text}</div></div>
+  </div>`;
 }
+function toggleKeepHelp(event, btn){
+  event.stopPropagation();
+  const pop = btn.nextElementSibling;
+  document.querySelectorAll('.vip-keep-popover.show').forEach(el=>{ if(el!==pop) el.classList.remove('show'); });
+  pop.classList.toggle('show');
+}
+document.addEventListener('click', function(){
+  document.querySelectorAll('.vip-keep-popover.show').forEach(el=>el.classList.remove('show'));
+});
 
 function renderLevelHero(){
   const box = document.getElementById('h5-level-hero');
@@ -5368,7 +5399,7 @@ function renderLevelHero(){
         <div class="level-hero-icon">💎</div>
         <div class="level-hero-title">${r.name}<span class="level-hero-status">${status}</span></div>
         ${rows.map(t => `<div class="level-hero-row">${t}</div>`).join('')}
-        ${level===CUR_LEVEL ? renderKeepStatus(r) : ''}
+        ${level===CUR_LEVEL ? renderKeepHelp(r) : ''}
       </div>`);
   });
   box.innerHTML = cards.join('');
@@ -5600,12 +5631,15 @@ function resetDemo(){
   demoProgress = { daily: 125, week: 320, monthly: 900 };
   claimedState = { promotion: false, daily: false, week: false, monthly: false };
   claimScenario = 'normal';
+  clientButtonScenario = 'normal';
   claimRule.mode = 'scheme2';   // 恢复为默认全局生效方案（方案二·未领取作废），与「领取规则设置」初始值一致
   pastClaimOverride = {};       // 清空历史等级的手动领取覆盖记录，恢复演示数据初始的 pastHistory 状态
   keepScenario = 'normal';      // 恢复保级衰退与恢复场景演示为默认态
   previewLevel = CUR_LEVEL;
   const sel = document.getElementById('scenarioSelect');
   if(sel) sel.value = 'normal';
+  const buttonSel = document.getElementById('clientButtonScenarioSelect');
+  if(buttonSel) buttonSel.value = 'normal';
   const keepSel = document.getElementById('keepScenarioSelect');
   if(keepSel) keepSel.value = 'normal';
   expandedLevel = CUR_LEVEL;
